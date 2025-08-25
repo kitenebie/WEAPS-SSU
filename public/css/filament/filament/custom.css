@@ -1,0 +1,18 @@
+.fi-simple-main-ctn {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: flex;
+
+    /* Background image + gradient */
+    background: linear-gradient(135deg, rgba(128, 0, 0, 0.6) 50%, rgba(128, 0, 0, 0.2) 100%), 
+                url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fsorsu.edu.ph%2Fsorsu-bulan-campus-joins-the-country-in-commemorating-the-126th-year-of-independence%2F&psig=AOvVaw36pum8Kao3MAHSiswxcHf2&ust=1756206804917000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJDttanqpY8DFQAAAAAdAAAAABAu');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Optional: blend for smoother look */
+    background-blend-mode: overlay;
+}
