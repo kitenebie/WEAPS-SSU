@@ -1,0 +1,64 @@
+{
+    "name": "resma/filament-awin-theme",
+    "description": "A modern, responsive, and customizable theme for FilamentPHP, designed to elevate your admin panel with a sleek interface and seamless user experience.",
+    "keywords": [
+        "Resma",
+        "laravel",
+        "filamentphp",
+        "filament-awin-theme",
+        "theme",
+        "filament"
+    ],
+    "homepage": "https://github.com/resmatech/filament-awin-theme",
+    "support": {
+        "issues": "https://github.com/resmatech/filament-awin-theme/issues",
+        "source": "https://github.com/resmatech/filament-awin-theme"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rebwar Mustafa",
+            "email": "hello@resma.tech",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "filament/filament": "^4.0",
+        "spatie/laravel-package-tools": "^1.15.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Resma\\FilamentAwinTheme\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Resma\\FilamentAwinTheme\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "lint": "pint",
+        "test": "pest",
+        "test:lint": "pint --test"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                
+            ],
+            "aliases": {
+                "FilamentAwinTheme": "Resma\\FilamentAwinTheme\\Facades\\FilamentAwinTheme"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

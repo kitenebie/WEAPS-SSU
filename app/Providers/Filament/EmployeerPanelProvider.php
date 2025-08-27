@@ -32,6 +32,9 @@ class EmployeerPanelProvider extends PanelProvider
             ->emailVerification()
             ->emailChangeVerification()
             ->profile()
+            ->brandLogo(asset('https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp'))
+            ->brandLogoHeight('3rem')
+            ->topNavigation(true)
             ->colors([
                 'primary' => Color::Rose,
             ])
@@ -43,7 +46,6 @@ class EmployeerPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Employeer/Widgets'), for: 'App\Filament\Employeer\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
