@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\CurriculumVitaes\Pages;
+namespace App\Filament\Employeer\Resources\CurriculumVitaes\Pages;
 
-use App\Filament\Resources\CurriculumVitaes\CurriculumVitaeResource;
+use App\Filament\Employeer\Resources\CurriculumVitaes\CurriculumVitaeResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
