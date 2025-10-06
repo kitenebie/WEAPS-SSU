@@ -20,27 +20,6 @@ class ViewCurriculumVitae extends ViewRecord
     {
         return [
             // EditAction::make(),
-            Action::make('Hire this applicant')
-                ->form([
-                    TextInput::make('Name')
-                        ->required(),
-                    TextInput::make('Email')
-                        ->required(),
-                    Section::make('Send an Email')
-                        ->schema([
-                            TextInput::make('Subject')
-                                ->required(),
-                            RichEditor::make('content')
-                                ->required()
-                                ->toolbarButtons([
-                                    ['bold', 'italic', 'underline', 'strike', 'subscript', 'superscript', 'link'],
-                                    ['h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd'],
-                                    ['blockquote', 'bulletList', 'orderedList'],
-                                    ['table', 'attachFiles'],
-                                    ['undo', 'redo'],
-                                ]),
-                        ])
-                ]),
         ];
     }
 }

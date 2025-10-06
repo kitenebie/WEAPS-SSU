@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('curriculum_vitaes', function (Blueprint $table) {
-            $table->json('education')->nullable(); // Detailed education history
             $table->json('certifications')->nullable();
             $table->json('awards')->nullable();
             $table->json('affiliations')->nullable();
@@ -29,7 +28,6 @@ return new class extends Migration
     {
         Schema::table('curriculum_vitaes', function (Blueprint $table) {
             $table->dropColumn([
-                'education',
                 'certifications',
                 'awards',
                 'affiliations',

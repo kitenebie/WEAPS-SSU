@@ -29,6 +29,11 @@ class CurriculumVitaeForm
                                 ->icon('heroicon-o-user')
                                 ->schema([
                                     FileUpload::make('profile_picture')
+                                        ->disk('public')
+                                        ->imageEditor()
+                                        ->imageEditorAspectRatios([
+                                            '1:1',
+                                        ])
                                         ->image()->columnSpanFull(),
                                     TextInput::make('first_name')
                                         ->required(),
@@ -48,53 +53,87 @@ class CurriculumVitaeForm
                                 ])
                                 ->columns(2),
 
-                            Section::make('Skills & Languages')
+                            Section::make('Education & Skills')
                                 ->collapsed()
-                                ->description('Technical skills and language proficiencies')
-                                ->icon('heroicon-o-language')
+                                ->description('Educational qualifications alongside technical and language proficiencies')
+                                ->icon('heroicon-o-light-bulb')
                                 ->schema([
-                                    Repeater::make('skills')
-                                        ->label('Technical & Soft Skills')
+                                    Section::make('Education')
+                                        ->collapsed()
+                                        ->description('Education history and relevant training')
+                                        ->icon('heroicon-o-academic-cap')
                                         ->schema([
-                                            TextInput::make('name')
-                                                ->required()
-                                                ->placeholder('e.g., JavaScript, Project Management'),
-                                            Select::make('level')
-                                                ->options([
-                                                    10 => 'Beginner',
-                                                    25 => 'Novice',
-                                                    40 => 'Intermediate',
-                                                    60 => 'Advanced',
-                                                    80 => 'Expert',
-                                                    95 => 'Master',
+                                            Repeater::make('education')
+                                                ->label('Education History')
+                                                ->schema([
+                                                    TextInput::make('degree')
+                                                        ->label('Degree / Grade')
+                                                        ->required()
+                                                        ->placeholder('e.g., Bachelor of Science in Computer Science'),
+                                                    TextInput::make('school_name')
+                                                        ->label('School Name / University')
+                                                        ->required()
+                                                        ->placeholder('e.g., University of the Philippines'),
+                                                    TextInput::make('year_graduated')
+                                                        ->label('Year Graduated')
+                                                        ->numeric()
+                                                        ->required()
+                                                        ->placeholder('e.g., 2020'),
                                                 ])
-                                                ->required()
-                                                ->default(40),
-                                        ])
-                                        ->collapsible()
-                                        ->defaultItems(0)
-                                        ->addActionLabel('Add Skill'),
+                                                ->collapsible()
+                                                ->defaultItems(0)
+                                                ->addActionLabel('Add Education')
+                                        ]),
+                                    Section::make('Skills & Languages')
+                                        ->collapsed()
+                                        ->description('Technical skills and language proficiencies')
+                                        ->icon('heroicon-o-language')
+                                        ->schema([
+                                            Repeater::make('skills')
+                                                ->label('Technical & Soft Skills')
+                                                ->schema([
+                                                    TextInput::make('name')
+                                                        ->required()
+                                                        ->placeholder('e.g., JavaScript, Project Management'),
+                                                    Select::make('level')
+                                                        ->options([
+                                                            10 => 'Beginner',
+                                                            25 => 'Novice',
+                                                            40 => 'Intermediate',
+                                                            60 => 'Advanced',
+                                                            80 => 'Expert',
+                                                            95 => 'Master',
+                                                        ])
+                                                        ->required()
+                                                        ->default(40),
+                                                ])
+                                                ->collapsible()
+                                                ->defaultItems(0)
+                                                ->addActionLabel('Add Skill'),
 
-                                    Repeater::make('languages')
-                                        ->label('Languages')
-                                        ->schema([
-                                            TextInput::make('name')
-                                                ->required()
-                                                ->placeholder('Language name'),
-                                            Select::make('proficiency')
-                                                ->options([
-                                                    'Basic' => 'Basic',
-                                                    'Intermediate' => 'Intermediate',
-                                                    'Fluent' => 'Fluent',
-                                                    'Native' => 'Native',
+                                            Repeater::make('languages')
+                                                ->label('Languages')
+                                                ->schema([
+                                                    TextInput::make('name')
+                                                        ->required()
+                                                        ->placeholder('Language name'),
+                                                    Select::make('proficiency')
+                                                        ->options([
+                                                            'Basic' => 'Basic',
+                                                            'Intermediate' => 'Intermediate',
+                                                            'Fluent' => 'Fluent',
+                                                            'Native' => 'Native',
+                                                        ])
+                                                        ->required()
+                                                        ->default('Intermediate'),
                                                 ])
-                                                ->required()
-                                                ->default('Intermediate'),
-                                        ])
-                                        ->collapsible()
-                                        ->defaultItems(0)
-                                        ->addActionLabel('Add Language'),
+                                                ->collapsible()
+                                                ->defaultItems(0)
+                                                ->addActionLabel('Add Language'),
+                                        ]),
                                 ]),
+
+
                             Section::make('Certifications & Awards')
                                 ->collapsed()
                                 ->description('Professional certifications and awards received')
@@ -206,6 +245,37 @@ class CurriculumVitaeForm
                                         ->required()
                                         ->numeric()
                                         ->default(0),
+                                ]),
+
+                            Section::make('Work Experience')
+                                ->collapsed()
+                                ->description('Previous job positions and employment history')
+                                ->icon('heroicon-o-building-office-2')
+                                ->schema([
+                                    Repeater::make('work_experience')
+                                        ->label('Work Experience')
+                                        ->schema([
+                                            TextInput::make('jobPosition')
+                                                ->label('Job Position')
+                                                ->required(),
+                                            DatePicker::make('start_date')
+                                                ->label('Start Date')
+                                                ->required(),
+                                            DatePicker::make('end_date')
+                                                ->label('End Date')
+                                                ->placeholder('Leave empty if current position'),
+                                            TextInput::make('company_name')
+                                                ->label('Company Name')
+                                                ->required(),
+                                            TextInput::make('company_email')
+                                                ->label('Company Email'),
+                                            TextInput::make('company_contactnumber')
+                                                ->label('Company Contact Number'),
+                                        ])
+                                        ->columns(2)
+                                        ->collapsible()
+                                        ->defaultItems(0)
+                                        ->addActionLabel('Add Work Experience'),
                                 ]),
 
                             Section::make('Projects')

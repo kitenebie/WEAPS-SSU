@@ -24,9 +24,7 @@ return new class extends Migration
             $table->text('summary')->nullable(); // short description
             
             // Education
-            $table->string('highest_degree')->nullable();
-            $table->string('university')->nullable();
-            $table->year('graduation_year')->nullable();
+            $table->json('education')->nullable(); // array of education records
             
             // Experience
             $table->integer('years_of_experience')->default(0);
