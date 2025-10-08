@@ -22,6 +22,7 @@ use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Resma\FilamentAwinTheme\FilamentAwinTheme;
 use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
 use Filament\Pages\Enums\SubNavigationPosition;
+use Filament\Support\Enums\Width;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -40,7 +41,7 @@ class AdminPanelProvider extends PanelProvider
                     ->subNavigationPosition(SubNavigationPosition::End)
             // ->brandLogo(asset('https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp'))
             // ->brandLogoHeight('3rem')
-            ->topNavigation(false)
+            ->topNavigation(true)
             ->colors([
                 'primary' => Color::Rose,
                 'danger' => Color::Rose,
@@ -82,6 +83,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->maxContentWidth(Width::Full);
     }
 }

@@ -24,6 +24,7 @@ class Company extends Model
         'email',
         'cover_photo',
         'logo',
+        'about',
     ];
 
     protected $casts = [

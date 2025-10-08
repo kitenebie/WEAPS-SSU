@@ -53,4 +53,12 @@ class User extends Authenticatable
     {
         return "{$this->first_name} {$this->last_name}";
     }
+
+    /**
+     * Get the companies for the user.
+     */
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
 }
