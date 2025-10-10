@@ -110,16 +110,14 @@ class Register extends BaseRegister
     public function register(): ?RegistrationResponse
     {
         $data = $this->form->getState();
-
+        // dd($data);
         $user = \App\Models\User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-        // Assign role based on selection
-        $roleName = $data['role'] === 'employer' ? 'employer' : 'employee';
-        $role = Role::firstOrCreate(['name' => $roleName, 'guard_name' => 'web']);
+        $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
         $user->assignRole($role);
 
         $this->sendEmailVerificationNotification($user);

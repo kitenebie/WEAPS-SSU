@@ -45,10 +45,10 @@ class EmployeerPanelProvider extends PanelProvider
                 'primary' => Color::Rose,
             ])
             ->discoverResources(in: app_path('Filament/Employeer/Resources'), for: 'App\Filament\Employeer\Resources')
-            ->discoverPages(in: app_path('Filament/Employeer/Pages'), for: 'App\Filament\Employeer\Pages')
             ->pages([
-                // Dashboard::class,
+                \App\Filament\Employeer\Pages\Verification::class,
             ])
+            ->discoverPages(in: app_path('Filament/Employeer/Pages'), for: 'App\Filament\Employeer\Pages')
             ->discoverWidgets(in: app_path('Filament/Employeer/Widgets'), for: 'App\Filament\Employeer\Widgets')
             ->widgets([
                 AccountWidget::class,
