@@ -6,6 +6,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\TagsInput;
@@ -15,6 +16,7 @@ use App\Models\Company;
 use App\Models\Carrer;
 use App\Models\CompanyPost;
 use Illuminate\Support\Facades\Auth;
+use Filament\Schemas\Components\Utilities\Set;
 
 class CompanyForm
 {
@@ -67,6 +69,26 @@ class CompanyForm
                                         '16:9',
                                     ])
                                     ->default(null)->required()->image(),
+                                FileUpload::make('Document_Permit')
+                                    ->imageEditor()
+                                    ->imageEditorAspectRatios([
+                                        '9:16',
+                                    ])->required()
+                                    ->label('Document/Permit Types')
+                                    ->helperText('Update the image type of documents or permits this company handles')
+                                    ->default([])
+                                    ->multiple()
+                                    ->loadingIndicatorPosition('left')
+                                    ->panelLayout('integrated')
+                                    ->removeUploadedFileButtonPosition('right')
+                                    ->uploadButtonPosition('left')
+                                    ->uploadProgressIndicatorPosition('left')
+                                    ->panelLayout('grid')
+                                    ->reorderable()
+                                    ->appendFiles()
+                                    ->openable()
+                                    ->previewable()
+                                    ->columnSpanFull()->image(),
                             ]),
 
                         Section::make('Basic Information')
@@ -74,9 +96,13 @@ class CompanyForm
                             ->description('Core company details and overview')
                             ->columns(2)
                             ->components([
-                                TextInput::make('id')
-                                    ->required(),
+                                Hidden::make('user_handle')
+                                    ->label('User Handle'),
                                 TextInput::make('name')
+                                    ->reactive()
+                                    ->afterStateUpdated(function (Set $set) {
+                                        $set('user_handle', Auth::id());
+                                    })
                                     ->required(),
                                 TextInput::make('type')
                                     ->default(null)->required(),

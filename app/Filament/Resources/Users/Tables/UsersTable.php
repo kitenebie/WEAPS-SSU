@@ -20,13 +20,67 @@ class UsersTable
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
-                TextColumn::make('company.user_handle')
-                    ->label('Company User Handle')
-                    ->searchable()
-                    ->placeholder('No company handle'),
-                TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
+                TextColumn::make('companies.name')
+                    ->label('Company Name')
+                    ->searchable(),
+                TextColumn::make('companies.type')
+                    ->label('Company Type')
+                    ->searchable(),
+                TextColumn::make('companies.location')
+                    ->label('Location')
+                    ->searchable(),
+                TextColumn::make('companies.founded_year')
+                    ->label('Founded Year')
+                    ->searchable(),
+                TextColumn::make('companies.employee_count')
+                    ->label('Employee Count')
+                    ->searchable(),
+                TextColumn::make('companies.description')
+                    ->label('Description')
+                    ->wrap()
+                    ->lineClamp(2)
+                    ->searchable(),
+                TextColumn::make('companies.industry')
+                    ->label('Industry')
+                    ->searchable(),
+                TextColumn::make('companies.company_size')
+                    ->label('Company Size')
+                    ->searchable(),
+                // TextColumn::make('companies.specialties')
+                //     ->label('Specialties')
+                //     ->searchable(),
+                // TextColumn::make('companies.website')
+                //     ->label('Website')
+                //     ->searchable(),
+                // TextColumn::make('companies.phone')
+                //     ->label('Phone')
+                //     ->searchable(),
+                // TextColumn::make('companies.email')
+                //     ->label('Company Email')
+                //     ->searchable(),
+                // TextColumn::make('companies.cover_photo')
+                //     ->label('Cover Photo')
+                //     ->searchable(),
+                // TextColumn::make('companies.logo')
+                //     ->label('Logo')
+                //     ->searchable(),
+                // TextColumn::make('companies.about')
+                //     ->label('About')
+                //     ->wrap()
+                //     ->lineClamp(2)
+                //     ->searchable(),
+                // TextColumn::make('companies.Document_Permit')
+                //     ->label('Document Permit')
+                //     ->searchable(),
+                TextColumn::make('companies.isActive')
+                    ->label('Is Active')
+                    ->searchable(),
+                // TextColumn::make('companies.user_handle')
+                //     ->label('User Handle')
+                //     ->searchable(),
+                // TextColumn::make('email_verified_at')
+                //     ->dateTime()
+                //     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -41,7 +95,6 @@ class UsersTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

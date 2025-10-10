@@ -23,6 +23,7 @@ use Resma\FilamentAwinTheme\FilamentAwinTheme;
 use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
 use Filament\Pages\Enums\SubNavigationPosition;
 use Filament\Support\Enums\Width;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -33,12 +34,13 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->breadcrumbs(false)
             ->registration()
             ->passwordReset()
             ->emailVerification()
             ->emailChangeVerification()
             ->profile()
-                    ->subNavigationPosition(SubNavigationPosition::End)
+            ->subNavigationPosition(SubNavigationPosition::End)
             // ->brandLogo(asset('https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp'))
             // ->brandLogoHeight('3rem')
             ->topNavigation(true)
@@ -58,7 +60,8 @@ class AdminPanelProvider extends PanelProvider
                     )
                     ->enableTwoFactorAuthentication(),
                 FilamentAwinTheme::make(),
-                FilamentApexChartsPlugin::make()
+                FilamentApexChartsPlugin::make(),
+                FilamentShieldPlugin::make(), // Registers RoleResource (Spatie Shield)
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

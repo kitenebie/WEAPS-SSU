@@ -19,6 +19,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Support\Enums\Width;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin as ShieldPlugin;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
+use Resma\FilamentAwinTheme\FilamentAwinTheme;
 
 class EmployeerPanelProvider extends PanelProvider
 {
@@ -47,6 +50,10 @@ class EmployeerPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Employeer/Widgets'), for: 'App\Filament\Employeer\Widgets')
             ->widgets([
                 AccountWidget::class,
+            ])
+            ->plugins([
+                FilamentAwinTheme::make(),
+                ShieldPlugin::make(), // Registers RoleResource (Spatie Shield)
             ])
             ->middleware([
                 EncryptCookies::class,

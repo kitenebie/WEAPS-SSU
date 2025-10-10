@@ -9,6 +9,7 @@ use App\Filament\Resources\Users\Pages\ViewUser;
 use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\Schemas\UserInfolist;
 use App\Filament\Resources\Users\Tables\UsersTable;
+use App\Models\Company;
 use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -20,9 +21,11 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
-    protected static ?string $recordTitleAttribute = 'Campanies';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
+    protected static ?string $modelLabel = 'Company List';
+    protected static ?string $recordTitleAttribute = 'Company List';
+    protected static ?string $navigationLabel = 'Company List';
+    protected static ?string $slug = 'Company List';
 
     public static function form(Schema $schema): Schema
     {
@@ -50,9 +53,14 @@ class UserResource extends Resource
     {
         return [
             'index' => ListUsers::route('/'),
-            'create' => CreateUser::route('/create'),
+            // 'create' => CreateUser::route('/create'),
             'view' => ViewUser::route('/{record}'),
-            'edit' => EditUser::route('/{record}/edit'),
+            // 'edit' => EditUser::route('/{record}/edit'),
         ];
+    }
+    
+    protected function hasBreadcrumbs(): bool
+    {
+        return false;
     }
 }

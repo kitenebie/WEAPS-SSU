@@ -8,7 +8,7 @@
     "require": {
         "php": "^8.2",
         "awcodes/overlook": "^3.0",
-        "bezhansalleh/filament-shield": "~4.0@beta",
+        "bezhansalleh/filament-shield": "*",
         "filament/filament": "~4.0",
         "filament/spatie-laravel-settings-plugin": "~4.0",
         "gboquizosanchez/filament-log-viewer": "^2.0",

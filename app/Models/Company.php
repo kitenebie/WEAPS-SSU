@@ -25,10 +25,15 @@ class Company extends Model
         'cover_photo',
         'logo',
         'about',
+        'Document_Permit',
+        'isActive',
+        'user_handle',
     ];
 
     protected $casts = [
         'specialties' => 'array',
+        'Document_Permit' => 'array',
+        'isActive' => 'boolean',
         'founded_year' => 'integer',
         'employee_count' => 'integer',
     ];

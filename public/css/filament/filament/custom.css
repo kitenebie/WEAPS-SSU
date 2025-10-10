@@ -8,7 +8,7 @@
 
     /* Background image + gradient */
     background: linear-gradient(35deg, rgba(128, 0, 0, 0.9) 50%, rgba(128, 0, 0, 0.1) 100%), 
-                url('https://sorsu.edu.ph/wp-content/uploads/2024/06/SORSU-BC-JOINS-126TH-INDEPENDENCE-DAY-4.jpg');
+                url('/bg.png');
 
     
     background-size: cover;
