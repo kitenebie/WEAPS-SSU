@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\CurriculumVitae;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/cv/{id}', function ($id) {
     $cv = CurriculumVitae::findOrFail($id);
@@ -29,4 +30,35 @@ Route::get('/private/{path}', function ($path) {
     return response()->file($filePath);
 
 })->where('path', '.*')->name('private.file');
+
+// Social Auth Routes
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+})->name('socialite.google');
+
+Route::get('/auth/github', function () {
+    return Socialite::driver('github')->redirect();
+})->name('socialite.github');
+
+Route::get('/auth/facebook', function () {
+    return Socialite::driver('facebook')->redirect();
+})->name('socialite.facebook');
+
+Route::get('/auth/google/callback', function () {
+    $user = Socialite::driver('google')->user();
+    // Handle user creation/login logic here
+    return redirect('/employeer/login');
+})->name('socialite.google.callback');
+
+Route::get('/auth/github/callback', function () {
+    $user = Socialite::driver('github')->user();
+    // Handle user creation/login logic here
+    return redirect('/employeer/login');
+})->name('socialite.github.callback');
+
+Route::get('/auth/facebook/callback', function () {
+    $user = Socialite::driver('facebook')->user();
+    // Handle user creation/login logic here
+    return redirect('/employeer/login');
+})->name('socialite.facebook.callback');
 

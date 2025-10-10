@@ -22,6 +22,8 @@ use Filament\Support\Enums\Width;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin as ShieldPlugin;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Resma\FilamentAwinTheme\FilamentAwinTheme;
+use Filament\Forms\Components\Actions\Action;
+use Filament\Support\Enums\ActionSize;
 
 class EmployeerPanelProvider extends PanelProvider
 {
@@ -31,7 +33,7 @@ class EmployeerPanelProvider extends PanelProvider
             ->id('employeer')
             ->path('/')
             ->login()
-            ->registration()
+            ->registration(\App\Filament\Employeer\Pages\Auth\Register::class)
             ->passwordReset()
             ->emailVerification()
             ->emailChangeVerification()
