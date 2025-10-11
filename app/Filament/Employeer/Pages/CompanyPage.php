@@ -7,6 +7,7 @@ use Filament\Support\Icons\Heroicon;
 use BackedEnum;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CompanyPage extends Page
 {
@@ -19,9 +20,26 @@ class CompanyPage extends Page
 
     public static function canAccess(): bool
     {
-        // Check if user has required role to access this page
         $user = Auth::user();
-        return !$user->hasAnyRole([env('USER_DEFAULT_ROLE')]);
+
+        if (!$user) {
+            return false;
+        }
+
+        // Hide Company Profile navigation if user role is applicant
+        $applicantRole = env('USER_APPLICANT_ROLE');
+        if ($user->roles()->where('name', $applicantRole)->exists()) {
+            return false;
+        }
+
+        // Make it visible if Company_id session exists and is not null
+        if (Session::get('Company_id') !== null) {
+            return true;
+        }
+
+        // Fallback to existing logic for other cases
+        $defaultRole = env('USER_DEFAULT_ROLE');
+        return !$user->roles()->where('name', $defaultRole)->exists();
     }
 
 }

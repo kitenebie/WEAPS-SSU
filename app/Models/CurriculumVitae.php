@@ -9,6 +9,8 @@ class CurriculumVitae extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
+        'isActive',
         'first_name',
         'last_name',
         'middle_name',
@@ -34,9 +36,12 @@ class CurriculumVitae extends Model
         'profile_picture',
         'languages',
         'projects',
+        'front_id',
+        'back_id',
     ];
 
     protected $casts = [
+        'isActive' => 'boolean',
         'skills' => 'array',
         'work_experience' => 'array',
         'education' => 'array',
@@ -52,5 +57,13 @@ class CurriculumVitae extends Model
 
     public function getFullnameAttribute(){
         return $this->last_name . ", " . $this->first_name . " " . $this->middle_name;
+    }
+
+    /**
+     * Get the user that owns the curriculum vitae.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

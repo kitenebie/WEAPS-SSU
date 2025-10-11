@@ -1,4 +1,4 @@
-<x-filament-panels::page><script src="https://cdn.tailwindcss.com"></script>
+de<x-filament-panels::page><script src="https://cdn.tailwindcss.com"></script>
 <style>
     .fi-sidebar-nav, .fi-header, .fi-user-menu, .fi-input-wrp {
         display: none !important;
@@ -50,13 +50,16 @@
                             </div>
                         </div>
 
-                        <a href="/Company%20Profile"
-                           class="inline-flex items-center justify-center w-full px-6 py-3 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-lg transition-colors duration-200">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                            </svg>
-                            Register as Company
-                        </a>
+                        <form method="GET" action="/employeer/company-form" class="w-full">
+                            @csrf
+                            <button type="submit"
+                               class="inline-flex items-center justify-center w-full px-6 py-3 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                                Register as Company
+                            </button>
+                        </form>
                     </div>
                 </div>
 
@@ -96,13 +99,16 @@
                             </div>
                         </div>
 
-                        <a href="/Applicants/create"
-                           class="inline-flex items-center justify-center w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors duration-200">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                            Register as Applicant
-                        </a>
+                        <form method="GET" action="/employeer/applicant-form" class="w-full">
+                            @csrf
+                            <button type="submit"
+                               class="inline-flex items-center justify-center w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                Register as Applicant
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

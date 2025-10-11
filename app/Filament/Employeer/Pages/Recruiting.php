@@ -17,9 +17,6 @@ class Recruiting extends Page
 
     public static function canAccess(): bool
     {
-        // Check if user has required role to access this page
-        $user = Auth::user();
-        return !$user->hasAnyRole([env('USER_DEFAULT_ROLE')]);
+        return false;
     }
-
 }

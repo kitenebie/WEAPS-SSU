@@ -35,7 +35,6 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->breadcrumbs(false)
-            ->registration()
             ->passwordReset()
             ->emailVerification()
             ->emailChangeVerification()
@@ -70,8 +69,16 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                \App\Filament\Widgets\TotalUsersWidget::class,
+                \App\Filament\Widgets\VerifiedUsersWidget::class,
+                \App\Filament\Widgets\UnverifiedUsersWidget::class,
+                \App\Filament\Widgets\TotalCompaniesWidget::class,
+                \App\Filament\Widgets\ActiveCompaniesWidget::class,
+                \App\Filament\Widgets\InactiveCompaniesWidget::class,
+                \App\Filament\Widgets\ApplicationFrequencyChart::class,
+                \App\Filament\Widgets\HiringAnalyticsChart::class,
+                \App\Filament\Widgets\CareerPostsChart::class,
+                \App\Filament\Widgets\ApplicantHiringDistributionChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,

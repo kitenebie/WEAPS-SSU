@@ -30,6 +30,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'first_name',
+        'middle_name',
+        'last_name',
     ];
 
     /**
@@ -88,5 +91,13 @@ class User extends Authenticatable
     public function companies()
     {
         return $this->hasMany(Company::class);
+    }
+
+    /**
+     * Get the curriculum vitae for the user.
+     */
+    public function curriculumVitae()
+    {
+        return $this->hasOne(CurriculumVitae::class);
     }
 }

@@ -17,22 +17,50 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Filament\Panel;
 
 class CurriculumVitaeResource extends Resource
 {
     protected static ?string $model = CurriculumVitae::class;
-    protected static ?string $modelLabel = 'Applicants';
+
+    public static function getModelLabel(): string
+    {
+        $user = Auth::user();
+        if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
+            return 'My Resume';
+        }
+        return 'Applicants';
+    }
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?string $recordTitleAttribute = 'first_name';
-    protected static ?string $navigationLabel = 'Recruiting Applicants';
+
+    public static function getNavigationLabel(): string
+    {
+        $user = Auth::user();
+        if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
+            return 'Resume';
+        }
+        return 'Recruiting Applicants';
+    }
+
     protected static ?string $slug = 'Applicants';
 
     public static function getGlobalSearchResultTitle(Model $record): string
     {
         return $record->fullname;
     }
-    protected static ?string $clusterBreadcrumb = 'Applicants';
+
+    public static function getClusterBreadcrumb(): string
+    {
+        $user = Auth::user();
+        if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
+            return 'My Resume';
+        }
+        return 'Applicants';
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -64,5 +92,12 @@ class CurriculumVitaeResource extends Resource
             'view' => ViewCurriculumVitae::route('/{record}'),
             'edit' => EditCurriculumVitae::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getIndexRedirectUrl(): string
+    {
+        // This is now handled in ListCurriculumVitaes::mount()
+        // Keeping as fallback for other scenarios
+        return static::getUrl('index');
     }
 }

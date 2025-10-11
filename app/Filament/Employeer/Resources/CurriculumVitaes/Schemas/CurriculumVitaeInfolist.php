@@ -11,6 +11,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Actions\Action;
+use Illuminate\Support\Facades\Auth;
 
 class CurriculumVitaeInfolist
 {
@@ -22,6 +23,7 @@ class CurriculumVitaeInfolist
                     ->description('Personal details provided by the applicant')
                     ->afterHeader([
                         Action::make('Hire this applicant')
+                            ->visible(fn () => !Auth::user()->hasRole(env('USER_APPLICANT_ROLE')))
                             ->form([
                                 TextInput::make('Name')
                                     ->required(),
