@@ -163,3 +163,11 @@ Route::post('/verification/update-role/{type}', function ($type) {
     return redirect($redirectRoute);
 })->name('verification.update-role');
 
+// API route for inactive resumes
+Route::get('/inActiveResume', [App\Http\Controllers\ResumeController::class, 'inActiveResume'])
+    ->name('inactive.resumes');
+
+// API route for verification
+Route::post('/api/a/i/varification/', [App\Http\Controllers\ResumeController::class, 'apiVerification'])
+    ->name('api.verification');
+

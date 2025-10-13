@@ -58,7 +58,7 @@
                                     <div class="bg-slate-300 text-white rounded-xl w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 shadow-lg group-hover:scale-110 transition-transform duration-200" id="guide-step-3">3</div>
                                     <div class="flex-1">
                                         <p class="font-semibold text-slate-800">ID Verification</p>
-                                        <p class="text-slate-600 text-xs leading-relaxed">Upload government ID images</p>
+                                        <p class="text-slate-600 text-xs leading-relaxed">Upload School ID images</p>
                                     </div>
                                 </div>
 
@@ -74,7 +74,7 @@
                             <div class="mt-6 p-4 bg-blue-50 rounded-lg">
                                 <h3 class="font-semibold text-blue-900 mb-2 text-sm">Document Requirements:</h3>
                                 <ul class="text-xs text-blue-800 space-y-1">
-                                    <li>• Current government-issued ID</li>
+                                    <li>• Current School-issued ID</li>
                                     <li>• Recent professional photo</li>
                                     <li>• Clear, high-resolution images</li>
                                     <li>• All details must match exactly</li>
@@ -154,7 +154,7 @@
                                             </div>
                                             <div>
                                                 <p class="text-blue-900 font-semibold mb-1">Verification Requirements</p>
-                                                <p class="text-blue-800 text-sm leading-relaxed">All personal information must exactly match your government-issued ID. AI verification will cross-check all details for accuracy and consistency.</p>
+                                                <p class="text-blue-800 text-sm leading-relaxed">All personal information must exactly match your School-issued ID. AI verification will cross-check all details for accuracy and consistency.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +236,7 @@
                                             </svg>
                                             <div>
                                                 <p class="text-yellow-800 font-medium">Document Requirements</p>
-                                                <p class="text-yellow-700 text-sm">Upload clear, high-resolution images of your profile photo and government ID. All documents must be current and clearly legible.</p>
+                                                <p class="text-yellow-700 text-sm">Upload clear, high-resolution images of your profile photo and School ID. All documents must be current and clearly legible.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -274,7 +274,7 @@
                                         <div>
                                             <label for="front_id" class="block text-sm font-semibold text-slate-800 mb-3">
                                                 Front ID *
-                                                <span class="text-xs font-normal text-slate-600">(Government ID front)</span>
+                                                <span class="text-xs font-normal text-slate-600">(School ID front)</span>
                                             </label>
                                             <div class="relative">
                                                 <input type="file" id="front_id" name="front_id" accept="image/*" required
@@ -302,7 +302,7 @@
                                         <div>
                                             <label for="back_id" class="block text-sm font-semibold text-slate-800 mb-3">
                                                 Back ID *
-                                                <span class="text-xs font-normal text-slate-600">(Government ID back)</span>
+                                                <span class="text-xs font-normal text-slate-600">(School ID back)</span>
                                             </label>
                                             <div class="relative">
                                                 <input type="file" id="back_id" name="back_id" accept="image/*" required

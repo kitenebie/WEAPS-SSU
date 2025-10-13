@@ -1,9 +1,11 @@
-de<x-filament-panels::page><script src="https://cdn.tailwindcss.com"></script>
-<style>
-    .fi-sidebar-nav, .fi-header, .fi-user-menu, .fi-input-wrp {
-        display: none !important;
-    }
-</style>
+<x-filament-panels::page>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fi-sidebar-nav, .fi-header, .fi-user-menu, .fi-input-wrp {
+            display: none !important;
+        }
+    </style>
+
     <div class="container mx-auto px-4 py-8">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
