@@ -56,7 +56,12 @@ class Company extends Model
 
     public function reviews()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(CompanyReview::class);
+    }
+
+    public function companyReviews()
+    {
+        return $this->hasMany(CompanyReview::class);
     }
 
     public function applicants()

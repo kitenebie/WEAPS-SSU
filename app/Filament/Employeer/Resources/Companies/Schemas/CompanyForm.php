@@ -186,6 +186,16 @@ class CompanyForm
                                 TextInput::make('location')
                                     ->label('Job Location')
                                     ->required(),
+                                TextInput::make('min_salary')
+                                    ->label('Minimum Salary (₱)')
+                                    ->prefix('₱')
+                                    ->numeric()
+                                    ->placeholder('e.g. 25000'),
+                                TextInput::make('max_salary')
+                                    ->label('Maximum Salary (₱)')
+                                    ->prefix('₱')
+                                    ->numeric()
+                                    ->placeholder('e.g. 50000'),
                                 TagsInput::make('tags')
                                     ->label('Skills/Tags')
                                     ->columnSpanFull(),

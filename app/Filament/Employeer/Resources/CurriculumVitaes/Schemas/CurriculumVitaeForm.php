@@ -29,11 +29,13 @@ class CurriculumVitaeForm
                                 ->icon('heroicon-o-user')
                                 ->schema([
                                     FileUpload::make('profile_picture')
-                                        ->disk('public')
                                         ->imageEditor()
                                         ->imageEditorAspectRatios([
                                             '1:1',
                                         ])
+                                        ->disk('local')
+                                        ->directory('profile')
+                                        ->visibility('public')
                                         ->image()->columnSpanFull(),
                                     TextInput::make('first_name')
                                         ->required(),

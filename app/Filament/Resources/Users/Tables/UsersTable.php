@@ -90,6 +90,7 @@ class UsersTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->modifyQueryUsing(fn ($query) => $query->whereHas('companies'))
             ->filters([
                 //
             ])

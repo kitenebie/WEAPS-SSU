@@ -7,32 +7,34 @@
                 {{-- <img src="https://i.ytimg.com/vi/648DbEgy7Oo/maxresdefault.jpg" alt="Cover Photo"
                     class="w-full h-full object-cover" /> --}}
 
-                            @if ($company->cover_photo)
-                            @php
-                                $coverPhotoPath = storage_path('app/private/' . $company->cover_photo);
-                                $coverPhotoData = file_exists($coverPhotoPath) ? base64_encode(file_get_contents($coverPhotoPath)) : null;
-                                $coverPhotoMime = $coverPhotoData ? mime_content_type($coverPhotoPath) : null;
-                            @endphp
-                            @if($coverPhotoData)
-                            <img src="data:{{ $coverPhotoMime }};base64,{{ $coverPhotoData }}"
-                                alt="Company Logo" class="w-full h-full object-cover" />
-                            @endif
-                            @else
-                            <img src="https://img.freepik.com/free-psd/digital-marketing-agency-corporate-facebook-cover-template_106176-2261.jpg?semt=ais_hybrid&w=740&q=80"
-                                alt="Company Logo" class="w-full h-full object-cover" />
+                @if ($company->cover_photo)
+                    @php
+                        $coverPhotoPath = storage_path('app/private/' . $company->cover_photo);
+                        $coverPhotoData = file_exists($coverPhotoPath)
+                            ? base64_encode(file_get_contents($coverPhotoPath))
+                            : null;
+                        $coverPhotoMime = $coverPhotoData ? mime_content_type($coverPhotoPath) : null;
+                    @endphp
+                    @if ($coverPhotoData)
+                        <img src="data:{{ $coverPhotoMime }};base64,{{ $coverPhotoData }}" alt="Company Logo"
+                            class="w-full h-full object-cover" />
+                    @endif
+                @else
+                    <img src="https://img.freepik.com/free-psd/digital-marketing-agency-corporate-facebook-cover-template_106176-2261.jpg?semt=ais_hybrid&w=740&q=80"
+                        alt="Company Logo" class="w-full h-full object-cover" />
 
-                            @endif
+                @endif
                 <!-- Dark Overlay -->
                 <div class="absolute inset-0 bg-red-700 bg-opacity-50"></div>
 
                 <!-- Company Name + Tagline -->
                 <div class="absolute px-3 py-2 bottom-4 left-52 text-white" style="background-color: #2C2B2B54">
-                    <h2 class="text-3xl font-bold" >{{ $company->name ?? '' }}</h2>
+                    <h2 class="text-3xl font-bold">{{ $company->name ?? '' }}</h2>
                     <p class="text-lg text-center">{{ $company->type ?? '' }}</p>
                 </div>
             </div>
         </div>
-        
+
         <!-- Profile Section -->
         <div class="bg-white rounded-b-lg shadow-lg">
             <!-- Company Logo and Basic Info -->
@@ -43,18 +45,20 @@
                         <!-- Logo -->
                         <div class="w-40 h-40 bg-white rounded-full border-4 border-red-900 shadow-lg overflow-hidden">
                             @if ($company->logo)
-                            @php
-                                $logoPath = storage_path('app/private/' . $company->logo);
-                                $logoData = file_exists($logoPath) ? base64_encode(file_get_contents($logoPath)) : null;
-                                $logoMime = $logoData ? mime_content_type($logoPath) : null;
-                            @endphp
-                            @if($logoData)
-                            <img src="data:{{ $logoMime }};base64,{{ $logoData }}"
-                                alt="Company Logo" class="w-full h-full object-cover" />
-                            @endif
+                                @php
+                                    $logoPath = storage_path('app/private/' . $company->logo);
+                                    $logoData = file_exists($logoPath)
+                                        ? base64_encode(file_get_contents($logoPath))
+                                        : null;
+                                    $logoMime = $logoData ? mime_content_type($logoPath) : null;
+                                @endphp
+                                @if ($logoData)
+                                    <img src="data:{{ $logoMime }};base64,{{ $logoData }}" alt="Company Logo"
+                                        class="w-full h-full object-cover" />
+                                @endif
                             @else
-                            <img src="https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/07/door-company-logo.jpg"
-                                alt="Company Logo" class="w-full h-full object-cover" />
+                                <img src="https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/07/door-company-logo.jpg"
+                                    alt="Company Logo" class="w-full h-full object-cover" />
 
                             @endif
                         </div>
@@ -80,11 +84,14 @@
                             <span id="employees">👥 {{ $company->employee_count ?? '' }} employees</span>
                         </div>
                     </div>
-
-                    <a href="/Company%20Settings/{{ auth()->user()->id }}/edit"
-                        class=" bg-red-900 hover:border hover:border-yellow-400 text-white px-4 py-2 rounded-lg transition-all">
-                        Update Profile
-                    </a>
+                    @if (
+                        !\Illuminate\Support\Facades\Session::get('company_id') ||
+                            \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
+                        <a href="/Company%20Settings/{{ auth()->user()->id }}/edit"
+                            class=" bg-red-900 hover:border hover:border-yellow-400 text-white px-4 py-2 rounded-lg transition-all">
+                            Update Profile
+                        </a>
+                    @endif
                 </div>
             </div>
 
@@ -108,10 +115,14 @@
                             class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
                             Reviews
                         </button>
-                        <button onclick="showTab('Applicants')"
-                            class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-                            Applicants
-                        </button>
+                        @if (
+                            !\Illuminate\Support\Facades\Session::get('company_id') ||
+                                \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
+                            <button onclick="showTab('Applicants')"
+                                class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
+                                Applicants
+                            </button>
+                        @endif
                     </nav>
                 </div>
             </div>
@@ -135,7 +146,7 @@
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <h4 class="font-semibold text-red-900-700 mb-2">Industry</h4>
                                 <p id="industry" class="text-gray-600">
-                                   {{ $company->industry ?? '' }}
+                                    {{ $company->industry ?? '' }}
                                 </p>
                             </div>
                             <div class="bg-gray-50 p-4 rounded-lg">
@@ -151,9 +162,10 @@
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <h4 class="font-semibold text-red-900-700 mb-2">Specialties</h4>
                             <div id="specialties" class="flex flex-wrap gap-2">
-                                @if($company->specialties && count($company->specialties) > 0)
-                                    @foreach($company->specialties as $specialty)
-                                        <span class="bg-red-900-100 text-red-900-700 px-3 py-1 rounded-full text-sm">{{ $specialty }}</span>
+                                @if ($company->specialties && count($company->specialties) > 0)
+                                    @foreach ($company->specialties as $specialty)
+                                        <span
+                                            class="bg-red-900-100 text-red-900-700 px-3 py-1 rounded-full text-sm">{{ $specialty }}</span>
                                     @endforeach
                                 @else
                                     <span class="text-gray-500 text-sm">No specialties listed</span>
@@ -177,30 +189,89 @@
                             $careers = App\Models\Carrer::where('company_id', $company->id)->get();
                         @endphp
 
-                        @if($careers->count() > 0)
-                            @foreach($careers as $career)
+                        @if ($careers->count() > 0)
+                            @foreach ($careers as $career)
                                 <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                                     <div class="flex justify-between items-start">
                                         <div class="flex-1">
                                             <h4 class="font-semibold text-lg text-gray-900">
                                                 {{ $career->title ?? 'Untitled Position' }}
                                             </h4>
-                                            <p class="text-gray-600 mb-2">{{ $career->role_type ?? 'Not specified' }} • {{ $career->location ?? 'Location not specified' }}</p>
+                                            <p class="text-gray-600 mb-2">{{ $career->role_type ?? 'Not specified' }} •
+                                                {{ $career->location ?? 'Location not specified' }}</p>
+                                            @if ($career->min_salary || $career->max_salary)
+                                                <div
+                                                    class="flex items-center text-sm text-emerald-600 font-semibold mb-2">
+                                                    <svg class="w-4 h-4 mr-2 text-emerald-500" fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
+                                                        </path>
+                                                    </svg>
+                                                    @if ($career->min_salary && $career->max_salary)
+                                                        ₱{{ number_format($career->min_salary) }} -
+                                                        ₱{{ number_format($career->max_salary) }}
+                                                    @elseif($career->min_salary)
+                                                        ₱{{ number_format($career->min_salary) }}+
+                                                    @elseif($career->max_salary)
+                                                        Up to ₱{{ number_format($career->max_salary) }}
+                                                    @endif
+                                                </div>
+                                            @endif
                                             <p class="text-gray-700 text-sm">
-                                                {{ $career->description ?? 'No description provided.' }}
+                                                {{ Str::limit($career->description ?? 'No description provided.', 150) }}
                                             </p>
-                                            @if($career->tags && count($career->tags) > 0)
+                                            @if ($career->tags && count($career->tags) > 0)
                                                 <div class="mt-2 flex flex-wrap gap-2">
-                                                    @foreach($career->tags as $tag)
-                                                        <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">{{ $tag }}</span>
+                                                    @foreach ($career->tags as $tag)
+                                                        <span
+                                                            class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">{{ $tag }}</span>
                                                     @endforeach
                                                 </div>
                                             @endif
                                         </div>
-                                        <button
-                                            class="bg-red-900 hover:bg-red-900-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
-                                            Apply Now
-                                        </button>
+                                        <div class="flex space-x-2">
+                                            @php
+                                                $userId = auth()->id();
+                                                $careerAlreadySaved = $userId
+                                                    ? App\Models\SaveCareer::where('user_id', $userId)
+                                                        ->where('career_id', $career->id)
+                                                        ->exists()
+                                                    : false;
+                                                $careerAlreadyApplied = $userId
+                                                    ? App\Models\Applicant::where('user_id', $userId)
+                                                        ->where('career_id', $career->id)
+                                                        ->exists()
+                                                    : false;
+                                            @endphp
+
+                                            @if ($careerAlreadySaved)
+                                                <button
+                                                    class="bg-green-100 text-green-800 font-medium py-2 px-3 rounded-lg cursor-not-allowed text-sm"
+                                                    disabled>
+                                                    ✓ Saved
+                                                </button>
+                                            @else
+                                                <button onclick="saveJob({{ $career->id }})"
+                                                    class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-3 rounded-lg transition-colors duration-200 text-sm">
+                                                    Save Job
+                                                </button>
+                                            @endif
+
+                                            @if ($careerAlreadyApplied)
+                                                <button
+                                                    class="bg-blue-100 text-blue-800 font-medium py-2 px-4 rounded-lg cursor-not-allowed text-sm"
+                                                    disabled>
+                                                    ✓ Applied
+                                                </button>
+                                            @else
+                                                <button onclick="applyNow({{ $career->id }})"
+                                                    class="bg-red-900 hover:bg-red-900-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
+                                                    Apply Now
+                                                </button>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -211,8 +282,8 @@
                             </div>
                         @endif
                     </div>
-                </div>
 
+                </div>
                 <!-- Posts Section -->
                 <div id="posts-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Recent Updates</h3>
@@ -223,17 +294,20 @@
                                 ->get();
                         @endphp
 
-                        @if($posts->count() > 0)
-                            @foreach($posts as $post)
+                        @if ($posts->count() > 0)
+                            @foreach ($posts as $post)
                                 <div class="border-b border-gray-200 pb-6">
                                     <div class="flex items-start space-x-3">
-                                        <div class="w-12 h-12 bg-red-900 rounded-full flex items-center justify-center">
-                                            <span class="text-white font-bold">{{ substr($company->name ?? 'CO', 0, 2) }}</span>
+                                        <div
+                                            class="w-12 h-12 bg-red-900 rounded-full flex items-center justify-center">
+                                            <span
+                                                class="text-white font-bold">{{ substr($company->name ?? 'CO', 0, 2) }}</span>
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center space-x-2 mb-2">
                                                 <h4 class="font-semibold">{{ $company->name ?? 'Company' }}</h4>
-                                                <span class="text-gray-500 text-sm">• {{ $post->created_at ? $post->created_at->diffForHumans() : 'Recently' }}</span>
+                                                <span class="text-gray-500 text-sm">•
+                                                    {{ $post->created_at ? $post->created_at->diffForHumans() : 'Recently' }}</span>
                                             </div>
                                             <p class="text-gray-700 mb-3">
                                                 {{ $post->content ?? 'No content available.' }}
@@ -262,117 +336,137 @@
 
                 <!-- Reviews Section -->
                 <div id="reviews-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">
-                        Employee Reviews
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <div class="flex items-center mb-2">
-                                <div class="flex text-yellow-400">★★★★★</div>
-                                <span class="ml-2 text-sm text-gray-600">5.0 • Software Engineer</span>
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Company Reviews</h3>
+
+                    <!-- Review Form (only show if user hasn't reviewed yet) -->
+                    <div id="review-form-container" class="mb-8">
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Share Your Experience</h4>
+
+                            <!-- Rating Stars -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+                                <div class="star-rating-container">
+                                    <input type="hidden" id="rating-value" value="5">
+                                    <div class="star-rating">
+                                        <span class="star" data-rating="1" title="Poor">☆</span>
+                                        <span class="star" data-rating="2" title="Fair">☆</span>
+                                        <span class="star" data-rating="3" title="Good">☆</span>
+                                        <span class="star" data-rating="4" title="Very Good">☆</span>
+                                        <span class="star" data-rating="5" title="Excellent">☆</span>
+                                    </div>
+                                    <span id="rating-text" class="ml-3 text-sm text-gray-600 font-medium">5 Stars -
+                                        Excellent</span>
+                                </div>
                             </div>
-                            <p class="text-gray-700">
-                                "Great company culture and excellent growth opportunities.
-                                Management is supportive and the work is challenging and
-                                rewarding."
-                            </p>
-                        </div>
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <div class="flex items-center mb-2">
-                                <div class="flex text-yellow-400">★★★★☆</div>
-                                <span class="ml-2 text-sm text-gray-600">4.0 • Project Manager</span>
+
+                            <!-- Review Text -->
+                            <div class="mb-4">
+                                <label for="review-text" class="block text-sm font-medium text-gray-700 mb-2">Your
+                                    Review</label>
+                                <textarea id="review-text" rows="4"
+                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    placeholder="Share your experience working with this company..."></textarea>
                             </div>
-                            <p class="text-gray-700">
-                                "Good work-life balance and competitive benefits. The company
-                                invests in employee development and new technologies."
-                            </p>
+
+                            <!-- Anonymous Option -->
+                            <div class="mb-4">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="is-anonymous"
+                                        class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                                    <span class="ml-2 text-sm text-gray-700">Submit anonymously</span>
+                                </label>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button id="submit-review-btn" onclick="submitReview({{ $company->id }})"
+                                class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200">
+                                Submit Review
+                            </button>
                         </div>
+                    </div>
+
+                    <!-- Reviews Display -->
+                    <div id="reviews-container">
+                        <!-- Reviews will be loaded here -->
+                    </div>
+
+                    <!-- Load More Button (for pagination) -->
+                    <div id="load-more-container" class="text-center mt-6 hidden">
+                        <button id="load-more-btn" onclick="loadMoreReviews({{ $company->id }})"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg font-medium transition-colors duration-200">
+                            Load More Reviews
+                        </button>
                     </div>
                 </div>
 
                 <!-- Applicant Section -->
                 <div id="Applicants-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-gray-900">Aplicants</h3>
+                        <h3 class="text-xl font-bold text-gray-900">Applicants</h3>
                     </div>
-                    <div id="jobPositions" class="space-y-4">
-                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <h4 class="font-semibold text-lg text-gray-900">
-                                        John Doe
-                                    </h4>
-                                    <p class="text-gray-600 mb-2">
-                                        Applying For • Senior Software Engineer
-                                    </p>
-                                    <p class="text-gray-700 text-sm">
-                                        with 5 years of experience
-                                    </p>
-                                    <div class="mt-2 flex flex-wrap gap-2">
-                                        <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">React</span>
-                                        <span
-                                            class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Node.js</span>
-                                        <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">AWS</span>
-                                    </div>
-                                </div>
-                                <button
-                                    class="bg-red-900 hover:bg-red-900-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
-                                    View
-                                </button>
-                            </div>
-                        </div>
+                    <div class="space-y-4">
+                        @php
+                            $applicants = App\Models\Applicant::where('company_id', $company->id)
+                                ->with(['user', 'career'])
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+                        @endphp
 
-                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <h4 class="font-semibold text-lg text-gray-900">
-                                        Juvy Medalle
-                                    </h4>
-                                    <p class="text-gray-600 mb-2">
-                                        Applying for • UX/UI Designer
-                                    </p>
-                                    <p class="text-gray-700 text-sm">with 2 years experience</p>
-                                    <div class="mt-2 flex flex-wrap gap-2">
-                                        <span
-                                            class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Figma</span>
-                                        <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Adobe
-                                            Creative Suite</span>
-                                        <span
-                                            class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Prototyping</span>
+                        @if ($applicants->count() > 0)
+                            @foreach ($applicants as $applicant)
+                                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold text-lg text-gray-900">
+                                                {{ $applicant->user->first_name ?? 'Unknown' }}
+                                                {{ $applicant->user->last_name ?? 'User' }}
+                                            </h4>
+                                            <p class="text-gray-600 mb-2">
+                                                Applying for • {{ $applicant->career->title ?? 'Unknown Position' }}
+                                            </p>
+                                            <p class="text-gray-700 text-sm">
+                                                Applied {{ $applicant->created_at->diffForHumans() }}
+                                            </p>
+                                            <div class="mt-2">
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                                    @if ($applicant->status === 'pending') bg-yellow-100 text-yellow-800
+                                                    @elseif($applicant->status === 'approved') bg-green-100 text-green-800
+                                                    @elseif($applicant->status === 'rejected') bg-red-100 text-red-800
+                                                    @else bg-gray-100 text-gray-800 @endif">
+                                                    {{ ucfirst($applicant->status ?? 'pending') }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <button onclick="viewApplicant({{ $applicant->user_id }})"
+                                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
+                                                View Profile
+                                            </button>
+                                            @if ($applicant->status === 'pending')
+                                                <button
+                                                    onclick="updateApplicationStatus({{ $applicant->id }}, 'approved')"
+                                                    class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
+                                                    View
+                                                </button>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                                <button
-                                    class="bg-red-900 hover:bg-red-900-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
-                                    View
-                                </button>
+                            @endforeach
+                        @else
+                            <div class="text-center py-8 text-gray-500">
+                                <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                    </path>
+                                </svg>
+                                <p class="text-lg mb-2">No applicants yet</p>
+                                <p class="text-sm">Applications for your job postings will appear here.</p>
                             </div>
-                        </div>
-
-                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <h4 class="font-semibold text-lg text-gray-900">
-                                        Anne Smith
-                                    </h4>
-                                    <p class="text-gray-600 mb-2">
-                                        Applying for • Digital Marketing Manager
-                                    </p>
-                                    <p class="text-gray-700 text-sm">with 2 years experience</p>
-                                    <div class="mt-2 flex flex-wrap gap-2">
-                                        <span
-                                            class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">SEO/SEM</span>
-                                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Social
-                                            Media</span>
-                                        <span
-                                            class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Analytics</span>
-                                    </div>
-                                </div>
-                                <button
-                                    class="bg-red-900 hover:bg-red-900-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
-                                    View
-                                </button>
-                            </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -425,7 +519,7 @@
                 </div>
 
                 <!-- Recent Activity -->
-                <div class="bg-white rounded-lg shadow-md p-6">
+                {{-- <div class="bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-lg font-bold text-gray-900 mb-4">
                         Recent Activity
                     </h3>
@@ -443,11 +537,42 @@
                             <span class="text-gray-700">Team expansion in progress</span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+
+                @if (
+                    !\Illuminate\Support\Facades\Session::get('company_id') ||
+                        \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
+                    <!-- Recent vistors -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">
+                            Recent Visitors
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            @php
+                                $recentVisitors = \App\Models\RecentVisitor::getTopRecentVisitors($company->user_id, 3);
+                            @endphp
+                            @if($recentVisitors->count() > 0)
+                                @foreach($recentVisitors as $visitor)
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-bold text-sm">
+                                                {{ substr($visitor->visitor->first_name ?? $visitor->visitor->name ?? 'U', 0, 1) }}{{ substr($visitor->visitor->last_name ?? $visitor->visitor->name ? '':'U', 0, 1) }}
+                                            </span>
+                                        </div>
+                                        <span class="text-gray-700">{{ $visitor->visitor->first_name ?? $visitor->visitor->name ?? 'Unknown' }} {{ $visitor->visitor->last_name ?? $visitor->visitor->name ? '':'User' }}</span>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="text-center py-4 text-gray-500">
+                                    <p class="text-sm">No recent visitors</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
-
     <!-- Add Position Modal -->
     <div id="addPositionModal"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
@@ -509,5 +634,11 @@
             </div>
         </div>
     </div>
-    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStarRating();
+            loadReviews({{ $company->id }});
+        });
+    </script>
+
 </div>

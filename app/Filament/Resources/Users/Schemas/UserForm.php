@@ -22,6 +22,12 @@ class UserForm
                 TextInput::make('password')
                     ->password()
                     ->required(),
+                TextInput::make('first_name')
+                    ->default(null),
+                TextInput::make('middle_name')
+                    ->default(null),
+                TextInput::make('last_name')
+                    ->default(null),
             ]);
     }
 }

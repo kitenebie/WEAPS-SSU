@@ -46,6 +46,8 @@ class EditCompany extends EditRecord
                         'description' => $career->description,
                         'role_type' => $career->role_type,
                         'location' => $career->location,
+                        'min_salary' => $career->min_salary,
+                        'max_salary' => $career->max_salary,
                         'tags' => $career->tags,
                     ];
                 })
@@ -87,6 +89,8 @@ class EditCompany extends EditRecord
                             'description' => $careerData['description'],
                             'role_type' => $careerData['role_type'],
                             'location' => $careerData['location'],
+                            'min_salary' => $careerData['min_salary'] ?? null,
+                            'max_salary' => $careerData['max_salary'] ?? null,
                             'tags' => $careerData['tags'],
                         ]);
                         $existingCareerIds[] = $career->id;
@@ -99,6 +103,8 @@ class EditCompany extends EditRecord
                         'description' => $careerData['description'],
                         'role_type' => $careerData['role_type'],
                         'location' => $careerData['location'],
+                        'min_salary' => $careerData['min_salary'] ?? null,
+                        'max_salary' => $careerData['max_salary'] ?? null,
                         'tags' => $careerData['tags'],
                     ]);
                     $existingCareerIds[] = $newCareer->id;

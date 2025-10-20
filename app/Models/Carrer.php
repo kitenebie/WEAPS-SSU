@@ -15,6 +15,8 @@ class Carrer extends Model
         'description',
         'role_type',
         'location',
+        'min_salary',
+        'max_salary',
         'tags',
     ];
 
@@ -30,5 +32,10 @@ class Carrer extends Model
     public function applicants()
     {
         return $this->hasMany(Applicant::class, 'career_id');
+    }
+
+    public function savedCareers()
+    {
+        return $this->hasMany(SaveCareer::class, 'career_id');
     }
 }

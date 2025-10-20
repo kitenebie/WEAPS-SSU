@@ -100,4 +100,20 @@ class User extends Authenticatable
     {
         return $this->hasOne(CurriculumVitae::class);
     }
+
+    /**
+     * Get the saved careers for the user.
+     */
+    public function savedCareers()
+    {
+        return $this->hasMany(SaveCareer::class);
+    }
+
+    /**
+     * Get the applicants for the user.
+     */
+    public function applicants()
+    {
+        return $this->hasMany(Applicant::class);
+    }
 }

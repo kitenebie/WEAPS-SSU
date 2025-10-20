@@ -7,6 +7,46 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50">
+    <!-- Header with Back Button -->
+    <header class="bg-white shadow-sm border-b border-slate-200">
+        <div class="container-full mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()"
+                            class="inline-flex items-center px-4 py-2 bg-emerald-100 hover:bg-emerald-200 text-slate-700 font-medium rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back
+                    </button>
+                    <div>
+                        <h1 class="text-xl font-semibold text-slate-900">Alumni Registration</h1>
+                        <p class="text-sm text-slate-600">Complete your profile verification</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <div class="hidden md:flex items-center space-x-2 text-sm bg-emerald-100 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                        <span class="text-emerald-700 font-medium">Secure Registration</span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-2 text-sm bg-emerald-100 px-3 py-1 rounded-full">
+                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span class="text-emerald-700 font-medium">AI Verification</span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-2 text-sm bg-blue-100 px-3 py-1 rounded-full">
+                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span class="text-blue-700 font-medium">Verified Process</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <div class="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
         <div class="container-full mx-auto px-4 py-8">
             <div class="max-w-full mx-auto">
@@ -212,6 +252,24 @@
                                             </div>
                                             <div class="text-xs text-slate-500 mt-2">Must match ID exactly</div>
                                         </div>
+                                    </div>
+
+                                    <div class="mt-6">
+                                        <label for="School_id" class="block text-sm font-semibold text-slate-800 mb-3">
+                                            School ID *
+                                            <span class="text-xs font-normal text-slate-600">(Student/School ID Number)</span>
+                                        </label>
+                                        <div class="relative">
+                                            <input type="text" id="School_id" name="School_id" required
+                                                   class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                   placeholder="Enter your school ID number">
+                                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs text-slate-500 mt-2">Enter your valid school identification number</div>
                                     </div>
                                 </div>
 
@@ -477,13 +535,15 @@
             const firstName = document.getElementById('first_name').value.trim();
             const middleName = document.getElementById('middle_name').value.trim();
             const lastName = document.getElementById('last_name').value.trim();
+            const schoolId = document.getElementById('School_id').value.trim();
 
             let progress = 0;
             let currentStep = 1;
 
-            // Personal information (40%)
-            if (firstName) progress += 20;
-            if (lastName) progress += 20;
+            // Personal information (50%)
+            if (firstName) progress += 15;
+            if (lastName) progress += 15;
+            if (schoolId) progress += 20;
 
             if (progress >= 30) currentStep = 2;
 
@@ -657,9 +717,15 @@
         function validateApplicantForm() {
             const firstName = document.getElementById('first_name').value.trim();
             const lastName = document.getElementById('last_name').value.trim();
+            const schoolId = document.getElementById('School_id').value.trim();
 
             if (!firstName || !lastName) {
                 alert('Please fill in all required personal information fields.');
+                return false;
+            }
+
+            if (!schoolId) {
+                alert('Please enter your School ID.');
                 return false;
             }
 
@@ -682,7 +748,7 @@
 
         // Add event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            const inputs = ['first_name', 'middle_name', 'last_name'];
+            const inputs = ['first_name', 'middle_name', 'last_name', 'School_id'];
             inputs.forEach(id => {
                 const element = document.getElementById(id);
                 if (element) {

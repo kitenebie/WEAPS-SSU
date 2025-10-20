@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Filament\Employeer\Resources\CurriculumVitaes\Schemas;
+namespace App\Filament\Resources\CurriculumVitaes\Schemas;
+
 
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
@@ -13,6 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Actions\Action;
 use Illuminate\Support\Facades\Auth;
 
+
 class CurriculumVitaeInfolist
 {
     public static function configure(Schema $schema): Schema
@@ -21,30 +23,6 @@ class CurriculumVitaeInfolist
             ->components([
                 Section::make('Applicant Personal Information')
                     ->description('Personal details provided by the applicant')
-                    ->afterHeader([
-                        Action::make('Hire this applicant')
-                            ->visible(fn() => !Auth::user()->hasRole(env('USER_APPLICANT_ROLE')))
-                            ->form([
-                                TextInput::make('Name')
-                                    ->required(),
-                                TextInput::make('Email')
-                                    ->required(),
-                                Section::make('Send an Email')
-                                    ->schema([
-                                        TextInput::make('Subject')
-                                            ->required(),
-                                        RichEditor::make('content')
-                                            ->required()
-                                            ->toolbarButtons([
-                                                ['bold', 'italic', 'underline', 'strike', 'subscript', 'superscript', 'link'],
-                                                ['h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd'],
-                                                ['blockquote', 'bulletList', 'orderedList'],
-                                                ['table', 'attachFiles'],
-                                                ['undo', 'redo'],
-                                            ]),
-                                    ])
-                            ]),
-                    ])
                     ->schema([
                         Grid::make()
                             ->gridContainer()
