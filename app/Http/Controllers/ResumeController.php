@@ -47,6 +47,7 @@ class ResumeController extends Controller
 
             // Query inactive resumes with specific fields, filtering out null images
             $inactiveResumes = CurriculumVitae::where('isActive', false)
+                ->where('isAiValidate', false)  
                 ->where(function ($query) {
                     $query->whereNotNull('profile_picture')
                         ->orWhereNotNull('front_id')
@@ -146,9 +147,9 @@ class ResumeController extends Controller
                         'AI_reason' => $userData['AI_reason'],
                     ]);
                     if ($userData['face_dectetion'] && $userData['AI_result']) {
-                            // CurriculumVitae::where('user_id', $userData['user_id'])->update([
-                            //     'isActive' => true,
-                            // ]);
+                            CurriculumVitae::where('user_id', $userData['user_id'])->update([
+                                'isAiValidate' => true,
+                            ]);
                         Log::info('User AI detection data updated', [
                             'user_id' => $userData['user_id'],
                             'face_detection' => $userData['face_dectetion'],

@@ -20,16 +20,16 @@ class CurriculumVitaesTable
                 $query->whereDoesntHave('companies');
             }))
             ->columns([
-                TextColumn::make('user.first_name')
+                TextColumn::make('first_name')
                     ->name('firstName')
                     ->searchable(),
-                TextColumn::make('user.middle_name')
+                TextColumn::make('middle_name')
                     ->name('middleName')
                     ->searchable(),
-                TextColumn::make('user.last_name')
+                TextColumn::make('last_name')
                     ->name('lastName')
                     ->searchable(),
-                TextColumn::make('user.email')
+                TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
                 TextColumn::make('phone')

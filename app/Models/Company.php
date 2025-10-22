@@ -10,34 +10,36 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'type',
-        'location',
-        'founded_year',
-        'employee_count',
-        'description',
-        'industry',
-        'company_size',
-        'specialties',
-        'website',
-        'phone',
-        'email',
-        'cover_photo',
-        'logo',
-        'about',
-        'Document_Permit',
-        'isActive',
-        'user_handle',
-        'user_id',
-    ];
+         'name',
+         'type',
+         'location',
+         'founded_year',
+         'employee_count',
+         'description',
+         'industry',
+         'company_size',
+         'specialties',
+         'website',
+         'phone',
+         'email',
+         'cover_photo',
+         'logo',
+         'about',
+         'Document_Permit',
+         'isActive',
+         'user_handle',
+         'user_id',
+         'isAdminVerified',
+     ];
 
     protected $casts = [
-        'specialties' => 'array',
-        'Document_Permit' => 'array',
-        'isActive' => 'boolean',
-        'founded_year' => 'integer',
-        'employee_count' => 'integer',
-    ];
+         'specialties' => 'array',
+         'Document_Permit' => 'array',
+         'isActive' => 'boolean',
+         'isAdminVerified' => 'boolean',
+         'founded_year' => 'integer',
+         'employee_count' => 'integer',
+     ];
 
     // Relationships
     public function user()

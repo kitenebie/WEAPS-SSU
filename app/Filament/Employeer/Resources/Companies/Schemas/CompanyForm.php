@@ -154,6 +154,7 @@ class CompanyForm
                     ]),
 
                 Section::make('Career Management')
+                    ->visible(fn() => Company::where('user_id', Auth::id())->first()->isAdminVerified)
                     ->collapsed()
                     ->collapsible()
                     ->columnSpanFull()
@@ -209,6 +210,7 @@ class CompanyForm
 
                 Section::make('Company Posts')
                     ->columnSpanFull()
+                    ->visible(fn() => Company::where('user_id', Auth::id())->first()->isAdminVerified)
                     ->collapsed()
                     ->collapsible()
                     ->description('Company announcements and updates')

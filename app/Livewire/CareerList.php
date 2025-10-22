@@ -22,7 +22,10 @@ class CareerList extends Component
 
     public function loadCareers()
     {
-        $query = Carrer::with('company');
+        $query = Carrer::with('company')
+            ->whereHas('company', function ($q) {
+                $q->where('isAdminVerified', true);
+            });
 
         // Apply search filter
         if ($this->search) {

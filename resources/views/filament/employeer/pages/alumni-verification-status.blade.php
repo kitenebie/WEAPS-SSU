@@ -169,12 +169,13 @@
                         </div>
                     </div>
                     <!-- Refresh Button -->
-                    <div class="text-center mt-8">
+                    <div id="accountBTN" class="hidden text-center mt-8">
                         <button onclick="myAccount()"
                             class="inline-flex items-center px-6 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-400 text-white font-semibold rounded-lg transition-colors duration-200">
                             Continue with my account
                         </button>
-                        <p class="text-xs text-slate-500 mt-2">Last updated: <span id="last-updated">Just now</span>
+                        <p class="text-xs text-slate-500 mt-2">Last updated: <span id="last-updated">Just
+                                now</span>
                         </p>
                     </div>
                 </div>
@@ -323,7 +324,7 @@
             const progressElement = document.getElementById('overall-progress');
             const progressBar = document.getElementById('overall-progress-bar');
             const lastUpdated = document.getElementById('last-updated');
-
+            const accountBTN = document.getElementById('accountBTN');
             let progress = 0;
             let progressText = '';
 
@@ -350,6 +351,8 @@
                     updateStatusMessage('Verification Complete',
                         'Congratulations! Your alumni verification has been successfully completed. You now have full access to all platform features.'
                     );
+                    //remove class hidden
+                    accountBTN.classList.remove('hidden');
                     stopPolling();
                     break;
 
@@ -575,7 +578,7 @@
                 '<svg class="w-5 h-5 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>Refreshing...';
 
             setTimeout(() => {
-                location.href = '/Applicants/{{ Auth::user()->id }}/edit';
+                location.href = '/Applicants/{{ \App\Models\CurriculumVitae::where("user_id", Auth::user()->id)->first()->id }}/edit';
             }, 1000);
         }
         // Start polling when page loads

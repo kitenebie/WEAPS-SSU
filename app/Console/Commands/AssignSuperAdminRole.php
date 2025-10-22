@@ -13,14 +13,14 @@ class AssignSuperAdminRole extends Command
      *
      * @var string
      */
-    protected $signature = 'user:assign-super-admin {email : The email of the user to assign super admin role}';
+    protected $signature = 'user:admin {email : The email of the user to assign super admin role}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Assign super_admin role to a user';
+    protected $description = 'Assign admin role to a user';
 
     /**
      * Execute the console command.
@@ -36,15 +36,16 @@ class AssignSuperAdminRole extends Command
             return 1;
         }
 
-        // Check if super_admin role exists, create if not
+        // Check if admin role exists, create if not
         $role = Role::firstOrCreate(
-            ['name' => 'super_admin', 'guard_name' => 'web']
+            ['name' => 'admin', 'guard_name' => 'web']
         );
 
         // Assign role to user
-        $user->assignRole('super_admin');
+        $user->syncRoles(['admin']);
+        $user->assignRole('admin');
 
-        $this->info("Successfully assigned super_admin role to user: {$user->name} ({$user->email})");
+        $this->info("Successfully assigned admin role to user: {$user->name} ({$user->email})");
 
         return 0;
     }

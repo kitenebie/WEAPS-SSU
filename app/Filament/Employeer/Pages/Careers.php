@@ -25,9 +25,12 @@ class Careers extends Page
         if (!Auth::check()) {
         return false;
         }
+        if(Auth::user()->hasRole(env('USER_APPLICANT_ROLE')) || Auth::user()->hasRole(env('ADMIN_ROLE'))  || Auth::user()->hasRole(env('SUPER_ADMIN_ROLE'))){
+            return true;
+        }
 
         // Check if user has alumni role
-        if (!Auth::user()->hasRole('super_admin') || !Auth::user()->hasRole('Applicant_Alumni')) {
+        if (!Auth::user()->hasRole('super_admin')) {
             return false;
         }
         return true;

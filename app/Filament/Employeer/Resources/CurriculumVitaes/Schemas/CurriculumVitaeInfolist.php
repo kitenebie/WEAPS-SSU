@@ -12,6 +12,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Actions\Action;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Company;
 
 class CurriculumVitaeInfolist
 {
@@ -23,12 +24,14 @@ class CurriculumVitaeInfolist
                     ->description('Personal details provided by the applicant')
                     ->afterHeader([
                         Action::make('Hire this applicant')
-                            ->visible(fn() => !Auth::user()->hasRole(env('USER_APPLICANT_ROLE')))
+                            ->visible(fn($record) => !Auth::user()->hasRole(env('USER_APPLICANT_ROLE')) && Company::where('user_id', Auth::id())->first()->isAdminVerified)
                             ->form([
                                 TextInput::make('Name')
-                                    ->required(),
+                                    ->required()
+                                    ->default(fn($record) => $record->first_name . ' ' . $record->last_name),
                                 TextInput::make('Email')
-                                    ->required(),
+                                    ->required()
+                                    ->default(fn($record) => $record->email),
                                 Section::make('Send an Email')
                                     ->schema([
                                         TextInput::make('Subject')
@@ -43,7 +46,14 @@ class CurriculumVitaeInfolist
                                                 ['undo', 'redo'],
                                             ]),
                                     ])
-                            ]),
+                            ])
+                            ->modal()
+                            ->modalSubmitActionLabel('Send Email')
+                            ->action(function (array $data, $record) {
+                                // Handle sending email or hiring logic here
+                                // For example, send email using the data
+                                // Notification::make()->success()->send();
+                            }),
                     ])
                     ->schema([
                         Grid::make()
