@@ -46,7 +46,7 @@ class ResumeController extends Controller
             }
 
             // Query inactive resumes with specific fields, filtering out null images
-            $inactiveResumes = CurriculumVitae::where('isActive', false)
+            $inactiveResumes = CurriculumVitae::where('isAdminVerified', false)
                 ->where('isAiValidate', false)  
                 ->where(function ($query) {
                     $query->whereNotNull('profile_picture')

@@ -11,8 +11,10 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 
 class CurriculumVitaeForm
 {
@@ -380,6 +382,23 @@ class CurriculumVitaeForm
                                             ->url()
                                             ->placeholder('https://facebook.com/yourprofile')
                                             ->helperText('Facebook profile URL'),
+                                    ])
+                                    ->columns(2),
+                                Section::make('Admin Verification')
+                                    ->collapsed()
+                                    ->description('Administrative verification status')
+                                    ->icon('heroicon-o-shield-check')
+                                    ->schema([
+                                        Toggle::make('isAdminVerified')
+                                            ->label('Admin Verified')
+                                            ->onIcon(Heroicon::ShieldCheck)
+                                            ->offIcon(Heroicon::Power)
+                                            ->helperText('Indicates if this CV has been verified by an administrator'),
+                                        Toggle::make('isAiValidate')
+                                            ->onIcon(Heroicon::Sparkles)
+                                            ->offIcon(Heroicon::ArrowPath)
+                                            ->label('AI Validated')
+                                            ->helperText('Indicates if this User has been validated by AI processes'),
                                     ])
                                     ->columns(2),
                             ])->columnSpanFull()

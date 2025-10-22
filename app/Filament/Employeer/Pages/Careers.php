@@ -2,6 +2,7 @@
 
 namespace App\Filament\Employeer\Pages;
 
+use App\Models\User;
 use Filament\Support\Icons\Heroicon;
 use BackedEnum;
 use Illuminate\Http\Response;
@@ -26,6 +27,12 @@ class Careers extends Page
         return false;
         }
         if(Auth::user()->hasRole(env('USER_APPLICANT_ROLE')) || Auth::user()->hasRole(env('ADMIN_ROLE'))  || Auth::user()->hasRole(env('SUPER_ADMIN_ROLE'))){
+            if(Auth::user()->hasRole(env('USER_APPLICANT_ROLE'))){
+                $user = User::find(Auth::user()->id);
+                if($user->curriculumVitae->isAdminVerified == false){
+                return false;
+                }
+            }
             return true;
         }
 
