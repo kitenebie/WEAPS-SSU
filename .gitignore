@@ -19,8 +19,6 @@
 /storage/*.key
 /storage/pail
 /vendor/*
-!/vendor/filament
-!/vendor/resma
 Homestead.json
 Homestead.yaml
 Thumbs.db
