@@ -6,11 +6,11 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminRoleMiddleware
+class EmployerRoleMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && !Auth::user()->hasRole(['admin', 'super_admin'])) {
+        if (Auth::check() && Auth::user()->hasRole('admin')) {
             abort(403, 'Access denied.');
         }
 

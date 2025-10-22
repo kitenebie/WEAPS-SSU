@@ -25,6 +25,7 @@ use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Resma\FilamentAwinTheme\FilamentAwinTheme;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Support\Enums\ActionSize;
+use App\Http\Middleware\EmployerRoleMiddleware;
 
 class EmployeerPanelProvider extends PanelProvider
 {
@@ -70,6 +71,7 @@ class EmployeerPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                EmployerRoleMiddleware::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
