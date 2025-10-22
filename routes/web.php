@@ -24,8 +24,9 @@ Route::get('/auth/facebook/callback', [App\Http\Controllers\SocialAuthController
 Route::get('/alumni/applicant-form', [App\Http\Controllers\RegistrationController::class, 'showApplicantForm'])->name('applicant.form');
 Route::get('/alumni/alumni-verification-status', [App\Http\Controllers\RegistrationController::class, 'showAlumniVerificationStatus'])->name('alumni.verification.status');
 Route::get('/employeer/company-form', [App\Http\Controllers\RegistrationController::class, 'showCompanyForm'])->name('company.form');
+Route::post('/employeer/company-form', [App\Http\Controllers\RegistrationController::class, 'storeCompany'])->name('company.form.store');
 Route::get('/employeer/company-verification-status', [App\Http\Controllers\RegistrationController::class, 'showCompanyVerificationStatus'])->name('company.verification.status');
-
+Route::get('/CheckUserVerifactionStatus', [App\Http\Controllers\RegistrationController::class, 'CheckUserVerifactionStatus'])->name('CheckUserVerifactionStatus');
 // Routes for verification role updates
 Route::post('/verification/update-role/{type}', [App\Http\Controllers\RegistrationController::class, 'updateRole'])->name('verification.update-role');
 

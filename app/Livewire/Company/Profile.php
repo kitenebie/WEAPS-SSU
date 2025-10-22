@@ -16,9 +16,53 @@ use Illuminate\Support\Facades\Session;
 class Profile extends Component implements HasForms
 {
     use InteractsWithForms;
+
+    public function isAllCompanyInformationNotNUll()
+    {
+        $company = null;
+
+        if (Session::get('company_id')) {
+            $company = Company::find(Session::get('company_id'));
+        } else {
+            $company = Company::where('user_id', Auth::user()->id)->first();
+        }
+
+        if (!$company) {
+            return false;
+        }
+
+        // Define essential company information fields that should not be null
+        $essentialFields = [
+            'name',
+            'type',
+            'location',
+            'founded_year',
+            'employee_count',
+            'description',
+            'industry',
+            'company_size',
+            'specialties',
+            'website',
+            'phone',
+            'email',
+            'cover_photo',
+            'logo',
+            'about',
+            'Document_Permit',
+        ];
+
+        // Check if all essential fields are not null and not empty
+        foreach ($essentialFields as $field) {
+            if (empty($company->$field)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
     public function render()
     {
-        if(Session::get('company_id')){
+        if (Session::get('company_id')) {
             $company = Company::find(Session::get('company_id'));
         } else {
             $company = Company::where('user_id', Auth::user()->id)->first();

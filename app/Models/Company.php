@@ -28,6 +28,7 @@ class Company extends Model
         'Document_Permit',
         'isActive',
         'user_handle',
+        'user_id',
     ];
 
     protected $casts = [

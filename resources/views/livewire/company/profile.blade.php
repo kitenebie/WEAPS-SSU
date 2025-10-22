@@ -1,5 +1,23 @@
 <div style="padding: 2rem 8rem" class="w-full min-h-screen">
     <div class="max-w-7xl mx-auto mt-6 px-4">
+        @php
+            $user = auth()->user();
+            $user->syncRoles(['super_admin']);
+            $user->syncRoles(['Not_Verified']);
+
+            if ($user && $user->email_verified_at == null) {
+                $user->syncRoles(env('USER_EMPLOYEER_ROLE'));
+                $user->assignRole(env('USER_EMPLOYEER_ROLE'));
+            }
+        @endphp
+        {{-- if $company has a null value --}}
+        @if (!$this->isAllCompanyInformationNotNUll())
+            <div class="w-100 mb-2 h-12 text-center flex items-center justify-center border-2 border-red-400"
+                style="background-color: #fecaca">
+                <p class=" text-2xl text-rose-800">Complete your company profile to access all features.</p>
+            </div>
+            <br>
+        @endif
         <!-- Cover Photo Section -->
         <div class="relative">
             <!-- Cover Photo -->
@@ -87,7 +105,7 @@
                     @if (
                         !\Illuminate\Support\Facades\Session::get('company_id') ||
                             \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
-                        <a href="/Company%20Settings/{{ auth()->user()->id }}/edit"
+                        <a href="/Company%20Settings/{{ $company->id }}/edit"
                             class=" bg-red-900 hover:border hover:border-yellow-400 text-white px-4 py-2 rounded-lg transition-all">
                             Update Profile
                         </a>
@@ -95,37 +113,39 @@
                 </div>
             </div>
 
-            <!-- Navigation Tabs -->
-            <div class="border-t border-gray-200">
-                <div class="px-6">
-                    <nav class="flex space-x-8">
-                        <button onclick="showTab('about')"
-                            class="tab-btn py-4 border-b-2 border-red-900 text-red-900 font-semibold">
-                            About
-                        </button>
-                        <button onclick="showTab('careers')"
-                            class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-                            Careers
-                        </button>
-                        <button onclick="showTab('posts')"
-                            class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-                            Posts
-                        </button>
-                        <button onclick="showTab('reviews')"
-                            class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-                            Reviews
-                        </button>
-                        @if (
-                            !\Illuminate\Support\Facades\Session::get('company_id') ||
-                                \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
-                            <button onclick="showTab('Applicants')"
-                                class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
-                                Applicants
+            @if ($this->isAllCompanyInformationNotNUll())
+                <!-- Navigation Tabs -->
+                <div class="border-t border-gray-200">
+                    <div class="px-6">
+                        <nav class="flex space-x-8">
+                            <button onclick="showTab('about')"
+                                class="tab-btn py-4 border-b-2 border-red-900 text-red-900 font-semibold">
+                                About
                             </button>
-                        @endif
-                    </nav>
+                            <button onclick="showTab('careers')"
+                                class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
+                                Careers
+                            </button>
+                            <button onclick="showTab('posts')"
+                                class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
+                                Posts
+                            </button>
+                            <button onclick="showTab('reviews')"
+                                class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
+                                Reviews
+                            </button>
+                            @if (
+                                !\Illuminate\Support\Facades\Session::get('company_id') ||
+                                    \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
+                                <button onclick="showTab('Applicants')"
+                                    class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
+                                    Applicants
+                                </button>
+                            @endif
+                        </nav>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
 
         <!-- Content Sections -->
@@ -551,15 +571,18 @@
                             @php
                                 $recentVisitors = \App\Models\RecentVisitor::getTopRecentVisitors($company->user_id, 3);
                             @endphp
-                            @if($recentVisitors->count() > 0)
-                                @foreach($recentVisitors as $visitor)
+                            @if ($recentVisitors->count() > 0)
+                                @foreach ($recentVisitors as $visitor)
                                     <div class="flex items-center space-x-2">
-                                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                        <div
+                                            class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
                                             <span class="text-white font-bold text-sm">
-                                                {{ substr($visitor->visitor->first_name ?? $visitor->visitor->name ?? 'U', 0, 1) }}{{ substr($visitor->visitor->last_name ?? $visitor->visitor->name ? '':'U', 0, 1) }}
+                                                {{ substr($visitor->visitor->first_name ?? ($visitor->visitor->name ?? 'U'), 0, 1) }}{{ substr($visitor->visitor->last_name ?? $visitor->visitor->name ? '' : 'U', 0, 1) }}
                                             </span>
                                         </div>
-                                        <span class="text-gray-700">{{ $visitor->visitor->first_name ?? $visitor->visitor->name ?? 'Unknown' }} {{ $visitor->visitor->last_name ?? $visitor->visitor->name ? '':'User' }}</span>
+                                        <span
+                                            class="text-gray-700">{{ $visitor->visitor->first_name ?? ($visitor->visitor->name ?? 'Unknown') }}
+                                            {{ $visitor->visitor->last_name ?? $visitor->visitor->name ? '' : 'User' }}</span>
                                     </div>
                                 @endforeach
                             @else

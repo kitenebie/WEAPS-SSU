@@ -30,12 +30,6 @@
                         <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                         <span class="text-emerald-700 font-medium">Secure Registration</span>
                     </div>
-                    <div class="hidden md:flex items-center space-x-2 text-sm bg-emerald-100 px-3 py-1 rounded-full">
-                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span class="text-emerald-700 font-medium">AI Verification</span>
-                    </div>
                     <div class="hidden md:flex items-center space-x-2 text-sm bg-blue-100 px-3 py-1 rounded-full">
                         <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -109,14 +103,6 @@
                                         <p class="text-slate-600 text-xs leading-relaxed">Upload required documentation</p>
                                     </div>
                                 </div>
-
-                                <div class="flex items-start group">
-                                    <div class="bg-slate-300 text-white rounded-xl w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 shadow-lg group-hover:scale-110 transition-transform duration-200" id="guide-step-5">5</div>
-                                    <div class="flex-1">
-                                        <p class="font-semibold text-slate-800">Verification</p>
-                                        <p class="text-slate-600 text-xs leading-relaxed">AI verification and approval</p>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="mt-6 p-4 bg-red-50 rounded-lg">
@@ -141,7 +127,6 @@
                                     <li>• Current and valid permits</li>
                                     <li>• Clearly legible details</li>
                                     <li>• Matching company name</li>
-                                    <li>• AI verification process</li>
                                 </ul>
                             </div>
                         </div>
@@ -169,7 +154,70 @@
                                 </div>
                             </div>
 
-                            <form method="POST" action="#" enctype="multipart/form-data" onsubmit="return validateCompanyForm()">
+                            <form method="POST" action="{{ route('company.form.store') }}" enctype="multipart/form-data" onsubmit="return validateCompanyForm()">
+                                @csrf
+
+                                <!-- Error Alert -->
+                                @if ($errors->any())
+                                    <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-400 rounded-lg">
+                                        <div class="flex">
+                                            <svg class="w-5 h-5 text-red-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <div class="flex-1">
+                                                <h3 class="text-red-800 font-semibold mb-1">Please fix the following errors:</h3>
+                                                <ul class="text-red-700 text-sm list-disc list-inside space-y-1">
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <button type="button" onclick="this.parentElement.parentElement.parentElement.style.display='none'" class="text-red-400 hover:text-red-600">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                <!-- Session Error Alert -->
+                                @if (session('error'))
+                                    <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-400 rounded-lg">
+                                        <div class="flex">
+                                            <svg class="w-5 h-5 text-red-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <div class="flex-1">
+                                                <p class="text-red-800 font-medium">{{ session('error') }}</p>
+                                            </div>
+                                            <button type="button" onclick="this.parentElement.parentElement.style.display='none'" class="text-red-400 hover:text-red-600">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                <!-- Success Alert -->
+                                @if (session('success'))
+                                    <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-400 rounded-lg">
+                                        <div class="flex">
+                                            <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <div class="flex-1">
+                                                <p class="text-green-800 font-medium">{{ session('success') }}</p>
+                                            </div>
+                                            <button type="button" onclick="this.parentElement.parentElement.style.display='none'" class="text-green-400 hover:text-green-600">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endif
                                 <!-- Company Information Section -->
                                 <div class="mb-10">
                                     <div class="flex items-center justify-between mb-8">
@@ -214,7 +262,7 @@
                                             <div class="relative">
                                                 <input type="text" id="name" name="name" required
                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white"
-                                                       placeholder="Enter your official company name">
+                                                       placeholder="Enter your official company name" value="{{ old('name') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
@@ -229,14 +277,14 @@
                                                 <select id="industry" name="industry" required
                                                         class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white appearance-none">
                                                     <option value="">Select Industry</option>
-                                                    <option value="Technology">Technology</option>
-                                                    <option value="Healthcare">Healthcare</option>
-                                                    <option value="Finance">Finance</option>
-                                                    <option value="Education">Education</option>
-                                                    <option value="Manufacturing">Manufacturing</option>
-                                                    <option value="Retail">Retail</option>
-                                                    <option value="Consulting">Consulting</option>
-                                                    <option value="Other">Other</option>
+                                                    <option value="Technology" {{ old('industry') == 'Technology' ? 'selected' : '' }}>Technology</option>
+                                                    <option value="Healthcare" {{ old('industry') == 'Healthcare' ? 'selected' : '' }}>Healthcare</option>
+                                                    <option value="Finance" {{ old('industry') == 'Finance' ? 'selected' : '' }}>Finance</option>
+                                                    <option value="Education" {{ old('industry') == 'Education' ? 'selected' : '' }}>Education</option>
+                                                    <option value="Manufacturing" {{ old('industry') == 'Manufacturing' ? 'selected' : '' }}>Manufacturing</option>
+                                                    <option value="Retail" {{ old('industry') == 'Retail' ? 'selected' : '' }}>Retail</option>
+                                                    <option value="Consulting" {{ old('industry') == 'Consulting' ? 'selected' : '' }}>Consulting</option>
+                                                    <option value="Other" {{ old('industry') == 'Other' ? 'selected' : '' }}>Other</option>
                                                 </select>
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,12 +300,12 @@
                                                 <select id="company_size" name="company_size" required
                                                         class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white appearance-none">
                                                     <option value="">Select Size</option>
-                                                    <option value="1-10">1-10 employees</option>
-                                                    <option value="11-50">11-50 employees</option>
-                                                    <option value="51-200">51-200 employees</option>
-                                                    <option value="201-500">201-500 employees</option>
-                                                    <option value="501-1000">501-1000 employees</option>
-                                                    <option value="1000+">1000+ employees</option>
+                                                    <option value="1-10" {{ old('company_size') == '1-10' ? 'selected' : '' }}>1-10 employees</option>
+                                                    <option value="11-50" {{ old('company_size') == '11-50' ? 'selected' : '' }}>11-50 employees</option>
+                                                    <option value="51-200" {{ old('company_size') == '51-200' ? 'selected' : '' }}>51-200 employees</option>
+                                                    <option value="201-500" {{ old('company_size') == '201-500' ? 'selected' : '' }}>201-500 employees</option>
+                                                    <option value="501-1000" {{ old('company_size') == '501-1000' ? 'selected' : '' }}>501-1000 employees</option>
+                                                    <option value="1000+" {{ old('company_size') == '1000+' ? 'selected' : '' }}>1000+ employees</option>
                                                 </select>
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -275,7 +323,7 @@
                                             <div class="relative">
                                                 <input type="text" id="location" name="location" required
                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white"
-                                                       placeholder="Manila, Metro Manila">
+                                                       placeholder="Manila, Metro Manila" value="{{ old('location') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -290,7 +338,7 @@
                                             <div class="relative">
                                                 <input type="url" id="website" name="website"
                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white"
-                                                       placeholder="https://yourcompany.com">
+                                                       placeholder="https://yourcompany.com" value="{{ old('website') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
@@ -304,7 +352,7 @@
                                             <div class="relative">
                                                 <input type="tel" id="phone" name="phone"
                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white"
-                                                       placeholder="+63 912 345 6789">
+                                                       placeholder="+63 912 345 6789" value="{{ old('phone') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
@@ -318,7 +366,7 @@
                                             <div class="relative">
                                                 <textarea id="description" name="description" rows="5"
                                                           class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white resize-none"
-                                                          placeholder="Describe your company's mission, values, and what makes you unique..."></textarea>
+                                                          placeholder="Describe your company's mission, values, and what makes you unique...">{{ old('description') }}</textarea>
                                                 <div class="absolute top-4 left-4 pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
@@ -750,7 +798,7 @@
                     `;
                     previewContainer.appendChild(pdfDiv);
                 }
-            });
+            }); 
         }
 
         function validateCompanyForm() {

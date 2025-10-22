@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use Filament\Http\Middleware\Authenticate;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -54,6 +55,7 @@ class EmployeerPanelProvider extends PanelProvider
                 AccountWidget::class,
             ])
             ->plugins([
+                FilamentShieldPlugin::make(),
                 FilamentAwinTheme::make(),
                 ShieldPlugin::make(), // Registers RoleResource (Spatie Shield)
             ])

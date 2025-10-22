@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\CurriculumVitae;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -48,8 +49,8 @@ class ResumeController extends Controller
             $inactiveResumes = CurriculumVitae::where('isActive', false)
                 ->where(function ($query) {
                     $query->whereNotNull('profile_picture')
-                          ->orWhereNotNull('front_id')
-                          ->orWhereNotNull('back_id');
+                        ->orWhereNotNull('front_id')
+                        ->orWhereNotNull('back_id');
                 })
                 ->select([
                     'user_id',
@@ -100,7 +101,6 @@ class ResumeController extends Controller
                 'data' => $processedResumes,
                 'count' => $processedResumes->count()
             ], 200);
-
         } catch (\Exception $e) {
             // Log the error for debugging
             Log::error('Error retrieving inactive resumes: ' . $e->getMessage());
@@ -124,11 +124,44 @@ class ResumeController extends Controller
         try {
             Log::info('Verification', $request->all());
 
+            // Get the API response data
+            $responseData = $request->all();
+
+            // Check if we have user verification data
+            if (isset($responseData[2]) && is_array($responseData[2]) && !empty($responseData[2])) {
+                foreach ($responseData[2] as $userData) {
+                    // Update User model with AI detection results
+                    $filderUser_Id = CurriculumVitae::where('user_id', $userData['user_id'])->get();
+                    if ($filderUser_Id->count() > 1) {
+                        foreach ($filderUser_Id as $user) {
+                            CurriculumVitae::where('School_id', $user->School_id)->delete();
+                            continue;
+                        }
+                    }
+
+                    User::where('id', $userData['user_id'])->update([
+                        'face_detection' => $userData['face_dectetion'], // Note: typo in API response
+                        'detection_reason' => $userData['detection_reason'],
+                        'AI_result' => $userData['AI_result'],
+                        'AI_reason' => $userData['AI_reason'],
+                    ]);
+                    if ($userData['face_dectetion'] && $userData['AI_result']) {
+                            // CurriculumVitae::where('user_id', $userData['user_id'])->update([
+                            //     'isActive' => true,
+                            // ]);
+                        Log::info('User AI detection data updated', [
+                            'user_id' => $userData['user_id'],
+                            'face_detection' => $userData['face_dectetion'],
+                            'AI_result' => $userData['AI_result']
+                        ]);
+                    }
+                }
+            }
+
             return response()->json([
                 'success' => true,
-                'message' => 'Verification logged successfully.'
+                'message' => 'Verification processed and users updated successfully.'
             ], 200);
-
         } catch (\Exception $e) {
             Log::error('Error in API verification: ' . $e->getMessage());
 
@@ -139,5 +172,4 @@ class ResumeController extends Controller
             ], 500);
         }
     }
-
 }

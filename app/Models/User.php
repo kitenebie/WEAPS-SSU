@@ -33,6 +33,10 @@ class User extends Authenticatable
         'first_name',
         'middle_name',
         'last_name',
+        'face_detection',
+        'detection_reason',
+        'AI_result',
+        'AI_reason',
     ];
 
     /**

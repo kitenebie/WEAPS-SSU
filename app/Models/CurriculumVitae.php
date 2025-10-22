@@ -38,6 +38,7 @@ class CurriculumVitae extends Model
         'projects',
         'front_id',
         'back_id',
+        'School_id',
     ];
 
     protected $casts = [
