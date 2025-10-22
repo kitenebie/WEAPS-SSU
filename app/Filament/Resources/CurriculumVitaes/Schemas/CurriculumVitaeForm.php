@@ -389,7 +389,7 @@ class CurriculumVitaeForm
                                     ->description('Administrative verification status')
                                     ->icon('heroicon-o-shield-check')
                                     ->schema([
-                                        Toggle::make('isAdminVerified')
+                                        Toggle::make('isActive')
                                             ->label('Admin Verified')
                                             ->onIcon(Heroicon::ShieldCheck)
                                             ->offIcon(Heroicon::Power)

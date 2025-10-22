@@ -63,6 +63,10 @@ class CurriculumVitaesTable
                     ->numeric()
                     ->sortable(),
                 IconColumn::make('isActive')
+                    ->label('Admin Verified')
+                    ->boolean(),
+                IconColumn::make('isAiValidate')
+                    ->label('AI Verified')
                     ->boolean(),
                 TextColumn::make('front_id')
                     ->searchable(),

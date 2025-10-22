@@ -29,7 +29,7 @@ class Careers extends Page
         if(Auth::user()->hasRole(env('USER_APPLICANT_ROLE')) || Auth::user()->hasRole(env('ADMIN_ROLE'))  || Auth::user()->hasRole(env('SUPER_ADMIN_ROLE'))){
             if(Auth::user()->hasRole(env('USER_APPLICANT_ROLE'))){
                 $user = User::find(Auth::user()->id);
-                if($user->curriculumVitae->isAdminVerified == false){
+                if($user->curriculumVitae->isActive == false){
                 return false;
                 }
             }
