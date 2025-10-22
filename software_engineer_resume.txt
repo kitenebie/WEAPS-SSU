@@ -1,0 +1,85 @@
+JOHN DOE
+Software Engineer
+San Francisco, CA | (555) 123-4567 | john.doe@email.com | linkedin.com/in/johndoe | github.com/johndoe
+
+PROFESSIONAL SUMMARY
+Innovative and results-driven Software Engineer with 5+ years of experience in full-stack development, specializing in scalable web applications and cloud technologies. Proven track record of delivering high-performance solutions using modern frameworks and best practices. Passionate about clean code, agile methodologies, and continuous learning.
+
+SKILLS
+Programming Languages: JavaScript, Python, Java, C++
+Web Technologies: React, Node.js, Express, HTML5, CSS3, REST APIs
+Databases: PostgreSQL, MongoDB, Redis
+Cloud Platforms: AWS, Docker, Kubernetes
+Tools & Frameworks: Git, Jenkins, Jest, Webpack
+Soft Skills: Team Leadership, Problem-Solving, Agile/Scrum
+
+WORK EXPERIENCE
+
+Senior Software Engineer
+TechCorp Inc., San Francisco, CA
+June 2022 - Present
+
+- Led development of microservices architecture serving 1M+ users, improving system performance by 40% through optimized database queries and caching strategies
+- Designed and implemented RESTful APIs using Node.js and Express, reducing API response times by 35%
+- Mentored junior developers and conducted code reviews, resulting in 25% improvement in code quality metrics
+- Collaborated with cross-functional teams to deliver features on time, contributing to 15% increase in user engagement
+- Technologies: Node.js, React, PostgreSQL, AWS, Docker, Kubernetes
+
+Software Engineer
+Innovate Solutions, Palo Alto, CA
+January 2020 - May 2022
+
+- Developed full-stack web applications using React and Python/Django, handling 500K+ monthly active users
+- Implemented CI/CD pipelines using Jenkins and Docker, reducing deployment time by 50%
+- Optimized database performance for high-traffic applications, achieving 99.9% uptime
+- Contributed to open-source projects, gaining recognition in the developer community
+- Technologies: Python, Django, React, PostgreSQL, Jenkins, Docker
+
+Junior Software Engineer
+StartupXYZ, Mountain View, CA
+August 2018 - December 2019
+
+- Built responsive web interfaces using HTML5, CSS3, and JavaScript, improving user experience scores by 30%
+- Developed backend services with Java and Spring Boot, integrating with third-party APIs
+- Participated in agile development processes, delivering features in 2-week sprints
+- Conducted unit and integration testing, maintaining 95% test coverage
+- Technologies: Java, Spring Boot, JavaScript, MySQL, Git
+
+EDUCATION
+
+Bachelor of Science in Computer Science
+Stanford University, Stanford, CA
+September 2014 - June 2018
+- GPA: 3.8/4.0
+- Relevant Coursework: Data Structures, Algorithms, Software Engineering, Database Systems
+- Honors: Dean's List (2016-2018), Computer Science Excellence Award
+
+CERTIFICATIONS
+
+- AWS Certified Solutions Architect - Associate (2023)
+- Google Cloud Professional Cloud Architect (2022)
+- Certified Scrum Master (CSM) (2021)
+- Oracle Certified Java Programmer (OCJP) (2019)
+
+PROJECTS
+
+E-Commerce Platform (Personal Project)
+- Built a full-stack e-commerce application using MERN stack
+- Implemented payment processing with Stripe API and real-time inventory management
+- Deployed on AWS with auto-scaling, handling 10K+ concurrent users
+- Technologies: MongoDB, Express.js, React, Node.js, AWS
+
+Task Management Tool (Open Source)
+- Developed a collaborative task management application with real-time updates
+- Integrated with Google Calendar API for seamless scheduling
+- Achieved 500+ GitHub stars and contributions from 20+ developers
+- Technologies: React, Firebase, Node.js
+
+ACHIEVEMENTS
+- Employee of the Year 2023, TechCorp Inc.
+- Published 3 articles on Medium about modern web development practices
+- Speaker at Tech Conference 2022: "Scaling Microservices with Kubernetes"
+- Active contributor to open-source projects on GitHub
+
+REFERENCES
+Available upon request

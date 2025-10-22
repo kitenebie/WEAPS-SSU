@@ -1,0 +1,20 @@
+
+.fi-simple-main-ctn {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: flex;
+
+    /* Background image + gradient */
+    background: linear-gradient(35deg, rgba(128, 0, 0, 0.9) 50%, rgba(128, 0, 0, 0.1) 100%), 
+                url('/bg.png');
+
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Optional: blend for smoother look */
+    background-blend-mode: multiply; /* 🔥 makes the gradient dominate */
+}
