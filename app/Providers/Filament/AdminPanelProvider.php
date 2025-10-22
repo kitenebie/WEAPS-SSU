@@ -47,6 +47,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Rose,
                 'danger' => Color::Rose,
             ])
+            ->darkMode(false)
             ->plugins([
                 BreezyCore::make()
                     ->myProfile(

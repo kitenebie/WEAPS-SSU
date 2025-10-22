@@ -45,6 +45,7 @@ class EmployeerPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Rose,
             ])
+            ->darkMode(false)
             ->discoverResources(in: app_path('Filament/Employeer/Resources'), for: 'App\Filament\Employeer\Resources')
             ->pages([
                 \App\Filament\Employeer\Pages\Verification::class,
