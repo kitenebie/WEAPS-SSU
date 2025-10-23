@@ -43,6 +43,20 @@ class CurriculumVitaeForm
                                             ->directory('profile')
                                             ->visibility('public')
                                             ->image()->columnSpanFull(),
+                                        FileUpload::make('front_id')
+                                            ->label('Front ID')
+                                            ->image()
+                                            ->disk('local')
+                                            ->directory('ids')
+                                            ->visibility('public')
+                                            ->columnSpanFull(),
+                                        FileUpload::make('back_id')
+                                            ->label('Back ID')
+                                            ->image()
+                                            ->disk('local')
+                                            ->directory('ids')
+                                            ->visibility('public')
+                                            ->columnSpanFull(),
                                         TextInput::make('first_name')
                                             ->required(),
                                         TextInput::make('last_name')

@@ -53,6 +53,16 @@ class CurriculumVitaeInfolist
                                                                     ->disk('local')
                                                                     ->visibility('public')
                                                                     ->imageSize(200),
+                                                                ImageEntry::make('front_id')
+                                                                    ->label('Front ID')
+                                                                    ->disk('local')
+                                                                    ->visibility('public')
+                                                                    ->imageSize(200),
+                                                                ImageEntry::make('back_id')
+                                                                    ->label('Back ID')
+                                                                    ->disk('local')
+                                                                    ->visibility('public')
+                                                                    ->imageSize(200),
                                                             ]),
                                                         Grid::make()
                                                             ->columns(1)
