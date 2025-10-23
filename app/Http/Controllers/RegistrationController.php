@@ -58,7 +58,7 @@ class RegistrationController extends Controller
     {
         $userCampany = Company::where('user_handle', Auth::id())->first();
         if (!Auth::check() || !$userCampany || $userCampany->isActive) {
-            return redirect()->back();
+            return redirect('/employeer/company-verification-status');
         }
         return view('filament.employeer.pages.company-verification-status');
     }
