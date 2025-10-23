@@ -6,7 +6,7 @@
         .fi-user-menu,
         fi-sidebar,
         .fi-main-sidebar,
-        .fi-icon-btn
+        .fi-icon-btn,
         .fi-input-wrp {
             display: none !important;
         }
