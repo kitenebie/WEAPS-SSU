@@ -3,12 +3,14 @@
     <style>
         .fi-sidebar-nav,
         .fi-header,
-        .fi-user-menu,.fi-sidebar .fi-main-sidebar,
+        .fi-user-menu,
+        fi-sidebar,
+        .fi-main-sidebar,
         .fi-input-wrp {
             display: none !important;
         }
-        .fi-topbar-item:nth-child(2)
-        {
+
+        .fi-topbar-item:nth-child(2) {
             display: none !important;
         }
     </style>
