@@ -435,7 +435,7 @@ class CurriculumVitaeForm
                                                 $livewire = $component->getContainer()->getLivewire();
                                                 $record = method_exists($livewire, 'getRecord') ? $livewire->getRecord() : null;
 
-                                                if ($record && $record->user && $record->user->email_verified_at === null) {
+                                                if ($record && $record->user && $record->user->AI_reason === null) {
                                                     $record->user->forceFill(['AI_reason' => 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.'])->save();
                                                 }
                                             }),
