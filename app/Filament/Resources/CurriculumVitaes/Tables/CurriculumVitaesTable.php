@@ -9,6 +9,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 
 class CurriculumVitaesTable
@@ -65,13 +66,16 @@ class CurriculumVitaesTable
                 IconColumn::make('isActive')
                     ->label('Admin Verified')
                     ->boolean(),
-                TextColumn::make('user.AI_reason'),
                 IconColumn::make('isAiValidate')
                     ->label('AI Verified') 
                     ->boolean(),
-                TextColumn::make('front_id')
+                ImageColumn::make('front_id'),
+                ImageColumn::make('back_id'),
+                TextColumn::make('user.AI_reason')
+                    ->label('AI Reason')
                     ->searchable(),
-                TextColumn::make('back_id')
+                TextColumn::make('user.detection_reason')
+                    ->label('Detection Reason')
                     ->searchable(),
             ])
             ->filters([
