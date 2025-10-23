@@ -63,7 +63,7 @@ class CurriculumVitaesTable
                             return 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.';
                         }
 
-                        return $state ?? '-';
+                        return $record->user->AI_reason ?? '-';
                     }),
                 TextColumn::make('created_at')
                     ->dateTime()
