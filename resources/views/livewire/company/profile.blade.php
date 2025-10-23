@@ -28,7 +28,7 @@
                             class="w-full h-full object-cover" />
                     @endif
                 @else
-                    <img src="https://img.freepik.com/free-psd/digital-marketing-agency-corporate-facebook-cover-template_106176-2261.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://ionic.io/blog/wp-content/uploads/2018/03/skeleton.gif"
                         alt="Company Logo" class="w-full h-full object-cover" />
 
                 @endif
