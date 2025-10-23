@@ -46,9 +46,9 @@ class CurriculumVitaesTable
                 TextColumn::make('user.email')
                     ->label('Email address')
                     ->searchable(),
-                TextColumn::make('user.phone')
+                TextColumn::make('phone')
                     ->searchable(),
-                TextColumn::make('user.address')
+                TextColumn::make('address')
                     ->searchable(),
                 TextColumn::make('job_title')
                     ->searchable(),
@@ -57,7 +57,6 @@ class CurriculumVitaesTable
                     ->sortable(),
                 TextColumn::make('user.AI_reason')
                     ->label('Verification Remarks')
-                    ->searchable()
                     ->formatStateUsing(function ($state, $record) {
                         // Prefer the resolved column state. Fall back to a message when AI-verified with no reason.
                         if (($state === null || $state === '') && (bool) $record->isAiValidate) {
