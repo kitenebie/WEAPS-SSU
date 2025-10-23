@@ -41,7 +41,6 @@ class RegistrationController extends Controller
         $user = Auth::user();
         $user->syncRoles(['super_admin']);
         $user->syncRoles(['Not_Verified']);
-        dd($user);
         if ($user && $user->email_verified_at == null) {
             $user->syncRoles(env('USER_EMPLOYEER_ROLE'));
             $user->assignRole(env('USER_EMPLOYEER_ROLE'));
