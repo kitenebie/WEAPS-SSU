@@ -61,7 +61,7 @@ class CurriculumVitaesTable
                         // Prefer the resolved column state. Fall back to a message when AI-verified with no reason.
                         if ($record->isAiValidate == 1) {
                             if ($state == null) {
-                                return 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.';
+                                return $record->isAiValidate == 1 ?'This account is verified manually by the admin since the images are not clearly detected by the Face detection.':'---';
                             }
                         }
 
