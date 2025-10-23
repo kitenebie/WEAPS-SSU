@@ -30,7 +30,7 @@ class CurriculumVitaesTable
                 IconColumn::make('isAiValidate')
                     ->label('AI Verified') 
                     ->boolean(),
-                TextColumn::make('first_name')
+                TextColumn::make('user.first_name')
                     ->name('firstName')
                     ->searchable(),
                 TextColumn::make('middle_name')
