@@ -6,6 +6,9 @@ use App\Models\Carrer;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Forms\Components\Select;
+/**
+ * Charts visualizing the number of career posts over recent months/years and overall total.
+ */
 
 class CareerPostsChart extends ApexChartWidget
 {

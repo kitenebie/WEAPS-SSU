@@ -6,6 +6,9 @@ use App\Models\Applicant;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Forms\Components\Select;
+/**
+ * Analytics chart showing application frequency by users over time (yearly or all time).
+ */
 
 class ApplicationFrequencyChart extends ApexChartWidget
 {

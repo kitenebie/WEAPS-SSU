@@ -6,6 +6,9 @@ use App\Models\Applicant;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Forms\Components\Select;
+/**
+ * Charts visualizing hiring counts over time (monthly/yearly) and overall total.
+ */
 
 class HiringAnalyticsChart extends ApexChartWidget
 {

@@ -5,6 +5,9 @@ namespace App\Filament\Widgets;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+/**
+ * Displays the number of users pending email verification as a Filament stats card.
+ */
 
 class UnverifiedUsersWidget extends BaseWidget
 {

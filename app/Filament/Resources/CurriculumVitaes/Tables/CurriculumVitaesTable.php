@@ -11,6 +11,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Enums\RecordActionsPosition;
 
 class CurriculumVitaesTable
 {
@@ -73,8 +74,8 @@ class CurriculumVitaesTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-            ])
-            ->toolbarActions([
+            ], RecordActionsPosition::BeforeColumns)
+            ->toolbarActions(actions: [
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

@@ -5,6 +5,9 @@ namespace App\Filament\Widgets;
 use App\Models\Company;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+/**
+ * Displays the total number of registered companies as a Filament stats card.
+ */
 
 class TotalCompaniesWidget extends BaseWidget
 {

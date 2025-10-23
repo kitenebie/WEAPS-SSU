@@ -6,6 +6,9 @@ use App\Models\Applicant;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Forms\Components\Select;
+/**
+ * Stacked bar chart showing the distribution of applicant hirings by year or all time.
+ */
 
 class ApplicantHiringDistributionChart extends ApexChartWidget
 {
