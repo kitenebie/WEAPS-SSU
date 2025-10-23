@@ -21,6 +21,15 @@ class CurriculumVitaesTable
                 $query->whereDoesntHave('companies');
             }))
             ->columns([
+                ImageColumn::make('profile_picture'),
+                ImageColumn::make('front_id'),
+                ImageColumn::make('back_id'),
+                IconColumn::make('isActive')
+                    ->label('Admin Verified')
+                    ->boolean(),
+                IconColumn::make('isAiValidate')
+                    ->label('AI Verified') 
+                    ->boolean(),
                 TextColumn::make('first_name')
                     ->name('firstName')
                     ->searchable(),
@@ -42,11 +51,11 @@ class CurriculumVitaesTable
                 TextColumn::make('years_of_experience')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('linkedin_url')
+                TextColumn::make('user.AI_reason')
+                    ->label('AI Reason')
                     ->searchable(),
-                TextColumn::make('github_url')
-                    ->searchable(),
-                TextColumn::make('portfolio_url')
+                TextColumn::make('user.detection_reason')
+                    ->label('Detection Reason')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -56,27 +65,6 @@ class CurriculumVitaesTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('profile_picture')
-                    ->searchable(),
-                TextColumn::make('facebook_url')
-                    ->searchable(),
-                TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
-                IconColumn::make('isActive')
-                    ->label('Admin Verified')
-                    ->boolean(),
-                IconColumn::make('isAiValidate')
-                    ->label('AI Verified') 
-                    ->boolean(),
-                ImageColumn::make('front_id'),
-                ImageColumn::make('back_id'),
-                TextColumn::make('user.AI_reason')
-                    ->label('AI Reason')
-                    ->searchable(),
-                TextColumn::make('user.detection_reason')
-                    ->label('Detection Reason')
-                    ->searchable(),
             ])
             ->filters([
                 //
