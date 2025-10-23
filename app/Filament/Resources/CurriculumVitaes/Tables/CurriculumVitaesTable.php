@@ -52,11 +52,13 @@ class CurriculumVitaesTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('user.AI_reason')
-                    ->label('AI Reason')
-                    ->searchable(),
-                TextColumn::make('user.detection_reason')
-                    ->label('Detection Reason')
-                    ->searchable(),
+                    ->label('Verification Remarks')
+                    ->searchable()
+                    ->formatStateUsing(fn($state, $record) =>
+                        $record->user->AI_reason === null && $record->isAiValidate
+                            ? 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.'
+                            : $state
+                    ),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
