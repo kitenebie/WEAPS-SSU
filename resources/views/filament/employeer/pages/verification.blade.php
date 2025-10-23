@@ -14,6 +14,9 @@
         .fi-topbar-item:nth-child(2) {
             display: none !important;
         }
+        .fi-sidebar-header-ctnr {
+            display: block !important;
+        }
     </style>
     @php
         $user = auth()->user();
