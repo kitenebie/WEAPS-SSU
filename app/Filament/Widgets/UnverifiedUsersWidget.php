@@ -14,7 +14,7 @@ class UnverifiedUsersWidget extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Unverified Users', User::whereNull('email_verified_at')->count())
+            Stat::make('Unverified Users', User::where('isActive', false)->count())
                 ->description('Users pending verification')
                 ->descriptionIcon('heroicon-m-exclamation-triangle')
                 ->color('warning'),

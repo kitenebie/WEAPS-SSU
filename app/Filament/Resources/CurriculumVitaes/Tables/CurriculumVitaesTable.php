@@ -17,9 +17,13 @@ class CurriculumVitaesTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->query(CurriculumVitae::whereHas('user', function ($query) {
-                $query->whereDoesntHave('companies');
-            }))
+            ->query(
+                CurriculumVitae::query()
+                    ->whereHas('user', function ($query) {
+                        $query->whereDoesntHave('companies');
+                    })
+                    ->with('user')
+            )
             ->columns([
                 ImageColumn::make('profile_picture'),
                 ImageColumn::make('front_id'),
@@ -31,20 +35,20 @@ class CurriculumVitaesTable
                     ->label('AI Verified') 
                     ->boolean(),
                 TextColumn::make('user.first_name')
-                    ->name('firstName')
+                    ->label('First name')
                     ->searchable(),
-                TextColumn::make('middle_name')
-                    ->name('middleName')
+                TextColumn::make('user.middle_name')
+                    ->label('Middle name')
                     ->searchable(),
-                TextColumn::make('last_name')
-                    ->name('lastName')
+                TextColumn::make('user.last_name')
+                    ->label('Last name')
                     ->searchable(),
-                TextColumn::make('email')
+                TextColumn::make('user.email')
                     ->label('Email address')
                     ->searchable(),
-                TextColumn::make('phone')
+                TextColumn::make('user.phone')
                     ->searchable(),
-                TextColumn::make('address')
+                TextColumn::make('user.address')
                     ->searchable(),
                 TextColumn::make('job_title')
                     ->searchable(),

@@ -14,7 +14,7 @@ class VerifiedUsersWidget extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Verified Users', User::whereNotNull('email_verified_at')->count())
+            Stat::make('Verified Users', User::where('isActive', false)->count())
                 ->description('Users with verified emails')
                 ->descriptionIcon('heroicon-m-check-badge')
                 ->color('success'),
