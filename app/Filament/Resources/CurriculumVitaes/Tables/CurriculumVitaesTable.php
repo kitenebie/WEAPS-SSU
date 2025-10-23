@@ -65,8 +65,9 @@ class CurriculumVitaesTable
                 IconColumn::make('isActive')
                     ->label('Admin Verified')
                     ->boolean(),
+                TextColumn::make('user.AI_reason'),
                 IconColumn::make('isAiValidate')
-                    ->label('AI Verified')
+                    ->label('AI Verified') 
                     ->boolean(),
                 TextColumn::make('front_id')
                     ->searchable(),
