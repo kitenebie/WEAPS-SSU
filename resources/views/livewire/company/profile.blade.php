@@ -241,6 +241,7 @@
                                                 </div>
                                             @endif
                                         </div>
+                                        @if (!$this->isMe)
                                         <div class="flex space-x-2">
                                             @php
                                                 $userId = auth()->id();
@@ -282,6 +283,7 @@
                                                 </button>
                                             @endif
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach
