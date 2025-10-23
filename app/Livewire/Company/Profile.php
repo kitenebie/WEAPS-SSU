@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 class Profile extends Component implements HasForms
 {
     use InteractsWithForms;
+    public $isMe = false;
 
     public function isAllCompanyInformationNotNUll()
     {
@@ -66,6 +67,7 @@ class Profile extends Component implements HasForms
             $company = Company::find(Session::get('company_id'));
         } else {
             $company = Company::where('user_id', Auth::user()->id)->first();
+            $this->isMe = true;
         }
 
         // Track visitor if not the company owner

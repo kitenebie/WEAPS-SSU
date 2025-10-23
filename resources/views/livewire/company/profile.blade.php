@@ -28,8 +28,8 @@
                             class="w-full h-full object-cover" />
                     @endif
                 @else
-                    <img src="https://ionic.io/blog/wp-content/uploads/2018/03/skeleton.gif"
-                        alt="Company Logo" class="w-full h-full object-cover" />
+                    <img src="https://ionic.io/blog/wp-content/uploads/2018/03/skeleton.gif" alt="Company Logo"
+                        class="w-full h-full object-cover" />
 
                 @endif
                 <!-- Dark Overlay -->
@@ -347,55 +347,56 @@
                 <!-- Reviews Section -->
                 <div id="reviews-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
                     <h3 class="text-xl font-bold text-gray-900 mb-6">Company Reviews</h3>
+                    @if (!$this->isMe)
+                        <!-- Review Form (only show if user hasn't reviewed yet) -->
+                        <div id="review-form-container" class="mb-8">
+                            <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                                <h4 class="text-lg font-semibold text-gray-900 mb-4">Share Your Experience</h4>
 
-                    <!-- Review Form (only show if user hasn't reviewed yet) -->
-                    <div id="review-form-container" class="mb-8">
-                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Share Your Experience</h4>
-
-                            <!-- Rating Stars -->
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
-                                <div class="star-rating-container">
-                                    <input type="hidden" id="rating-value" value="5">
-                                    <div class="star-rating">
-                                        <span class="star" data-rating="1" title="Poor">☆</span>
-                                        <span class="star" data-rating="2" title="Fair">☆</span>
-                                        <span class="star" data-rating="3" title="Good">☆</span>
-                                        <span class="star" data-rating="4" title="Very Good">☆</span>
-                                        <span class="star" data-rating="5" title="Excellent">☆</span>
+                                <!-- Rating Stars -->
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+                                    <div class="star-rating-container">
+                                        <input type="hidden" id="rating-value" value="5">
+                                        <div class="star-rating">
+                                            <span class="star" data-rating="1" title="Poor">☆</span>
+                                            <span class="star" data-rating="2" title="Fair">☆</span>
+                                            <span class="star" data-rating="3" title="Good">☆</span>
+                                            <span class="star" data-rating="4" title="Very Good">☆</span>
+                                            <span class="star" data-rating="5" title="Excellent">☆</span>
+                                        </div>
+                                        <span id="rating-text" class="ml-3 text-sm text-gray-600 font-medium">5 Stars
+                                            -
+                                            Excellent</span>
                                     </div>
-                                    <span id="rating-text" class="ml-3 text-sm text-gray-600 font-medium">5 Stars -
-                                        Excellent</span>
                                 </div>
-                            </div>
 
-                            <!-- Review Text -->
-                            <div class="mb-4">
-                                <label for="review-text" class="block text-sm font-medium text-gray-700 mb-2">Your
-                                    Review</label>
-                                <textarea id="review-text" rows="4"
-                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                                    placeholder="Share your experience working with this company..."></textarea>
-                            </div>
+                                <!-- Review Text -->
+                                <div class="mb-4">
+                                    <label for="review-text" class="block text-sm font-medium text-gray-700 mb-2">Your
+                                        Review</label>
+                                    <textarea id="review-text" rows="4"
+                                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                        placeholder="Share your experience working with this company..."></textarea>
+                                </div>
 
-                            <!-- Anonymous Option -->
-                            <div class="mb-4">
-                                <label class="flex items-center">
-                                    <input type="checkbox" id="is-anonymous"
-                                        class="rounded border-gray-300 text-red-600 focus:ring-red-500">
-                                    <span class="ml-2 text-sm text-gray-700">Submit anonymously</span>
-                                </label>
-                            </div>
+                                <!-- Anonymous Option -->
+                                <div class="mb-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="is-anonymous"
+                                            class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                                        <span class="ml-2 text-sm text-gray-700">Submit anonymously</span>
+                                    </label>
+                                </div>
 
-                            <!-- Submit Button -->
-                            <button id="submit-review-btn" onclick="submitReview({{ $company->id }})"
-                                class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200">
-                                Submit Review
-                            </button>
+                                <!-- Submit Button -->
+                                <button id="submit-review-btn" onclick="submitReview({{ $company->id }})"
+                                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200">
+                                    Submit Review
+                                </button>
+                            </div>
                         </div>
-                    </div>
-
+                    @endif
                     <!-- Reviews Display -->
                     <div id="reviews-container">
                         <!-- Reviews will be loaded here -->
