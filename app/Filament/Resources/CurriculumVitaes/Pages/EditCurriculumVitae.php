@@ -19,20 +19,20 @@ class EditCurriculumVitae extends EditRecord
         ];
     }
 
-    protected function afterSave(): void
-    {
-        $record = $this->record;
+    // protected function afterSave(): void
+    // {
+    //     $record = $this->record;
 
-        // If isActive changed to true, mark the related user's email as verified now.
-        $original = (int) $record->getOriginal('isActive');
-        $current = (int) $record->isActive;
+    //     // If isActive changed to true, mark the related user's email as verified now.
+    //     $original = (int) $record->getOriginal('isActive');
+    //     $current = (int) $record->isActive;
 
-        if ($original !== $current && $current === 1) {
-            if ($record->user) {
-                if ($record->user->email_verified_at === null) {
-                    $record->user->forceFill(['email_verified_at' => now()])->save();
-                }
-            }
-        }
-    }
+    //     if ($original !== $current && $current === 1) {
+    //         if ($record->user) {
+    //             if ($record->user->email_verified_at === null) {
+    //                 $record->user->forceFill(['email_verified_at' => now()])->save();
+    //             }
+    //         }
+    //     }
+    // }
 }

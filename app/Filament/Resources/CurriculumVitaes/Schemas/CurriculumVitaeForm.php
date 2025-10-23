@@ -407,7 +407,20 @@ class CurriculumVitaeForm
                                             ->label('Admin Verified')
                                             ->onIcon(Heroicon::ShieldCheck)
                                             ->offIcon(Heroicon::Power)
-                                            ->helperText('Indicates if this CV has been verified by an administrator'),
+                                            ->helperText('Indicates if this CV has been verified by an administrator')
+                                            ->reactive()
+                                            ->afterStateUpdated(function (bool $state, $component) {
+                                                if (! $state) {
+                                                    return;
+                                                }
+
+                                                $livewire = $component->getContainer()->getLivewire();
+                                                $record = method_exists($livewire, 'getRecord') ? $livewire->getRecord() : null;
+
+                                                if ($record && $record->user && $record->user->email_verified_at === null) {
+                                                    $record->user->forceFill(['email_verified_at' => now()])->save();
+                                                }
+                                            }),
                                         Toggle::make('isAiValidate')
                                             ->onIcon(Heroicon::Sparkles)
                                             ->offIcon(Heroicon::ArrowPath)
