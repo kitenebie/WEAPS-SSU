@@ -37,7 +37,7 @@ Route::get('/inActiveResume', [App\Http\Controllers\ResumeController::class, 'in
     ->name('inactive.resumes');
 
 // API route for verification
-Route::post('/api/a/i/varification/', [App\Http\Controllers\ResumeController::class, 'apiVerification'])
+Route::post('/api/a/i/varification', [App\Http\Controllers\ResumeController::class, 'apiVerification'])
     ->name('api.verification');
 
 // Career details route
