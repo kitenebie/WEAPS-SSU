@@ -57,20 +57,7 @@ class CurriculumVitaesTable
                     ->sortable(),
                 TextColumn::make('user.AI_reason')
                     ->label('Verification Remarks')
-                    ->searchable()
-                    ->formatStateUsing(function ($state, $record) {
-                        // Use string length to determine emptiness.
-                        $reason = is_string($state) ? trim($state) : '';
-                        $len = strlen($reason);
-
-                        if ((bool) $record->isAiValidate) {
-                            return $len > 0
-                                ? $reason
-                                : 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.';
-                        }
-
-                        return $len > 0 ? $reason : '-';
-                    }),
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

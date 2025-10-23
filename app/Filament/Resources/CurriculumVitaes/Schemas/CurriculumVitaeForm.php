@@ -425,7 +425,20 @@ class CurriculumVitaeForm
                                             ->onIcon(Heroicon::Sparkles)
                                             ->offIcon(Heroicon::ArrowPath)
                                             ->label('AI Validated')
-                                            ->helperText('Indicates if this User has been validated by AI processes'),
+                                            ->helperText('Indicates if this User has been validated by AI processes')
+                                            ->reactive()
+                                            ->afterStateUpdated(function (bool $state, $component) {
+                                                if (! $state) {
+                                                    return;
+                                                }
+
+                                                $livewire = $component->getContainer()->getLivewire();
+                                                $record = method_exists($livewire, 'getRecord') ? $livewire->getRecord() : null;
+
+                                                if ($record && $record->user && $record->user->email_verified_at === null) {
+                                                    $record->user->forceFill(['AI_reason' => 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.'])->save();
+                                                }
+                                            }),
                                     ])
                                     ->columns(2),
                             ])->columnSpanFull()
