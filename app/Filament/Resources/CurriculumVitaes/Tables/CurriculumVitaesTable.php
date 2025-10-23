@@ -57,7 +57,7 @@ class CurriculumVitaesTable
                     ->formatStateUsing(fn($state, $record) =>
                         $record->user->AI_reason === null && $record->isAiValidate
                             ? 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.'
-                            : $state
+                            : $record->user->AI_reason
                     ),
                 TextColumn::make('created_at')
                     ->dateTime()
