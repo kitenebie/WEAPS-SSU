@@ -3,7 +3,7 @@
     <style>
         .fi-sidebar-nav,
         .fi-header,
-        .fi-user-menu,
+        .fi-user-menu,.fi-sidebar .fi-main-sidebar,
         .fi-input-wrp {
             display: none !important;
         }
