@@ -11,7 +11,7 @@
             display: none !important;
         }
 
-        .fi-topbar-item:nth-child(2) {
+        .fi-topbar {
             display: none !important;
         }
     </style>
