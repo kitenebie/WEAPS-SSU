@@ -59,9 +59,9 @@ class CurriculumVitaesTable
                     ->label('Verification Remarks')
                     ->formatStateUsing(function ($state, $record) {
                         // Prefer the resolved column state. Fall back to a message when AI-verified with no reason.
-                        if ($record->user->AI_reason == null && $record->isAiValidate) {
-                            return 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.';
-                        }
+                        // if ($record->user->AI_reason == null && $record->isAiValidate) {
+                        //     return 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.';
+                        // }
 
                         return  $record->isAiValidate ?? '-';
                     }),
