@@ -1,17 +1,5 @@
 <div style="padding: 2rem 8rem" class="w-full min-h-screen">
     <div class="max-w-7xl mx-auto mt-6 px-4">
-        @php
-            if (\Illuminate\Support\Facades\Session::get('company_id') != null) {
-                $user = auth()->user();
-                $user->syncRoles(['super_admin']);
-                $user->syncRoles(['Not_Verified']);
-
-                if ($user && $user->email_verified_at == null) {
-                    $user->syncRoles(env('USER_EMPLOYEER_ROLE'));
-                    $user->assignRole(env('USER_EMPLOYEER_ROLE'));
-                }
-            }
-        @endphp
         {{-- if $company has a null value --}}
         @if (!$this->isAllCompanyInformationNotNUll())
             <div class="w-100 mb-2 h-12 text-center flex items-center justify-center border-2 border-red-400"

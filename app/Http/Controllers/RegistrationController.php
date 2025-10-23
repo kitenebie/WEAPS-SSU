@@ -36,6 +36,18 @@ class RegistrationController extends Controller
         return view('filament.employeer.pages.alumni-verification-status');
     }
 
+    public function companyActivited()
+    {
+        $user = Auth::user();
+        $user->syncRoles(['super_admin']);
+        $user->syncRoles(['Not_Verified']);
+        dd($user);
+        if ($user && $user->email_verified_at == null) {
+            $user->syncRoles(env('USER_EMPLOYEER_ROLE'));
+            $user->assignRole(env('USER_EMPLOYEER_ROLE'));
+        }
+        return redirect('/Company%20Profile');
+    }
     /**
      * Show company registration form
      *
@@ -139,13 +151,12 @@ class RegistrationController extends Controller
             Company::create($companyData);
 
             return redirect()->route('company.verification.status')
-                           ->with('success', 'Company registration submitted successfully! Your application is being reviewed.');
-
+                ->with('success', 'Company registration submitted successfully! Your application is being reviewed.');
         } catch (\Exception $e) {
             return redirect()->back()
-                           ->withInput()
-                           ->withErrors(['system' => 'An error occurred while processing your registration. Please try again.'])
-                           ->with('error', $e->getMessage());
+                ->withInput()
+                ->withErrors(['system' => 'An error occurred while processing your registration. Please try again.'])
+                ->with('error', $e->getMessage());
         }
     }
 
