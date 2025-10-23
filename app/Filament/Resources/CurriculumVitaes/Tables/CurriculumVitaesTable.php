@@ -59,17 +59,17 @@ class CurriculumVitaesTable
                     ->label('Verification Remarks')
                     ->searchable()
                     ->formatStateUsing(function ($state, $record) {
-                        // Use the resolved state from the related user column. Avoid reading $record->AI_reason (belongs to CV).
-                        $reason = is_string($state) ? trim($state) : ($state ?? null);
+                        // Use string length to determine emptiness.
+                        $reason = is_string($state) ? trim($state) : '';
+                        $len = strlen($reason);
 
                         if ((bool) $record->isAiValidate) {
-                            if ($reason === null || $reason === '') {
-                                return 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.';
-                            }
-                            return $reason;
+                            return $len > 0
+                                ? $reason
+                                : 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.';
                         }
 
-                        return ($reason !== null && $reason !== '') ? $reason : '-';
+                        return $len > 0 ? $reason : '-';
                     }),
                 TextColumn::make('created_at')
                     ->dateTime()
