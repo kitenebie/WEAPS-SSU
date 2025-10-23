@@ -57,16 +57,19 @@ class CurriculumVitaesTable
                     ->sortable(),
                 TextColumn::make('user.AI_reason')
                     ->label('Verification Remarks')
+                    ->searchable()
                     ->formatStateUsing(function ($state, $record) {
-                        return 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.';
-                        // Prefer the resolved column state. Fall back to a message when AI-verified with no reason.
-                        if ($record->isAiValidate == 1) {
-                            if ($state == null) {
-                                return $record->isAiValidate == 1 ?'This account is verified manually by the admin since the images are not clearly detected by the Face detection.':'---';
+                        // Use the resolved state from the related user column. Avoid reading $record->AI_reason (belongs to CV).
+                        $reason = is_string($state) ? trim($state) : ($state ?? null);
+
+                        if ((bool) $record->isAiValidate) {
+                            if ($reason === null || $reason === '') {
+                                return 'This account is verified manually by the admin since the images are not clearly detected by the Face detection.';
                             }
+                            return $reason;
                         }
 
-                        return  $record->isAiValidate ?? '-';
+                        return ($reason !== null && $reason !== '') ? $reason : '-';
                     }),
                 TextColumn::make('created_at')
                     ->dateTime()
