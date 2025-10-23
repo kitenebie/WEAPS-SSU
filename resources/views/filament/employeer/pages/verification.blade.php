@@ -1,7 +1,7 @@
 <x-filament-panels::page>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .fi-sidebar-nav,
+        .fi-sidebar-nav,fi-topbar,
         .fi-header,
         .fi-user-menu,
         fi-sidebar,
