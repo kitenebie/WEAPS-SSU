@@ -78,8 +78,8 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Widgets\TotalCompaniesWidget::class,
                 \App\Filament\Widgets\ActiveCompaniesWidget::class,
                 \App\Filament\Widgets\InactiveCompaniesWidget::class,
-                // \App\Filament\Widgets\ApplicationFrequencyChart::class,
-                // \App\Filament\Widgets\HiringAnalyticsChart::class,
+                \App\Filament\Widgets\ApplicationFrequencyChart::class,
+                \App\Filament\Widgets\HiringAnalyticsChart::class,
                 \App\Filament\Widgets\CareerPostsChart::class,
                 \App\Filament\Widgets\ApplicantHiringDistributionChart::class,
             ])
