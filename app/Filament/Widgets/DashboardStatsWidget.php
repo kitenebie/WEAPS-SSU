@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Company;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Components\Grid;
 
 class DashboardStatsWidget extends BaseWidget
 {
@@ -15,7 +15,7 @@ class DashboardStatsWidget extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Fieldset::make()
+            Grid::make()
                 ->columns([
                     'sm' => 1,
                     'md' => 2,
