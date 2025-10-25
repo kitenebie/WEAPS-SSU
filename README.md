@@ -4,6 +4,7 @@ php seed.php
 php active_user.php
 php update_seed.php
 
+php artisan db:seed --class=CarrerSeeder 
 php artisan db:seed --class=ApplicantSeeder
 <br>
 <br>
