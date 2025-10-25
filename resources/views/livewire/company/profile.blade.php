@@ -1,5 +1,10 @@
-<div style="padding: 2rem 8rem" class="w-full min-h-screen">
-    <div class="max-w-7xl mx-auto mt-6 px-4">
+<div class="w-full min-h-screen lg:px-4 md:px-8 lg:px-16 lg:py-4">
+    <style>
+        .fi-width-full{
+            padding: 0 !important;
+        }
+    </style>
+    <div class="lg:max-w-7xl mx-auto sm:max-w-full mt-6 px-4">
         {{-- if $company has a null value --}}
         @if (!$this->isAllCompanyInformationNotNUll())
             <div class="w-100 mb-2 h-12 text-center flex items-center justify-center border-2 border-red-400"
@@ -36,9 +41,9 @@
                 <div class="absolute inset-0 bg-red-700 bg-opacity-50"></div>
 
                 <!-- Company Name + Tagline -->
-                <div class="absolute px-3 py-2 bottom-4 left-52 text-white" style="background-color: #2C2B2B54">
-                    <h2 class="text-3xl font-bold">{{ $company->name ?? '' }}</h2>
-                    <p class="text-lg text-center">{{ $company->type ?? '' }}</p>
+                <div style="background-color: #0E0E0EC4" class="absolute px-3 py-2 bottom-4 left-52 sm:w-full md:left-20  text-white rounded">
+                    <h2 class="text-2xl md:text-3xl font-bold">{{ $company->name ?? '' }}</h2>
+                    <p class="text-base md:text-lg text-right md:text-center">{{ $company->type ?? '' }}</p>
                 </div>
             </div>
         </div>
@@ -107,28 +112,28 @@
                 <!-- Navigation Tabs -->
                 <div class="border-t border-gray-200">
                     <div class="px-6">
-                        <nav class="flex space-x-8">
+                        <nav class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 overflow-x-auto">
                             <button onclick="showTab('about')"
-                                class="tab-btn py-4 border-b-2 border-red-900 text-red-900 font-semibold">
+                                class="tab-btn py-4 px-2 md:px-0 border-b-2 border-red-900 text-red-900 font-semibold whitespace-nowrap">
                                 About
                             </button>
                             <button onclick="showTab('careers')"
-                                class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
+                                class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                 Careers
                             </button>
                             <button onclick="showTab('posts')"
-                                class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
+                                class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                 Posts
                             </button>
                             <button onclick="showTab('reviews')"
-                                class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
+                                class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                 Reviews
                             </button>
                             @if (
                                 !\Illuminate\Support\Facades\Session::get('company_id') ||
                                     \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
                                 <button onclick="showTab('Applicants')"
-                                    class="tab-btn py-4 border-b-2 border-transparent text-gray-600 hover:text-gray-900">
+                                    class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                     Applicants
                                 </button>
                             @endif
@@ -152,7 +157,7 @@
                             {{ $company->about ?? '' }}
                         </p>
 
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <h4 class="font-semibold text-red-900-700 mb-2">Industry</h4>
                                 <p id="industry" class="text-gray-600">

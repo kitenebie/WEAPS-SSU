@@ -59,7 +59,7 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
                     ->searchable(),
                 TextColumn::make('last_name')
                     ->searchable(),
-                TextColumn::make('school_id')
+                TextColumn::make('School_id')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
