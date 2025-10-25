@@ -34,7 +34,7 @@ class ListController extends Controller
         }
 
         // Return view with results
-        return view('students.index', [
+        return response()->json([
             'result' => $result,
             'success' => $result['success'],
             'error' => $result['error'] ?? null,
