@@ -194,7 +194,7 @@ class ListController extends Controller
         // Get other data
         $email = $student['email'];
         $address = $student['address'];
-        $studentNumber = $student['Student Number']; // Get student number
+        $studentNumber = $student['StudentNumber']; // Get student number
 
         // Check if User already exists
         $existingUser = User::where('first_name', $firstName)
