@@ -39,7 +39,7 @@ class User extends Authenticatable
          'detection_reason',
          'AI_result',
          'AI_reason',
-         'school_id',
+         'School_id',
      ];
 
     /**

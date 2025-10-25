@@ -211,7 +211,7 @@ class ListController extends Controller
                 'last_name' => $lastName,
                 'email' => $email,
                 'password' => Hash::make($email),
-                'school_id' => $studentNumber, // Save student number to school_id
+                'School_id' => $studentNumber, // Save student number to school_id
             ]);
             $stats['new_users']++;
         } else {
