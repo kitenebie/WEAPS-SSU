@@ -18,7 +18,7 @@ class VerifiedUsersWidget extends BaseWidget
     {
         return [
             Stat::make('Verified Users', User::whereNotNull('email_verified_at')->count())
-                ->description('Users with verified emails')
+                ->description('Users with verified')
                 ->descriptionIcon('heroicon-m-check-badge')
                 ->color('success'),
         ];

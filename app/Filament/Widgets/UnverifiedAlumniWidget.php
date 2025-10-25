@@ -19,7 +19,7 @@ class UnverifiedAlumniWidget extends BaseWidget
     {
         return [
             Stat::make('Unverified Alumni', User::whereHas('curriculumVitae')->whereNull('email_verified_at')->count())
-                ->description('Alumni with unverified emails')
+                ->description('Alumni with unverified')
                 ->descriptionIcon('heroicon-m-exclamation-triangle')
                 ->color('warning'),
         ];
