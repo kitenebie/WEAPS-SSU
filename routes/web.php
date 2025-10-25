@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CurriculumVitae;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\ListController;
 
 Route::get('/cv/{id}', [App\Http\Controllers\CvController::class, 'show'])->name('cv.view');
 
@@ -61,4 +62,4 @@ Route::middleware('auth')->group(function () {
 // Alternative route without middleware for testing
 Route::post('/company/review/store-test', [App\Http\Controllers\CompanyReviewController::class, 'store'])->name('company.review.store.test');
 
-Route::get('/alumni/list', [App\Http\Controllers\ListController::class, 'index'])->name('list.scrape');
+Route::get('/alumni/list', [ListController::class, 'index'])->name('students.scrape');

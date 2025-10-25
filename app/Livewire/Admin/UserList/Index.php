@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\UserList;
 
+use Filament\Actions\BulkActionGroup;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
@@ -19,6 +20,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\CreateAction;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -197,6 +199,9 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
                     }),
             ])
             ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
                 CreateAction::make()
                     ->form([
                         TextInput::make('name')->required(),
