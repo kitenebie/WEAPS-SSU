@@ -26,6 +26,8 @@ use Resma\FilamentAwinTheme\FilamentAwinTheme;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Support\Enums\ActionSize;
 use App\Http\Middleware\EmployerRoleMiddleware;
+use App\Filament\Widgets\VerifiedAlumniWidget;
+use App\Filament\Widgets\UnverifiedAlumniWidget;
 
 class EmployeerPanelProvider extends PanelProvider
 {
@@ -34,7 +36,7 @@ class EmployeerPanelProvider extends PanelProvider
         return $panel
             ->id('employeer')
             ->path('/')
-            ->login()
+            ->login(\App\Filament\Employeer\Pages\Auth\Login::class)
             ->registration(\App\Filament\Employeer\Pages\Auth\Register::class)
             ->passwordReset()
             ->emailVerification()
@@ -55,6 +57,8 @@ class EmployeerPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Employeer/Widgets'), for: 'App\Filament\Employeer\Widgets')
             ->widgets([
                 AccountWidget::class,
+                VerifiedAlumniWidget::class,
+                UnverifiedAlumniWidget::class,
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),

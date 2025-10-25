@@ -12,7 +12,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Actions\Action;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Company;
+use App\Mail\CurriculumVitaeEmail;
+use Filament\Notifications\Notification;
 
 class CurriculumVitaeInfolist
 {
@@ -50,9 +53,22 @@ class CurriculumVitaeInfolist
                             ->modal()
                             ->modalSubmitActionLabel('Send Email')
                             ->action(function (array $data, $record) {
-                                // Handle sending email or hiring logic here
-                                // For example, send email using the data
-                                // Notification::make()->success()->send();
+                                // Validate the input data
+                                if (empty($data['Subject']) || empty($data['content'])) {
+                                    Notification::make()->error('Subject and content are required.')->send();
+                                    return;
+                                }
+
+                                try {
+                                    // Send the email
+                                    Mail::to($record->email)->send(new CurriculumVitaeEmail($data['Subject'], $data['content'], $record));
+
+                                    // Success notification
+                                    Notification::make()->success('Email sent successfully to ' . $record->email . '.')->send();
+                                } catch (\Exception $e) {
+                                    // Error notification
+                                    Notification::make()->error('Failed to send email: ' . $e->getMessage())->send();
+                                }
                             }),
                     ])
                     ->schema([

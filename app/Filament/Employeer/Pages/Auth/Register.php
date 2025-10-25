@@ -2,6 +2,7 @@
 
 namespace App\Filament\Employeer\Pages\Auth;
 
+use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -16,6 +17,8 @@ use Filament\Forms\Components\Hidden;
 use Filament\Support\Icons\Heroicon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Placeholder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class Register extends BaseRegister
 {
@@ -23,6 +26,9 @@ class Register extends BaseRegister
     {
         return $schema
             ->components([
+                TextInput::make('school_id')
+                    ->label('Student ID')
+                    ->maxLength(255),
 
                 TextInput::make('name')
                     ->label(__('filament-panels::auth/pages/register.form.name.label'))
@@ -110,11 +116,27 @@ class Register extends BaseRegister
     public function register(): ?RegistrationResponse
     {
         $data = $this->form->getState();
-        // dd($data);
-        $user = \App\Models\User::create([
+
+        // Check if school_id is provided and exists
+        $existingUser = $data['school_id'] ? User::where('school_id', $data['school_id'])->first() : null;
+
+        if ($existingUser) {
+            // If school_id exists, redirect to applicant-form
+            Filament::auth()->login($existingUser);
+            User::where('id', $existingUser->id)->update([
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+            Session::put('Alumni_data', $existingUser);
+            return app(RegistrationResponse::class, ['url' => '/alumni/applicant-form']);
+        }
+
+        // Otherwise, create new user
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'school_id' => $data['school_id'] ?? null,
         ]);
 
         $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);

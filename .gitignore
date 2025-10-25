@@ -17,6 +17,7 @@
 .htaccess
 /storage/pail
 /vendor
+!/vendor/filament/filament/src/Pages/*
 Homestead.json
 Homestead.yaml
 Thumbs.db

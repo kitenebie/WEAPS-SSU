@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Traits\Loggable;
 
 class RecentVisitor extends Model
 {
+    use Loggable;
     protected $fillable = [
         'visitor_id',
         'profile_id',

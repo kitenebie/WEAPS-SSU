@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\Loggable;
 
 class Company extends Model
 {
-    use HasFactory;
+    use HasFactory, Loggable;
 
     protected $fillable = [
          'name',
@@ -77,5 +78,23 @@ class Company extends Model
     {
         // Assuming tagline is derived or stored separately
         return $this->attributes['tagline'] ?? 'Innovation • Excellence • Growth';
+    }
+
+    protected static function booted(): void
+    {
+        static::created(function (self $company): void {
+            self::logChange($company, 'create');
+        });
+
+        static::updated(function (self $company): void {
+            $changes = $company->getChanges();
+            if (!empty($changes)) {
+                self::logChange($company, 'update', $changes);
+            }
+        });
+
+        static::deleted(function (self $company): void {
+            self::logChange($company, 'delete');
+        });
     }
 }

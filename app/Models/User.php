@@ -9,11 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 use Spatie\Permission\Models\Role;
+use App\Models\Traits\Loggable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles, TwoFactorAuthenticatable;
+    use HasFactory, Notifiable, HasRoles, TwoFactorAuthenticatable, Loggable;
 
     /**
      * Spatie Permission guard name for this model.
@@ -27,17 +28,18 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'first_name',
-        'middle_name',
-        'last_name',
-        'face_detection',
-        'detection_reason',
-        'AI_result',
-        'AI_reason',
-    ];
+         'name',
+         'email',
+         'password',
+         'first_name',
+         'middle_name',
+         'last_name',
+         'face_detection',
+         'detection_reason',
+         'AI_result',
+         'AI_reason',
+         'school_id',
+     ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -80,6 +82,19 @@ class User extends Authenticatable
             if (! $user->hasAnyRole()) {
                 $user->assignRole($roleName);
             }
+
+            self::logChange($user, 'create');
+        });
+
+        static::updated(function (self $user): void {
+            $changes = $user->getChanges();
+            if (!empty($changes)) {
+                self::logChange($user, 'update', $changes);
+            }
+        });
+
+        static::deleted(function (self $user): void {
+            self::logChange($user, 'delete');
         });
     }
 
