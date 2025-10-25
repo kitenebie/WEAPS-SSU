@@ -139,6 +139,7 @@ class ListController extends Controller
 
         $stats = [
             'total' => count($result['data']),
+            'data' => $result['data'],
             'new_users' => 0,
             'existing_users' => 0,
             'new_cvs' => 0,
