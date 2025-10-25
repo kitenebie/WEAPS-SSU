@@ -19,7 +19,7 @@ class DashboardStatsWidget extends BaseWidget
             Grid::make()
                 ->columns([
                     'sm' => 1,
-                    'md' => 2,
+                    'md' => 1,
                     'lg' => 4,
                 ])->columnSpanFull()
                 ->schema([
