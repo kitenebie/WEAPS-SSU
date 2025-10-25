@@ -16,6 +16,7 @@ class HiringAnalyticsChart extends ApexChartWidget
     protected static ?string $chartId = 'hiringAnalyticsChart';
     protected static ?int $contentHeight = 300;
     protected static bool $isCollapsible = true;
+    protected int | string | array $columnSpan = 2;
 
     protected function getFilters(): ?array
     {

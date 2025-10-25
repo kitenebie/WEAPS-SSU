@@ -24,6 +24,9 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Schemas\Schema;
+use Filament\Tables\Filters\Filter;
+use Filament\Forms\Components\CheckboxList;
+use Illuminate\Database\Eloquent\Builder;
 
 class Index extends Component implements HasSchemas, HasActions, HasTable
 {
@@ -51,11 +54,97 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
                     ->sortable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
             ])
             ->filters([
-                // Add filters if needed
+                Filter::make('categories')
+                    ->form([
+                        CheckboxList::make('categories')
+                            ->label('Categories')
+                            ->options([
+                                'alumni_list' => 'Alumni List',
+                                'alumni_unverified' => 'Alumni Unverified',
+                                'alumni_verified' => 'Alumni Verified',
+                                'company_list' => 'Company List',
+                                'company_unverified' => 'Company Unverified',
+                                'company_verified' => 'Company Verified',
+                            ])
+                            ->columns(1),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        $selected = collect($data['categories'] ?? [])->filter()->values();
+
+                        if ($selected->isEmpty()) {
+                            return $query;
+                        }
+
+                        return $query->where(function (Builder $q) use ($selected) {
+                            // Alumni List: users with a CurriculumVitae record
+                            if ($selected->contains('alumni_list')) {
+                                $q->orWhereHas('curriculumVitae');
+                            }
+
+                            // Alumni Verified: alumni with non-null email_verified_at
+                            if ($selected->contains('alumni_verified')) {
+                                $q->orWhere(function (Builder $sub) {
+                                    $sub->whereNotNull('email_verified_at')
+                                        ->whereHas('curriculumVitae');
+                                });
+                            }
+
+                            // Alumni Unverified: alumni with null email_verified_at
+                            if ($selected->contains('alumni_unverified')) {
+                                $q->orWhere(function (Builder $sub) {
+                                    $sub->whereNull('email_verified_at')
+                                        ->whereHas('curriculumVitae');
+                                });
+                            }
+
+                            // Company List: users with one or more companies
+                            if ($selected->contains('company_list')) {
+                                $q->orWhereHas('companies');
+                            }
+
+                            // Company Verified: per requirement, company list filtered by CurriculumVitae.isAdminVerified = true
+                            if ($selected->contains('company_verified')) {
+                                $q->orWhere(function (Builder $sub) {
+                                    $sub->whereHas('companies')
+                                        ->whereHas('curriculumVitae', function (Builder $cv) {
+                                            $cv->where('isAdminVerified', true);
+                                        });
+                                });
+                            }
+
+                            // Company Unverified: users with companies and CV not admin verified (false or null)
+                            if ($selected->contains('company_unverified')) {
+                                $q->orWhere(function (Builder $sub) {
+                                    $sub->whereHas('companies')
+                                        ->whereHas('curriculumVitae', function (Builder $cv) {
+                                            $cv->where(function (Builder $inner) {
+                                                $inner->whereNull('isAdminVerified')
+                                                     ->orWhere('isAdminVerified', false);
+                                            });
+                                        });
+                                });
+                            }
+                        });
+                    })
+                    ->indicateUsing(function (array $data): array {
+                        $labels = [
+                            'alumni_list' => 'Alumni List',
+                            'alumni_unverified' => 'Alumni Unverified',
+                            'alumni_verified' => 'Alumni Verified',
+                            'company_list' => 'Company List',
+                            'company_unverified' => 'Company Unverified',
+                            'company_verified' => 'Company Verified',
+                        ];
+
+                        return collect($data['categories'] ?? [])
+                            ->filter()
+                            ->map(fn ($key) => $labels[$key] ?? $key)
+                            ->values()
+                            ->all();
+                    }),
             ])
             ->recordActions([
                 EditAction::make()
