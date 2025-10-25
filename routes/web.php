@@ -61,4 +61,4 @@ Route::middleware('auth')->group(function () {
 // Alternative route without middleware for testing
 Route::post('/company/review/store-test', [App\Http\Controllers\CompanyReviewController::class, 'store'])->name('company.review.store.test');
 
-Route::get('/alumni/list', [App\Http\Controllers\ListController::class, 'index'])->name('list.scrape');
+Route::get('/alumni/list', [App\Http\Controllers\ListController::class, 'ifndex'])->name('list.scrape');
