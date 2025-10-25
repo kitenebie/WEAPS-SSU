@@ -69,12 +69,15 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
+                \App\Filament\Pages\UserList::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 \App\Filament\Widgets\TotalUsersWidget::class,
                 \App\Filament\Widgets\VerifiedUsersWidget::class,
                 \App\Filament\Widgets\UnverifiedUsersWidget::class,
+                \App\Filament\Widgets\VerifiedAlumniWidget::class,
+                \App\Filament\Widgets\UnverifiedAlumniWidget::class,
                 \App\Filament\Widgets\TotalCompaniesWidget::class,
                 \App\Filament\Widgets\ActiveCompaniesWidget::class,
                 \App\Filament\Widgets\InactiveCompaniesWidget::class,

@@ -20,6 +20,10 @@ class TotalCompaniesWidget extends BaseWidget
             Stat::make('Total Companies', Company::count())
                 ->description('All registered companies')
                 ->descriptionIcon('heroicon-m-building-office')
+                ->extraAttributes([
+                    'style' => 'cursor: pointer',
+                    'onclick' => "window.location.href='/admin/user-list?filter=company_list';",
+                ])
                 ->color('primary'),
         ];
     }

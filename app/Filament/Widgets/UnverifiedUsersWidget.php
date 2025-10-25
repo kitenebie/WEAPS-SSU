@@ -20,6 +20,10 @@ class UnverifiedUsersWidget extends BaseWidget
             Stat::make('Unverified Users', User::whereNull('email_verified_at')->count())
                 ->description('Users pending verification')
                 ->descriptionIcon('heroicon-m-exclamation-triangle')
+                ->extraAttributes([
+                    'style' => 'cursor: pointer',
+                    'onclick' => "window.location.href='/admin/user-list?filter=users_unverified';",
+                ])
                 ->color('warning'),
         ];
     }

@@ -20,6 +20,10 @@ class TotalUsersWidget extends BaseWidget
             Stat::make('Total Users', User::count())
                 ->description('All registered users')
                 ->descriptionIcon('heroicon-m-users')
+                ->extraAttributes([
+                    'style' => 'cursor: pointer',
+                    'onclick' => "window.location.href='/admin/user-list?filter=users_list';",
+                ])
                 ->color('primary'),
         ];
     }

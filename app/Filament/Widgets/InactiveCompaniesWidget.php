@@ -17,9 +17,13 @@ class InactiveCompaniesWidget extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Inactive Companies', Company::where('isActive', false)->count())
-                ->description('Inactive companies')
+            Stat::make('Unverified Companies', Company::where('isActive', false)->count())
+                ->description('Unverified companies')
                 ->descriptionIcon('heroicon-m-x-circle')
+                ->extraAttributes([
+                    'style' => 'cursor: pointer',
+                    'onclick' => "window.location.href='/admin/user-list?filter=company_unverified';",
+                ])
                 ->color('danger'),
         ];
     }

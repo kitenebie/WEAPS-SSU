@@ -18,8 +18,12 @@ class VerifiedUsersWidget extends BaseWidget
     {
         return [
             Stat::make('Verified Users', User::whereNotNull('email_verified_at')->count())
-                ->description('Users with verified')
+                ->description('Users with verified account')
                 ->descriptionIcon('heroicon-m-check-badge')
+                ->extraAttributes([
+                    'style' => 'cursor: pointer',
+                    'onclick' => "window.location.href='/admin/user-list?filter=users_verified';",
+                ])
                 ->color('success'),
         ];
     }

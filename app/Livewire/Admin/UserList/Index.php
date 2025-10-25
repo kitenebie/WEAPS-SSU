@@ -33,6 +33,16 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
     use InteractsWithActions;
     use InteractsWithSchemas;
     use InteractsWithTable;
+
+    public function mount($filter = null): void
+    {
+        // Check if there's a filter parameter passed from the view or URL
+        if ($filter && in_array($filter, ['users_list', 'users_unverified', 'users_verified', 'alumni_verified', 'alumni_unverified', 'alumni_list', 'company_list', 'company_verified', 'company_unverified'])) {
+            $this->tableFilters['categories'] = [
+                'categories' => [$filter],
+            ];
+        }
+    }
     
     public function table(Table $table): Table
     {
@@ -62,6 +72,9 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
                         CheckboxList::make('categories')
                             ->label('Categories')
                             ->options([
+                                'users_list' => 'Users List',
+                                'users_unverified' => 'Users Unverified',
+                                'users_verified' => 'Users Verified',
                                 'alumni_list' => 'Alumni List',
                                 'alumni_unverified' => 'Alumni Unverified',
                                 'alumni_verified' => 'Alumni Verified',
@@ -79,7 +92,22 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
                         }
 
                         return $query->where(function (Builder $q) use ($selected) {
-                            // Alumni List: users with a CurriculumVitae record
+                             // Users List: all users (default, no additional filtering needed)
+                             if ($selected->contains('users_list')) {
+                                 // No additional query needed - shows all users
+                             }
+
+                             // Users Verified: users with non-null email_verified_at
+                             if ($selected->contains('users_verified')) {
+                                 $q->orWhereNotNull('email_verified_at');
+                             }
+
+                             // Users Unverified: users with null email_verified_at
+                             if ($selected->contains('users_unverified')) {
+                                 $q->orWhereNull('email_verified_at');
+                             }
+
+                             // Alumni List: users with a CurriculumVitae record
                             if ($selected->contains('alumni_list')) {
                                 $q->orWhereHas('curriculumVitae');
                             }
@@ -131,6 +159,9 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
                     })
                     ->indicateUsing(function (array $data): array {
                         $labels = [
+                            'users_list' => 'Users List',
+                            'users_unverified' => 'Users Unverified',
+                            'users_verified' => 'Users Verified',
                             'alumni_list' => 'Alumni List',
                             'alumni_unverified' => 'Alumni Unverified',
                             'alumni_verified' => 'Alumni Verified',
@@ -181,6 +212,7 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
                     }),
             ]);
     }
+
 
     public function render()
     {

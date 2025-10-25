@@ -19,8 +19,12 @@ class VerifiedAlumniWidget extends BaseWidget
     {
         return [
             Stat::make('Verified Alumni', User::whereHas('curriculumVitae')->whereNotNull('email_verified_at')->count())
-                ->description('Alumni with verified')
+                ->description('Alumni with verified account')
                 ->descriptionIcon('heroicon-m-check-badge')
+                ->extraAttributes([
+                    'style' => 'cursor: pointer',
+                    'onclick' => "window.location.href='/admin/user-list?filter=alumni_verified';",
+                ])
                 ->color('success'),
         ];
     }
