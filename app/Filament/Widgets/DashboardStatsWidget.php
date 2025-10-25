@@ -11,7 +11,7 @@ use Filament\Schemas\Components\Grid;
 class DashboardStatsWidget extends BaseWidget
 {
     protected static ?int $sort = -20;
-    protected int | string | array $columnSpan = 2;
+    protected int | string | array $columnSpan = 'full';
 
     protected function getStats(): array
     {
@@ -19,7 +19,7 @@ class DashboardStatsWidget extends BaseWidget
             Grid::make()
                 ->columns([
                     'sm' => 1,
-                    'md' => 3,
+                    'md' => 2,
                     'lg' => 4,
                 ])->columnSpanFull()
                 ->schema([
