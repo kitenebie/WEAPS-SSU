@@ -2,18 +2,17 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\Applicant;
+use App\Models\Company;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
-use Filament\Forms\Components\Select;
 /**
- * Stacked bar chart showing the distribution of applicant hirings by year or all time.
+ * Bar chart showing company names ordered from least to highest career posts since 2025.
  */
 
 class ApplicantHiringDistributionChart extends ApexChartWidget
 {
-    protected static ?string $heading = 'Applicant Hiring Distribution';
-    protected static ?string $chartId = 'applicantHiringDistributionChart';
+    protected static ?string $heading = 'Company Career Posts Distribution (2025+)';
+    protected static ?string $chartId = 'companyCareerPostsChart';
     protected static ?int $contentHeight = 350;
     protected static bool $isCollapsible = true;
     protected static bool $Collapse = false;
@@ -21,93 +20,56 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
     protected function getFilters(): ?array
     {
-        return [
-            'yearly' => 'Yearly (Last 5 years)',
-            'all' => 'All Time',
-        ];
+        $years = DB::table('carrers')
+            ->join('companies', 'carrers.company_id', '=', 'companies.id')
+            ->where('carrers.created_at', '>=', '2025-01-01')
+            ->distinct()
+            ->pluck(DB::raw('YEAR(carrers.created_at) as year'))
+            ->sort()
+            ->toArray();
+
+        $filters = [];
+        foreach ($years as $year) {
+            $filters[$year] = $year;
+        }
+        return $filters;
     }
 
     protected function getOptions(): array
     {
-        $period = request()->query('filter', 'yearly');
-
-        switch ($period) {
-            case 'yearly':
-                return $this->getYearlyData();
-            case 'all':
-                return $this->getAllTimeData();
-            default:
-                return $this->getYearlyData();
-        }
+        $year = request()->query('filter', 2025);
+        return $this->getDataForYear($year);
     }
 
-    private function getYearlyData(): array
+    private function getDataForYear($year): array
     {
-        $data = Applicant::select(
-                'user_id',
-                DB::raw('COUNT(*) as hiring_count'),
-                DB::raw('YEAR(created_at) as year')
-            )
-            ->where('created_at', '>=', now()->subYears(5))
-            ->groupBy('user_id', 'year')
-            ->selectRaw('COUNT(*) as hiring_count')
-            ->orderByDesc('hiring_count')
-            ->limit(10)
-            ->get()
-            ->groupBy('year');
+        $data = Company::withCount(['careers' => function ($query) use ($year) {
+            $query->whereYear('created_at', $year);
+        }])
+        ->orderBy('careers_count')
+        ->get();
 
-        $series = [];
-        $years = [];
+        $categories = [];
+        $counts = [];
 
-        // Get all unique years
-        $allYears = collect();
-        foreach ($data as $year => $records) {
-            $allYears->push($year);
-        }
-        $years = $allYears->sort()->values()->toArray();
-
-        // Prepare series data for each hiring count category
-        $categories = ['1 Hiring', '2-3 Hirings', '4-5 Hirings', '6+ Hirings'];
-
-        foreach ($categories as $category) {
-            $categoryData = [];
-            foreach ($years as $year) {
-                $yearRecords = $data->get($year, collect());
-                $count = 0;
-
-                switch ($category) {
-                    case '1 Hiring':
-                        $count = $yearRecords->where('hiring_count', 1)->count();
-                        break;
-                    case '2-3 Hirings':
-                        $count = $yearRecords->whereBetween('hiring_count', [2, 3])->count();
-                        break;
-                    case '4-5 Hirings':
-                        $count = $yearRecords->whereBetween('hiring_count', [4, 5])->count();
-                        break;
-                    case '6+ Hirings':
-                        $count = $yearRecords->where('hiring_count', '>', 5)->count();
-                        break;
-                }
-
-                $categoryData[] = $count;
-            }
-
-            $series[] = [
-                'name' => $category,
-                'data' => $categoryData,
-            ];
+        foreach ($data as $company) {
+            $categories[] = $company->name;
+            $counts[] = $company->careers_count;
         }
 
         return [
             'chart' => [
                 'type' => 'bar',
                 'height' => 350,
-                'stacked' => true,
             ],
-            'series' => $series,
+            'series' => [
+                [
+                    'name' => 'Career Posts in ' . $year,
+                    'data' => $counts,
+                ],
+            ],
             'xaxis' => [
-                'categories' => $years,
+                'categories' => $categories,
                 'labels' => [
                     'style' => [
                         'fontFamily' => 'inherit',
@@ -121,7 +83,12 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#10B981', '#3B82F6', '#F59E0B', '#EF4444'],
+            'colors' => ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16', '#F97316', '#8B5CF6'],
+            'plotOptions' => [
+                'bar' => [
+                    'distributed' => true,
+                ],
+            ],
             'legend' => [
                 'position' => 'top',
             ],
@@ -133,35 +100,7 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
     private function getAllTimeData(): array
     {
-        $data = Applicant::select(
-                'user_id',
-                DB::raw('COUNT(*) as hiring_count')
-            )
-            ->groupBy('user_id')
-            ->selectRaw('COUNT(*) as hiring_count')
-            ->orderByDesc('hiring_count')
-            ->limit(10)
-            ->get();
-
-        $categories = [];
-        $counts = [];
-
-        foreach ($data as $record) {
-            $categories[] = 'User ' . $record->user_id;
-            $counts[] = $record->hiring_count;
-        }
-
-        return [
-            'chart' => [
-                'type' => 'pie',
-                'height' => 350,
-            ],
-            'series' => $counts,
-            'labels' => $categories,
-            'colors' => ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16'],
-            'legend' => [
-                'position' => 'bottom',
-            ],
-        ];
+        // Fallback to 2025 data
+        return $this->getDataForYear(2025);
     }
 }

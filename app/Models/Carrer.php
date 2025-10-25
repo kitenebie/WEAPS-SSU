@@ -19,6 +19,8 @@ class Carrer extends Model
         'min_salary',
         'max_salary',
         'tags',
+        'created_at',
+        'updated_at'
     ];
 
     protected $casts = [

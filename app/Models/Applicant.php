@@ -15,6 +15,7 @@ class Applicant extends Model
         'company_id',
         'career_id',
         'status',
+        'created_at'
     ];
 
     protected $casts = [

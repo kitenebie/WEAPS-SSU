@@ -5,96 +5,70 @@ namespace App\Filament\Widgets;
 use App\Models\Applicant;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
-use Filament\Forms\Components\Select;
 /**
- * Analytics chart showing application frequency by users over time (yearly or all time).
+ * Analytics chart showing application counts by month-year and status.
  */
 
 class ApplicationFrequencyChart extends ApexChartWidget
 {
-    protected static ?string $heading = 'Application Frequency Analytics';
-    protected static ?string $chartId = 'applicationFrequencyChart';
+    protected static ?string $heading = 'Application Frequency by Year and Status';
+    protected static ?string $chartId = 'applicationFrequencyByMonthYearChart';
     protected static ?int $contentHeight = 350;
     protected static bool $isCollapsible = true;
     protected int | string | array $columnSpan = 2;
 
     protected function getFilters(): ?array
     {
-        return [
-            'yearly' => 'Yearly (Last 5 years)',
-            'all' => 'All Time',
-        ];
+        // Get unique years from applicants
+        $years = Applicant::distinct()
+            ->pluck(DB::raw('YEAR(created_at) as year'))
+            ->sort()
+            ->toArray();
+
+        $yearFilters = [];
+        foreach ($years as $year) {
+            $yearFilters[$year] = $year;
+        }
+
+        return $yearFilters;
     }
 
     protected function getOptions(): array
     {
-        $period = request()->query('filter', 'yearly');
-
-        switch ($period) {
-            case 'yearly':
-                return $this->getYearlyData();
-            case 'all':
-                return $this->getAllTimeData();
-            default:
-                return $this->getYearlyData();
-        }
+        $year = request()->query('filter', 2025);
+        return $this->getDataForYearAndMonth($year, 'all');
     }
 
-    private function getYearlyData(): array
+    private function getDataForYearAndMonth($year, $month): array
     {
-        $data = Applicant::select(
-                'user_id',
-                DB::raw('COUNT(*) as application_count'),
-                DB::raw('YEAR(created_at) as year')
-            )
-            ->where('created_at', '>=', now()->subYears(5))
-            ->groupBy('user_id', 'year')
-            ->selectRaw('COUNT(*) as application_count')
-            ->orderByDesc('application_count')
-            ->limit(10)
-            ->get()
-            ->groupBy('year');
+        $query = Applicant::select(
+            DB::raw('MONTH(created_at) as month'),
+            'status',
+            DB::raw('COUNT(*) as count')
+        )
+        ->whereYear('created_at', $year)
+        ->groupBy('month', 'status')
+        ->get();
+
+        $statuses = ['pending', 'approved', 'rejected'];
+        $monthNames = [
+            1 => 'JAN', 2 => 'FEB', 3 => 'MAR', 4 => 'APR', 5 => 'MAY', 6 => 'JUN',
+            7 => 'JUL', 8 => 'AUG', 9 => 'SEP', 10 => 'OCT', 11 => 'NOV', 12 => 'DEC'
+        ];
+
+        $categories = array_values($monthNames);
 
         $series = [];
-        $years = [];
-
-        // Get all unique years
-        $allYears = collect();
-        foreach ($data as $year => $records) {
-            $allYears->push($year);
-        }
-        $years = $allYears->sort()->values()->toArray();
-
-        // Prepare series data for each application count category
-        $categories = ['1-2 Applications', '3-5 Applications', '6-10 Applications', '10+ Applications'];
-
-        foreach ($categories as $category) {
-            $categoryData = [];
-            foreach ($years as $year) {
-                $yearRecords = $data->get($year, collect());
-                $count = 0;
-
-                switch ($category) {
-                    case '1-2 Applications':
-                        $count = $yearRecords->whereBetween('application_count', [1, 2])->count();
-                        break;
-                    case '3-5 Applications':
-                        $count = $yearRecords->whereBetween('application_count', [3, 5])->count();
-                        break;
-                    case '6-10 Applications':
-                        $count = $yearRecords->whereBetween('application_count', [6, 10])->count();
-                        break;
-                    case '10+ Applications':
-                        $count = $yearRecords->where('application_count', '>', 10)->count();
-                        break;
-                }
-
-                $categoryData[] = $count;
+        foreach ($statuses as $status) {
+            $statusData = [];
+            foreach ($categories as $cat) {
+                $monthNum = array_search($cat, $monthNames);
+                $count = $query->where('month', $monthNum)->where('status', $status)->sum('count');
+                $statusData[] = $count;
             }
-
             $series[] = [
-                'name' => $category,
-                'data' => $categoryData,
+                'name' => ucfirst($status),
+                'data' => $statusData,
             ];
         }
 
@@ -106,7 +80,7 @@ class ApplicationFrequencyChart extends ApexChartWidget
             ],
             'series' => $series,
             'xaxis' => [
-                'categories' => $years,
+                'categories' => $categories,
                 'labels' => [
                     'style' => [
                         'fontFamily' => 'inherit',
@@ -120,7 +94,7 @@ class ApplicationFrequencyChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'],
+            'colors' => ['#F59E0B', '#10B981', '#EF4444'],
             'legend' => [
                 'position' => 'top',
             ],
@@ -132,43 +106,8 @@ class ApplicationFrequencyChart extends ApexChartWidget
 
     private function getAllTimeData(): array
     {
-        $data = Applicant::select(
-                'user_id',
-                DB::raw('COUNT(*) as application_count')
-            )
-            ->groupBy('user_id')
-            ->selectRaw('COUNT(*) as application_count')
-            ->orderByDesc('application_count')
-            ->limit(15)
-            ->get();
-
-        $categories = [];
-        $counts = [];
-
-        foreach ($data as $record) {
-            $categories[] = 'User ' . $record->user_id;
-            $counts[] = $record->application_count;
-        }
-
-        return [
-            'chart' => [
-                'type' => 'donut',
-                'height' => 350,
-            ],
-            'series' => $counts,
-            'labels' => $categories,
-            'colors' => [
-                '#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6',
-                '#EC4899', '#06B6D4', '#84CC16', '#F97316', '#6366F1',
-                '#14B8A6', '#F43F5E', '#8B5CF6', '#06B6D4', '#84CC16'
-            ],
-            'legend' => [
-                'position' => 'bottom',
-            ],
-            'dataLabels' => [
-                'enabled' => true,
-                'formatter' => 'function (val) { return val.toFixed(1) + "%" }',
-            ],
-        ];
+        // Use current year and all months
+        $currentYear = date('Y');
+        return $this->getDataForYearAndMonth($currentYear, 'all');
     }
 }

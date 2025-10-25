@@ -3,8 +3,7 @@
     <div style="width: 100rem !important" class="mt-8">
 
         <!-- Search and Filter Section -->
-        <div
-            class="mb-8 min-w-full border border-gray-200 rounded-xl shadow-xs p-8">
+        <div class="mb-8 min-w-full border border-gray-200 rounded-xl shadow-xs p-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Search Bar -->
                 <div>
@@ -21,7 +20,8 @@
                             placeholder="Search by job title, company..."
                             class="w-full  p-2 pl-4 pr-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                         <div class="absolute inset-y-0 right-2  pl-4 flex items-center pointer-events-none">
-                            <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
@@ -293,70 +293,72 @@
                             @endif
 
                             {{-- @if ($career->min_salary || $career->max_salary)
-                            <div class="flex items-center text-sm text-slate-600">
-                                <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                                </svg>
-                                @if ($career->min_salary && $career->max_salary)
-                                    ₱{{ number_format($career->min_salary) }} - ₱{{ number_format($career->max_salary) }}
-                                @elseif($career->min_salary)
-                                    ₱{{ number_format($career->min_salary) }}+
-                                @elseif($career->max_salary)
-                                    Up to ₱{{ number_format($career->max_salary) }}
-                                @endif
-                            </div>
-                        @endif
-                    </div> --}}
-
-                            @if ($career->tags && count($career->tags) > 0)
-                                <div class="mb-4 mt-4">
-                                    <div class="flex flex-wrap gap-2">
-                                        @foreach ($career->tags as $tag)
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-slate-800">
-                                                {{ $tag }}
-                                            </span>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @endif
-
-                            <div class="mb-4 flex gap-2">
-                                <button wire:click="openCareer({{ $career->id }})"
-                                    class="w-1/2 bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
+                                <div class="flex items-center text-sm text-slate-600">
+                                    <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
                                         </path>
                                     </svg>
-                                    View Details
-                                </button>
-                                <button wire:click="openCampany({{ $career->company_id }})"
-                                    class="w-1/2 bg-emerald-400 hover:bg-emerald-500 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                        </path>
-                                    </svg>
-                                    View Compay
-                                </button>
-                            </div>
-
-                            <div class="pt-4 border-t border-slate-200">
-                                <div class="flex items-center justify-between text-sm text-slate-500">
-                                    <span>{{ $career->created_at->diffForHumans() }}</span>
-                                    @if ($career->applicants_count ?? false)
-                                        <span class="font-medium">{{ $career->applicants_count }} applicants</span>
+                                    @if ($career->min_salary && $career->max_salary)
+                                        ₱{{ number_format($career->min_salary) }} -
+                                        ₱{{ number_format($career->max_salary) }}
+                                    @elseif($career->min_salary)
+                                        ₱{{ number_format($career->min_salary) }}+
+                                    @elseif($career->max_salary)
+                                        Up to ₱{{ number_format($career->max_salary) }}
                                     @endif
                                 </div>
+                            @endif --}}
+                        </div>
+
+                        @if ($career->tags && count($career->tags) > 0)
+                            <div class="mb-4 mt-4">
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach ($career->tags as $tag)
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-slate-800">
+                                            {{ $tag }}
+                                        </span>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                        <div class="mb-4 flex gap-2">
+                            <button wire:click="openCareer({{ $career->id }})"
+                                class="w-1/2 bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                                View Details
+                            </button>
+                            <button wire:click="openCampany({{ $career->company_id }})"
+                                class="w-1/2 bg-emerald-400 hover:bg-emerald-500 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                                View Compay
+                            </button>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-200">
+                            <div class="flex items-center justify-between text-sm text-slate-500">
+                                <span>{{ $career->created_at->diffForHumans() }}</span>
+                                @if ($career->applicants_count ?? false)
+                                    <span class="font-medium">{{ $career->applicants_count }} applicants</span>
+                                @endif
                             </div>
                         </div>
+                    </div>
                 @endforeach
             </div>
         @else
