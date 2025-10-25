@@ -24,8 +24,6 @@ class CurriculumVitaesTable
             ->modifyQueryUsing(fn ($query) => $query->where('isActive', true))
             ->columns([
                 Stack::make([
-                TextColumn::make('School_id')
-                    ->searchable(),
                     ImageColumn::make('profile_picture')
                         ->label('')
                         ->circular()

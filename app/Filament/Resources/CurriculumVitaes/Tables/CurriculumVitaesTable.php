@@ -26,6 +26,8 @@ class CurriculumVitaesTable
                     ->with('user')
             )
             ->columns([
+                TextColumn::make('School_id')
+                    ->searchable(),
                 ImageColumn::make('profile_picture'),
                 ImageColumn::make('front_id'),
                 ImageColumn::make('back_id'),
