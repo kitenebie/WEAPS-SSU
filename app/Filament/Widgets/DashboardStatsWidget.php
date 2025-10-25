@@ -11,6 +11,7 @@ use Filament\Schemas\Components\Grid;
 class DashboardStatsWidget extends BaseWidget
 {
     protected static ?int $sort = -20;
+    protected int | string | array $columnSpan = 'full';
 
     protected function getStats(): array
     {
