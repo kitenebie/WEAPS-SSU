@@ -2,108 +2,241 @@
 
 namespace App\Http\Controllers;
 
-// Import the User model to interact with the users table
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use App\Models\User;
 use App\Models\CurriculumVitae;
-// Import Hash facade to hash passwords securely
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class ListController extends Controller
 {
-    /**
-     * Handle the scraping of student data from the remote URL and saving to CurriculumVitae model.
-     * This method is triggered when accessing the /list.html route.
-     */
-    public function index()
+    protected $url;
+
+    public function __construct()
     {
-        // Define the URL to fetch the data from
-        $web_page = 'https://weapssorsu-bc.site/list.html';
-        // Read the entire content of the file into a string
-        $content = file_get_contents($web_page);
+        $this->url = 'https://weapssorsu-bc.site/list.html';
+    }
 
-        // Use regex to extract student data from HTML paragraphs
-        // Extract each field using preg_match_all
-        preg_match_all('/<p><strong>Student Number:</strong> (.*?)<\/p>/', $content, $studentNumberMatches);
-        preg_match_all('/<p><strong>Sex:</strong> (.*?)<\/p>/', $content, $sexMatches);
-        preg_match_all('/<p><strong>Lastname:</strong> (.*?)<\/p>/', $content, $lastnameMatches);
-        preg_match_all('/<p><strong>Firstname:</strong> (.*?)<\/p>/', $content, $firstnameMatches);
-        preg_match_all('/<p><strong>Middle Initial:</strong> (.*?)<\/p>/', $content, $middleInitialMatches);
-        preg_match_all('/<p><strong>Address:</strong> (.*?)<\/p>/', $content, $addressMatches);
-        preg_match_all('/<p><strong>Email:</strong> (.*?)<\/p>/', $content, $emailMatches);
+    /**
+     * Scrape and save students automatically
+     */
+    public function index(Request $request)
+    {
+        // Automatically scrape and save
+        $result = $this->scrapeAndSave();
+        
+        // Return JSON if requested
+        if ($request->expectsJson() || $request->has('json')) {
+            return response()->json($result);
+        }
 
-        $studentNumbers = $studentNumberMatches[1];
-        $sexes = $sexMatches[1];
-        $lastnames = $lastnameMatches[1];
-        $firstnames = $firstnameMatches[1];
-        $middleInitials = $middleInitialMatches[1];
-        $addresses = $addressMatches[1];
-        $emails = $emailMatches[1];
+        // Return view with results
+        return view('students.index', [
+            'result' => $result,
+            'success' => $result['success'],
+            'error' => $result['error'] ?? null,
+            'stats' => $result['stats'] ?? [],
+            'message' => $result['message'] ?? null
+        ]);
+    }
 
-        // Loop through each student based on the number of student numbers
-        $numStudents = count($studentNumbers);
+    /**
+     * Scrape students data from the webpage using Guzzle
+     */
+    protected function scrapeStudents()
+    {
+        try {
+            // Create Guzzle HTTP client
+            $client = new Client([
+                'timeout' => 30,
+                'verify' => false, // Set to true in production with proper SSL
+            ]);
 
-        if ($numStudents > 0) {
-            // Loop through each student
-            for ($i = 0; $i < $numStudents; $i++) {
-                // Map the student data fields to variables
-                $firstName = $firstnames[$i]; // Extract first name
-                $middleName = $middleInitials[$i]; // Extract middle initial
-                $lastName = $lastnames[$i]; // Extract last name
-                $email = $emails[$i]; // Extract email address
-                $schoolId = $studentNumbers[$i]; // Extract student number as school ID
-                $address = $addresses[$i]; // Extract address
-                $sex = $sexes[$i]; // Extract sex
-                // Construct the full name by concatenating first, middle, and last names, then trim whitespace
-                $fullName = trim("$firstName $middleName $lastName");
+            // Fetch the HTML content
+            $response = $client->get($this->url);
+            
+            if ($response->getStatusCode() !== 200) {
+                throw new \Exception('Failed to fetch the webpage');
+            }
 
-                // Check if a user already exists with the same first_name, middle_name, last_name, and school_id
-                // This prevents duplicate entries based on these unique combinations
-                $existingUser = User::where('first_name', $firstName)
-                    ->where('middle_name', $middleName)
-                    ->where('last_name', $lastName)
-                    ->where('school_id', $schoolId)
-                    ->first();
+            $html = $response->getBody()->getContents();
 
-                // If no existing user is found, create a new one
-                if (!$existingUser) {
-                    $existingUser = User::create([
-                        'name' => $fullName, // Full name for display
-                        'first_name' => $firstName, // First name
-                        'middle_name' => $middleName, // Middle name
-                        'last_name' => $lastName, // Last name
-                        'email' => $email, // Email address
-                        'password' => Hash::make($email), // Hash the email as password for security
-                        'school_id' => $schoolId, // Student number as school ID
-                    ]);
-                }
+            // Extract JSON data from the script tag
+            $students = $this->extractStudentsFromScript($html);
 
-                // Check if a CV already exists with the same first_name, middle_name, last_name, and School_id
-                $existingCv = CurriculumVitae::where('first_name', $firstName)
-                    ->where('middle_name', $middleName)
-                    ->where('last_name', $lastName)
-                    ->where('School_id', $schoolId)
-                    ->first();
+            return [
+                'success' => true,
+                'data' => $students,
+                'count' => count($students)
+            ];
 
-                // If no existing CV is found, create a new one linked to the user
-                if (!$existingCv) {
-                    CurriculumVitae::create([
-                        'user_id' => $existingUser->id, // Link to the user
-                        'first_name' => $firstName, // First name
-                        'middle_name' => $middleName, // Middle name
-                        'last_name' => $lastName, // Last name
-                        'email' => $email, // Email address
-                        'address' => $address, // Address
-                        'School_id' => $schoolId, // Student number as School ID
-                        'isActive' => false, // Set as active
-                    ]);
-                }
-                // If existing CV is found, skip creation (no action needed)
+        } catch (RequestException $e) {
+            Log::error('Student scraping failed (Guzzle): ' . $e->getMessage());
+            
+            return [
+                'success' => false,
+                'error' => 'Failed to fetch data: ' . $e->getMessage(),
+                'data' => []
+            ];
+        } catch (\Exception $e) {
+            Log::error('Student scraping failed: ' . $e->getMessage());
+            
+            return [
+                'success' => false,
+                'error' => $e->getMessage(),
+                'data' => []
+            ];
+        }
+    }
+
+    /**
+     * Extract students data from JavaScript in the HTML
+     */
+    protected function extractStudentsFromScript($html)
+    {
+        // Pattern to match the data object in the script
+        $pattern = '/const data = ({[\s\S]*?});/';
+        
+        if (preg_match($pattern, $html, $matches)) {
+            // Get the JSON string
+            $jsonString = $matches[1];
+            
+            // Decode the JSON
+            $data = json_decode($jsonString, true);
+            
+            if (isset($data['students'])) {
+                return $data['students'];
             }
         }
-        // If no students found, no data is processed (could add error handling if needed)
 
-        // Return a simple response to confirm the operation
-        return response('Data scraped and saved.');
+        return [];
+    }
+
+    /**
+     * Scrape and save students to database
+     */
+    protected function scrapeAndSave()
+    {
+        $result = $this->scrapeStudents();
+        
+        if (!$result['success']) {
+            return [
+                'success' => false,
+                'error' => $result['error'],
+                'stats' => [
+                    'total' => 0,
+                    'new_users' => 0,
+                    'existing_users' => 0,
+                    'new_cvs' => 0,
+                    'existing_cvs' => 0,
+                    'errors' => 0
+                ]
+            ];
+        }
+
+        $stats = [
+            'total' => count($result['data']),
+            'new_users' => 0,
+            'existing_users' => 0,
+            'new_cvs' => 0,
+            'existing_cvs' => 0,
+            'errors' => 0
+        ];
+
+        DB::beginTransaction();
+
+        try {
+            foreach ($result['data'] as $student) {
+                try {
+                    $this->saveStudent($student, $stats);
+                } catch (\Exception $e) {
+                    $stats['errors']++;
+                    Log::error('Failed to save student: ' . $e->getMessage(), [
+                        'student' => $student
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return [
+                'success' => true,
+                'message' => 'Students scraped and saved successfully',
+                'stats' => $stats
+            ];
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Transaction failed: ' . $e->getMessage());
+            
+            return [
+                'success' => false,
+                'error' => $e->getMessage(),
+                'stats' => $stats
+            ];
+        }
+    }
+
+    /**
+     * Save individual student to database
+     */
+    protected function saveStudent($student, &$stats)
+    {
+        // Parse the name
+        $firstName = $student['firstname'];
+        $middleName = $student['middleInitial'];
+        $lastName = $student['lastname'];
+        $fullName = trim("{$firstName} {$middleName} {$lastName}");
+        
+        // Get other data
+        $email = $student['email'];
+        $address = $student['address'];
+        $studentNumber = $student['Student Number']; // Get student number
+
+        // Check if User already exists
+        $existingUser = User::where('first_name', $firstName)
+            ->where('middle_name', $middleName)
+            ->where('last_name', $lastName)
+            ->first();
+
+        if (!$existingUser) {
+            $existingUser = User::create([
+                'name' => $fullName,
+                'first_name' => $firstName,
+                'middle_name' => $middleName,
+                'last_name' => $lastName,
+                'email' => $email,
+                'password' => Hash::make($email),
+                'school_id' => $studentNumber, // Save student number to school_id
+            ]);
+            $stats['new_users']++;
+        } else {
+            $stats['existing_users']++;
+        }
+
+        // Check if CV already exists
+        $existingCv = CurriculumVitae::where('first_name', $firstName)
+            ->where('middle_name', $middleName)
+            ->where('last_name', $lastName)
+            ->first();
+
+        if (!$existingCv) {
+            CurriculumVitae::create([
+                'user_id' => $existingUser->id,
+                'first_name' => $firstName,
+                'middle_name' => $middleName,
+                'last_name' => $lastName,
+                'email' => $email,
+                'address' => $address,
+                'School_id' => $studentNumber, // Save student number to School_id
+                'isActive' => false,
+            ]);
+            $stats['new_cvs']++;
+        } else {
+            $stats['existing_cvs']++;
+        }
     }
 }
