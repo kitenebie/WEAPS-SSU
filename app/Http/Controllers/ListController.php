@@ -95,7 +95,7 @@ class ListController extends Controller
                         'email' => $email, // Email address
                         'address' => $address, // Address
                         'School_id' => $schoolId, // Student number as School ID
-                        'isActive' => true, // Set as active
+                        'isActive' => false, // Set as active
                     ]);
                 }
                 // If existing CV is found, skip creation (no action needed)
