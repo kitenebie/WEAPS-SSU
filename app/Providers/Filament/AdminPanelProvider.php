@@ -91,6 +91,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
                 AdminRoleMiddleware::class,
             ])
+            ->globalSearch(false)
             ->authMiddleware([
                 Authenticate::class,
             ])

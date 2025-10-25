@@ -76,6 +76,7 @@ class EmployeerPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->globalSearch(false)
             ->maxContentWidth(Width::Full);
     }
 }
