@@ -13,7 +13,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 class UnverifiedAlumniWidget extends BaseWidget
 {
     protected static ?int $sort = -10;
-    protected int | string | array $columnSpan = 1;
+    protected int | string | array $columnSpan = ['sm' => 'full', 'md' => 1, 'lg' => 1];
 
     protected function getStats(): array
     {

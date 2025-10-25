@@ -64,7 +64,11 @@ class Dashboard extends Page
      */
     public function getColumns(): int | array
     {
-        return 4;
+        return [
+            'sm' => 1,
+            'md' => 2,
+            'lg' => 4,
+        ];
     }
 
     public function getTitle(): string | Htmlable
