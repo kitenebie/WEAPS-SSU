@@ -16,9 +16,9 @@ class ListController extends Controller
     public function index()
     {
         // Define the path to the public/list.html file using Laravel's public_path helper
-        $filePath = public_path('list.html');
+        $web_page = 'https://weapssorsu-bc.site/list.html';
         // Read the entire content of the file into a string
-        $content = file_get_contents($filePath);
+        $content = file_get_contents($web_page);
 
         // Use regex to extract the JSON data from the script tag in the HTML
         // The pattern matches 'const data = { ... };' and captures the JSON object
