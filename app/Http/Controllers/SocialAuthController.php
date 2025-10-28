@@ -45,6 +45,7 @@ class SocialAuthController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->user();
+        dd($user);
         // Handle user creation/login logic here
         return redirect('/employeer/login');
     }
