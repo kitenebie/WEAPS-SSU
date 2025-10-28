@@ -83,9 +83,35 @@ class SocialAuthController extends Controller
      */
     public function handleGithubCallback()
     {
-        $user = Socialite::driver('github')->user();
-        // Handle user creation/login logic here
-        return redirect('/employeer/login');
+        try {
+            $socialUser = Socialite::driver('github')->user();
+
+            // Check if user exists by email
+            $user = \App\Models\User::where('email', $socialUser->getEmail())->first();
+
+            if (!$user) {
+                // Create new user
+                $user = \App\Models\User::create([
+                    'name' => $socialUser->getName() ?? $socialUser->getNickname(),
+                    'email' => $socialUser->getEmail(),
+                    'password' => \Illuminate\Support\Facades\Hash::make(uniqid()), // Random password since OAuth
+                    'email_verified_at' => now(), // GitHub emails are verified
+                ]);
+
+                // Assign default role
+                $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
+                $user->assignRole($role);
+            }
+
+            // Log the user in
+            \Illuminate\Support\Facades\Auth::login($user);
+
+            // Redirect to intended page or dashboard
+            return redirect()->intended('/');
+        } catch (\Exception $e) {
+            // Handle errors gracefully
+            return redirect('/login')->withErrors(['social_auth' => 'Authentication failed. Please try again.']);
+        }
     }
 
     /**
@@ -95,8 +121,34 @@ class SocialAuthController extends Controller
      */
     public function handleLinkedInCallback()
     {
-        $user = Socialite::driver('linkedin')->user();
-        // Handle user creation/login logic here
-        return redirect('/employeer/login');
+        try {
+            $socialUser = Socialite::driver('linkedin')->user();
+
+            // Check if user exists by email
+            $user = \App\Models\User::where('email', $socialUser->getEmail())->first();
+
+            if (!$user) {
+                // Create new user
+                $user = \App\Models\User::create([
+                    'name' => $socialUser->getName(),
+                    'email' => $socialUser->getEmail(),
+                    'password' => \Illuminate\Support\Facades\Hash::make(uniqid()), // Random password since OAuth
+                    'email_verified_at' => now(), // LinkedIn emails are verified
+                ]);
+
+                // Assign default role
+                $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
+                $user->assignRole($role);
+            }
+
+            // Log the user in
+            \Illuminate\Support\Facades\Auth::login($user);
+
+            // Redirect to intended page or dashboard
+            return redirect()->intended('/');
+        } catch (\Exception $e) {
+            // Handle errors gracefully
+            return redirect('/login')->withErrors(['social_auth' => 'Authentication failed. Please try again.']);
+        }
     }
 }
