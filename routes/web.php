@@ -17,7 +17,7 @@ Route::get('/private/{path}', [App\Http\Controllers\FileController::class, 'serv
 Route::get('/auth/google', [App\Http\Controllers\SocialAuthController::class, 'redirectToGoogle'])->name('socialite.google');
 Route::get('/auth/github', [App\Http\Controllers\SocialAuthController::class, 'redirectToGithub'])->name('socialite.github');
 Route::get('/auth/linkedin', [App\Http\Controllers\SocialAuthController::class, 'redirectToLinkedIn'])->name('socialite.linkedin');
-Route::get('/auth/google/callback', [App\Http\Controllers\SocialAuthController::class, 'handleGoogleCallback'])->name('socialite.google.callback');
+Route::get('/login/google/callback', [App\Http\Controllers\SocialAuthController::class, 'handleGoogleCallback'])->name('socialite.google.callback');
 Route::get('/auth/github/callback', [App\Http\Controllers\SocialAuthController::class, 'handleGithubCallback'])->name('socialite.github.callback');
 Route::get('/auth/linkedin/callback', [App\Http\Controllers\SocialAuthController::class, 'handleLinkedInCallback'])->name('socialite.linkedin.callback');
 

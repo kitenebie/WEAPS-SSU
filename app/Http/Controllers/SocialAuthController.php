@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Spatie\Permission\Models\Role;
 
 class SocialAuthController extends Controller
 {
@@ -44,10 +45,35 @@ class SocialAuthController extends Controller
      */
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
-        dd($user);
-        // Handle user creation/login logic here
-        return redirect('/employeer/login');
+        try {
+            $socialUser = Socialite::driver('google')->user();
+
+            // Check if user exists by email
+            $user = \App\Models\User::where('email', $socialUser->getEmail())->first();
+
+            if (!$user) {
+                // Create new user
+                $user = \App\Models\User::create([
+                    'name' => $socialUser->getName(),
+                    'email' => $socialUser->getEmail(),
+                    'password' => \Illuminate\Support\Facades\Hash::make(uniqid()), // Random password since OAuth
+                    'email_verified_at' => now(), // Google emails are verified
+                ]);
+
+                // Assign default role
+                $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
+                $user->assignRole($role);
+            }
+
+            // Log the user in
+            \Illuminate\Support\Facades\Auth::login($user);
+
+            // Redirect to intended page or dashboard
+            return redirect()->intended('/');
+        } catch (\Exception $e) {
+            // Handle errors gracefully
+            return redirect('/login')->withErrors(['social_auth' => 'Authentication failed. Please try again.']);
+        }
     }
 
     /**
