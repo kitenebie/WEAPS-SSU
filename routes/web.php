@@ -62,4 +62,7 @@ Route::middleware('auth')->group(function () {
 // Alternative route without middleware for testing
 Route::post('/company/review/store-test', [App\Http\Controllers\CompanyReviewController::class, 'store'])->name('company.review.store.test');
 
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy.policy');
 Route::get('/alumni/list', [ListController::class, 'index'])->name('students.scrape');
