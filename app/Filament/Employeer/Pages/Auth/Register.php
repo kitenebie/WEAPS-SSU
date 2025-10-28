@@ -67,7 +67,7 @@ class Register extends BaseRegister
                     ->content(new \Illuminate\Support\HtmlString('
                             <button style="Display: flex !important" wire:click="$set(\'registerMode\', \'normal\')" class="btn-signup mb-4 fi-color fi-color-secondary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="button">
                         Try another way
-                    </button>'),
+                    </button>')),
                 Placeholder::make('social_auth')
                     ->hiddenLabel()
                     ->visible(fn () => $this->registerMode === 'normal')
