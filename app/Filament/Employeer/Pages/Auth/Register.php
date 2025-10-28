@@ -129,6 +129,7 @@ class Register extends BaseRegister
                             <button style="Display: flex !important" wire:click="$set(\'registerMode\', \'normal\')" class="btn-signup mb-4 fi-color fi-color-primary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="button">
                         Try another way
                     </button>
+                        <style>
                         button:nth-child(1)
                         {
                             display: none !important;
