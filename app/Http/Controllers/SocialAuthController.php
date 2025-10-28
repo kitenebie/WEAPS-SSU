@@ -28,13 +28,13 @@ class SocialAuthController extends Controller
     }
 
     /**
-     * Redirect to Facebook authentication
+     * Redirect to LinkedIn authentication
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function redirectToFacebook()
+    public function redirectToLinkedIn()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('linkedin')->redirect();
     }
 
     /**
@@ -62,13 +62,13 @@ class SocialAuthController extends Controller
     }
 
     /**
-     * Handle Facebook authentication callback
+     * Handle LinkedIn authentication callback
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function handleFacebookCallback()
+    public function handleLinkedInCallback()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('linkedin')->user();
         // Handle user creation/login logic here
         return redirect('/employeer/login');
     }

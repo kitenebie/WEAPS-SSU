@@ -16,10 +16,10 @@ Route::get('/private/{path}', [App\Http\Controllers\FileController::class, 'serv
 // Social Auth Routes
 Route::get('/auth/google', [App\Http\Controllers\SocialAuthController::class, 'redirectToGoogle'])->name('socialite.google');
 Route::get('/auth/github', [App\Http\Controllers\SocialAuthController::class, 'redirectToGithub'])->name('socialite.github');
-Route::get('/auth/facebook', [App\Http\Controllers\SocialAuthController::class, 'redirectToFacebook'])->name('socialite.facebook');
+Route::get('/auth/linkedin', [App\Http\Controllers\SocialAuthController::class, 'redirectToLinkedIn'])->name('socialite.linkedin');
 Route::get('/auth/google/callback', [App\Http\Controllers\SocialAuthController::class, 'handleGoogleCallback'])->name('socialite.google.callback');
 Route::get('/auth/github/callback', [App\Http\Controllers\SocialAuthController::class, 'handleGithubCallback'])->name('socialite.github.callback');
-Route::get('/auth/facebook/callback', [App\Http\Controllers\SocialAuthController::class, 'handleFacebookCallback'])->name('socialite.facebook.callback');
+Route::get('/auth/linkedin/callback', [App\Http\Controllers\SocialAuthController::class, 'handleLinkedInCallback'])->name('socialite.linkedin.callback');
 
 // Routes for registration forms
 Route::get('/alumni/applicant-form', [App\Http\Controllers\RegistrationController::class, 'showApplicantForm'])->name('applicant.form');
