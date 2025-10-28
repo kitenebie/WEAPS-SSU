@@ -22,38 +22,55 @@ use Illuminate\Support\Facades\Session;
 
 class Register extends BaseRegister
 {
+    public $registerMode = 'normal';
+
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 TextInput::make('school_id')
                     ->label('Student ID')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->required(fn () => $this->registerMode === 'student'),
 
                 TextInput::make('name')
                     ->label(__('filament-panels::auth/pages/register.form.name.label'))
-                    ->required()
+                    ->required(fn () => $this->registerMode === 'normal')
                     ->maxLength(255)
-                    ->autofocus(),
+                    ->autofocus()
+                    ->visible(fn () => $this->registerMode === 'normal'),
 
                 TextInput::make('email')
                     ->label(__('filament-panels::auth/pages/register.form.email.label'))
                     ->email()
-                    ->required()
+                    ->required(fn () => $this->registerMode === 'normal')
                     ->maxLength(255)
-                    ->unique(table: 'users'),
+                    ->unique(table: 'users')
+                    ->visible(fn () => $this->registerMode === 'normal'),
 
                 TextInput::make('password')
                     ->label(__('filament-panels::auth/pages/register.form.password.label'))
                     ->password()
-                    ->required()
+                    ->required(fn () => $this->registerMode === 'normal')
                     ->minLength(8)
-                    ->same('passwordConfirmation'),
+                    ->same('passwordConfirmation')
+                    ->visible(fn () => $this->registerMode === 'normal'),
 
                 TextInput::make('passwordConfirmation')
                     ->label(__('filament-panels::auth/pages/register.form.password_confirmation.label'))
                     ->password()
-                    ->required(),
+                    ->required(fn () => $this->registerMode === 'normal')
+                    ->visible(fn () => $this->registerMode === 'normal'),
+                Placeholder::make('student_button')
+                    ->hiddenLabel()
+                    ->content(new \Illuminate\Support\HtmlString('
+                    <div style="margin-bottom: 1rem;">
+                    <button wire:click="$set(\'registerMode\', \'student\')" style="display: inline-flex; align-items: center; justify-content: center; padding: 8px 16px; background-color: #0866FF; border: 1px solid #0247AFFF; border-radius: 6px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); font-size: 14px; font-weight: 500; color: #161616FF; text-decoration: none;">
+                    Register Using SorSU Student ID
+                    </button>
+                    </div>
+                    '))
+                    ->visible(fn () => $this->registerMode === 'normal'),
                 Placeholder::make('social_auth')
                     ->hiddenLabel()
                     ->content(new \Illuminate\Support\HtmlString('
@@ -76,7 +93,7 @@ class Register extends BaseRegister
                     </div>
                         <p style="width: 100%; margin-bottom: 1rem; text-align:center; padding: 4px; color: #A4A4A4">--------------  Or continue with  --------------</p>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
-                            <a href="' . route('socialite.google') . '" style="display: inline-flex ; align-items: center; justify-content: center; padding: 8px 16px; background-color: white; border: 1px solid #d1d5db; border-radius: 6px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); font-size: 14px; font-weight: 500; color: #6b7280; text-decoration: none;">
+                            <a href="' . route('socialite.google') . '" style="display: inline-flex ; align-items: center; justify-content: center; padding: 8px 16px; background-color: #0866FF; border: 1px solid #0247AFFF; border-radius: 6px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); font-size: 14px; font-weight: 500; color: #161616FF; text-decoration: none;">
                                 <svg style="width: 20px; height: 20px; margin-right: 8px;" viewBox="0 0 24 24">
                                     <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                                     <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -117,35 +134,56 @@ class Register extends BaseRegister
     {
         $data = $this->form->getState();
 
-        // Check if school_id is provided and exists
-        $existingUser = $data['school_id'] ? User::where('school_id', $data['school_id'])->first() : null;
+        if ($this->registerMode === 'student') {
+            $existingUser = User::where('school_id', $data['school_id'])->first();
+            if ($existingUser) {
+                Filament::auth()->login($existingUser);
+                Session::put('Alumni_data', $existingUser);
+                return app(RegistrationResponse::class, ['url' => '/alumni/applicant-form']);
+            } else {
+                $user = User::create([
+                    'name' => 'Student ' . $data['school_id'],
+                    'email' => $data['school_id'] . '@sorsu.edu.ph',
+                    'password' => Hash::make('temp123'),
+                    'school_id' => $data['school_id'],
+                ]);
+                $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
+                $user->assignRole($role);
+                $this->sendEmailVerificationNotification($user);
+                Filament::auth()->login($user);
+                return app(RegistrationResponse::class);
+            }
+        } else {
+            // Check if school_id is provided and exists
+            $existingUser = $data['school_id'] ? User::where('school_id', $data['school_id'])->first() : null;
 
-        if ($existingUser) {
-            // If school_id exists, redirect to applicant-form
-            Filament::auth()->login($existingUser);
-            User::where('id', $existingUser->id)->update([
+            if ($existingUser) {
+                // If school_id exists, redirect to applicant-form
+                Filament::auth()->login($existingUser);
+                User::where('id', $existingUser->id)->update([
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                ]);
+                Session::put('Alumni_data', $existingUser);
+                return app(RegistrationResponse::class, ['url' => '/alumni/applicant-form']);
+            }
+
+            // Otherwise, create new user
+            $user = User::create([
+                'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
+                'school_id' => $data['school_id'] ?? null,
             ]);
-            Session::put('Alumni_data', $existingUser);
-            return app(RegistrationResponse::class, ['url' => '/alumni/applicant-form']);
+
+            $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
+            $user->assignRole($role);
+
+            $this->sendEmailVerificationNotification($user);
+
+            Filament::auth()->login($user);
+
+            return app(RegistrationResponse::class);
         }
-
-        // Otherwise, create new user
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'school_id' => $data['school_id'] ?? null,
-        ]);
-
-        $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
-        $user->assignRole($role);
-
-        $this->sendEmailVerificationNotification($user);
-
-        Filament::auth()->login($user);
-
-        return app(RegistrationResponse::class);
     }
 }
