@@ -63,7 +63,7 @@ class Register extends BaseRegister
                     ->visible(fn () => $this->registerMode === 'normal'),
                 Placeholder::make('social_auth')
                     ->hiddenLabel()
-                    ->visible(fn () => $this->registerMode === 'student')
+                    ->visible(fn () => $this->registerMode === 'normal')
                     ->content(new \Illuminate\Support\HtmlString('
                     <div style="display: flex; flex-direction:  column; margin-bottom: 1rem; gap: 8px;">
                     <button style="Display: flex !important" x-data="filamentFormButton" x-bind:class="{ \'fi-processing\': isProcessing }" class="btn-signup mb-4 fi-color fi-color-primary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="submit" wire:loading.attr="disabled" wire:target="register" x-bind:disabled="isProcessing">
