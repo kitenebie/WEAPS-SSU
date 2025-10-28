@@ -65,13 +65,6 @@ class Register extends BaseRegister
                     ->hiddenLabel()
                     ->visible(fn () => $this->registerMode === 'normal')
                     ->content(new \Illuminate\Support\HtmlString('
-                            <button style="Display: flex !important" wire:click="$set(\'registerMode\', \'normal\')" class="btn-signup mb-4 fi-color fi-color-secondary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="button">
-                        Try another way
-                    </button>')),
-                Placeholder::make('social_auth')
-                    ->hiddenLabel()
-                    ->visible(fn () => $this->registerMode === 'normal')
-                    ->content(new \Illuminate\Support\HtmlString('
                     <div style="display: flex; flex-direction:  column; margin-bottom: 1rem; gap: 8px;">
                     <button style="Display: flex !important" x-data="filamentFormButton" x-bind:class="{ \'fi-processing\': isProcessing }" class="btn-signup mb-4 fi-color fi-color-primary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="submit" wire:loading.attr="disabled" wire:target="register" x-bind:disabled="isProcessing">
                                             <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fi-icon fi-loading-indicator fi-size-md" wire:loading.delay.default="" wire:target="register">
@@ -129,6 +122,21 @@ class Register extends BaseRegister
 
                         </style>
                     ')),
+                Placeholder::make('social_auth')
+                    ->hiddenLabel()
+                    ->visible(fn () => $this->registerMode === 'normal')
+                    ->content(new \Illuminate\Support\HtmlString('
+                            <button style="Display: flex !important" wire:click="$set(\'registerMode\', \'normal\')" class="btn-signup mb-4 fi-color fi-color-primary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="button">
+                        Try another way
+                    </button>
+                        button:nth-child(1)
+                        {
+                            display: none !important;
+                        }
+                        btn-signup
+                        {
+                            display: flex !important;
+                        }')),
             ]);
     }
 
