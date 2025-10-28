@@ -94,6 +94,11 @@ class Register extends BaseRegister
                         <p style="width: 100%; margin-bottom: 1rem; text-align:center; padding: 4px; color: #A4A4A4">--------------  Or continue with  --------------</p>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             
+                    <div style="margin-bottom: 1rem;">
+                    <button wire:click="$set(\'registerMode\', \'student\')" style="display: inline-flex; align-items: center; justify-content: center; padding: 8px 16px; background-color: #0866FF; border: 1px solid #0247AFFF; border-radius: 6px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); font-size: 14px; font-weight: 500; color: #161616FF; text-decoration: none;">
+                    Register Using SorSU Student ID
+                    </button>
+                    </div>
                             <a href="' . route('socialite.google') . '" style="display: inline-flex ; align-items: center; justify-content: center; padding: 8px 16px; background-color: #0866FF; border: 1px solid #0247AFFF; border-radius: 6px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); font-size: 14px; font-weight: 500; color: #EBEBEBFF; text-decoration: none;">
                                 <svg style="width: 20px; height: 20px; margin-right: 8px;" viewBox="0 0 24 24">
                                     <path fill="#EBEBEBFF" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
