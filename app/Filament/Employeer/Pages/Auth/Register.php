@@ -31,7 +31,8 @@ class Register extends BaseRegister
                 TextInput::make('school_id')
                     ->label('Student ID')
                     ->maxLength(255)
-                    ->required(fn () => $this->registerMode === 'student'),
+                    ->required(fn () => $this->registerMode === 'student')
+                    ->visible(fn () => $this->registerMode === 'student'),
 
                 TextInput::make('name')
                     ->label(__('filament-panels::auth/pages/register.form.name.label'))
