@@ -15,6 +15,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Actions\Action;
 
 class CurriculumVitaeForm
 {
@@ -86,12 +87,28 @@ class CurriculumVitaeForm
                                             ->icon('heroicon-o-academic-cap')
                                             ->schema([
                                                 Repeater::make('education')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                                     ->label('Education History')
                                                     ->schema([
-                                                        TextInput::make('degree')
+                                                        Select::make('degree')
                                                             ->label('Degree / Grade')
+                                                            ->options([
+                                                            'Elementary School' => 'Elementary School',
+                                                            'Junior High School' => 'Junior High School',
+                                                            'Senior High School' => 'Senior High School',
+                                                            'College' => [
+                                                                'BS in Computer Science' => 'BS in Computer Science',
+                                                                'BS in Information Technology' => 'BS in Information Technology',
+                                                                'BS in Information System' => 'BS in Information System',
+                                                                'BS in Accountancy' => 'BS in Accountancy',
+                                                                'BS in Accounting Information System' => 'BS in Accounting Information System',
+                                                                'BS in Entrepreneurship (BS Entrep)' => 'BS in Entrepreneurship',
+                                                                'Bachelor of Public Administration' => 'Bachelor of Public Administration',
+                                                            ]
+                                                            ])
+                                                            ->searchable()
                                                             ->required()
-                                                            ->placeholder('e.g., Bachelor of Science in Computer Science'),
+                                                            ->placeholder('Select or type your degree'),
                                                         TextInput::make('school_name')
                                                             ->label('School Name / University')
                                                             ->required()
@@ -112,6 +129,7 @@ class CurriculumVitaeForm
                                             ->icon('heroicon-o-language')
                                             ->schema([
                                                 Repeater::make('skills')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                                     ->label('Technical & Soft Skills')
                                                     ->schema([
                                                         TextInput::make('name')
@@ -134,6 +152,7 @@ class CurriculumVitaeForm
                                                     ->addActionLabel('Add Skill'),
 
                                                 Repeater::make('languages')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                                     ->label('Languages')
                                                     ->schema([
                                                         TextInput::make('name')
@@ -162,6 +181,7 @@ class CurriculumVitaeForm
                                     ->icon('heroicon-o-trophy')
                                     ->schema([
                                         Repeater::make('certifications')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                             ->label('Certifications')
                                             ->schema([
                                                 TextInput::make('name')
@@ -180,6 +200,7 @@ class CurriculumVitaeForm
                                             ->addActionLabel('Add Certification'),
 
                                         Repeater::make('awards')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                             ->label('Awards & Honors')
                                             ->schema([
                                                 TextInput::make('name')
@@ -205,6 +226,7 @@ class CurriculumVitaeForm
                                     ->icon('heroicon-o-heart')
                                     ->schema([
                                         Repeater::make('volunteer_work')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                             ->label('Volunteer Experience')
                                             ->schema([
                                                 TextInput::make('organization')
@@ -226,6 +248,7 @@ class CurriculumVitaeForm
                                             ->addActionLabel('Add Volunteer Work'),
 
                                         Repeater::make('references')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                             ->label('Professional References')
                                             ->schema([
                                                 TextInput::make('name')
@@ -275,6 +298,7 @@ class CurriculumVitaeForm
                                     ->icon('heroicon-o-building-office-2')
                                     ->schema([
                                         Repeater::make('work_experience')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                             ->label('Work Experience')
                                             ->schema([
                                                 TextInput::make('jobPosition')
@@ -306,6 +330,7 @@ class CurriculumVitaeForm
                                     ->icon('heroicon-o-code-bracket')
                                     ->schema([
                                         Repeater::make('projects')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                             ->label('Key Projects')
                                             ->schema([
                                                 TextInput::make('name')
@@ -334,6 +359,7 @@ class CurriculumVitaeForm
                                     ->icon('heroicon-o-building-office')
                                     ->schema([
                                         Repeater::make('affiliations')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                             ->label('Professional Affiliations')
                                             ->schema([
                                                 TextInput::make('organization')
@@ -355,6 +381,7 @@ class CurriculumVitaeForm
                                             ->addActionLabel('Add Affiliation'),
 
                                         Repeater::make('publications')
+                                                ->addAction(fn(Action $action) => $action->color('primary'))
                                             ->label('Publications')
                                             ->schema([
                                                 TextInput::make('title')

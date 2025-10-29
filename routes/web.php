@@ -43,6 +43,7 @@ Route::post('/api/a/i/varification', [App\Http\Controllers\ResumeController::cla
 
 // Career details route
 Route::get('/career/{id}', [App\Http\Controllers\CareerController::class, 'show'])->name('career.details');
+Route::get('/career/{id}/details', [App\Http\Controllers\CareerController::class, 'getCareerDetails'])->name('career.details.api');
 
 // Career save and apply routes
 Route::middleware('auth')->group(function () {

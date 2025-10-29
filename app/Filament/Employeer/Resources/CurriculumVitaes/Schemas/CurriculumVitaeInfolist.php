@@ -311,13 +311,17 @@ class CurriculumVitaeInfolist
                             ->columns(4)
                             ->schema([
                                 TextEntry::make('linkedin_url')
-                                    ->badge(),
+                                    ->badge()
+                                    ->url(fn ($record) => $record->linkedin_url),
                                 TextEntry::make('github_url')
-                                    ->badge(),
+                                    ->badge()
+                                    ->url(fn ($record) => $record->github_url),
                                 TextEntry::make('portfolio_url')
-                                    ->badge(),
+                                    ->badge()
+                                    ->url(fn ($record) => $record->portfolio_url),
                                 TextEntry::make('facebook_url')
-                                    ->badge(),
+                                    ->badge()
+                                    ->url(fn ($record) => $record->facebook_url),
                             ])->columnSpanFull(),
                     ])->columnSpanFull()
             ]);

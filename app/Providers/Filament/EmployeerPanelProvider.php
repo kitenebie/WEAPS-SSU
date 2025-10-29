@@ -44,7 +44,7 @@ class EmployeerPanelProvider extends PanelProvider
             ->brandLogoHeight('3rem')
             ->topNavigation(true)
             ->colors([
-                'primary' => Color::Rose,
+                'primary' => Color::Maroon,
             ])
             ->darkMode(false)
             ->discoverResources(in: app_path('Filament/Employeer/Resources'), for: 'App\Filament\Employeer\Resources')

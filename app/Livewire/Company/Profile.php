@@ -18,6 +18,22 @@ class Profile extends Component implements HasForms
     use InteractsWithForms;
     public $isMe = false;
 
+    // Position form properties
+    public $jobTitle;
+    public $jobLocation;
+    public $jobType;
+    public $jobDescription;
+    public $minSalary;
+    public $maxSalary;
+    public $jobTags = []; // array
+    public $newTag = '';
+    public $startDate;
+    public $endDate;
+    public $showAddPositionModal = false;
+    public $showAddPostModal = false;
+    public $postContent = '';
+    public $searchTerm = '';
+
     public function isAllCompanyInformationNotNUll()
     {
         $company = null;
@@ -83,8 +99,135 @@ class Profile extends Component implements HasForms
             );
         }
 
+        // Get careers with search filter
+        $careers = \App\Models\Carrer::where('company_id', $company->id)
+            ->when($this->searchTerm, function ($query) {
+                $query->where(function ($q) {
+                    $q->where('title', 'like', '%' . $this->searchTerm . '%')
+                      ->orWhere('description', 'like', '%' . $this->searchTerm . '%')
+                      ->orWhere('location', 'like', '%' . $this->searchTerm . '%')
+                      ->orWhere('role_type', 'like', '%' . $this->searchTerm . '%');
+                });
+            })
+            ->get();
+
         return view('livewire.company.profile', [
             'company' => $company,
+            'careers' => $careers,
         ]);
+    }
+
+    public function savePosition()
+    {
+        try {
+            // Validate the form data
+            $this->validate([
+                'jobTitle' => 'required|string|max:255',
+                'jobLocation' => 'required|string|max:255',
+                'jobType' => 'required|string|in:Full-time,Part-time,Contract,Internship',
+                'jobDescription' => 'required|string',
+                'minSalary' => 'nullable|numeric|min:0',
+                'maxSalary' => 'nullable|numeric|min:0',
+                'jobTags' => 'nullable|array',
+                'jobTags.*' => 'string',
+                'startDate' => 'nullable|date',
+                'endDate' => 'nullable|date|after_or_equal:startDate',
+            ]);
+
+            // Get the company
+            $company = null;
+            if (Session::get('company_id')) {
+                $company = Company::find(Session::get('company_id'));
+            } else {
+                $company = Company::where('user_id', Auth::user()->id)->first();
+            }
+
+            if (!$company) {
+                $this->addError('general', 'Company not found.');
+                return;
+            }
+
+            // Prepare tags array
+            $tags = $this->jobTags ?? [];
+
+            // Create the career
+            \App\Models\Carrer::create([
+                'company_id' => $company->id,
+                'title' => $this->jobTitle,
+                'description' => $this->jobDescription,
+                'role_type' => $this->jobType,
+                'location' => $this->jobLocation,
+                'min_salary' => $this->minSalary,
+                'max_salary' => $this->maxSalary,
+                'tags' => $tags,
+                'start_date' => $this->startDate,
+                'end_date' => $this->endDate,
+            ]);
+
+            // Reset form fields
+            $this->reset(['jobTitle', 'jobLocation', 'jobType', 'jobDescription', 'minSalary', 'maxSalary', 'jobTags', 'newTag', 'startDate', 'endDate']);
+
+            // Dispatch success event for SweetAlert
+            $this->dispatch('position-saved', 'Position added successfully!');
+
+            // Close modal
+            $this->showAddPositionModal = false;
+        } catch (\Exception $e) {
+            $this->addError('general', 'An error occurred while saving the position: ' . $e->getMessage());
+        }
+    }
+
+    public function addTag()
+    {
+        if (!empty($this->newTag) && !in_array($this->newTag, $this->jobTags)) {
+            $this->jobTags[] = $this->newTag;
+            $this->newTag = '';
+        }
+    }
+
+    public function removeTag($index)
+    {
+        unset($this->jobTags[$index]);
+        $this->jobTags = array_values($this->jobTags);
+    }
+
+    public function savePost()
+    {
+        try {
+            // Validate the form data
+            $this->validate([
+                'postContent' => 'required|string|max:1000',
+            ]);
+
+            // Get the company
+            $company = null;
+            if (Session::get('company_id')) {
+                $company = Company::find(Session::get('company_id'));
+            } else {
+                $company = Company::where('user_id', Auth::user()->id)->first();
+            }
+
+            if (!$company) {
+                $this->addError('general', 'Company not found.');
+                return;
+            }
+
+            // Create the post
+            \App\Models\CompanyPost::create([
+                'company_id' => $company->id,
+                'content' => $this->postContent,
+            ]);
+
+            // Reset form fields
+            $this->reset(['postContent']);
+
+            // Dispatch success event for SweetAlert
+            $this->dispatch('post-saved', 'Post added successfully!');
+
+            // Close modal
+            $this->showAddPostModal = false;
+        } catch (\Exception $e) {
+            $this->addError('general', 'An error occurred while saving the post: ' . $e->getMessage());
+        }
     }
 }

@@ -311,6 +311,19 @@ class Color
         900 => 'oklch(0.41 0.159 10.272)',
         950 => 'oklch(0.271 0.105 12.094)',
     ];
+    public const Maroon = [
+        50  => 'oklch(0.97 0.015 25)',
+        100 => 'oklch(0.935 0.03 25)',
+        200 => 'oklch(0.87 0.055 25)',
+        300 => 'oklch(0.78 0.1 25)',
+        400 => 'oklch(0.66 0.16 25)',
+        500 => 'oklch(0.55 0.18 25)', // main maroon
+        600 => 'oklch(0.48 0.17 25)',
+        700 => 'oklch(0.41 0.14 25)',
+        800 => 'oklch(0.34 0.11 25)',
+        900 => 'oklch(0.28 0.09 25)',
+        950 => 'oklch(0.19 0.07 25)',
+    ];
 
     public static function convertToOklch(string $color): string
     {
@@ -521,7 +534,7 @@ class Color
         [,, $hue] = sscanf($color, 'oklch(%f %f %f)');
 
         return array_map(
-            fn (array $constants): string => "oklch({$constants[0]} {$constants[1]} {$hue})",
+            fn(array $constants): string => "oklch({$constants[0]} {$constants[1]} {$hue})",
             [
                 50 => [0.97717647058824, 0.01395454545455],
                 100 => [0.95035294117647, 0.03272727272727],

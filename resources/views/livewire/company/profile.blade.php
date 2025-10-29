@@ -1,10 +1,27 @@
-<div class="w-full min-h-screen lg:px-4 md:px-8 lg:px-16 lg:py-4">
+<div class="w-full min-h-screen lg:px-4 md:px-8 lg:px-16 lg:py-4" x-data="{ showAddPositionModal: @entangle('showAddPositionModal') }">
     <style>
-        .fi-width-full{
+        .fi-width-full {
             padding: 0 !important;
         }
     </style>
-    <div class="lg:max-w-7xl mx-auto sm:max-w-full mt-6 px-4">
+    <div class="lg:max-w-7xl mx-auto sm:max-w-full mt-6 px-4" x-data="{
+        showAddPositionModal: @entangle('showAddPositionModal'),
+        showAddPostModal: @entangle('showAddPostModal'),
+        init() {
+            this.$watch('showAddPositionModal', (value) => {
+                if (value) {
+                    showTab('careers');
+                    saveTabToLocalStorage('careers');
+                }
+            });
+            this.$watch('showAddPostModal', (value) => {
+                if (value) {
+                    showTab('posts');
+                    saveTabToLocalStorage('posts');
+                }
+            });
+        }
+    }">
         {{-- if $company has a null value --}}
         @if (!$this->isAllCompanyInformationNotNUll())
             <div class="w-100 mb-2 h-12 text-center flex items-center justify-center border-2 border-red-400"
@@ -41,7 +58,8 @@
                 <div class="absolute inset-0 bg-red-700 bg-opacity-50"></div>
 
                 <!-- Company Name + Tagline -->
-                <div style="background-color: #0E0E0EC4" class="absolute px-3 py-2 bottom-4 left-52 sm:w-full md:left-20  text-white rounded">
+                <div style="background-color: #0E0E0EC4"
+                    class="absolute px-3 py-2 bottom-4 left-52 sm:w-full md:left-20  text-white rounded">
                     <h2 class="text-2xl md:text-3xl font-bold">{{ $company->name ?? '' }}</h2>
                     <p class="text-base md:text-lg text-right md:text-center">{{ $company->type ?? '' }}</p>
                 </div>
@@ -56,7 +74,7 @@
                     class="flex flex-col md:flex-row items-start md:items-end space-y-4 md:space-y-0 md:space-x-6 -mt-20">
                     <div class="relative">
                         <!-- Logo -->
-                        <div class="w-40 h-40 bg-white rounded-full border-4 border-red-900 shadow-lg overflow-hidden">
+                        <div class="w-40 h-40 bg-white rounded-full border-4 border-maroon-500 shadow-lg overflow-hidden">
                             @if ($company->logo)
                                 @php
                                     $logoPath = storage_path('app/private/' . $company->logo);
@@ -101,7 +119,7 @@
                         !\Illuminate\Support\Facades\Session::get('company_id') ||
                             \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
                         <a href="/Company%20Settings/{{ $company->id }}/edit"
-                            class=" bg-red-900 hover:border hover:border-yellow-400 text-white px-4 py-2 rounded-lg transition-all">
+                            class=" bg-maroon-500 hover:border hover:border-yellow-400 text-white px-4 py-2 rounded-lg transition-all">
                             Update Profile
                         </a>
                     @endif
@@ -113,30 +131,30 @@
                 <div class="border-t border-gray-200">
                     <div class="px-6">
                         <nav class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 overflow-x-auto">
-                            <button onclick="showTab('about')"
-                                class="tab-btn py-4 px-2 md:px-0 border-b-2 border-red-900 text-red-900 font-semibold whitespace-nowrap">
-                                About
-                            </button>
-                            <button onclick="showTab('careers')"
+                            <button onclick="showTab('careers'); saveTabToLocalStorage('careers')"
                                 class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                 Careers
                             </button>
-                            <button onclick="showTab('posts')"
+                            <button onclick="showTab('posts'); saveTabToLocalStorage('posts')"
                                 class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                 Posts
                             </button>
-                            <button onclick="showTab('reviews')"
+                            <button onclick="showTab('reviews'); saveTabToLocalStorage('reviews')"
                                 class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                 Reviews
                             </button>
                             @if (
                                 !\Illuminate\Support\Facades\Session::get('company_id') ||
                                     \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
-                                <button onclick="showTab('Applicants')"
+                                <button onclick="showTab('Applicants'); saveTabToLocalStorage('Applicants')"
                                     class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                     Applicants
                                 </button>
                             @endif
+                            <button onclick="showTab('about'); saveTabToLocalStorage('about')"
+                                class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
+                                About
+                            </button>
                         </nav>
                     </div>
                 </div>
@@ -148,7 +166,7 @@
             <!-- Main Content -->
             <div class="lg:col-span-2 space-y-6">
                 <!-- About Section -->
-                <div id="about-section" class="tab-content bg-white rounded-lg shadow-md p-6">
+                <div id="about-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
                     <h3 class="text-xl font-bold text-gray-900 mb-4">
                         About TechCorp Solutions
                     </h3>
@@ -159,13 +177,13 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-gray-50 p-4 rounded-lg">
-                                <h4 class="font-semibold text-red-900-700 mb-2">Industry</h4>
+                                <h4 class="font-semibold text-maroon-500-700 mb-2">Industry</h4>
                                 <p id="industry" class="text-gray-600">
                                     {{ $company->industry ?? '' }}
                                 </p>
                             </div>
                             <div class="bg-gray-50 p-4 rounded-lg">
-                                <h4 class="font-semibold text-red-900-700 mb-2">
+                                <h4 class="font-semibold text-maroon-500-700 mb-2">
                                     Company Size
                                 </h4>
                                 <p id="companySize" class="text-gray-600">
@@ -175,12 +193,12 @@
                         </div>
 
                         <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-semibold text-red-900-700 mb-2">Specialties</h4>
+                            <h4 class="font-semibold text-maroon-500-700 mb-2">Specialties</h4>
                             <div id="specialties" class="flex flex-wrap gap-2">
                                 @if ($company->specialties && count($company->specialties) > 0)
                                     @foreach ($company->specialties as $specialty)
                                         <span
-                                            class="bg-red-900-100 text-red-900-700 px-3 py-1 rounded-full text-sm">{{ $specialty }}</span>
+                                            class="bg-maroon-500-100 text-maroon-500-700 px-3 py-1 rounded-full text-sm">{{ $specialty }}</span>
                                     @endforeach
                                 @else
                                     <span class="text-gray-500 text-sm">No specialties listed</span>
@@ -191,22 +209,40 @@
                 </div>
 
                 <!-- Careers Section -->
-                <div id="careers-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
+                <div id="careers-section" class="tab-content bg-white rounded-lg shadow-md p-6 ">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-xl font-bold text-gray-900">Current Openings</h3>
-                        <button onclick="addPosition()"
-                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg font-semibold transition-all">
+                        <button onclick="showAddPositionModal()"
+                            class="bg-maroon-500 hover:bg-maroon-600 text-white px-4 py-2 rounded-lg font-semibold transition-all">
                             + Add Position
                         </button>
                     </div>
-                    <div id="jobPositions" class="space-y-4">
-                        @php
-                            $careers = App\Models\Carrer::where('company_id', $company->id)->get();
-                        @endphp
 
+                    <!-- Search Input -->
+                    <div class="mb-6">
+                        <input type="text" wire:model.live.debounce.300ms="searchTerm"
+                            placeholder="Search positions by title, description, location, or type..."
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                    </div>
+
+                    <div id="jobPositions" class="space-y-4">
                         @if ($careers->count() > 0)
                             @foreach ($careers as $career)
-                                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                @php
+                                    $userId = auth()->id();
+                                    $careerAlreadySaved = $userId
+                                        ? App\Models\SaveCareer::where('user_id', $userId)
+                                            ->where('career_id', $career->id)
+                                            ->exists()
+                                        : false;
+                                    $careerAlreadyApplied = $userId
+                                        ? App\Models\Applicant::where('user_id', $userId)
+                                            ->where('career_id', $career->id)
+                                            ->exists()
+                                        : false;
+                                @endphp
+                                <div class="border border-gray-200 hover:bg-gray-50 transition-all duration-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
+                                     onclick="openCareerModal({{ $career->id }}, {{ $careerAlreadySaved ? 'true' : 'false' }}, {{ $careerAlreadyApplied ? 'true' : 'false' }}, {{ $this->isMe ? 'true' : 'false' }})">
                                     <div class="flex justify-between items-start">
                                         <div class="flex-1">
                                             <h4 class="font-semibold text-lg text-gray-900">
@@ -247,47 +283,33 @@
                                             @endif
                                         </div>
                                         @if (!$this->isMe)
-                                        <div class="flex space-x-2">
-                                            @php
-                                                $userId = auth()->id();
-                                                $careerAlreadySaved = $userId
-                                                    ? App\Models\SaveCareer::where('user_id', $userId)
-                                                        ->where('career_id', $career->id)
-                                                        ->exists()
-                                                    : false;
-                                                $careerAlreadyApplied = $userId
-                                                    ? App\Models\Applicant::where('user_id', $userId)
-                                                        ->where('career_id', $career->id)
-                                                        ->exists()
-                                                    : false;
-                                            @endphp
-
-                                            @if ($careerAlreadySaved)
-                                                <button
-                                                    class="bg-green-100 text-green-800 font-medium py-2 px-3 rounded-lg cursor-not-allowed text-sm"
-                                                    disabled>
-                                                    ✓ Saved
-                                                </button>
-                                            @else
-                                                <button onclick="saveJob({{ $career->id }})"
-                                                    class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-3 rounded-lg transition-colors duration-200 text-sm">
-                                                    Save Job
-                                                </button>
-                                            @endif
-
-                                            @if ($careerAlreadyApplied)
-                                                <button
-                                                    class="bg-blue-100 text-blue-800 font-medium py-2 px-4 rounded-lg cursor-not-allowed text-sm"
-                                                    disabled>
-                                                    ✓ Applied
-                                                </button>
-                                            @else
-                                                <button onclick="applyNow({{ $career->id }})"
-                                                    class="bg-red-900 hover:bg-red-900-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
-                                                    Apply Now
-                                                </button>
-                                            @endif
-                                        </div>
+                                            <div class="flex space-x-2">
+                                                @if ($careerAlreadySaved)
+                                                    <button
+                                                        class="bg-green-100 text-green-800 font-medium py-2 px-3 rounded-lg cursor-not-allowed text-sm"
+                                                        disabled>
+                                                        ✓ Saved
+                                                    </button>
+                                                @else
+                                                    <button onclick="event.stopPropagation(); saveJob({{ $career->id }})"
+                                                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-3 rounded-lg transition-colors duration-200 text-sm">
+                                                        Save Job
+                                                    </button>
+                                                @endif
+    
+                                                @if ($careerAlreadyApplied)
+                                                    <button
+                                                        class="bg-blue-100 text-blue-800 font-medium py-2 px-4 rounded-lg cursor-not-allowed text-sm"
+                                                        disabled>
+                                                        ✓ Applied
+                                                    </button>
+                                                @else
+                                                    <button onclick="event.stopPropagation(); applyNow({{ $career->id }})"
+                                                        class="bg-maroon-500 hover:bg-maroon-500-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
+                                                        Apply Now
+                                                    </button>
+                                                @endif
+                                            </div>
                                         @endif
                                     </div>
                                 </div>
@@ -303,7 +325,13 @@
                 </div>
                 <!-- Posts Section -->
                 <div id="posts-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Recent Updates</h3>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-900">Recent Updates</h3>
+                        <button onclick="showAddPostModal(); showTab('posts'); saveTabToLocalStorage('posts')"
+                            class="bg-maroon-500 hover:bg-maroon-600 text-white px-4 py-2 rounded-lg font-semibold transition-all">
+                            + Add Post
+                        </button>
+                    </div>
                     <div class="space-y-6">
                         @php
                             $posts = App\Models\CompanyPost::where('company_id', $company->id)
@@ -316,7 +344,7 @@
                                 <div class="border-b border-gray-200 pb-6">
                                     <div class="flex items-start space-x-3">
                                         <div
-                                            class="w-12 h-12 bg-red-900 rounded-full flex items-center justify-center">
+                                            class="w-12 h-12 bg-maroon-500 rounded-full flex items-center justify-center">
                                             <span
                                                 class="text-white font-bold">{{ substr($company->name ?? 'CO', 0, 2) }}</span>
                                         </div>
@@ -330,13 +358,13 @@
                                                 {{ $post->content ?? 'No content available.' }}
                                             </p>
                                             <div class="flex space-x-4 text-gray-500 text-sm">
-                                                <!-- <button class="hover:text-red-900">
+                                                <!-- <button class="hover:text-maroon-500">
                                                     👍 Like ({{ rand(10, 50) }})
                                                 </button>
-                                                <button class="hover:text-red-900">
+                                                <button class="hover:text-maroon-500">
                                                     💬 Comment ({{ rand(1, 15) }})
                                                 </button>
-                                                <button class="hover:text-red-900">📤 Share</button> -->
+                                                <button class="hover:text-maroon-500">📤 Share</button> -->
                                             </div>
                                         </div>
                                     </div>
@@ -497,7 +525,7 @@
                     <div class="space-y-3 text-sm">
                         <div class="flex justify-between">
                             <span class="text-gray-600">Website:</span>
-                            <a href="#" class="text-red-900 hover:underline">{{ $company->website ?? '' }}</a>
+                            <a href="#" class="text-maroon-500 hover:underline">{{ $company->website ?? '' }}</a>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Industry:</span>
@@ -594,14 +622,16 @@
             </div>
         </div>
     </div>
-    <!-- Add Position Modal -->
-    <div id="addPositionModal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-lg max-w-xl w-full">
+    <!-- Add Post Modal -->
+    <div id="addPostModal" style="background-color: #11000491; overflow-y: auto;"
+        class="fixed inset-0 flex items-center justify-center p-4 z-50 hidden"
+        @post-saved.window="Swal.fire({icon: 'success', title: 'Success!', text: $event.detail, timer: 2000, showConfirmButton: false}).then((result) => { showTab('posts');});">
+        <div class="bg-white rounded-lg max-w-xl w-[600px]">
             <div class="border-b border-gray-200 px-6 py-4">
                 <div class="flex justify-between items-center">
-                    <h2 class="text-xl font-bold text-gray-900">Add New Position</h2>
-                    <button onclick="closePositionModal()" class="text-gray-500 hover:text-gray-700">
+                    <h2 class="text-xl font-bold text-gray-900">Add New Post</h2>
+                    <button onclick="hideAddPostModal()"
+                        class="text-gray-500 hover:text-gray-700">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12"></path>
@@ -611,24 +641,75 @@
             </div>
 
             <div class="p-6">
-                <form id="positionForm" class="space-y-4">
+                <form>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Post Content</label>
+                        <textarea wire:model="postContent" rows="6"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-transparent resize-none"
+                            placeholder="Share your company's latest updates, announcements, or news..."></textarea>
+                        @error('postContent')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </form>
+
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button onclick="hideAddPostModal()"
+                        class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-all">
+                        Cancel
+                    </button>
+                    <button wire:click="savePost"
+                        class="px-6 py-2 bg-maroon-500 hover:bg-maroon-600 text-white rounded-lg font-semibold transition-all">
+                        Save Post
+                    </button>
+                </div>
+
+                @error('general')
+                    <div class="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Position Modal -->
+    <div id="addPositionModal" style="background-color: #11000491; overflow-y: auto;"
+        class="fixed inset-0 flex items-center justify-center p-4 z-50 hidden"
+        @position-saved.window="Swal.fire({icon: 'success', title: 'Success!', text: $event.detail, timer: 2000, showConfirmButton: false}); showTab('posts');">
+        <div class="bg-white rounded-lg max-w-xl w-[600px]">
+            <div class="border-b border-gray-200 px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl font-bold text-gray-900">Add New Position</h2>
+                    <button onclick="hideAddPositionModal()"
+                        class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
-                        <input type="text" id="jobTitle"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-900-500 focus:border-transparent" />
+                        <input type="text" wire:model="jobTitle"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-maroon-500-500 focus:border-transparent" />
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                        <input type="text" id="jobLocation"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-900-500 focus:border-transparent" />
+                        <input type="text" wire:model="jobLocation"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-maroon-500-500 focus:border-transparent" />
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Employment Type</label>
-                        <select id="jobType"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-900-500 focus:border-transparent">
-                            <option value="Full-time">Full-time</option>
+                    <div class="col-span-2">
+                        <label class="block text-sm  font-medium text-gray-700 mb-1">Employment Type</label>
+                        <select wire:model="jobType"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-maroon-500-500 focus:border-transparent">
+                            <option selected value="Full-time">Full-time</option>
                             <option value="Part-time">Part-time</option>
                             <option value="Contract">Contract</option>
                             <option value="Internship">Internship</option>
@@ -636,30 +717,465 @@
                     </div>
 
                     <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Min Salary</label>
+                        <input type="number" wire:model="minSalary"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-maroon-500-500 focus:border-transparent" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Max Salary</label>
+                        <input type="number" wire:model="maxSalary"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-maroon-500-500 focus:border-transparent" />
+                    </div>
+
+                    <div class="col-span-2 px-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tags</label>
+                        <div class="overflow-hidden">
+                            <div class="p-3">
+                                <div class="flex flex-wrap gap-2 mb-3 min-h-[2rem]">
+                                    @foreach ($jobTags as $index => $tag)
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-md text-sm bg-maroon-100 text-maroon-800 border">
+                                            {{ $tag }}
+                                            <button wire:click="removeTag({{ $index }})" type="button"
+                                                class="ml-2 inline-flex items-center p-0.5 rounded-full text-maroon-400 hover:text-maroon-600 hover:bg-maroon-200 transition-colors">
+                                                X
+                                            </button>
+                                        </span>
+                                    @endforeach
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="text" wire:model="newTag"
+                                        placeholder="Type a tag and press Enter or click Add..."
+                                        class="flex-1 border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+                                        wire:keydown.enter="addTag" />
+                                    <button wire:click="addTag" type="button"
+                                        class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded font-medium transition-colors">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                        <input type="date" wire:model="startDate"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-maroon-500-500 focus:border-transparent" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                        <input type="date" wire:model="endDate"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-maroon-500-500 focus:border-transparent" />
+                    </div>
+
+                    <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                        <textarea id="jobDescription" rows="3"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-900-500 focus:border-transparent"></textarea>
+                        <!-- Editor Panel -->
+                        <div class="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+                            <div class="bg-gray-800 hidden text-white px-4 py-3 flex items-center justify-between">
+                                <span class="hidden font-semibold">Editor</span>
+                                <div class="hidden flex gap-2">
+                                    <button type="button" onclick="insertMarkdown('**', '**')"
+                                        class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm"
+                                        title="Bold">B</button>
+                                    <button type="button" onclick="insertMarkdown('*', '*')"
+                                        class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm italic"
+                                        title="Italic">I</button>
+                                    <button type="button" onclick="insertMarkdown('`', '`')"
+                                        class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm font-mono"
+                                        title="Code">&lt;/&gt;</button>
+                                    <button type="button" onclick="insertMarkdown('[', '](url)')"
+                                        class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm"
+                                        title="Link">🔗</button>
+                                    <button type="button" onclick="insertMarkdown('## ', '')"
+                                        class="px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm"
+                                        title="Heading">H</button>
+                                </div>
+                            </div>
+                            <textarea id="markdown-input" wire:model="jobDescription"
+                                class="w-full h-96  p-4 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Type job description here..."></textarea>
+                        </div>
                     </div>
                 </form>
 
                 <div class="mt-6 flex justify-end space-x-3">
-                    <button onclick="closePositionModal()"
+                    <button onclick="hideAddPositionModal()"
                         class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-all">
                         Cancel
                     </button>
-                    <button onclick="savePosition()"
-                        class="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg font-semibold transition-all">
+                    <button wire:click="savePosition"
+                        class="px-6 py-2 bg-maroon-500 hover:bg-maroon-600 text-white rounded-lg font-semibold transition-all">
                         Save Position
                     </button>
                 </div>
+
+                @error('general')
+                    <div class="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
     </div>
     <script>
+        function showTab(tabName) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach((content) => content.classList.add('hidden'));
+
+            const btns = document.querySelectorAll('.tab-btn');
+            btns.forEach((btn) => {
+                btn.classList.remove('border-maroon-500', 'text-maroon-500', 'font-semibold');
+                btn.classList.add('border-transparent', 'text-gray-600');
+            });
+
+            const section = document.getElementById(tabName + '-section');
+            if (section) section.classList.remove('hidden');
+
+            // Update the active tab button styling
+            const activeBtn = document.querySelector(`button[onclick*="${tabName}"]`);
+            if (activeBtn) {
+                activeBtn.classList.remove('border-transparent', 'text-gray-600');
+                activeBtn.classList.add('border-maroon-500', 'text-maroon-500', 'font-semibold');
+            }
+        }
+
+        function saveTabToLocalStorage(tabName) {
+            localStorage.setItem('companyProfileActiveTab', tabName);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             initializeStarRating();
             loadReviews({{ $company->id }});
+
+            // Check URL for tab parameter
+            const urlSearch = window.location.search;
+            if (urlSearch.includes('?posts')) {
+                showTab('posts');
+                saveTabToLocalStorage('posts');
+            } else if (urlSearch.includes('?careers')) {
+                showTab('careers');
+                saveTabToLocalStorage('careers');
+            } else if (urlSearch.includes('?reviews')) {
+                showTab('reviews');
+                saveTabToLocalStorage('reviews');
+            } else if (urlSearch.includes('?Applicants')) {
+                showTab('Applicants');
+                saveTabToLocalStorage('Applicants');
+            } else if (urlSearch.includes('?about')) {
+                showTab('about');
+                saveTabToLocalStorage('about');
+            } else {
+                // Load saved tab from localStorage if no URL param
+                const savedTab = localStorage.getItem('companyProfileActiveTab');
+                if (savedTab) {
+                    showTab(savedTab);
+                }
+            }
         });
+
+        function setTextareaMode(mode) {
+            const writeMode = document.getElementById('write-mode');
+            const previewMode = document.getElementById('preview-mode');
+            const writeTab = document.getElementById('write-tab');
+            const previewTab = document.getElementById('preview-tab');
+            const textarea = document.querySelector('textarea[wire\\:model="jobDescription"]');
+            const previewContent = document.getElementById('preview-content');
+
+            if (mode === 'write') {
+                writeMode.classList.remove('hidden');
+                previewMode.classList.add('hidden');
+                writeTab.classList.add('active-mode');
+                writeTab.classList.remove('bg-gray-50', 'hover:bg-gray-100');
+                writeTab.classList.add('bg-white', 'hover:bg-gray-50');
+                previewTab.classList.remove('active-mode');
+                previewTab.classList.add('bg-gray-50', 'hover:bg-gray-100');
+            } else {
+                writeMode.classList.add('hidden');
+                previewMode.classList.remove('hidden');
+                previewTab.classList.add('active-mode');
+                previewTab.classList.remove('bg-gray-50', 'hover:bg-gray-100');
+                previewTab.classList.add('bg-white', 'hover:bg-gray-50');
+                writeTab.classList.remove('active-mode');
+                writeTab.classList.add('bg-gray-50', 'hover:bg-gray-100');
+
+                // Simple markdown-like preview (basic implementation)
+                const text = textarea.value;
+                const html = text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/\n/g, '<br>');
+                previewContent.innerHTML = html;
+            }
+        }
     </script>
 
+    <!-- Career Details Modal -->
+    <div id="careerModal" style="background-color: #11000491; overflow-y: auto;"
+         class="fixed inset-0 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-lg max-w-6xl min-w-6xl sm:w-full max-h-[90vh] overflow-y-auto">
+            <div class="border-b border-gray-200 px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <h2 id="careerModalTitle" class="text-2xl font-bold text-gray-900">Career Details</h2>
+                    <button onclick="closeCareerModal()"
+                            class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <div class="space-y-6">
+                    <!-- Job Title and Basic Info -->
+                    <div>
+                        <h3 id="careerTitle" class="text-3xl font-bold text-gray-900 mb-2"></h3>
+                        <div class="flex flex-wrap items-center gap-4 text-gray-600 mb-4">
+                            <span id="careerRoleType"></span>
+                            <span>•</span>
+                            <span id="careerLocation"></span>
+                            <span id="careerSalary" class="text-emerald-600 font-semibold"></span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span id="careerCompany" class="text-lg text-gray-700"></span>
+                            <span>•</span>
+                            <span id="careerPostedDate" class="text-sm text-gray-500"></span>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div id="careerTags" class="flex flex-wrap gap-2"></div>
+
+                    <!-- Description -->
+                    <div>
+                        <h4 class="text-xl font-semibold text-gray-900 mb-3">Job Description</h4>
+                        <div id="careerDescription" class="text-gray-700 leading-relaxed"></div>
+                    </div>
+
+                    <!-- Additional Details -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div id="careerStartDateSection" class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-gray-900 mb-2">Start Date</h5>
+                            <p id="careerStartDate" class="text-gray-700"></p>
+                        </div>
+                        <div id="careerEndDateSection" class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-gray-900 mb-2">End Date</h5>
+                            <p id="careerEndDate" class="text-gray-700"></p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div id="careerActions" class="flex space-x-4  pt-6 border-t border-gray-200">
+                        
+                        <!-- Save Job Button -->
+                        <div id="saveJobContainer">
+                            <!-- Button will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Apply Now Button -->
+                        <div id="applyNowContainer">
+                            <!-- Button will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const input = document.getElementById('markdown-input');
+
+        function insertMarkdown(before, after) {
+            const start = input.selectionStart;
+            const end = input.selectionEnd;
+            const text = input.value;
+            const selectedText = text.substring(start, end) || 'text';
+
+            const newText = text.substring(0, start) + before + selectedText + after + text.substring(end);
+            input.value = newText;
+
+            // Set cursor position
+            const newPos = start + before.length + selectedText.length;
+            input.setSelectionRange(newPos, newPos);
+            input.focus();
+        }
+
+        // Handle tab key for indentation
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 4;
+            }
+        });
+
+        function showAddPostModal() {
+            document.getElementById('addPostModal').classList.remove('hidden');
+            document.getElementById('addPositionModal').classList.add('hidden');
+        }
+
+        function hideAddPostModal() {
+            document.getElementById('addPostModal').classList.add('hidden');
+        }
+
+        function showAddPositionModal() {
+            document.getElementById('addPositionModal').classList.remove('hidden');
+            document.getElementById('addPostModal').classList.add('hidden');
+        }
+
+        function hideAddPositionModal() {
+            document.getElementById('addPositionModal').classList.add('hidden');
+        }
+
+        function openCareerModal(careerId, isSaved, isApplied, isMe) {
+            // Fetch career details via AJAX
+            fetch(`/career/${careerId}/details`, {
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': window.csrfToken,
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    populateCareerModal(data.career, isSaved, isApplied, isMe);
+                    document.getElementById('careerModal').classList.remove('hidden');
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Failed to load career details.'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'An error occurred while loading career details.'
+                });
+            });
+        }
+
+        function closeCareerModal() {
+            document.getElementById('careerModal').classList.add('hidden');
+        }
+
+        function populateCareerModal(career, isSaved, isApplied, isMe) {
+            // Set title
+            document.getElementById('careerModalTitle').textContent = career.title || 'Untitled Position';
+
+            // Set basic info
+            document.getElementById('careerTitle').textContent = career.title || 'Untitled Position';
+            document.getElementById('careerRoleType').textContent = career.role_type || 'Not specified';
+            document.getElementById('careerLocation').textContent = career.location || 'Location not specified';
+            document.getElementById('careerCompany').textContent = career.company?.name || 'Unknown Company';
+            document.getElementById('careerPostedDate').textContent = career.created_at ?
+                new Date(career.created_at).toLocaleDateString() : 'Recently posted';
+
+            // Set salary
+            const salaryEl = document.getElementById('careerSalary');
+            if (career.min_salary || career.max_salary) {
+                let salaryText = '';
+                if (career.min_salary && career.max_salary) {
+                    salaryText = `₱${number_format(career.min_salary)} - ₱${number_format(career.max_salary)}`;
+                } else if (career.min_salary) {
+                    salaryText = `₱${number_format(career.min_salary)}+`;
+                } else if (career.max_salary) {
+                    salaryText = `Up to ₱${number_format(career.max_salary)}`;
+                }
+                salaryEl.textContent = salaryText;
+            } else {
+                salaryEl.textContent = '';
+            }
+
+            // Set description
+            document.getElementById('careerDescription').innerHTML = career.description || 'No description provided.';
+
+            // Set tags
+            const tagsContainer = document.getElementById('careerTags');
+            if (career.tags && career.tags.length > 0) {
+                tagsContainer.innerHTML = career.tags.map(tag =>
+                    `<span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">${tag}</span>`
+                ).join('');
+            } else {
+                tagsContainer.innerHTML = '';
+            }
+
+            // Set dates
+            const startDateEl = document.getElementById('careerStartDate');
+            const endDateEl = document.getElementById('careerEndDate');
+            const startDateSection = document.getElementById('careerStartDateSection');
+            const endDateSection = document.getElementById('careerEndDateSection');
+
+            if (career.start_date) {
+                startDateEl.textContent = new Date(career.start_date).toLocaleDateString();
+                startDateSection.style.display = 'block';
+            } else {
+                startDateSection.style.display = 'none';
+            }
+
+            if (career.end_date) {
+                endDateEl.textContent = new Date(career.end_date).toLocaleDateString();
+                endDateSection.style.display = 'block';
+            } else {
+                endDateSection.style.display = 'none';
+            }
+
+            // Set action buttons
+            const saveJobContainer = document.getElementById('saveJobContainer');
+            const applyNowContainer = document.getElementById('applyNowContainer');
+
+            if (isMe === true || isMe === 'true') {
+                // Hide action buttons for company owner
+                saveJobContainer.style.display = 'none';
+                applyNowContainer.style.display = 'none';
+            } else {
+                // Show action buttons for visitors
+                saveJobContainer.style.display = 'block';
+                applyNowContainer.style.display = 'block';
+
+                if (isSaved === true || isSaved === 'true') {
+                    saveJobContainer.innerHTML = `
+                        <button class="bg-green-100 text-green-800 font-medium py-2 px-4 rounded-lg cursor-not-allowed text-sm" disabled>
+                            ✓ Saved
+                        </button>
+                    `;
+                } else {
+                    saveJobContainer.innerHTML = `
+                        <button onclick="saveJob(${career.id})" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200 text-sm">
+                            Save Job
+                        </button>
+                    `;
+                }
+
+                if (isApplied === true || isApplied === 'true') {
+                    applyNowContainer.innerHTML = `
+                        <button class="bg-blue-100 text-blue-800 font-medium py-2 px-4 rounded-lg cursor-not-allowed text-sm" disabled>
+                            ✓ Applied
+                        </button>
+                    `;
+                } else {
+                    applyNowContainer.innerHTML = `
+                        <button onclick="applyNow(${career.id})" class="bg-maroon-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
+                            Apply Now
+                        </button>
+                    `;
+                }
+            }
+        }
+
+        function number_format(number) {
+            return new Intl.NumberFormat().format(number);
+        }
+    </script>
 </div>
+

@@ -55,6 +55,26 @@ class CurriculumVitaesTable
                     ->searchable(),
                 TextColumn::make('job_title')
                     ->searchable(),
+                TextColumn::make('highest_degree')
+                    ->label('Highest Degree')
+                    ->getStateUsing(function ($record) {
+                        return $record->highest_degree;
+                    })
+                    ->searchable(query: function ($query, $data) {
+                        return $query->whereHas('education', function ($q) use ($data) {
+                            $q->where('degree', 'like', '%' . $data . '%');
+                        });
+                    }),
+                TextColumn::make('university')
+                    ->label('University')
+                    ->getStateUsing(function ($record) {
+                        return $record->university;
+                    })
+                    ->searchable(query: function ($query, $data) {
+                        return $query->whereHas('education', function ($q) use ($data) {
+                            $q->where('school_name', 'like', '%' . $data . '%');
+                        });
+                    }),
                 TextColumn::make('years_of_experience')
                     ->numeric()
                     ->sortable(),

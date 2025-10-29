@@ -23,3 +23,20 @@
     /* Optional: blend for smoother look */
     background-blend-mode: multiply; /* 🔥 makes the gradient dominate */
 }
+
+.fi-btn .fi-size-sm  .fi-ac-btn-action, .fi-topbar-item.fi-active .fi-topbar-item-btn{
+    background-color: #a73845 !important;
+    color: white !important;
+}
+.fi-btn .fi-size-sm .fi-ac-btn-action:hover, .fi-topbar-item.fi-active .fi-topbar-item-btn:hover{
+    background-color: #8a2e3a !important;
+    color: white !important;
+}
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn, .fi-topbar-item.fi-active .fi-topbar-item-btn{
+    background-color: #a73845 !important;
+    color: white !important;
+}
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn:hover, .fi-topbar-item.fi-active .fi-topbar-item-btn:hover{
+    background-color: #8a2e3a !important;
+    color: white !important;
+}

@@ -20,7 +20,9 @@ class Carrer extends Model
         'max_salary',
         'tags',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'start_date',
+        'end_date'
     ];
 
     protected $casts = [

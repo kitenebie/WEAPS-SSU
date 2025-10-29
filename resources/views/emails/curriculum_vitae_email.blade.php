@@ -4,10 +4,9 @@
     <title>{{ $subject }}</title>
 </head>
 <body>
-    <h2>Email Content</h2>
     <div>{!! $content !!}</div>
 
-    <h2>Applicant Details</h2>
+    {{-- <h2>Applicant Details</h2>
     <p><strong>Name:</strong> {{ $cv->first_name }} {{ $cv->last_name }}</p>
     <p><strong>Email:</strong> {{ $cv->email }}</p>
     <p><strong>Phone:</strong> {{ $cv->phone }}</p>
@@ -41,6 +40,6 @@
         <li>{{ $skill['name'] }} ({{ $skill['level'] }})</li>
         @endforeach
     </ul>
-    @endif
+    @endif --}}
 </body>
 </html>

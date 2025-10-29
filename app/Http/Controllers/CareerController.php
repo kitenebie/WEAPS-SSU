@@ -143,6 +143,16 @@ class CareerController extends Controller
         ]);
     }
 
+    public function getCareerDetails($id)
+    {
+        $career = Carrer::with('company')->findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'career' => $career,
+        ]);
+    }
+
     public function updateApplicationStatus(Request $request)
     {
         $validator = Validator::make($request->all(), [

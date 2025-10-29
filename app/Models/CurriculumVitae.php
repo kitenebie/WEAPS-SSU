@@ -24,6 +24,8 @@ class CurriculumVitae extends Model
           'skills',
           'work_experience',
           'education',
+          'highest_degree',
+          'university',
           'certifications',
           'awards',
           'affiliations',
@@ -61,6 +63,48 @@ class CurriculumVitae extends Model
 
     public function getFullnameAttribute(){
         return $this->last_name . ", " . $this->first_name . " " . $this->middle_name;
+    }
+
+    public function getHighestDegreeAttribute(){
+        if (!$this->education || !is_array($this->education)) {
+            return null;
+        }
+
+        $bachelorDegrees = array_filter($this->education, function($edu) {
+            return isset($edu['degree']) && stripos($edu['degree'], 'bachelor') !== false;
+        });
+
+        if (empty($bachelorDegrees)) {
+            return null;
+        }
+
+        // Sort by year_graduated descending to get the most recent
+        usort($bachelorDegrees, function($a, $b) {
+            return ($b['year_graduated'] ?? 0) <=> ($a['year_graduated'] ?? 0);
+        });
+
+        return $bachelorDegrees[0]['degree'] ?? null;
+    }
+
+    public function getUniversityAttribute(){
+        if (!$this->education || !is_array($this->education)) {
+            return null;
+        }
+
+        $bachelorDegrees = array_filter($this->education, function($edu) {
+            return isset($edu['degree']) && stripos($edu['degree'], 'bachelor') !== false;
+        });
+
+        if (empty($bachelorDegrees)) {
+            return null;
+        }
+
+        // Sort by year_graduated descending to get the most recent
+        usort($bachelorDegrees, function($a, $b) {
+            return ($b['year_graduated'] ?? 0) <=> ($a['year_graduated'] ?? 0);
+        });
+
+        return $bachelorDegrees[0]['school_name'] ?? null;
     }
 
     /**
