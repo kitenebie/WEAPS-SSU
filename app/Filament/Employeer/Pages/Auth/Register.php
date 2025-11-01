@@ -174,7 +174,7 @@ class Register extends BaseRegister
     {
         $data = $this->form->getState();
 
-        if ($this->registerMode === 'student') {
+        if ($data['school_id'] != null) {
             $existingUser = User::where('school_id', $data['school_id'])->first();
             if ($existingUser) {
                 Filament::auth()->login($existingUser);
