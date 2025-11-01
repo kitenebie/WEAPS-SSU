@@ -28,7 +28,7 @@ class Register extends BaseRegister
     {
         return $schema
             ->components([
-                TextInput::make('school_id')
+                TextInput::make('School_id')
                     ->label('Student ID')
                     ->maxLength(255)
                     ->required(fn () => $this->registerMode === 'student')
@@ -172,8 +172,8 @@ class Register extends BaseRegister
     {
         $data = $this->form->getState();
 
-        if (!empty($data['school_id'])) {
-            $existingUser = User::where('school_id', $data['school_id'])->first();
+        if (!empty($data['School_id'])) {
+            $existingUser = User::where('School_id', $data['School_id'])->first();
             if ($existingUser) {
                 Session::put('Alumni_data', $existingUser);
                 $updateData = [];
@@ -185,7 +185,7 @@ class Register extends BaseRegister
                 Filament::auth()->login($existingUser);
                 return app(RegistrationResponse::class, ['url' => '/alumni/applicant-form']);
             } else {
-                $this->addError('school_id', 'Invalid student ID');
+                $this->addError('School_id', 'Invalid student ID');
                 return null;
             }
         } elseif (!empty($data['email'])) {

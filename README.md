@@ -80,3 +80,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+
+
+===
+in app\Http\Controllers\RegistrationController.php review the code for public function updateRole($type) revise the code if the Session::get('Alumni_data') has data value then get the value of School_id and look to CurriculumVitae Model if the CurriculumVitae.School_id is equal to School_id of Session::get('Alumni_data'). if TRUE then add the update for User model [
