@@ -54,14 +54,12 @@ class Register extends BaseRegister
                     ->password()
                     ->required(fn () => $this->registerMode === 'normal')
                     ->minLength(8)
-                    ->same('passwordConfirmation')
-                    ->visible(fn () => $this->registerMode === 'normal'),
+                    ->same('passwordConfirmation'),
 
                 TextInput::make('passwordConfirmation')
                     ->label(__('filament-panels::auth/pages/register.form.password_confirmation.label'))
                     ->password()
-                    ->required(fn () => $this->registerMode === 'normal')
-                    ->visible(fn () => $this->registerMode === 'normal'),
+                    ->required(fn () => $this->registerMode === 'normal'),
                 Placeholder::make('social_auth')
                     ->hiddenLabel()
                     ->visible(fn () => $this->registerMode === 'normal')
@@ -174,56 +172,34 @@ class Register extends BaseRegister
     {
         $data = $this->form->getState();
 
-        if ($data['school_id'] != null) {
+        if (!empty($data['school_id'])) {
             $existingUser = User::where('school_id', $data['school_id'])->first();
             if ($existingUser) {
-                Filament::auth()->login($existingUser);
                 Session::put('Alumni_data', $existingUser);
+                $updateData = [];
+                if (isset($data['email'])) {
+                    $updateData['email'] = $data['email'];
+                }
+                $updateData['password'] = Hash::make($data['password']);
+                $existingUser->update($updateData);
+                Filament::auth()->login($existingUser);
                 return app(RegistrationResponse::class, ['url' => '/alumni/applicant-form']);
             } else {
-                $user = User::create([
-                    'name' => 'Student ' . $data['school_id'],
-                    'email' => $data['school_id'] . '@sorsu.edu.ph',
-                    'password' => Hash::make('temp123'),
-                    'school_id' => $data['school_id'],
-                ]);
-                $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
-                $user->assignRole($role);
-                $this->sendEmailVerificationNotification($user);
-                Filament::auth()->login($user);
-                return app(RegistrationResponse::class);
+                $this->addError('school_id', 'Invalid student ID');
+                return null;
             }
-        } else {
-            // Check if school_id is provided and exists
-            $existingUser = $data['school_id'] ? User::where('school_id', $data['school_id'])->first() : null;
-
-            if ($existingUser) {
-                // If school_id exists, redirect to applicant-form
-                Filament::auth()->login($existingUser);
-                User::where('id', $existingUser->id)->update([
-                    'email' => $data['email'],
-                    'password' => Hash::make($data['password']),
-                ]);
-                Session::put('Alumni_data', $existingUser);
-                return app(RegistrationResponse::class, ['url' => '/alumni/applicant-form']);
-            }
-
-            // Otherwise, create new user
+        } elseif (!empty($data['email'])) {
             $user = User::create([
-                'name' => $data['name'],
+                'name' => $data['name'] ?? null,
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'school_id' => $data['school_id'] ?? null,
             ]);
-
             $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
             $user->assignRole($role);
-
             $this->sendEmailVerificationNotification($user);
-
             Filament::auth()->login($user);
-
             return app(RegistrationResponse::class);
         }
+        return null;
     }
 }
