@@ -17,4 +17,20 @@ class MyApplication extends Page
     protected static ?string $recordTitleAttribute = 'My-Application';
 
     protected string $view = 'filament.employeer.pages.my-application';
+    public static function canAccess(): bool
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return false;
+        }
+
+        // Hide Company Profile navigation if user role is applicant
+        $applicantRole = env('USER_APPLICANT_ROLE');
+        if ($user->roles()->where('name', $applicantRole)->exists()) {
+            return true;
+        }
+
+        return false;
+    }
 }
