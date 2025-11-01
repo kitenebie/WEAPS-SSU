@@ -12,6 +12,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Filament\Forms;
+use App\Models\CurriculumVitae;
 use Filament\Infolists\Components\TextEntry;
 
 
@@ -21,7 +22,13 @@ class CurriculumVitaesTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn ($query) => $query->where('isActive', true))
+            ->query(
+                CurriculumVitae::query()
+                    ->whereHas('user', function ($query) {
+                        $query->whereDoesntHave('companies');
+                    })
+                    ->with('user')
+            )
             ->columns([
                 Stack::make([
                     ImageColumn::make('profile_picture')
