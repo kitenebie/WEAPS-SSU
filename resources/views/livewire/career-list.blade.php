@@ -1,5 +1,6 @@
 <div style="width: 100%; display: flex; justify-content: center;">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/src/outStyle.css">
     <div style="width: 100rem !important" class="mt-8">
 
         <!-- Search and Filter Section -->
@@ -18,7 +19,7 @@
                     <div class="relative flex">
                         <input type="text" id="search" wire:model.live.debounce.300ms="search"
                             placeholder="Search by job title, company..."
-                            class="w-full  p-2 pl-4 pr-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
+                            class="w-full  p-2 pl-4 pr-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                         <div class="absolute inset-y-0 right-2  pl-4 flex items-center pointer-events-none">
                             <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -44,7 +45,7 @@
                     </label>
                     <input type="text" id="location_filter" wire:model.live.debounce.300ms="location_filter"
                         placeholder="Enter location..."
-                        class="w-full px-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
+                        class="w-full px-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                 </div>
 
                 <!-- Role Type Filter -->
@@ -59,7 +60,7 @@
                         Job Type
                     </label>
                     <select id="role_type_filter" wire:model.live="role_type_filter"
-                        class="w-full px-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
+                        class="w-full px-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                         <option value="">All Job Types</option>
                         <option value="Full-time">Full-time</option>
                         <option value="Part-time">Part-time</option>
@@ -81,7 +82,7 @@
                         Salary Range (₱)
                     </label>
                     <select id="salary_range_filter" wire:model.live="salary_range_filter"
-                        class="w-full px-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
+                        class="w-full px-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                         <option value="">All Salary Ranges</option>
                         <option value="5k-10k">₱5,000 - ₱10,000</option>
                         <option value="11k-15k">₱11,000 - ₱15,000</option>
@@ -111,8 +112,9 @@
                         <div class="flex flex-wrap gap-2">
                             @if ($search)
                                 <span
-                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-100 text-emerald-800">
-                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-800">
+                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
@@ -127,7 +129,7 @@
                             @endif
                             @if ($role_type_filter)
                                 <span
-                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-rose-100 text-slate-800">
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-maroon-100 text-slate-800">
                                     {{ $role_type_filter }}
                                 </span>
                             @endif
@@ -208,7 +210,7 @@
                         </div>
 
                         <button wire:click="clearFilters"
-                            class="inline-flex mt-2 items-center px-4 py-2 bg-white border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-rose-50 hover:border-slate-400 transition-all duration-200 shadow-sm">
+                            class="inline-flex mt-2 items-center px-4 py-2 bg-white border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-maroon-50 hover:border-slate-400 transition-all duration-200 shadow-sm">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12"></path>
@@ -234,8 +236,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($careers as $career)
                     <div
-                        class="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg hover:border-slate-300 transition-all duration-200">
-                        <div class="mb-4">
+                        class="bg-gray-50 rounded-lg relative shadow-md border pt-4 border-gray-200 p-6 hover:shadow-lg hover:border-slate-300 transition-all duration-200">
+                        <div class="w-full h-4 bg-maroon-600 absolute rounded-t-lg top-0 left-0"></div>
+                        <div class="mb-4" >
                             <h3 class="text-xl font-semibold text-slate-900 mb-2">{{ $career->title }}</h3>
                             @if ($career->company)
                                 <p class="text-sm text-slate-600 mb-2">
@@ -244,8 +247,8 @@
                                 </p>
                             @endif
                             @if ($career->min_salary || $career->max_salary)
-                                <div class="flex items-center text-sm text-emerald-600 font-semibold mb-2">
-                                    {{-- <svg class="w-4 h-4 mr-2 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex items-center text-sm text-amber-600 font-semibold mb-2">
+                                    {{-- <svg class="w-4 h-4 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                                 </svg> --}}
                                     @if ($career->min_salary && $career->max_salary)
@@ -317,7 +320,7 @@
                                 <div class="flex flex-wrap gap-2">
                                     @foreach ($career->tags as $tag)
                                         <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-slate-800">
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-maroon-100 text-slate-800">
                                             {{ $tag }}
                                         </span>
                                     @endforeach
@@ -327,7 +330,7 @@
 
                         <div class="mb-4 flex gap-2">
                             <button wire:click="openCareer({{ $career->id }})"
-                                class="w-1/2 bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                                class="w-1/2 bg-maroon-600 hover:bg-maroon-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -338,7 +341,7 @@
                                 View Details
                             </button>
                             <button wire:click="openCampany({{ $career->company_id }})"
-                                class="w-1/2 bg-emerald-400 hover:bg-emerald-500 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                                class="w-1/2 bg-amber-400 hover:bg-amber-500 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>

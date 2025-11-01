@@ -29,12 +29,12 @@ class CareerList extends Component
 
         // Apply search filter
         if ($this->search) {
-            $query->where(function($q) {
+            $query->where(function ($q) {
                 $q->where('title', 'like', '%' . $this->search . '%')
-                  ->orWhere('description', 'like', '%' . $this->search . '%')
-                  ->orWhereHas('company', function($companyQuery) {
-                      $companyQuery->where('name', 'like', '%' . $this->search . '%');
-                  });
+                    ->orWhere('description', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('company', function ($companyQuery) {
+                        $companyQuery->where('name', 'like', '%' . $this->search . '%');
+                    });
             });
         }
 
@@ -72,19 +72,19 @@ class CareerList extends Component
 
             if (isset($ranges[$this->salary_range_filter])) {
                 [$min, $max] = $ranges[$this->salary_range_filter];
-                $query->where(function($q) use ($min, $max) {
-                    $q->where(function($subQ) use ($min, $max) {
+                $query->where(function ($q) use ($min, $max) {
+                    $q->where(function ($subQ) use ($min, $max) {
                         $subQ->where('min_salary', '>=', $min)
-                             ->where('min_salary', '<=', $max);
+                            ->where('min_salary', '<=', $max);
                     })
-                    ->orWhere(function($subQ) use ($min, $max) {
-                        $subQ->where('max_salary', '>=', $min)
-                             ->where('max_salary', '<=', $max);
-                    })
-                    ->orWhere(function($subQ) use ($min, $max) {
-                        $subQ->where('min_salary', '<=', $min)
-                             ->where('max_salary', '>=', $max);
-                    });
+                        ->orWhere(function ($subQ) use ($min, $max) {
+                            $subQ->where('max_salary', '>=', $min)
+                                ->where('max_salary', '<=', $max);
+                        })
+                        ->orWhere(function ($subQ) use ($min, $max) {
+                            $subQ->where('min_salary', '<=', $min)
+                                ->where('max_salary', '>=', $max);
+                        });
                 });
             }
         }
@@ -99,7 +99,6 @@ class CareerList extends Component
     public function openCampany($companyId)
     {
         Session::put('company_id', $companyId);
-
         return redirect('/Company%20Profile');
     }
     public function clearFilters()

@@ -16,7 +16,7 @@ class CurriculumVitaePolicy
     public function viewAny(AuthUser $authUser): bool
     {
         // Check if user has the applicant role
-        if ($authUser->hasRole(env('USER_APPLICANT_ROLE'))) {
+        if ($authUser->hasRole(env('USER_APPLICANT_ROLE', 'Applicant_Alumni'))) {
             // Check if the user has a curriculum vitae and it belongs to them
             $userCv = CurriculumVitae::where('user_id', Auth::id())->first();
             return $userCv !== null;
@@ -28,7 +28,7 @@ class CurriculumVitaePolicy
     public function view(AuthUser $authUser, CurriculumVitae $curriculumVitae): bool
     {
         // Check if user has the applicant role and the CV belongs to them
-        if ($authUser->hasRole(env('USER_APPLICANT_ROLE'))) {
+        if ($authUser->hasRole(env('USER_APPLICANT_ROLE', 'Applicant_Alumni'))) {
             return $curriculumVitae->user_id === Auth::id() ? true : false;
         }
 
@@ -43,7 +43,7 @@ class CurriculumVitaePolicy
     public function update(AuthUser $authUser, CurriculumVitae $curriculumVitae): bool
     {
         // Check if user has the applicant role and the CV belongs to them
-        if ($authUser->hasRole(env('USER_APPLICANT_ROLE'))) {
+        if ($authUser->hasRole(env('USER_APPLICANT_ROLE', 'Applicant_Alumni'))) {
             return $curriculumVitae->user_id === Auth::id();
         }
 
@@ -53,7 +53,7 @@ class CurriculumVitaePolicy
     public function delete(AuthUser $authUser, CurriculumVitae $curriculumVitae): bool
     {
         // Check if user has the applicant role and the CV belongs to them
-        if ($authUser->hasRole(env('USER_APPLICANT_ROLE'))) {
+        if ($authUser->hasRole(env('USER_APPLICANT_ROLE', 'Applicant_Alumni'))) {
             return $curriculumVitae->user_id === Auth::id();
         }
 

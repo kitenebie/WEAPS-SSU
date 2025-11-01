@@ -27,7 +27,7 @@ class CurriculumVitaeInfolist
                     ->description('Personal details provided by the applicant')
                     ->afterHeader([
                         Action::make('Hire this applicant')
-                            ->visible(fn($record) => !Auth::user()->hasRole(env('USER_APPLICANT_ROLE')) && Company::where('user_id', Auth::id())->first()->isAdminVerified)
+                            ->visible(fn($record) => !Auth::user()->hasRole(env('USER_APPLICANT_ROLE', 'Applicant_Alumni')) && Company::where('user_id', Auth::id())->first()->isAdminVerified)
                             ->form([
                                 TextInput::make('Name')
                                     ->required()

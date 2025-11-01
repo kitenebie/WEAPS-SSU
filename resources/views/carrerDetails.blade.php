@@ -51,7 +51,7 @@
                     @endif
 
                     @if($alreadyApplied ?? false)
-                        <button class="bg-blue-100 text-blue-800 font-medium py-2 px-6 rounded-lg cursor-not-allowed" disabled>
+                        <button class="bg-maroon-100 text-maroon-800 font-medium py-2 px-6 rounded-lg cursor-not-allowed" disabled>
                             ✓ Applied
                         </button>
                     @else
@@ -155,7 +155,7 @@
                     @endif
 
                     @if($alreadyApplied ?? false)
-                        <button class="bg-blue-100 text-blue-800 font-medium py-2 px-6 rounded-lg cursor-not-allowed" disabled>
+                        <button class="bg-maroon-100 text-maroon-800 font-medium py-2 px-6 rounded-lg cursor-not-allowed" disabled>
                             ✓ Applied
                         </button>
                     @else
@@ -189,6 +189,9 @@
 
 
         function saveJob(careerId) {
+            const saveJobButtons = document.querySelectorAll('#save-job-btn, #save-job-footer-btn');
+            saveJobButtons.forEach(button => button.disabled = true);
+
             fetch('/career/save', {
                 method: 'POST',
                 headers: {
@@ -214,6 +217,7 @@
                         text: data.message || 'Failed to save job.',
                     });
                 }
+                saveJobButtons.forEach(button => button.disabled = false);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -222,10 +226,14 @@
                     title: 'Error!',
                     text: 'An error occurred while saving the job.',
                 });
+                saveJobButtons.forEach(button => button.disabled = false);
             });
         }
 
         function applyNow(careerId) {
+            const applyNowButtons = document.querySelectorAll('#apply-now-btn, #apply-now-footer-btn');
+            applyNowButtons.forEach(button => button.disabled = true);
+
             fetch('/career/apply', {
                 method: 'POST',
                 headers: {
@@ -251,6 +259,7 @@
                         text: data.message || 'Failed to submit application.',
                     });
                 }
+                applyNowButtons.forEach(button => button.disabled = false);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -259,6 +268,7 @@
                     title: 'Error!',
                     text: 'An error occurred while submitting the application.',
                 });
+                applyNowButtons.forEach(button => button.disabled = false);
             });
         }
     </script>

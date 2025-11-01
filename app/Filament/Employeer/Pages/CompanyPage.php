@@ -25,16 +25,17 @@ class CompanyPage extends Page
         if (!$user) {
             return false;
         }
+        // dd(Session::get('Company_id'));
+
+        // Make it visible if Company_id session exists and is not null
+        if (Session::get('Company_id') !== null) {
+            return true;
+        }
 
         // Hide Company Profile navigation if user role is applicant
         $applicantRole = env('USER_APPLICANT_ROLE');
         if ($user->roles()->where('name', $applicantRole)->exists()) {
             return false;
-        }
-
-        // Make it visible if Company_id session exists and is not null
-        if (Session::get('Company_id') !== null) {
-            return true;
         }
 
         // Fallback to existing logic for other cases

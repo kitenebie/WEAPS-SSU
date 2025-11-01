@@ -26,8 +26,8 @@ class Careers extends Page
         if (!Auth::check()) {
         return false;
         }
-        if(Auth::user()->hasRole(env('USER_APPLICANT_ROLE')) || Auth::user()->hasRole(env('ADMIN_ROLE'))  || Auth::user()->hasRole(env('SUPER_ADMIN_ROLE'))){
-            if(Auth::user()->hasRole(env('USER_APPLICANT_ROLE'))){
+        if(Auth::user()->hasRole(env('USER_APPLICANT_ROLE', 'Applicant_Alumni')) || Auth::user()->hasRole(env('ADMIN_ROLE', 'admin'))  || Auth::user()->hasRole(env('SUPER_ADMIN_ROLE', 'super_admin'))){
+            if(Auth::user()->hasRole(env('USER_APPLICANT_ROLE', 'Applicant_Alumni'))){
                 $user = User::find(Auth::user()->id);
                 if($user->curriculumVitae->isActive == false){
                 return false;

@@ -1,5 +1,4 @@
 <x-filament-panels::page>
-    <link rel="stylesheet" href="/src/outStyle.css">
     <div class="min-w-7xll mx-auto py-6">
         <div class="mb-6">
             <h1 class="text-2xl font-bold text-gray-900">Career Opportunities</h1>
@@ -7,5 +6,9 @@
         </div>
 
         @livewire('career-list')
-    
+    <style>
+        .fi-main-ctn{
+            background-color: #ffffff !important;
+        }
+    </style>
 </x-filament-panels::page>

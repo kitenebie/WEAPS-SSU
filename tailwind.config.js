@@ -9,7 +9,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: {
+                maroon: {
                     50: "#fdf2f3",
                     100: "#fbe6e9",
                     200: "#f3cdd2",
@@ -21,6 +21,19 @@ export default {
                     800: "#591e28",
                     900: "#451720",
                     950: "#2a0c12",
+                },
+                gold: {
+                    50: "#fefce8",
+                    100: "#fef9c3",
+                    200: "#fef08a",
+                    300: "#fde047",
+                    400: "#facc15",
+                    500: "#eab308", // main gold
+                    600: "#ca8a04",
+                    700: "#a16207",
+                    800: "#854d0e",
+                    900: "#713f12",
+                    950: "#422006",
                 },
             },
         },
