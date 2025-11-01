@@ -486,13 +486,13 @@
                                             </div>
                                         </div>
                                         <div class="flex space-x-2">
-                                            <button onclick="viewApplicant({{ $applicant->user_id }})"
+                                            <button onclick="viewApplicant({{ $applicant->user->id }})"
                                                 class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
                                                 View Profile
                                             </button>
                                             @if ($applicant->status === 'pending')
                                                 <button
-                                                    onclick="updateApplicationStatus({{ $applicant->id }}, 'approved')"
+                                                    onclick="updateApplicationStatus({{ $applicant->user->id }}, 'approved')"
                                                     class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
                                                     View
                                                 </button>
