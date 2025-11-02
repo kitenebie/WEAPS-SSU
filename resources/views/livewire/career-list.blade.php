@@ -238,6 +238,16 @@
                     <div
                         class="bg-gray-50 rounded-lg relative shadow-md border pt-4 border-gray-200 p-6 hover:shadow-lg hover:border-slate-300 transition-all duration-200">
                         <div class="w-full h-4 bg-maroon-600 absolute rounded-t-lg top-0 left-0"></div>
+                        @if(isset($career->is_saved) && $career->is_saved)
+                            <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+                                Saved
+                            </div>
+                        @endif
+                        @if(isset($career->is_applied) && $career->is_applied)
+                            <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+                                Applied
+                            </div>
+                        @endif
                         <div class="mb-4" >
                             <h3 class="text-xl font-semibold text-slate-900 mb-2">{{ $career->title }}</h3>
                             @if ($career->company)
