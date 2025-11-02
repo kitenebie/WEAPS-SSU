@@ -66,6 +66,15 @@ class CurriculumVitaesTable
                             ->label('Location')
                             ->icon('heroicon-m-map-pin')
                             ->color('gray'),
+
+                        TextColumn::make('user.employment_status')
+                            ->label('Employment Status')
+                            ->icon('heroicon-m-briefcase')
+                            ->formatStateUsing(fn($state) => match ($state) {
+                                'employed' => 'Employed',
+                                'unemployed' => 'Unemployed',
+                                default => 'Unknown',
+                            }),
                     ])->space(1),
                 ]),
             ])
