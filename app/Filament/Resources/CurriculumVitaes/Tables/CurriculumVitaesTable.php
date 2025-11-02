@@ -54,12 +54,7 @@ class CurriculumVitaesTable
                 TextColumn::make('address')
                     ->searchable(),
                 TextColumn::make('user.employment_status')
-                    ->label('Employment Status')
-                    ->formatStateUsing(fn($state) => match ($state) {
-                        'employed' => 'Employed',
-                        'unemployed' => 'Unemployed',
-                        default => 'Unknown',
-                    }),
+                    ->label('Employment Status'),
                 TextColumn::make('job_title')
                     ->searchable(),
                 TextColumn::make('highest_degree')
