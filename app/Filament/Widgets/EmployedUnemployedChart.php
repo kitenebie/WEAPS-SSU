@@ -28,7 +28,7 @@ class EmployedUnemployedChart extends ApexChartWidget
                 'height' => 350,
             ],
             'series' => [$employed, $unemployed, $undefined],
-            'labels' => ['Employed', 'Unemployed'],
+            'labels' => ['Employed', 'Unemployed', 'Undefined'],
             'colors' => ['#10B981', '#EF4444', '#9110B9FF'],
             'legend' => [
                 'position' => 'bottom',
