@@ -171,9 +171,9 @@ class Register extends BaseRegister
     public function register(): ?RegistrationResponse
     {
         $data = $this->form->getState();
-        dd($data);
         if (!empty($data['School_id'])) {
             $existingUser = User::where('School_id', $data['School_id'])->first();
+            // dd($data);
             if ($existingUser) {
                 Session::put('Alumni_data', $existingUser);
                 $updateData = [];
