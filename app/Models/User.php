@@ -40,7 +40,8 @@ class User extends Authenticatable
          'AI_result',
          'AI_reason',
          'School_id',
-         'employment_status'
+         'employment_status',
+         'gender'
      ];
 
     /**
