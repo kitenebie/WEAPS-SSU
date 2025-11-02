@@ -409,7 +409,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-1gap-6">
                                         <!-- Profile Image with Face Detection -->
                                         <div>
                                             <label for="profile_image" class="block text-sm font-semibold text-slate-800 mb-3">
@@ -427,7 +427,7 @@
                                                         <!-- Profile Picture Preview Overlay -->
                                                         <div id="profileImagePreview">
                                                             <p class="text-xs font-medium text-gray-700 mb-1">Profile Picture:</p>
-                                                            <img id="capturedImage" style="width: 320px !important; height: 240px !important;" width="320" height="240" src="" alt="Captured Profile Picture">
+                                                            <img id="capturedImage" class="hidden" style="width: 320px !important; height: 240px !important;" width="320" height="240" src="" alt="Captured Profile Picture">
                                                         </div>
                                                     </div>
 
@@ -452,7 +452,9 @@
                                                 <input type="hidden" name="profile_image_data" id="profileImageData">
                                             </div>
                                         </div>
+                                    </div>
 
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <!-- Front ID -->
                                         <div>
                                             <label for="front_id" class="block text-sm font-semibold text-slate-800 mb-3">
@@ -1283,6 +1285,7 @@
 
                 profileImageData.value = dataURL;
                 capturedImage.src = dataURL;
+                capturedImage.classList.remove('hidden');
                 profileImagePreview.style.display = 'block';
 
                 // Hide the video element after capturing

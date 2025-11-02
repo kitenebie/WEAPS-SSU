@@ -31,38 +31,38 @@ class Register extends BaseRegister
                 TextInput::make('School_id')
                     ->label('Student ID')
                     ->maxLength(255)
-                    ->required(fn () => $this->registerMode === 'student')
-                    ->visible(fn () => $this->registerMode != 'normal'),
+                    ->required(fn() => $this->registerMode === 'student')
+                    ->visible(fn() => $this->registerMode != 'normal'),
 
                 TextInput::make('name')
                     ->label(__('filament-panels::auth/pages/register.form.name.label'))
-                    ->required(fn () => $this->registerMode === 'normal')
+                    ->required(fn() => $this->registerMode === 'normal')
                     ->maxLength(255)
                     ->autofocus()
-                    ->visible(fn () => $this->registerMode === 'normal'),
+                    ->visible(fn() => $this->registerMode === 'normal'),
 
                 TextInput::make('email')
                     ->label(__('filament-panels::auth/pages/register.form.email.label'))
                     ->email()
-                    ->required(fn () => $this->registerMode === 'normal')
+                    ->required(fn() => $this->registerMode === 'normal')
                     ->maxLength(255)
                     ->unique(table: 'users')
-                    ->visible(fn () => $this->registerMode === 'normal'),
+                    ->visible(fn() => $this->registerMode === 'normal'),
 
                 TextInput::make('password')
                     ->label(__('filament-panels::auth/pages/register.form.password.label'))
                     ->password()
-                    ->required(fn () => $this->registerMode === 'normal')
+                    ->required(fn() => $this->registerMode === 'normal')
                     ->minLength(8)
                     ->same('passwordConfirmation'),
 
                 TextInput::make('passwordConfirmation')
                     ->label(__('filament-panels::auth/pages/register.form.password_confirmation.label'))
                     ->password()
-                    ->required(fn () => $this->registerMode === 'normal'),
+                    ->required(fn() => $this->registerMode === 'normal'),
                 Placeholder::make('social_auth')
                     ->hiddenLabel()
-                    ->visible(fn () => $this->registerMode === 'normal')
+                    ->visible(fn() => $this->registerMode === 'normal')
                     ->content(new \Illuminate\Support\HtmlString('
                     <div style="display: flex; flex-direction:  column; margin-bottom: 1rem; gap: 8px;">
                     <button style="Display: flex !important" x-data="filamentFormButton" x-bind:class="{ \'fi-processing\': isProcessing }" class="btn-signup mb-4 fi-color fi-color-primary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="submit" wire:loading.attr="disabled" wire:target="register" x-bind:disabled="isProcessing">
@@ -123,7 +123,7 @@ class Register extends BaseRegister
                     ')),
                 Placeholder::make('social_auth')
                     ->hiddenLabel()
-                    ->visible(fn () => $this->registerMode === 'student')
+                    ->visible(fn() => $this->registerMode === 'student')
                     ->content(new \Illuminate\Support\HtmlString('
                     <div style="display: flex; flex-direction:  column; margin-bottom: 1rem; gap: 8px;">
                     <button style="Display: flex !important" x-data="filamentFormButton" x-bind:class="{ \'fi-processing\': isProcessing }" class="btn-signup mb-4 fi-color fi-color-primary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="submit" wire:loading.attr="disabled" wire:target="register" x-bind:disabled="isProcessing">
@@ -177,13 +177,24 @@ class Register extends BaseRegister
             if ($existingUser) {
                 Session::put('Alumni_data', $existingUser);
                 $updateData = [];
-                if (isset($data['email'])) {
+                if (isset($data['email']) && !empty($data['email'])) {
                     $updateData['email'] = $data['email'];
                 }
-                $updateData['password'] = Hash::make($data['password']);
-                $existingUser->update($updateData);
+                if (isset($data['password']) && !empty($data['password'])) {
+                    $updateData['password'] = Hash::make($data['password']);
+                }
+                if (!empty($updateData)) {
+                    $existingUser->update($updateData);
+                }
                 Filament::auth()->login($existingUser);
-                return app(RegistrationResponse::class, ['url' => '/alumni/applicant-form']);
+                $role = Role::firstOrCreate(['name' => env('USER_DEFAULT_ROLE'), 'guard_name' => 'web']);
+                $existingUser->assignRole($role);
+                return new class implements RegistrationResponse {
+                    public function toResponse($request)
+                    {
+                        return redirect('/alumni/applicant-form');
+                    }
+                };
             } else {
                 $this->addError('School_id', 'Invalid student ID');
                 return null;
@@ -198,7 +209,12 @@ class Register extends BaseRegister
             $user->assignRole($role);
             $this->sendEmailVerificationNotification($user);
             Filament::auth()->login($user);
-            return app(RegistrationResponse::class);
+            return new class implements RegistrationResponse {
+                public function toResponse($request)
+                {
+                    return redirect('/verification');
+                }
+            };
         }
         return null;
     }
