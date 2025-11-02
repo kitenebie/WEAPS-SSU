@@ -95,8 +95,8 @@ class CareerList extends Component
         $userId = \Illuminate\Support\Facades\Auth::id();
         if ($userId) {
             foreach ($this->careers as $career) {
-                $career->is_saved = \App\Models\SaveCareer::where('user_id', $userId)->where('carrer_id', $career->id)->exists();
-                $career->is_applied = \App\Models\Applicant::where('user_id', $userId)->where('carrer_id', $career->id)->exists();
+                $career->is_saved = \App\Models\SaveCareer::where('user_id', $userId)->where('career_id', $career->id)->exists();
+                $career->is_applied = \App\Models\Applicant::where('user_id', $userId)->where('career_id', $career->id)->exists();
             }
         }
     }
