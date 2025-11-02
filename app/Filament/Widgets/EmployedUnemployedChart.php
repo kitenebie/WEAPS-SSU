@@ -11,7 +11,7 @@ class EmployedUnemployedChart extends ApexChartWidget
     protected static ?string $chartId = 'employedUnemployedChart';
     protected static ?int $contentHeight = 350;
     protected static bool $isCollapsible = true;
-    protected int | string | array $columnSpan = 1;
+    protected int | string | array $columnSpan = 2;
 
     protected function getOptions(): array
     {
@@ -20,15 +20,16 @@ class EmployedUnemployedChart extends ApexChartWidget
             $query->where('employment_status', 'unemployed')
                   ->orWhereNull('employment_status');
         })->count();
+        $undefined = User::where('employment_status', 'undefined')->count();
 
         return [
             'chart' => [
                 'type' => 'pie',
                 'height' => 350,
             ],
-            'series' => [$employed, $unemployed],
+            'series' => [$employed, $unemployed, $undefined],
             'labels' => ['Employed', 'Unemployed'],
-            'colors' => ['#10B981', '#EF4444'],
+            'colors' => ['#10B981', '#EF4444', '#9110B9FF'],
             'legend' => [
                 'position' => 'bottom',
             ],
