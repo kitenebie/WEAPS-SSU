@@ -54,6 +54,7 @@ class CurriculumVitaeForm
                                     TextInput::make('address')->columnSpan(2)
                                         ->default(null),
                                     Select::make('user.employment_status')
+                                            ->columnSpan(2)
                                         ->label('Employment Status')
                                         ->options([
                                             'employed' => 'Employed',
