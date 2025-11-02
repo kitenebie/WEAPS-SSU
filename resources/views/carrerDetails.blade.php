@@ -169,28 +169,37 @@
     </div>
 
     <script>
+        let saveJobListeners = [];
+        let applyNowListeners = [];
+
         document.addEventListener('DOMContentLoaded', function() {
             const saveJobButtons = document.querySelectorAll('#save-job-btn, #save-job-footer-btn');
             const applyNowButtons = document.querySelectorAll('#apply-now-btn, #apply-now-footer-btn');
             const careerId = {{ $career->id }};
 
             saveJobButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                const listener = function() {
                     saveJob(careerId);
-                });
+                };
+                button.addEventListener('click', listener);
+                saveJobListeners.push({ button, listener });
             });
 
             applyNowButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                const listener = function() {
                     applyNow(careerId);
-                });
+                };
+                button.addEventListener('click', listener);
+                applyNowListeners.push({ button, listener });
             });
         });
 
-
         function saveJob(careerId) {
-            const saveJobButtons = document.querySelectorAll('#save-job-btn, #save-job-footer-btn');
-            saveJobButtons.forEach(button => button.disabled = true);
+            // Remove event listeners to prevent multiple clicks
+            saveJobListeners.forEach(({ button, listener }) => {
+                button.removeEventListener('click', listener);
+                button.disabled = true;
+            });
 
             fetch('/career/save', {
                 method: 'POST',
@@ -217,7 +226,11 @@
                         text: data.message || 'Failed to save job.',
                     });
                 }
-                saveJobButtons.forEach(button => button.disabled = false);
+                // Re-add event listeners and enable buttons
+                saveJobListeners.forEach(({ button, listener }) => {
+                    button.addEventListener('click', listener);
+                    button.disabled = false;
+                });
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -226,13 +239,20 @@
                     title: 'Error!',
                     text: 'An error occurred while saving the job.',
                 });
-                saveJobButtons.forEach(button => button.disabled = false);
+                // Re-add event listeners and enable buttons
+                saveJobListeners.forEach(({ button, listener }) => {
+                    button.addEventListener('click', listener);
+                    button.disabled = false;
+                });
             });
         }
 
         function applyNow(careerId) {
-            const applyNowButtons = document.querySelectorAll('#apply-now-btn, #apply-now-footer-btn');
-            applyNowButtons.forEach(button => button.disabled = true);
+            // Remove event listeners to prevent multiple clicks
+            applyNowListeners.forEach(({ button, listener }) => {
+                button.removeEventListener('click', listener);
+                button.disabled = true;
+            });
 
             fetch('/career/apply', {
                 method: 'POST',
@@ -259,7 +279,11 @@
                         text: data.message || 'Failed to submit application.',
                     });
                 }
-                applyNowButtons.forEach(button => button.disabled = false);
+                // Re-add event listeners and enable buttons
+                applyNowListeners.forEach(({ button, listener }) => {
+                    button.addEventListener('click', listener);
+                    button.disabled = false;
+                });
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -268,7 +292,11 @@
                     title: 'Error!',
                     text: 'An error occurred while submitting the application.',
                 });
-                applyNowButtons.forEach(button => button.disabled = false);
+                // Re-add event listeners and enable buttons
+                applyNowListeners.forEach(({ button, listener }) => {
+                    button.addEventListener('click', listener);
+                    button.disabled = false;
+                });
             });
         }
     </script>
