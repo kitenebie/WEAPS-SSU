@@ -79,7 +79,7 @@ class ListController extends Controller
             return [
                 'success' => false,
                 'error' => 'Failed to fetch data: ' . $e->getMessage(),
-                'data' => []
+                'data' => [] 
             ];
         } catch (\Exception $e) {
             Log::error('Student scraping failed: ' . $e->getMessage());
