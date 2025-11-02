@@ -409,7 +409,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="grid grid-cols-1 md:grid-cols-1gap-6">
+                                    <div class="flex w-full">
                                         <!-- Profile Image with Face Detection -->
                                         <div>
                                             <label for="profile_image" class="block text-sm font-semibold text-slate-800 mb-3">
@@ -422,12 +422,12 @@
                                                     <h3 class="text-lg font-semibold mb-2">Profile Picture Capture</h3>
 
                                                     <div id="faceVideoContainer">
-                                                        <video id="faceVideo" width="320" height="240" autoplay muted playsinline></video>
+                                                        <video id="faceVideo" style="width: 100% !important;" height="240" autoplay muted playsinline></video>
                                                         <canvas id="faceOverlay"></canvas>
                                                         <!-- Profile Picture Preview Overlay -->
                                                         <div id="profileImagePreview">
                                                             <p class="text-xs font-medium text-gray-700 mb-1">Profile Picture:</p>
-                                                            <img id="capturedImage" class="hidden" style="width: 320px !important; height: 240px !important;" width="320" height="240" src="" alt="Captured Profile Picture">
+                                                            <img id="capturedImage" class="hidden" style="width: 100% !important; height: 240px !important;" width="320" height="240" src="" alt="Captured Profile Picture">
                                                         </div>
                                                     </div>
 
