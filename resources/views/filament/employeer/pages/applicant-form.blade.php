@@ -116,7 +116,7 @@
                         <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <span class="text-blue-700 font-medium">Verified Process</span>
+                        <span class="text-blue-700 font-medium">Face Live Detection</span>
                     </div>
                 </div>
             </div>
@@ -200,7 +200,7 @@
                                     <div class="bg-slate-300 text-white rounded-xl w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 shadow-lg group-hover:scale-110 transition-transform duration-200" id="guide-step-2">2</div>
                                     <div class="flex-1">
                                         <p class="font-semibold text-slate-800">Profile Photo</p>
-                                        <p class="text-slate-600 text-xs leading-relaxed">Upload a recent headshot</p>
+                                        <p class="text-slate-600 text-xs leading-relaxed">Capture your profile photo using face detection</p>
                                     </div>
                                 </div>
 
@@ -1287,6 +1287,7 @@
                 capturedImage.src = dataURL;
                 capturedImage.classList.remove('hidden');
                 profileImagePreview.style.display = 'block';
+                speak('Your profile picture has been captured and is now displayed');
 
                 // Hide the video element after capturing
                 faceVideo.style.display = 'none';
