@@ -409,7 +409,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex w-full">
+                                    <div class="flex w-full items-center justify-center">
                                         <!-- Profile Image with Face Detection -->
                                         <div>
                                             <label for="profile_image" class="block text-sm font-semibold text-slate-800 mb-3">
