@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Users\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -28,6 +29,13 @@ class UserForm
                     ->default(null),
                 TextInput::make('last_name')
                     ->default(null),
+                Select::make('employment_status')
+                    ->label('Employment Status')
+                    ->options([
+                        'employed' => 'Employed',
+                        'unemployed' => 'Unemployed',
+                    ])
+                    ->nullable(),
             ]);
     }
 }
