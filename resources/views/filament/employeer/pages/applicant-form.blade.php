@@ -427,7 +427,7 @@
                                                         <!-- Profile Picture Preview Overlay -->
                                                         <div id="profileImagePreview">
                                                             <p class="text-xs font-medium text-gray-700 mb-1">Profile Picture:</p>
-                                                            <img id="capturedImage" class="hidden" style="width: 100% !important; height: 240px !important;" width="320" height="240" src="" alt="Captured Profile Picture">
+                                                            <img id="capturedImage" class="hidden" style="width: 100% !important; height: 240px !important;" height="240" src="" alt="Captured Profile Picture">
                                                         </div>
                                                     </div>
 
@@ -443,7 +443,7 @@
 
                                                     <div class="flex gap-2 flex-wrap">
                                                         <button type="button" id="startFaceButton"
-                                                            class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">Start Face
+                                                            class="mt-2 px-4 py-2 bg-emerald-500 text-white rounded hover:bg-emerald-600 text-sm">Start Face
                                                             Detection</button>
                                                     </div>
                                                 </div>
