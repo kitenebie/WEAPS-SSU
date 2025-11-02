@@ -25,7 +25,8 @@ class CurriculumVitaesTable
             ->query(
                 CurriculumVitae::query()
                     ->whereHas('user', function ($query) {
-                        $query->whereDoesntHave('companies');
+                        $query->whereDoesntHave('companies')
+                              ->where('employment_status', 'Unemployed');
                     })
                     ->with('user')
             )
