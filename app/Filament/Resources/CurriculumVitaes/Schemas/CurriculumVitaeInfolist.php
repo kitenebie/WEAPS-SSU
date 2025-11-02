@@ -78,6 +78,13 @@ class CurriculumVitaeInfolist
                                                                     ->label('Email address'),
                                                                 TextEntry::make('phone'),
                                                                 TextEntry::make('address'),
+                                                                TextEntry::make('user.employment_status')
+                                                                    ->label('Employment Status')
+                                                                    ->formatStateUsing(fn($state) => match ($state) {
+                                                                        'employed' => 'Employed',
+                                                                        'unemployed' => 'Unemployed',
+                                                                        default => 'Unknown',
+                                                                    }),
                                                             ]),
                                                     ])
                                             ]),
