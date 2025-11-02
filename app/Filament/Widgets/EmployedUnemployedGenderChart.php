@@ -22,19 +22,29 @@ class EmployedUnemployedGenderChart extends ApexChartWidget
         $unemployedData = [];
 
         foreach ($genders as $gender) {
-            $employedData[] = User::where('gender', $gender)->where('employment_status', 'employed')->count();
-            $unemployedData[] = User::where('gender', $gender)->where(function ($query) {
-                $query->where('employment_status', 'unemployed')
-                      ->orWhereNull('employment_status');
-            })->count();
+            $employedData[] = User::whereHas('curriculumVitae')
+                                  ->where('gender', $gender)
+                                  ->where('employment_status', 'employed')
+                                  ->count();
+            $unemployedData[] = User::whereHas('curriculumVitae')
+                                    ->where('gender', $gender)
+                                    ->where(function ($query) {
+                                        $query->where('employment_status', 'unemployed')
+                                              ->orWhereNull('employment_status');
+                                    })->count();
         }
 
         // For unknown gender (null)
-        $employedData[] = User::whereNull('gender')->where('employment_status', 'employed')->count();
-        $unemployedData[] = User::whereNull('gender')->where(function ($query) {
-            $query->where('employment_status', 'unemployed')
-                  ->orWhereNull('employment_status');
-        })->count();
+        $employedData[] = User::whereHas('curriculumVitae')
+                              ->whereNull('gender')
+                              ->where('employment_status', 'employed')
+                              ->count();
+        $unemployedData[] = User::whereHas('curriculumVitae')
+                                ->whereNull('gender')
+                                ->where(function ($query) {
+                                    $query->where('employment_status', 'unemployed')
+                                          ->orWhereNull('employment_status');
+                                })->count();
 
         return [
             'chart' => [

@@ -15,12 +15,17 @@ class EmployedUnemployedChart extends ApexChartWidget
 
     protected function getOptions(): array
     {
-        $employed = User::where('employment_status', 'employed')->count();
-        $unemployed = User::where(function ($query) {
-            $query->where('employment_status', 'unemployed')
-                  ->orWhereNull('employment_status');
-        })->count();
-        $undefined = User::where('employment_status', 'undefined')->count();
+        $employed = User::whereHas('curriculumVitae')
+                        ->where('employment_status', 'employed')
+                        ->count();
+        $unemployed = User::whereHas('curriculumVitae')
+                          ->where(function ($query) {
+                              $query->where('employment_status', 'unemployed')
+                                    ->orWhereNull('employment_status');
+                          })->count();
+        $undefined = User::whereHas('curriculumVitae')
+                         ->where('employment_status', 'undefined')
+                         ->count();
 
         return [
             'chart' => [
