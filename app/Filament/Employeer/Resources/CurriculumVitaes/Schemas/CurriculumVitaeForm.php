@@ -45,7 +45,6 @@ class CurriculumVitaeForm
                                     TextInput::make('middle_name')
                                         ->default(null),
                                     Select::make('user.gender')
-                                        ->columnSpan(2)
                                         ->label('Gender')
                                         ->options([
                                             'male' => 'Male',
@@ -56,7 +55,6 @@ class CurriculumVitaeForm
                                         ->email()
                                         ->required(),
                                     TextInput::make('phone')
-                                        ->tel()->columnSpan(2)
                                         ->default(null),
                                     TextInput::make('address')->columnSpan(2)
                                         ->default(null),

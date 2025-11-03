@@ -190,7 +190,7 @@ class ListController extends Controller
         $firstName = $student['firstname'];
         $middleName = $student['middleInitial'];
         $lastName = $student['lastname'];
-        $sex = $student['Sex'];
+        $Sex = $student['Sex'];
         $fullName = trim("{$firstName} {$middleName} {$lastName}");
         
         // Get other data
@@ -211,7 +211,7 @@ class ListController extends Controller
                 'middle_name' => $middleName,
                 'last_name' => $lastName,
                 'email' => $email,
-                'gender' =>  $sex,
+                'gender' =>  $Sex,
                 'password' => Hash::make($email),
                 'School_id' => $studentNumber, // Save student number to school_id
             ]);
