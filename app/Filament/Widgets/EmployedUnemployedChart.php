@@ -7,7 +7,7 @@ use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class EmployedUnemployedChart extends ApexChartWidget
 {
-    protected static ?string $heading = 'Employed vs Unemployed Users';
+    protected static ?string $heading = 'Employed vs Unemployed Alumni';
     protected static ?string $chartId = 'employedUnemployedChart';
     protected static ?int $contentHeight = 350;
     protected static bool $isCollapsible = true;
