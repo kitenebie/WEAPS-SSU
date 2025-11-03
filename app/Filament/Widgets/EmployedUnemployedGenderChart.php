@@ -15,8 +15,8 @@ class EmployedUnemployedGenderChart extends ApexChartWidget
 
     protected function getOptions(): array
     {
-        $genders = ['male', 'female', 'other'];
-        $categories = ['Male', 'Female', 'Other', 'Unknown'];
+        $genders = ['male', 'female'];
+        $categories = ['Male', 'Female', 'Unknown'];
 
         $employedData = [];
         $unemployedData = [];
