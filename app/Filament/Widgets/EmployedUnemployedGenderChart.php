@@ -15,8 +15,8 @@ class EmployedUnemployedGenderChart extends ApexChartWidget
 
     protected function getOptions(): array
     {
-        $genders = ['male', 'female'];
-        $categories = ['Male', 'Female', 'Unknown'];
+        $genders = ['male', 'female', 'undefined'];
+        $categories = ['Male', 'Female', 'Undefined'];
 
         $employedData = [];
         $unemployedData = [];
@@ -28,23 +28,9 @@ class EmployedUnemployedGenderChart extends ApexChartWidget
                                   ->count();
             $unemployedData[] = User::whereHas('curriculumVitae')
                                     ->where('gender', $gender)
-                                    ->where(function ($query) {
-                                        $query->where('employment_status', 'unemployed')
-                                              ->orWhereNull('employment_status');
-                                    })->count();
+                                    ->where('employment_status', 'unemployed')
+                                    ->count();
         }
-
-        // For unknown gender (null)
-        $employedData[] = User::whereHas('curriculumVitae')
-                              ->whereNull('gender')
-                              ->where('employment_status', 'employed')
-                              ->count();
-        $unemployedData[] = User::whereHas('curriculumVitae')
-                                ->whereNull('gender')
-                                ->where(function ($query) {
-                                    $query->where('employment_status', 'unemployed')
-                                          ->orWhereNull('employment_status');
-                                })->count();
 
         return [
             'chart' => [
