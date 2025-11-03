@@ -15,11 +15,12 @@ class EmployedUnemployedGenderChart extends ApexChartWidget
 
     protected function getOptions(): array
     {
-        $genders = ['male', 'female', 'undefined'];
-        $categories = ['Male', 'Female', 'Undefined'];
+        $genders = ['male', 'female'];
+        $categories = ['Male', 'Female'];
 
         $employedData = [];
         $unemployedData = [];
+        $undefinedEmploymentData = [];
 
         foreach ($genders as $gender) {
             $employedData[] = User::whereHas('curriculumVitae')
@@ -30,6 +31,14 @@ class EmployedUnemployedGenderChart extends ApexChartWidget
                                     ->where('gender', $gender)
                                     ->where('employment_status', 'unemployed')
                                     ->count();
+            $undefinedEmploymentData[] = User::whereHas('curriculumVitae')
+                                             ->where('gender', $gender)
+                                             ->where(function ($query) {
+                                                 $query->whereNull('employment_status')
+                                                       ->orWhere('employment_status', '!=', 'employed')
+                                                       ->where('employment_status', '!=', 'unemployed');
+                                             })
+                                             ->count();
         }
 
         return [
@@ -45,6 +54,10 @@ class EmployedUnemployedGenderChart extends ApexChartWidget
                 [
                     'name' => 'Unemployed',
                     'data' => $unemployedData,
+                ],
+                [
+                    'name' => 'Undefined Employment',
+                    'data' => $undefinedEmploymentData,
                 ],
             ],
             'xaxis' => [
@@ -62,7 +75,7 @@ class EmployedUnemployedGenderChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#10B981', '#EF4444'],
+            'colors' => ['#10B981', '#EF4444', '#F59E0B'],
             'plotOptions' => [
                 'bar' => [
                     'horizontal' => false,
