@@ -69,7 +69,16 @@ class CurriculumVitaeForm
                                             ->options([
                                                 'male' => 'Male',
                                                 'female' => 'Female',
-                                            ]),
+                                            ])
+                                            ->reactive()
+                                            ->afterStateUpdated(function ($state, $component) {
+                                                $livewire = $component->getContainer()->getLivewire();
+                                                $record = method_exists($livewire, 'getRecord') ? $livewire->getRecord() : null;
+
+                                                if ($record && $record->user) {
+                                                    $record->user->forceFill(['gender' => $state])->save();
+                                                }
+                                            }),
                                         TextInput::make('email')
                                             ->label('Email address')
                                             ->email()
@@ -86,7 +95,16 @@ class CurriculumVitaeForm
                                                 'employed' => 'Employed',
                                                 'unemployed' => 'Unemployed',
                                             ])
-                                            ->nullable(),
+                                            ->nullable()
+                                            ->reactive()
+                                            ->afterStateUpdated(function ($state, $component) {
+                                                $livewire = $component->getContainer()->getLivewire();
+                                                $record = method_exists($livewire, 'getRecord') ? $livewire->getRecord() : null;
+
+                                                if ($record && $record->user) {
+                                                    $record->user->forceFill(['employment_status' => $state])->save();
+                                                }
+                                            }),
                                     ])
                                     ->columns(2),
 
