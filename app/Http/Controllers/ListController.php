@@ -190,9 +190,9 @@ class ListController extends Controller
         $firstName = $student['firstname'];
         $middleName = $student['middleInitial'];
         $lastName = $student['lastname'];
-        $Sex = $student['Sex'];
+        $Sex = strtolower($student['Sex']); // Normalize to lowercase
         $fullName = trim("{$firstName} {$middleName} {$lastName}");
-        
+
         // Get other data
         $email = $student['email'];
         $address = $student['address'];
@@ -218,6 +218,10 @@ class ListController extends Controller
             $stats['new_users']++;
         } else {
             $stats['existing_users']++;
+            // Update gender if it's null or incorrect
+            if (is_null($existingUser->gender) || !in_array($existingUser->gender, ['male', 'female'])) {
+                $existingUser->update(['gender' => $Sex]);
+            }
         }
 
         // Check if CV already exists
