@@ -57,7 +57,7 @@
                             talented professionals in your industry.
                         </p>
 
-                        <div class="space-y-3 mb-8 text-sm text-slate-500">
+                        <div class="space-y-3 mb-8 text-sm text-black">
                             <div class="flex items-center">
                                 <svg class="w-4 h-4 text-rose-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
@@ -118,7 +118,7 @@
                             career opportunities that match your expertise.
                         </p>
 
-                        <div class="space-y-3 mb-8 text-sm text-slate-500">
+                        <div class="space-y-3 mb-8 text-sm text-black">
                             <div class="flex items-center">
                                 <svg class="w-4 h-4 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
