@@ -98,11 +98,11 @@
 
                 <!-- Applicant Registration Card -->
                 <div
-                    class="bg-white rounded-xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 hover:border-emerald-300 hover:border-l-4 hover:border-l-emerald-500">
+                    class="bg-gray-100 rounded-xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-300 hover:border-l-4 hover:border-l-red-500">
                     <div class="text-center">
                         <!-- Applicant Icon -->
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-full mb-6">
-                            <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor"
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-full mb-6">
+                            <svg class="w-8 h-8 text-red-800" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -117,7 +117,7 @@
 
                         <div class="space-y-3 mb-8 text-sm text-slate-500">
                             <div class="flex items-center">
-                                <svg class="w-4 h-4 text-emerald-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd"></path>
@@ -125,7 +125,7 @@
                                 Create detailed CV
                             </div>
                             <div class="flex items-center">
-                                <svg class="w-4 h-4 text-emerald-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd"></path>
@@ -133,7 +133,7 @@
                                 Apply for jobs
                             </div>
                             <div class="flex items-center">
-                                <svg class="w-4 h-4 text-emerald-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd"></path>
@@ -145,7 +145,7 @@
                         <form method="GET" action="/alumni/applicant-form" class="w-full">
                             @csrf
                             <button type="submit"
-                                class="inline-flex items-center justify-center w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                                class="inline-flex items-center justify-center w-full px-6 py-3 bg-red-800 hover:bg-red-900 text-white font-semibold rounded-lg transition-colors duration-200">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
