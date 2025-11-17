@@ -14,6 +14,9 @@
         .fi-topbar {
             display: none !important;
         }
+        .fi-body{
+            background-color: #FEF2F2 !important;
+        }
     </style>
     @php
         $user = auth()->user();
