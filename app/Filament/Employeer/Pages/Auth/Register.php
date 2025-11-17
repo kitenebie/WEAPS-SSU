@@ -53,7 +53,8 @@ class Register extends BaseRegister
                     ->label(__('filament-panels::auth/pages/register.form.password.label'))
                     ->password()
                     ->required(fn() => $this->registerMode === 'normal')
-                    ->minLength(8)
+                    ->minLength(12)
+                    ->rules(['regex:/[A-Z]/', 'regex:/[a-z]/', 'regex:/[^a-zA-Z0-9]/'])
                     ->same('passwordConfirmation'),
 
                 TextInput::make('passwordConfirmation')
