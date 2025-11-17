@@ -84,7 +84,7 @@
 </head>
 <body class="bg-slate-50">
     <!-- Header with Back Button -->
-    <header class="bg-red-50 shadow-sm border-b border-slate-200">
+    <header class="bg-red-900 shadow-sm border-b border-slate-200">
         <div class="container-full mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
