@@ -28,7 +28,7 @@
         }
     @endphp
     <div class="bg-red-50 container mx-auto px-4 py-8">
-        <div class="max-w-6xl mx-auto">
+        <div class="bg-red-50 max-w-6xl mx-auto">
             <div class="text-center mb-12">
                 <h1 class="text-4xl font-bold text-slate-900 mb-4">Choose Your Registration Type</h1>
                 <p class="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -37,7 +37,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="bg-red-50 grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <!-- Company Registration Card -->
                 <div
                     class="bg-rose-50 rounded-xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 hover:border-rose-300 hover:border-l-4 hover:border-l-rose-500">
