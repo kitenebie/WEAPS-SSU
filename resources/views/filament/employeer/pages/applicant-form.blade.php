@@ -89,7 +89,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <button onclick="history.back()"
-                            class="inline-flex items-center px-4 py-2 bg-emerald-100 hover:bg-emerald-200 text-slate-700 font-medium rounded-lg transition-colors duration-200">
+                            class="inline-flex items-center px-4 py-2 bg-red-50 hover:bg-red-100 text-slate-700 font-medium rounded-lg transition-colors duration-200">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                         </svg>
@@ -102,15 +102,15 @@
                 </div>
 
                 <div class="flex items-center space-x-3">
-                    <div class="hidden md:flex items-center space-x-2 text-sm bg-emerald-100 px-3 py-1 rounded-full">
-                        <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                        <span class="text-emerald-700 font-medium">Secure Registration</span>
+                    <div class="hidden md:flex items-center space-x-2 text-sm bg-red-50 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 bg-red-800 rounded-full animate-pulse"></div>
+                        <span class="text-red-700 font-medium">Secure Registration</span>
                     </div>
                     <div class="hidden md:flex items-center space-x-2 text-sm bg-emerald-100 px-3 py-1 rounded-full">
-                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <span class="text-emerald-700 font-medium">AI Verification</span>
+                        <span class="text-red-700 font-medium">AI Verification</span>
                     </div>
                     <div class="hidden md:flex items-center space-x-2 text-sm bg-blue-100 px-3 py-1 rounded-full">
                         <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -162,7 +162,7 @@
             <div class="max-w-full mx-auto">
                 <!-- Header Section -->
                 <div class="text-center mb-12">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full mb-6 shadow-lg">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-red-800 to-red-900 rounded-full mb-6 shadow-lg">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
@@ -178,7 +178,7 @@
                     <div class="lg:col-span-2">
                         <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-6 sticky top-6">
                             <div class="text-center mb-6">
-                                <div class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl mb-3 shadow-lg">
+                                <div class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-red-800 to-red-900 rounded-xl mb-3 shadow-lg">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
@@ -189,7 +189,7 @@
 
                             <div class="space-y-3 text-sm">
                                 <div class="flex items-start group">
-                                    <div class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 shadow-lg group-hover:scale-110 transition-transform duration-200">1</div>
+                                    <div class="bg-gradient-to-r from-red-800 to-red-900 text-white rounded-xl w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 shadow-lg group-hover:scale-110 transition-transform duration-200">1</div>
                                     <div class="flex-1">
                                         <p class="font-semibold text-slate-800">Personal Details</p>
                                         <p class="text-slate-600 text-xs leading-relaxed">Enter your legal information</p>
@@ -260,14 +260,14 @@
                                         <p class="text-slate-600">Fill in your details and upload documents below</p>
                                     </div>
                                     <div class="text-right">
-                                        <div class="text-3xl font-bold text-emerald-600 mb-1" id="progress-percentage">0%</div>
+                                        <div class="text-3xl font-bold text-red-600 mb-1" id="progress-percentage">0%</div>
                                         <div class="text-sm text-slate-500">Complete</div>
                                     </div>
                                 </div>
 
                                 <!-- Progress Bar -->
                                 <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-gradient-to-r from-emerald-500 to-teal-600 h-3 rounded-full transition-all duration-500 ease-out" id="progress-bar" style="width: 0%"></div>
+                                    <div class="bg-gradient-to-r from-red-800 to-red-900 h-3 rounded-full transition-all duration-500 ease-out" id="progress-bar" style="width: 0%"></div>
                                 </div>
                             </div>
 
@@ -278,7 +278,7 @@
                                 <div class="mb-10">
                                     <div class="flex items-center justify-between mb-8">
                                         <div class="flex items-center">
-                                            <div class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl mr-4 shadow-lg">
+                                            <div class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-red-800 to-red-900 rounded-xl mr-4 shadow-lg">
                                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                                 </svg>
@@ -290,7 +290,7 @@
                                         </div>
                                         <div class="hidden md:flex items-center space-x-2 text-sm bg-slate-100 px-4 py-2 rounded-full">
                                             <span class="text-slate-600">Step</span>
-                                            <span class="font-bold text-emerald-600" id="current-step">1</span>
+                                            <span class="font-bold text-red-600" id="current-step">1</span>
                                             <span class="text-slate-600">of 4</span>
                                         </div>
                                     </div>
@@ -317,7 +317,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="first_name" name="first_name" required
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
                                                        placeholder="Enter your first name">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -335,7 +335,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="middle_name" name="middle_name"
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
                                                        placeholder="Enter your middle name">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -352,7 +352,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="last_name" name="last_name" required
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
                                                        placeholder="Enter your last name">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -371,7 +371,7 @@
                                         </label>
                                         <div class="relative">
                                             <input type="text" id="School_id" name="School_id" required
-                                                   class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                   class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
                                                    placeholder="Enter your school ID number">
                                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                 <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -387,7 +387,7 @@
                                 <div class="mb-10">
                                     <div class="flex items-center justify-between mb-6">
                                         <h2 class="text-xl font-semibold text-slate-900 flex items-center">
-                                            <svg class="w-5 h-5 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
                                             </svg>
                                             Document Uploads
@@ -443,7 +443,7 @@
 
                                                     <div class="flex gap-2 flex-wrap">
                                                         <button type="button" id="startFaceButton"
-                                                            class="mt-2 px-4 py-2 bg-emerald-500 text-white rounded hover:bg-emerald-600 text-sm">Start Face
+                                                            class="mt-2 px-4 py-2 bg-red-800 text-white rounded hover:bg-red-900 text-sm">Start Face
                                                             Detection</button>
                                                     </div>
                                                 </div>
@@ -516,7 +516,7 @@
                                 <!-- Submit Button -->
                                 <div class="flex justify-center pt-6 border-t border-slate-200">
                                     <button type="submit"
-                                            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 disabled:from-slate-400 disabled:to-slate-400 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-red-800 to-red-900 hover:from-red-900 hover:to-red-900 disabled:from-slate-400 disabled:to-slate-400 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                                             id="applicant-submit-btn"
                                             disabled>
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -533,7 +533,7 @@
                     <div class="lg:col-span-2">
                         <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-6 sticky top-6">
                             <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                 </svg>
@@ -566,8 +566,8 @@
                                 </div>
                             </div>
 
-                            <div class="mt-6 p-3 bg-emerald-50 rounded-lg">
-                                <p class="text-xs text-emerald-800">
+                            <div class="mt-6 p-3 bg-red-50 rounded-lg">
+                                <p class="text-xs text-red-800">
                                     <strong>Preview Notice:</strong><br>
                                     All uploaded documents will be verified for clarity and authenticity.
                                 </p>
@@ -1492,10 +1492,10 @@
                 if (stepEl) {
                     if (i <= currentStep) {
                         stepEl.classList.remove('bg-slate-300');
-                        stepEl.classList.add('bg-gradient-to-r', 'from-emerald-500', 'to-teal-600');
+                        stepEl.classList.add('bg-gradient-to-r', 'from-red-800', 'to-red-900');
                     } else {
                         stepEl.classList.add('bg-slate-300');
-                        stepEl.classList.remove('bg-gradient-to-r', 'from-emerald-500', 'to-teal-600');
+                        stepEl.classList.remove('bg-gradient-to-r', 'from-red-800', 'to-red-900');
                     }
                 }
             }
