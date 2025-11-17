@@ -27,8 +27,8 @@
             $user->assignRole('Not_Verified');
         }
     @endphp
-    <div class="bg-red-50 container mx-auto px-4 py-8">
-        <div class="bg-red-50 max-w-6xl mx-auto">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
                 <h1 class="text-4xl font-bold text-black mb-4">Choose Your Registration Type</h1>
                 <p class="text-lg text-black max-w-2xl mx-auto">
@@ -37,7 +37,7 @@
                 </p>
             </div>
 
-            <div class="bg-red-50 grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <!-- Company Registration Card -->
                 <div
                     class="bg-rose-50 rounded-xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 hover:border-rose-300 hover:border-l-4 hover:border-l-rose-500">
@@ -104,7 +104,7 @@
                     class="bg-red-50 rounded-xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-300 hover:border-l-4 hover:border-l-red-500">
                     <div class="text-center">
                         <!-- Applicant Icon -->
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-full mb-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-6">
                             <svg class="w-8 h-8 text-red-800" fill="#FEF6F6" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
