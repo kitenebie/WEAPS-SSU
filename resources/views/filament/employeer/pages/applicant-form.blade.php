@@ -464,7 +464,7 @@
                                             <div class="relative">
                                                 <input type="file" id="front_id" name="front_id" accept="image/*" required
                                                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" onchange="previewApplicantImage(this, 'front_id')">
-                                                <div class="w-full h-48 border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center bg-slate-50 hover:bg-slate-100 transition-colors relative cursor-pointer">
+                                                <div class="w-full h-48 border-2 border-dashed border-red-900 rounded-xl flex items-center justify-center bg-slate-50 hover:bg-slate-100 transition-colors relative cursor-pointer">
                                                     <div class="text-center" id="front_id-upload-area">
                                                         <!-- Re-upload button (shown when image is uploaded) -->
                                                         <button type="button" onclick="allowReupload('front_id')"
@@ -492,7 +492,7 @@
                                             <div class="relative">
                                                 <input type="file" id="back_id" name="back_id" accept="image/*" required
                                                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" onchange="previewApplicantImage(this, 'back_id')">
-                                                <div class="w-full h-48 border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center bg-slate-50 hover:bg-slate-100 transition-colors relative cursor-pointer">
+                                                <div class="w-full h-48 border-2 border-dashed border-red-900 rounded-xl flex items-center justify-center bg-slate-50 hover:bg-slate-100 transition-colors relative cursor-pointer">
                                                     <div class="text-center" id="back_id-upload-area">
                                                         <!-- Re-upload button (shown when image is uploaded) -->
                                                         <button type="button" onclick="allowReupload('back_id')"
