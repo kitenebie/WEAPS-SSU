@@ -14,7 +14,7 @@
         .fi-topbar {
             display: none !important;
         }
-        .fi-body{
+        .fi-body, .fi-main{
             background-color: #FEF2F2 !important;
         }
     </style>
