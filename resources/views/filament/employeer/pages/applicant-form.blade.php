@@ -84,7 +84,7 @@
 </head>
 <body class="bg-slate-50">
     <!-- Header with Back Button -->
-    <header class="bg-white shadow-sm border-b border-slate-200">
+    <header class="bg-red-50 shadow-sm border-b border-slate-200">
         <div class="container-full mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
@@ -106,17 +106,17 @@
                         <div class="w-2 h-2 bg-red-800 rounded-full animate-pulse"></div>
                         <span class="text-red-700 font-medium">Secure Registration</span>
                     </div>
-                    <div class="hidden md:flex items-center space-x-2 text-sm bg-emerald-100 px-3 py-1 rounded-full">
+                    <div class="hidden md:flex items-center space-x-2 text-sm bg-red-100 px-3 py-1 rounded-full">
                         <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         <span class="text-red-700 font-medium">AI Verification</span>
                     </div>
-                    <div class="hidden md:flex items-center space-x-2 text-sm bg-blue-100 px-3 py-1 rounded-full">
-                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="hidden md:flex items-center space-x-2 text-sm bg-red-100 px-3 py-1 rounded-full">
+                        <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <span class="text-blue-700 font-medium">Face Live Detection</span>
+                        <span class="text-red-700 font-medium">Face Live Detection</span>
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@
         </div>
     </div>
 
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
+    <div class="min-h-screen bg-gradient-to-br from-slate-50 to-red-50">
         <div class="container-full mx-auto px-4 py-8">
             <div class="max-w-full mx-auto">
                 <!-- Header Section -->
@@ -221,9 +221,9 @@
                                 </div>
                             </div>
 
-                            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-                                <h3 class="font-semibold text-blue-900 mb-2 text-sm">Document Requirements:</h3>
-                                <ul class="text-xs text-blue-800 space-y-1">
+                            <div class="mt-6 p-4 bg-red-50 rounded-lg">
+                                <h3 class="font-semibold text-red-900 mb-2 text-sm">Document Requirements:</h3>
+                                <ul class="text-xs text-red-800 space-y-1">
                                     <li>• Current School-issued ID</li>
                                     <li>• Recent professional photo</li>
                                     <li>• Clear, high-resolution images</li>
@@ -232,14 +232,14 @@
                                 </ul>
                             </div>
 
-                            <div class="mt-4 p-4 bg-emerald-50 rounded-lg">
-                                <h3 class="font-semibold text-emerald-900 mb-2 flex items-center text-sm">
+                            <div class="mt-4 p-4 bg-red-50 rounded-lg">
+                                <h3 class="font-semibold text-red-900 mb-2 flex items-center text-sm">
                                     <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
                                     Quality Guidelines:
                                 </h3>
-                                <ul class="text-xs text-emerald-800 space-y-1">
+                                <ul class="text-xs text-red-800 space-y-1">
                                     <li>• High-resolution images (300+ DPI)</li>
                                     <li>• Good lighting and clear focus</li>
                                     <li>• All text must be readable</li>
@@ -295,16 +295,16 @@
                                         </div>
                                     </div>
 
-                                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-6 mb-8">
+                                    <div class="bg-gradient-to-r from-red-50 to-indigo-50 border border-red-200 rounded-2xl p-6 mb-8">
                                         <div class="flex items-start">
-                                            <div class="inline-flex items-center justify-center w-8 h-8 bg-blue-500 rounded-lg mr-4 flex-shrink-0">
+                                            <div class="inline-flex items-center justify-center w-8 h-8 bg-red-500 rounded-lg mr-4 flex-shrink-0">
                                                 <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                                                 </svg>
                                             </div>
                                             <div>
-                                                <p class="text-blue-900 font-semibold mb-1">Verification Requirements</p>
-                                                <p class="text-blue-800 text-sm leading-relaxed">All personal information must exactly match your School-issued ID. AI verification will cross-check all details for accuracy and consistency.</p>
+                                                <p class="text-red-900 font-semibold mb-1">Verification Requirements</p>
+                                                <p class="text-red-800 text-sm leading-relaxed">All personal information must exactly match your School-issued ID. AI verification will cross-check all details for accuracy and consistency.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -992,7 +992,7 @@
                 });
 
                 faceStatus.textContent = '🎯 Camera ready. Keep your face in view, smile first, then blink to complete validation!';
-                faceStatus.style.color = 'blue';
+                faceStatus.style.color = 'red';
                 faceInstructions.style.display = 'block';
 
                 // Speak initial instruction - Step 1
@@ -1075,7 +1075,7 @@
 
                     // Add visual indicator that blink detection is ready
                     faceStep1.innerHTML = 'Step 1: Blink your eyes (Ready!)';
-                    faceStep1.style.color = 'blue';
+                    faceStep1.style.color = 'red';
 
                     // Show manual blink button as fallback
                     document.getElementById('manualBlinkBtn').style.display = 'inline-block';
