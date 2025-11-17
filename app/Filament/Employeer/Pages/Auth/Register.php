@@ -55,7 +55,7 @@ class Register extends BaseRegister
                     ->required(fn() => $this->registerMode === 'normal')
                     ->minLength(12)
                     ->rules(['regex:/[A-Z]/', 'regex:/[a-z]/', 'regex:/[^a-zA-Z0-9]/'])
-                    ->validationMessages(['regex' => 'Password must contain at least one uppercase letter, lowercase letter, and symbol.'])
+                    ->validationMessages(['regex' => 'Password must contain 12 Characters and at least one uppercase letter, lowercase letter, and symbol.'])
                     ->same('passwordConfirmation'),
 
                 TextInput::make('passwordConfirmation')
