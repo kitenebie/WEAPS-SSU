@@ -176,7 +176,7 @@
                 <div class="w-full grid grid-cols-1 lg:grid-cols-9 gap-2">
                     <!-- Left Side Instruction Panel -->
                     <div class="lg:col-span-2">
-                        <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-6 sticky top-6">
+                        <div class="bg-gray-100 rounded-2xl shadow-xl border border-slate-200/60 p-6 sticky top-6">
                             <div class="text-center mb-6">
                                 <div class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-red-800 to-red-900 rounded-xl mb-3 shadow-lg">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -251,7 +251,7 @@
 
                     <!-- Main Form Content -->
                     <div class="lg:col-span-5">
-                        <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-8">
+                        <div class="bg-gray-100 rounded-2xl shadow-xl border border-slate-200/60 p-8">
                             <!-- Progress Header -->
                             <div class="mb-8">
                                 <div class="flex items-center justify-between mb-6">
@@ -295,7 +295,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="bg-gradient-to-r from-red-50 to-indigo-50 border border-red-200 rounded-2xl p-6 mb-8">
+                                    <div class="bg-gradient-to-r from-red-50 to-rose-50 border border-red-200 rounded-2xl p-6 mb-8">
                                         <div class="flex items-start">
                                             <div class="inline-flex items-center justify-center w-8 h-8 bg-red-500 rounded-lg mr-4 flex-shrink-0">
                                                 <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -317,7 +317,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="first_name" name="first_name" required
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-100"
                                                        placeholder="Enter your first name">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -335,7 +335,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="middle_name" name="middle_name"
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-100"
                                                        placeholder="Enter your middle name">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -352,7 +352,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="last_name" name="last_name" required
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-100"
                                                        placeholder="Enter your last name">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -371,7 +371,7 @@
                                         </label>
                                         <div class="relative">
                                             <input type="text" id="School_id" name="School_id" required
-                                                   class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                   class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-100"
                                                    placeholder="Enter your school ID number">
                                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                 <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -531,7 +531,7 @@
 
                     <!-- Right Side Preview Panel -->
                     <div class="lg:col-span-2">
-                        <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-6 sticky top-6">
+                        <div class="bg-gray-100 rounded-2xl shadow-xl border border-slate-200/60 p-6 sticky top-6">
                             <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
                                 <svg class="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
