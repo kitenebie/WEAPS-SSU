@@ -8,6 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Auth\Pages\Register as BaseRegister;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Filament\Facades\Filament;
 use Filament\Auth\Http\Responses\Contracts\RegistrationResponse;
@@ -54,7 +55,11 @@ class Register extends BaseRegister
                     ->password()
                     ->required(fn() => $this->registerMode === 'normal')
                     ->minLength(12)
-                    ->rules(['regex:/[A-Z]/', 'regex:/[a-z]/', 'regex:/[^a-zA-Z0-9]/'])
+                    ->rules([
+                        Rule::regex('/[A-Z]/')->message('Password must contain at least one uppercase letter.'),
+                        Rule::regex('/[a-z]/')->message('Password must contain at least one lowercase letter.'),
+                        Rule::regex('/[^a-zA-Z0-9]/')->message('Password must contain at least one symbol.'),
+                    ])
                     ->same('passwordConfirmation'),
 
                 TextInput::make('passwordConfirmation')
