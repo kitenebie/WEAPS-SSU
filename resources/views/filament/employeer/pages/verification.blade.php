@@ -30,8 +30,8 @@
     <div class="bg-red-50 container mx-auto px-4 py-8">
         <div class="bg-red-50 max-w-6xl mx-auto">
             <div class="text-center mb-12">
-                <h1 class="text-4xl font-bold text-slate-900 mb-4">Choose Your Registration Type</h1>
-                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                <h1 class="text-4xl font-bold text-black mb-4">Choose Your Registration Type</h1>
+                <p class="text-lg text-black max-w-2xl mx-auto">
                     Select whether you want to register as a company looking to hire talent or as an applicant seeking
                     opportunities.
                 </p>
@@ -51,8 +51,8 @@
                             </svg>
                         </div>
 
-                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Register as Company</h3>
-                        <p class="text-slate-600 mb-8 leading-relaxed">
+                        <h3 class="text-2xl font-bold text-black mb-4">Register as Company</h3>
+                        <p class="text-black mb-8 leading-relaxed">
                             Create a company profile to post job opportunities, manage applications, and connect with
                             talented professionals in your industry.
                         </p>
@@ -112,8 +112,8 @@
                             </svg>
                         </div>
 
-                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Register as Alumni</h3>
-                        <p class="text-slate-600 mb-8 leading-relaxed">
+                        <h3 class="text-2xl font-bold text-black mb-4">Register as Alumni</h3>
+                        <p class="text-black mb-8 leading-relaxed">
                             Create your professional profile to showcase your skills, experience, and find exciting
                             career opportunities that match your expertise.
                         </p>
