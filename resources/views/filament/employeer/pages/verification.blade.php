@@ -15,7 +15,7 @@
             display: none !important;
         }
         .fi-body, .fi-main{
-            background-color: #FEF2F2 !important;
+            background-color: #C9C9C9FF !important;
         }
     </style>
     @php
