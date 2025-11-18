@@ -350,7 +350,7 @@
         </div>
     </div>
 
-    {{-- <script>
+    <script>
         // Simulate verification progress
         <?php if (!$isCompanyActive): ?>
         let currentProgress = 35;
@@ -499,7 +499,7 @@
             updateProgress();
             <?php endif; ?>
         });
-    </script> --}}
+    </script>
 </body>
 
 </html>
