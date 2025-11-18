@@ -29,9 +29,9 @@ class RegistrationController extends Controller
     public function showAlumniVerificationStatus()
     {
         // $userCV = CurriculumVitae::where('user_id', Auth::id())->first();
-        if (!Auth::check() || !$userCV || $userCV->isActive) {
-            return redirect()->back();
-        }
+        // if (!Auth::check() || !$userCV || $userCV->isActive) {
+        //     return redirect()->back();
+        // }
 
         return view('filament.employeer.pages.alumni-verification-status');
     }
