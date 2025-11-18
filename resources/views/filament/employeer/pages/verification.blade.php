@@ -40,7 +40,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <!-- Company Registration Card -->
                 <div
-                    class="bg-red-50 rounded-xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-300 hover:border-l-4 hover:border-l-red-500">
+                    class="bg-red-50 rounded-xl shadow-lg border border-red-800 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-300 hover:border-l-4 hover:border-l-red-500">
                     <div class="text-center">
                         <!-- Company Icon -->
                         <div class="inline-flex items-center justify-center w-16 h-16 bg-pink-100 rounded-full mb-6">
@@ -101,7 +101,7 @@
 
                 <!-- Applicant Registration Card -->
                 <div
-                    class="bg-red-50 rounded-xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-300 hover:border-l-4 hover:border-l-red-500">
+                    class="bg-red-50 rounded-xl shadow-lg border border-red-900 p-8 hover:shadow-xl transition-all duration-300 hover:border-red-300 hover:border-l-4 hover:border-l-red-500">
                     <div class="text-center">
                         <!-- Applicant Icon -->
                         <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-6">
