@@ -60,7 +60,7 @@
                 <div class="w-full grid grid-cols-1 lg:grid-cols-9 gap-2">
                     <!-- Left Side Instruction Panel -->
                     <div class="lg:col-span-2">
-                        <div class="bg-white rounded-2xl shadow-xl border border-red-900 p-6 sticky top-6">
+                        <div class="bg-gray-50 rounded-2xl shadow-xl border border-red-900 p-6 sticky top-6">
                             <div class="text-center mb-6">
                                 <div class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-red-700 to-pink-900 rounded-xl mb-3 shadow-lg">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@
 
                             <div class="space-y-3 text-sm">
                                 <div class="flex items-start group">
-                                    <div class="bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-xl w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 shadow-lg group-hover:scale-110 transition-transform duration-200">1</div>
+                                    <div class="bg-gradient-to-r from-red-700 to-red-900 text-white rounded-xl w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 shadow-lg group-hover:scale-110 transition-transform duration-200">1</div>
                                     <div class="flex-1">
                                         <p class="font-semibold text-slate-800">Company Details</p>
                                         <p class="text-slate-600 text-xs leading-relaxed">Enter your official company information</p>
@@ -116,14 +116,14 @@
                                 </ul>
                             </div>
 
-                            <div class="mt-4 p-4 bg-green-50 rounded-lg">
-                                <h3 class="font-semibold text-green-900 mb-2 flex items-center text-sm">
+                            <div class="mt-4 p-4 bg-red-50 rounded-lg">
+                                <h3 class="font-semibold text-red-900 mb-2 flex items-center text-sm">
                                     <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
                                     Permit Guidelines:
                                 </h3>
-                                <ul class="text-xs text-green-800 space-y-1">
+                                <ul class="text-xs text-red-800 space-y-1">
                                     <li>• Current and valid permits</li>
                                     <li>• Clearly legible details</li>
                                     <li>• Matching company name</li>
@@ -134,7 +134,7 @@
 
                     <!-- Main Form Content -->
                     <div class="lg:col-span-5">
-                        <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-8">
+                        <div class="bg-gray-50 rounded-2xl shadow-xl border border-slate-200/60 p-8">
                             <!-- Progress Header -->
                             <div class="mb-8">
                                 <div class="flex items-center justify-between mb-6">
@@ -143,14 +143,14 @@
                                         <p class="text-slate-600">Fill in your company details below</p>
                                     </div>
                                     <div class="text-right">
-                                        <div class="text-3xl font-bold text-red-600 mb-1" id="progress-percentage">0%</div>
+                                        <div class="text-3xl font-bold text-red-800 mb-1" id="progress-percentage">0%</div>
                                         <div class="text-sm text-slate-500">Complete</div>
                                     </div>
                                 </div>
 
                                 <!-- Progress Bar -->
                                 <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-gradient-to-r from-red-500 to-pink-600 h-3 rounded-full transition-all duration-500 ease-out" id="progress-bar" style="width: 0%"></div>
+                                    <div class="bg-gradient-to-r from-red-600 to-pink-900 h-3 rounded-full transition-all duration-500 ease-out" id="progress-bar" style="width: 0%"></div>
                                 </div>
                             </div>
 
@@ -202,15 +202,15 @@
 
                                 <!-- Success Alert -->
                                 @if (session('success'))
-                                    <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-400 rounded-lg">
+                                    <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-400 rounded-lg">
                                         <div class="flex">
-                                            <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <svg class="w-5 h-5 text-red-800 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                             </svg>
                                             <div class="flex-1">
-                                                <p class="text-green-800 font-medium">{{ session('success') }}</p>
+                                                <p class="text-red-800 font-medium">{{ session('success') }}</p>
                                             </div>
-                                            <button type="button" onclick="this.parentElement.parentElement.style.display='none'" class="text-green-400 hover:text-green-600">
+                                            <button type="button" onclick="this.parentElement.parentElement.style.display='none'" class="text-red-100 hover:text-red-800">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                                 </svg>
@@ -222,7 +222,7 @@
                                 <div class="mb-10">
                                     <div class="flex items-center justify-between mb-8">
                                         <div class="flex items-center">
-                                            <div class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl mr-4 shadow-lg">
+                                            <div class="inline-flex items-center justify-center w-10 h-10 bg-gradient-to-r from-red-600 to-red-800 rounded-xl mr-4 shadow-lg">
                                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                                 </svg>
@@ -234,21 +234,21 @@
                                         </div>
                                         <div class="hidden md:flex items-center space-x-2 text-sm bg-slate-100 px-4 py-2 rounded-full">
                                             <span class="text-slate-600">Step</span>
-                                            <span class="font-bold text-red-600" id="current-step">1</span>
+                                            <span class="font-bold text-red-800" id="current-step">1</span>
                                             <span class="text-slate-600">of 4</span>
                                         </div>
                                     </div>
 
-                                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-6 mb-8">
+                                    <div class="bg-gradient-to-r from-red-500 to-indigo-800 border border-red-200 rounded-2xl p-6 mb-8">
                                         <div class="flex items-start">
-                                            <div class="inline-flex items-center justify-center w-8 h-8 bg-blue-500 rounded-lg mr-4 flex-shrink-0">
+                                            <div class="inline-flex items-center justify-center w-8 h-8 bg-red-800 rounded-lg mr-4 flex-shrink-0">
                                                 <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                                                 </svg>
                                             </div>
                                             <div>
-                                                <p class="text-blue-900 font-semibold mb-1">Verification Requirements</p>
-                                                <p class="text-blue-800 text-sm leading-relaxed">All company information will be verified for accuracy and authenticity. Please ensure all details match your official business registration.</p>
+                                                <p class="text-red-900 font-semibold mb-1">Verification Requirements</p>
+                                                <p class="text-red-800 text-sm leading-relaxed">All company information will be verified for accuracy and authenticity. Please ensure all details match your official business registration.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="name" name="name" required
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-50"
                                                        placeholder="Enter your official company name" value="{{ old('name') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -275,7 +275,7 @@
                                             <label for="industry" class="block text-sm font-semibold text-slate-800 mb-3">Industry *</label>
                                             <div class="relative">
                                                 <select id="industry" name="industry" required
-                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white appearance-none">
+                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-50 appearance-none">
                                                     <option value="">Select Industry</option>
                                                     <option value="Technology" {{ old('industry') == 'Technology' ? 'selected' : '' }}>Technology</option>
                                                     <option value="Healthcare" {{ old('industry') == 'Healthcare' ? 'selected' : '' }}>Healthcare</option>
@@ -298,7 +298,7 @@
                                             <label for="company_size" class="block text-sm font-semibold text-slate-800 mb-3">Company Size *</label>
                                             <div class="relative">
                                                 <select id="company_size" name="company_size" required
-                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white appearance-none">
+                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-50 appearance-none">
                                                     <option value="">Select Size</option>
                                                     <option value="1-10" {{ old('company_size') == '1-10' ? 'selected' : '' }}>1-10 employees</option>
                                                     <option value="11-50" {{ old('company_size') == '11-50' ? 'selected' : '' }}>11-50 employees</option>
@@ -322,7 +322,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="location" name="location" required
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-50"
                                                        placeholder="Manila, Metro Manila" value="{{ old('location') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -337,7 +337,7 @@
                                             <label for="website" class="block text-sm font-semibold text-slate-800 mb-3">Website</label>
                                             <div class="relative">
                                                 <input type="url" id="website" name="website"
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-50"
                                                        placeholder="https://yourcompany.com" value="{{ old('website') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -351,7 +351,7 @@
                                             <label for="phone" class="block text-sm font-semibold text-slate-800 mb-3">Phone</label>
                                             <div class="relative">
                                                 <input type="tel" id="phone" name="phone"
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-50"
                                                        placeholder="+63 912 345 6789" value="{{ old('phone') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -365,7 +365,7 @@
                                             <label for="description" class="block text-sm font-semibold text-slate-800 mb-3">Company Description</label>
                                             <div class="relative">
                                                 <textarea id="description" name="description" rows="5"
-                                                          class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white resize-none"
+                                                          class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-gray-50 resize-none"
                                                           placeholder="Describe your company's mission, values, and what makes you unique...">{{ old('description') }}</textarea>
                                                 <div class="absolute top-4 left-4 pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -497,7 +497,7 @@
 
                     <!-- Right Side Preview Panel -->
                     <div class="lg:col-span-2">
-                        <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-6 sticky top-6">
+                        <div class="bg-gray-50 rounded-2xl shadow-xl border border-slate-200/60 p-6 sticky top-6">
                             <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
                                 <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
