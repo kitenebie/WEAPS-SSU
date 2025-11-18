@@ -28,7 +28,7 @@ class RegistrationController extends Controller
      */
     public function showAlumniVerificationStatus()
     {
-        $userCV = CurriculumVitae::where('user_id', Auth::id())->first();
+        // $userCV = CurriculumVitae::where('user_id', Auth::id())->first();
         if (!Auth::check() || !$userCV || $userCV->isActive) {
             return redirect()->back();
         }
