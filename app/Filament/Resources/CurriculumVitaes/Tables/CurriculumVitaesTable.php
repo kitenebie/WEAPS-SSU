@@ -111,6 +111,7 @@ class CurriculumVitaesTable
                 //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->reorderableColumns()
+            ->columnManagerColumns(4)
             ->filters([
                 //
             ])
