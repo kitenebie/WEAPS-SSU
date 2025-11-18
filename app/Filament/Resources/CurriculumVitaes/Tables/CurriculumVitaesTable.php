@@ -110,6 +110,7 @@ class CurriculumVitaesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->reorderableColumns()
+            ->columnManagerWidth('lg')
             ->filters([
                 //
             ])
