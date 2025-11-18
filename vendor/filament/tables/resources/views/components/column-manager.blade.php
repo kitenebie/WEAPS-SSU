@@ -18,7 +18,7 @@
                     columns: $wire.entangle('tableColumns'),
                     isLive: {{ $applyAction->isVisible() ? 'false' : 'true' }},
                 })"
-        class="fi-ta-col-manager-ctn"
+        class="fi-ta-col-manager-ctn bg-red-900"
     >
         <div class="fi-ta-col-manager-header">
             <{{ $headingTag }} class="fi-ta-col-manager-heading">
