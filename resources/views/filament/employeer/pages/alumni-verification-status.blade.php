@@ -23,7 +23,7 @@
                         Back
                     </button>
                     <div>
-                        <h1 class="text-xl font-semibold text-slate-900">Alumni Verification Status</h1>
+                        <h1 class="text-xl font-semibold text-white">Alumni Verification Status</h1>
                         <p class="text-sm text-slate-600">Track your verification progress</p>
                     </div>
                 </div>
