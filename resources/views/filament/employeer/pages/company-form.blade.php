@@ -532,8 +532,8 @@
                                 </div>
                             </div>
 
-                            <div class="mt-6 p-3 bg-blue-50 rounded-lg">
-                                <p class="text-xs text-blue-800">
+                            <div class="mt-6 p-3 bg-red-50 rounded-lg">
+                                <p class="text-xs text-red-900">
                                     <strong>Preview Notice:</strong><br>
                                     All uploaded documents will be verified for clarity and authenticity.
                                 </p>
