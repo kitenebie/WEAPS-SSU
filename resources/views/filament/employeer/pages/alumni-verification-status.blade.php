@@ -24,7 +24,7 @@
                     </button>
                     <div>
                         <h1 class="text-xl font-semibold text-white">Alumni Verification Status</h1>
-                        <p class="text-sm text-slate-600">Track your verification progress</p>
+                        <p class="text-sm text-gray-50">Track your verification progress</p>
                     </div>
                 </div>
 
