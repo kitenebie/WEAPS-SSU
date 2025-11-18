@@ -12,7 +12,7 @@
     use Illuminate\View\ComponentAttributeBag;
 @endphp
 
-<div class="fi-ta-col-manager"  style="background-color: #FEF2F2 !important">
+<div class="fi-ta-col-manager">
     <div
         x-data="filamentTableColumnManager({
                     columns: $wire.entangle('tableColumns'),
