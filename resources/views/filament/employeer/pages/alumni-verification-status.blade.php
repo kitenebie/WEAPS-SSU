@@ -8,14 +8,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-slate-50">
+<body class="bg-gray-50">
     <!-- Header with Back Button -->
-    <header class="bg-white shadow-sm border-b border-slate-200">
+    <header class="bg-red-900 shadow-sm border-b border-slate-200">
         <div class="container-full mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <button onclick="history.back()"
-                        class="inline-flex items-center px-4 py-2 bg-red-50 hover:bg-red-100 text-slate-700 font-medium rounded-lg transition-colors duration-200">
+                        class="inline-flex items-center px-4 py-2 bg-red-700 hover:bg-red-800 text-gray-50 font-medium rounded-lg transition-colors duration-200">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
