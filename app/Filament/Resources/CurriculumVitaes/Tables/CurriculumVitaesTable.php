@@ -111,8 +111,7 @@ class CurriculumVitaesTable
             ])
             ->reorderableColumns()
             ->columnManagerWidth('7xl')
-            ->columnManagerHeight('auto')
-            ->columnManagerColumns(3)
+            ->columnManagerColumns(2)
             ->filters([
                 //
             ])
