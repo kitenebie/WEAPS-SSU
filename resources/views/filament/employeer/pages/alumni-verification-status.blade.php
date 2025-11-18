@@ -297,7 +297,7 @@
         </div>
     </div>
 
-    {{-- <script>
+    <script>
         // Real API polling for verification status
         let pollingInterval;
 
@@ -585,7 +585,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             checkVerificationStatus(); // Initial check
         });
-    </script> --}}
+    </script>
 </body>
 
 </html>
