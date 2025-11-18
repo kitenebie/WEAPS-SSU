@@ -12,6 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Enums\RecordActionsPosition;
+use Filament\Support\Enums\Width;
 
 class CurriculumVitaesTable
 {
@@ -110,7 +111,7 @@ class CurriculumVitaesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->reorderableColumns()
-            ->columnManagerWidth('7xl')
+            ->columnManagerWidth(width::SixExtraLarge)
             ->columnManagerColumns(2)
             ->filters([
                 //
