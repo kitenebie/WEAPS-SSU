@@ -17,7 +17,7 @@ class CurriculumVitaesTable
 {
     public static function configure(Table $table): Table
     {
-        return $table 
+        return $table
             ->query(
                 CurriculumVitae::query()
                     ->whereHas('user', function ($query) {
@@ -109,6 +109,7 @@ class CurriculumVitaesTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->reorderableColumns()
             ->filters([
                 //
             ])
