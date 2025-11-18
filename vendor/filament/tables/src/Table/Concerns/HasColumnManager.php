@@ -19,11 +19,11 @@ trait HasColumnManager
     /**
      * @var int | array<string, int | null> | Closure
      */
-    protected int | array | Closure $columnManagerColumns = 2;
+    protected int | array | Closure $columnManagerColumns = 1;
 
-    protected string | Closure | null $columnManagerMaxHeight = '800px';
+    protected string | Closure | null $columnManagerMaxHeight = null;
 
-    protected Width | string | Closure | null $columnManagerWidth = width::SevenExtraLarge;
+    protected Width | string | Closure | null $columnManagerWidth = null;
 
     protected ?Closure $modifyColumnManagerTriggerActionUsing = null;
 
