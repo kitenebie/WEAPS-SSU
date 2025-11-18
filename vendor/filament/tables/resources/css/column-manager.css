@@ -1,5 +1,5 @@
 .fi-ta-col-manager {
-    @apply grid gap-y-4;
+    @apply grid gap-y-4 w-full;
 
     & .fi-ta-col-manager-ctn {
         @apply grid gap-4 bg-red-50 bg-red-900/50 p-4 rounded-lg border border-red-200 dark:border-red-700;
