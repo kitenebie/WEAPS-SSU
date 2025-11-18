@@ -2,16 +2,15 @@
     @apply grid gap-y-4;
 
     & .fi-ta-col-manager-ctn {
-        @apply grid gap-4 bg-red-50 bg-red-900/50 p-4 rounded-lg border border-red-200 dark:border-red-700;
-        
+        @apply grid gap-4;
     }
 
     & .fi-ta-col-manager-header {
-        @apply flex items-center justify-between bg-red-900;
+        @apply flex items-center justify-between;
     }
 
     & .fi-ta-col-manager-heading {
-        @apply text-base leading-6 font-semibold text-red-950 dark:text-white;
+        @apply text-base leading-6 font-semibold text-gray-950 dark:text-white;
     }
 
     & .fi-ta-col-manager-items {
