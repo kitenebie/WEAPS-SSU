@@ -19,7 +19,7 @@ trait HasColumnManager
     /**
      * @var int | array<string, int | null> | Closure
      */
-    protected int | array | Closure $columnManagerColumns = 1;
+    protected int | array | Closure $columnManagerColumns = 3;
 
     protected string | Closure | null $columnManagerMaxHeight = null;
 
