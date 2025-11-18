@@ -112,6 +112,7 @@ class CurriculumVitaesTable
             ])
             ->reorderableColumns()
             ->columnManagerWidth(width::SixExtraLarge)
+            ->columnManagerMaxHeight('500px')
             ->columnManagerColumns(2)
             ->filters([
                 //
