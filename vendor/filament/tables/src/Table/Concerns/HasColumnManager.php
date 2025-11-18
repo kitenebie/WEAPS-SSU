@@ -21,9 +21,9 @@ trait HasColumnManager
      */
     protected int | array | Closure $columnManagerColumns = 2;
 
-    protected string | Closure | null $columnManagerMaxHeight = 'auto';
+    protected string | Closure | null $columnManagerMaxHeight = '800px';
 
-    protected Width | string | Closure | null $columnManagerWidth = width::Screen;
+    protected Width | string | Closure | null $columnManagerWidth = width::SevenExtraLarge;
 
     protected ?Closure $modifyColumnManagerTriggerActionUsing = null;
 
