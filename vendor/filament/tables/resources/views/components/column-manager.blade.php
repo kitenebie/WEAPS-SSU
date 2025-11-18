@@ -12,7 +12,7 @@
     use Illuminate\View\ComponentAttributeBag;
 @endphp
 
-<div class="fi-ta-col-manager">
+<div class="fi-ta-col-manager"  style="background-color: #FEF2F2 !important">
     <div
         x-data="filamentTableColumnManager({
                     columns: $wire.entangle('tableColumns'),
@@ -20,7 +20,7 @@
                 })"
         class="fi-ta-col-manager-ctn"
     >
-        <div class="fi-ta-col-manager-header" style="background-color: #FEF2F2 !important">
+        <div class="fi-ta-col-manager-header">
             <{{ $headingTag }} class="fi-ta-col-manager-heading">
                 {{ __('filament-tables::table.column_manager.heading') }}
             </{{ $headingTag }}>
