@@ -1172,7 +1172,8 @@
                                                 filled($columnVisibleFrom = $column->getVisibleFrom()) ? "{$columnVisibleFrom}:fi-visible" : '',
                                             ])->style([
                                                 'width: ' . $columnWidth => filled($columnWidth),
-                                            ]) }}>
+                                            ]) }}
+                                        style="background-color: #7F1D1D !important; color: #FEF2F2 !important;">
                                         @if ($isColumnSortable)
                                             <span aria-label="{{ trim(strip_tags($columnLabel)) }}" role="button"
                                                 tabindex="0" wire:click="sortTable('{{ $columnName }}')"
@@ -1203,7 +1204,8 @@
                                 @if (!$isReordering && count($records))
                                     @if (count($defaultRecordActions) && $recordActionsPosition === RecordActionsPosition::AfterColumns)
                                         @if ($recordActionsColumnLabel)
-                                            <th class="fi-ta-header-cell fi-align-end">
+                                            <th class="fi-ta-header-cell fi-align-end"
+                                                style="background-color: #7F1D1D !important; color: #FEF2F2 !important;">
                                                 {{ $recordActionsColumnLabel }}
                                             </th>
                                         @else
@@ -1247,7 +1249,8 @@
 
                                     @if (count($defaultRecordActions) && $recordActionsPosition === RecordActionsPosition::AfterCells)
                                         @if ($recordActionsColumnLabel)
-                                            <th class="fi-ta-header-cell fi-align-end">
+                                            <th class="fi-ta-header-cell fi-align-end"
+                                                style="background-color: #7F1D1D !important; color: #FEF2F2 !important;">
                                                 {{ $recordActionsColumnLabel }}
                                             </th>
                                         @else
