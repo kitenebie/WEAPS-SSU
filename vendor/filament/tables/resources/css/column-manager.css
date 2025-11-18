@@ -6,7 +6,7 @@
     }
 
     & .fi-ta-col-manager-header {
-        @apply flex items-center justify-between;
+        @apply flex items-center justify-between bg-red-900;
     }
 
     & .fi-ta-col-manager-heading {
