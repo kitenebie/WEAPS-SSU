@@ -13,7 +13,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <button onclick="history.back()"
-                            class="inline-flex items-center px-4 py-2 bg-rose-100 hover:bg-rose-200 text-slate-700 font-medium rounded-lg transition-colors duration-200">
+                            class="inline-flex items-center px-4 py-2 bg-red-100 hover:bg-red-200 text-slate-700 font-medium rounded-lg transition-colors duration-200">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                         </svg>
@@ -46,7 +46,7 @@
             <div class="max-w-full mx-auto">
                 <!-- Header Section -->
                 <div class="text-center mb-12">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-rose-500 to-pink-600 rounded-full mb-6 shadow-lg">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-red-500 to-pink-600 rounded-full mb-6 shadow-lg">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                         </svg>
@@ -62,7 +62,7 @@
                     <div class="lg:col-span-2">
                         <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-6 sticky top-6">
                             <div class="text-center mb-6">
-                                <div class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-rose-500 to-pink-600 rounded-xl mb-3 shadow-lg">
+                                <div class="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-red-500 to-pink-600 rounded-xl mb-3 shadow-lg">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
@@ -73,7 +73,7 @@
 
                             <div class="space-y-3 text-sm">
                                 <div class="flex items-start group">
-                                    <div class="bg-gradient-to-r from-rose-500 to-pink-600 text-white rounded-xl w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 shadow-lg group-hover:scale-110 transition-transform duration-200">1</div>
+                                    <div class="bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-xl w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 shadow-lg group-hover:scale-110 transition-transform duration-200">1</div>
                                     <div class="flex-1">
                                         <p class="font-semibold text-slate-800">Company Details</p>
                                         <p class="text-slate-600 text-xs leading-relaxed">Enter your official company information</p>
@@ -143,14 +143,14 @@
                                         <p class="text-slate-600">Fill in your company details below</p>
                                     </div>
                                     <div class="text-right">
-                                        <div class="text-3xl font-bold text-rose-600 mb-1" id="progress-percentage">0%</div>
+                                        <div class="text-3xl font-bold text-red-600 mb-1" id="progress-percentage">0%</div>
                                         <div class="text-sm text-slate-500">Complete</div>
                                     </div>
                                 </div>
 
                                 <!-- Progress Bar -->
                                 <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-gradient-to-r from-rose-500 to-pink-600 h-3 rounded-full transition-all duration-500 ease-out" id="progress-bar" style="width: 0%"></div>
+                                    <div class="bg-gradient-to-r from-red-500 to-pink-600 h-3 rounded-full transition-all duration-500 ease-out" id="progress-bar" style="width: 0%"></div>
                                 </div>
                             </div>
 
@@ -234,7 +234,7 @@
                                         </div>
                                         <div class="hidden md:flex items-center space-x-2 text-sm bg-slate-100 px-4 py-2 rounded-full">
                                             <span class="text-slate-600">Step</span>
-                                            <span class="font-bold text-rose-600" id="current-step">1</span>
+                                            <span class="font-bold text-red-600" id="current-step">1</span>
                                             <span class="text-slate-600">of 4</span>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="name" name="name" required
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
                                                        placeholder="Enter your official company name" value="{{ old('name') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -275,7 +275,7 @@
                                             <label for="industry" class="block text-sm font-semibold text-slate-800 mb-3">Industry *</label>
                                             <div class="relative">
                                                 <select id="industry" name="industry" required
-                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white appearance-none">
+                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white appearance-none">
                                                     <option value="">Select Industry</option>
                                                     <option value="Technology" {{ old('industry') == 'Technology' ? 'selected' : '' }}>Technology</option>
                                                     <option value="Healthcare" {{ old('industry') == 'Healthcare' ? 'selected' : '' }}>Healthcare</option>
@@ -298,7 +298,7 @@
                                             <label for="company_size" class="block text-sm font-semibold text-slate-800 mb-3">Company Size *</label>
                                             <div class="relative">
                                                 <select id="company_size" name="company_size" required
-                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white appearance-none">
+                                                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white appearance-none">
                                                     <option value="">Select Size</option>
                                                     <option value="1-10" {{ old('company_size') == '1-10' ? 'selected' : '' }}>1-10 employees</option>
                                                     <option value="11-50" {{ old('company_size') == '11-50' ? 'selected' : '' }}>11-50 employees</option>
@@ -322,7 +322,7 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="location" name="location" required
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
                                                        placeholder="Manila, Metro Manila" value="{{ old('location') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -337,7 +337,7 @@
                                             <label for="website" class="block text-sm font-semibold text-slate-800 mb-3">Website</label>
                                             <div class="relative">
                                                 <input type="url" id="website" name="website"
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
                                                        placeholder="https://yourcompany.com" value="{{ old('website') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -351,7 +351,7 @@
                                             <label for="phone" class="block text-sm font-semibold text-slate-800 mb-3">Phone</label>
                                             <div class="relative">
                                                 <input type="tel" id="phone" name="phone"
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white"
                                                        placeholder="+63 912 345 6789" value="{{ old('phone') }}">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -365,7 +365,7 @@
                                             <label for="description" class="block text-sm font-semibold text-slate-800 mb-3">Company Description</label>
                                             <div class="relative">
                                                 <textarea id="description" name="description" rows="5"
-                                                          class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-rose-500/20 focus:border-rose-500 transition-all duration-200 bg-slate-50 focus:bg-white resize-none"
+                                                          class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/20 focus:border-red-500 transition-all duration-200 bg-slate-50 focus:bg-white resize-none"
                                                           placeholder="Describe your company's mission, values, and what makes you unique...">{{ old('description') }}</textarea>
                                                 <div class="absolute top-4 left-4 pointer-events-none">
                                                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -382,7 +382,7 @@
                                 <div class="mb-10">
                                     <div class="flex items-center justify-between mb-6">
                                         <h2 class="text-xl font-semibold text-slate-900 flex items-center">
-                                            <svg class="w-5 h-5 mr-2 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                             </svg>
                                             Company Logo
@@ -482,7 +482,7 @@
                                 <!-- Submit Button -->
                                 <div class="flex justify-center pt-6 border-t border-slate-200">
                                     <button type="submit"
-                                            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 disabled:from-slate-400 disabled:to-slate-400 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 disabled:from-slate-400 disabled:to-slate-400 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                                             id="company-submit-btn"
                                             disabled>
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -718,10 +718,10 @@
                 if (stepEl) {
                     if (i <= currentStep) {
                         stepEl.classList.remove('bg-slate-300');
-                        stepEl.classList.add('bg-gradient-to-r', 'from-rose-500', 'to-pink-600');
+                        stepEl.classList.add('bg-gradient-to-r', 'from-red-500', 'to-pink-600');
                     } else {
                         stepEl.classList.add('bg-slate-300');
-                        stepEl.classList.remove('bg-gradient-to-r', 'from-rose-500', 'to-pink-600');
+                        stepEl.classList.remove('bg-gradient-to-r', 'from-red-500', 'to-pink-600');
                     }
                 }
             }
