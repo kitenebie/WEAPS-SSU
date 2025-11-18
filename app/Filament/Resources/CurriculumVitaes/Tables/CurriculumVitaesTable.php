@@ -27,47 +27,63 @@ class CurriculumVitaesTable
             )
             ->columns([
                 TextColumn::make('School_id')
+                    ->toggleable()
                     ->searchable(),
-                ImageColumn::make('profile_picture'),
-                ImageColumn::make('front_id'),
-                ImageColumn::make('back_id'),
+                ImageColumn::make('profile_picture')
+                    ->toggleable(),
+                ImageColumn::make('front_id')
+                    ->toggleable(),
+                ImageColumn::make('back_id')
+                    ->toggleable(),
                 IconColumn::make('isActive')
                     ->label('Admin Verified')
+                    ->toggleable()
                     ->boolean(),
                 IconColumn::make('isAiValidate')
                     ->label('AI Verified')
+                    ->toggleable()
                     ->boolean(),
                 TextColumn::make('user.first_name')
                     ->label('First name')
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('user.middle_name')
                     ->label('Middle name')
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('user.last_name')
                     ->label('Last name')
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('user.email')
                     ->label('Email address')
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('phone')
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('address')
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('user.employment_status')
+                    ->toggleable()
                     ->label('Employment Status'),
                 TextColumn::make('job_title')
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('highest_degree')
                     ->label('Highest Degree')
                     ->getStateUsing(function ($record) {
                         return $record->highest_degree;
                     })
+                    ->toggleable()
                     ->searchable(query: function ($query, $data) {
                         return $query->whereHas('education', function ($q) use ($data) {
                             $q->where('degree', 'like', '%' . $data . '%');
                         });
                     }),
                 TextColumn::make('university')
+                    ->toggleable()
                     ->label('University')
                     ->getStateUsing(function ($record) {
                         return $record->university;
@@ -82,6 +98,7 @@ class CurriculumVitaesTable
                     ->sortable(),
                 TextColumn::make('user.AI_reason')
                     ->label('Verification Remarks')
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
