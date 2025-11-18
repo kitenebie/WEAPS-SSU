@@ -225,7 +225,7 @@
 
             <div @if (!$hasHeaderToolbar) x-cloak @endif
                 x-show="@js($hasHeaderToolbar) || @js($hasNonBulkToolbarAction) || (getSelectedRecordsCount() && @js(count($toolbarActions)))"
-                class="fi-ta-header-toolbar" style="background-color: #7F1D1D !important; color: #FEF2F2 !important;">
+                class="fi-ta-header-toolbar" style="background: #7F1D1D !important; color: #FEF2F2 !important;">
                 {{ FilamentView::renderHook(TablesRenderHook::TOOLBAR_START, scopes: static::class) }}
 
                 <div class="fi-ta-actions fi-align-start fi-wrapped">
@@ -422,7 +422,7 @@
 
                                     <x-filament::modal :alignment="$filtersTriggerActionModalAlignment" :autofocus="$filtersTriggerActionIsModalAutofocused" :close-button="$filtersTriggerActionHasModalCloseButton"
                                         :close-by-clicking-away="$filtersTriggerActionIsModalClosedByClickingAway" :close-by-escaping="$filtersTriggerActionIsModalClosedByEscaping" :description="$filtersTriggerActionModalDescription" :footer-actions="$filtersTriggerActionVisibleModalFooterActions"
-                                        :footer-actions-alignment="$filtersTriggerActionModalFooterActionsAlignment" :heading="$filtersTriggerActionModalHeading" :icon="$filtersTriggerActionModalIcon" :icon-color="$filtersTriggerActionModalIconColor"
+                                        :footer-actions-alignment="$filtersTriggerActionModalFooterActionsAlignment" :heading="$filtersTriggerActionModalHeading" :icon="$filtersTriggerActionModalIcon" :icon="$filtersTriggerActionModalIconColor"
                                         :slide-over="$filtersTriggerActionIsModalSlideOver" :sticky-footer="$filtersTriggerActionIsModalFooterSticky" :sticky-header="$filtersTriggerActionIsModalHeaderSticky" :width="$filtersFormWidth"
                                         :wire:key="$this->getId() . '.table.filters'" class="fi-ta-filters-modal">
                                         <x-slot name="trigger">
@@ -1088,13 +1088,13 @@
                                         @if (count($defaultRecordActions) && $recordActionsPosition === RecordActionsPosition::BeforeCells)
                                             @if ($recordActionsColumnLabel)
                                                 <th class="fi-ta-header-cell"
-                                                    style="background-color: #7F1D1D !important; color: #FEF2F2 !important;">
+                                                    style="background: #7F1D1D !important; color: #FEF2F2 !important;">
                                                     {{ $recordActionsColumnLabel }}
                                                 </th>
                                             @else
                                                 <th aria-label="{{ trans_choice('filament-tables::table.columns.actions.label', $flatRecordActionsCount) }}"
                                                     class="fi-ta-actions-header-cell fi-ta-empty-header-cell"
-                                                    style="background-color: #7F1D1D !important; color: #FEF2F2 !important;">
+                                                    style="background: #7F1D1D !important; color: #FEF2F2 !important;">
                                                 </th>
                                             @endif
                                         @endif
@@ -1173,7 +1173,7 @@
                                             ])->style([
                                                 'width: ' . $columnWidth => filled($columnWidth),
                                             ]) }}
-                                        style="background-color: #7F1D1D !important; color: #FEF2F2 !important;">
+                                        style="background: #7F1D1D !important; color: #FEF2F2 !important;">
                                         @if ($isColumnSortable)
                                             <span aria-label="{{ trim(strip_tags($columnLabel)) }}" role="button"
                                                 tabindex="0" wire:click="sortTable('{{ $columnName }}')"
@@ -1205,7 +1205,7 @@
                                     @if (count($defaultRecordActions) && $recordActionsPosition === RecordActionsPosition::AfterColumns)
                                         @if ($recordActionsColumnLabel)
                                             <th class="fi-ta-header-cell fi-align-end"
-                                                style="background-color: #7F1D1D !important; color: #FEF2F2 !important;">
+                                                style="background: #7F1D1D !important; color: #FEF2F2 !important;">
                                                 {{ $recordActionsColumnLabel }}
                                             </th>
                                         @else
@@ -1250,7 +1250,7 @@
                                     @if (count($defaultRecordActions) && $recordActionsPosition === RecordActionsPosition::AfterCells)
                                         @if ($recordActionsColumnLabel)
                                             <th class="fi-ta-header-cell fi-align-end"
-                                                style="background-color: #7F1D1D !important; color: #FEF2F2 !important;">
+                                                style="background: #7F1D1D !important; color: #FEF2F2 !important;">
                                                 {{ $recordActionsColumnLabel }}
                                             </th>
                                         @else
