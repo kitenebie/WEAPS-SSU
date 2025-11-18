@@ -19,6 +19,7 @@
                     isLive: {{ $applyAction->isVisible() ? 'false' : 'true' }},
                 })"
         class="fi-ta-col-manager-ctn"
+        style="background-color: red !important"
     >
         <div class="fi-ta-col-manager-header">
             <{{ $headingTag }} class="fi-ta-col-manager-heading">
