@@ -1,6 +1,2 @@
 @import 'tailwindcss' source(none);
 @import './index.css';
-/* Make Column Manager show 3 columns */
-.fi-ta-col-manager-items {
-    @apply grid grid-cols-3 gap-2 !important;
-}
