@@ -15,7 +15,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <button onclick="history.back()"
-                        class="inline-flex items-center px-4 py-2 bg-emerald-100 hover:bg-emerald-200 text-slate-700 font-medium rounded-lg transition-colors duration-200">
+                        class="inline-flex items-center px-4 py-2 bg-red-50 hover:bg-red-100 text-slate-700 font-medium rounded-lg transition-colors duration-200">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -29,29 +29,29 @@
                 </div>
 
                 <div class="flex items-center space-x-3">
-                    <div class="hidden md:flex items-center space-x-2 text-sm bg-emerald-100 px-3 py-1 rounded-full">
-                        <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                        <span class="text-emerald-700 font-medium">Verification in Progress</span>
+                    <div class="hidden md:flex items-center space-x-2 text-sm bg-red-50 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 bg-red-800 rounded-full animate-pulse"></div>
+                        <span class="text-red-700 font-medium">Verification in Progress</span>
                     </div>
-                    <div class="hidden md:flex items-center space-x-2 text-sm bg-blue-100 px-3 py-1 rounded-full">
-                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="hidden md:flex items-center space-x-2 text-sm bg-red-50 px-3 py-1 rounded-full">
+                        <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <span class="text-blue-700 font-medium">AI Processing</span>
+                        <span class="text-red-700 font-medium">AI Processing</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
+    <div class="min-h-screen bg-gradient-to-br from-slate-50 to-red-50">
         <div class="container-full mx-auto px-4 py-8">
             <div class="max-w-4xl mx-auto">
                 <!-- Header Section -->
                 <div class="text-center mb-12">
                     <div
-                        class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full mb-6 shadow-lg">
+                        class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-red-800 to-red-900 rounded-full mb-6 shadow-lg">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -69,14 +69,14 @@
                     <div class="flex items-center justify-between mb-8">
                         <h2 class="text-2xl font-bold text-slate-900">Verification Progress</h2>
                         <div class="text-right">
-                            <div class="text-3xl font-bold text-emerald-600 mb-1" id="overall-progress">0%</div>
+                            <div class="text-3xl font-bold text-red-600 mb-1" id="overall-progress">0%</div>
                             <div class="text-sm text-slate-500">Complete</div>
                         </div>
                     </div>
 
                     <!-- Progress Bar -->
                     <div class="w-full bg-slate-200 rounded-full h-4 overflow-hidden mb-8">
-                        <div class="bg-gradient-to-r from-emerald-500 to-teal-600 h-4 rounded-full transition-all duration-1000 ease-out"
+                        <div class="bg-gradient-to-r from-red-800 to-red-900 h-4 rounded-full transition-all duration-1000 ease-out"
                             id="overall-progress-bar" style="width: 0%"></div>
                     </div>
 
@@ -86,8 +86,8 @@
                         <div class="text-center" id="step-1">
                             <div class="relative mb-4">
                                 <div
-                                    class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                                    <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    class="inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-full mb-4">
+                                    <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                             clip-rule="evenodd"></path>
@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="absolute top-0 right-0">
                                     <div
-                                        class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white text-xs font-bold rounded-full">
+                                        class="inline-flex items-center justify-center w-6 h-6 bg-red-800 text-white text-xs font-bold rounded-full">
                                         ✓</div>
                                 </div>
                             </div>
@@ -107,9 +107,9 @@
                         <div class="text-center" id="step-2">
                             <div class="relative mb-4">
                                 <div
-                                    class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4 animate-pulse">
-                                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
+                                    class="inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-full mb-4 animate-pulse">
+                                    <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                         <rect x="8" y="9" width="8" height="6" rx="1" />
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="absolute top-0 right-0">
                                     <div
-                                        class="inline-flex items-center justify-center w-6 h-6 bg-blue-500 text-white text-xs font-bold rounded-full animate-spin">
+                                        class="inline-flex items-center justify-center w-6 h-6 bg-red-800 text-white text-xs font-bold rounded-full animate-spin">
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
@@ -131,7 +131,7 @@
                             <h3 class="text-lg font-semibold text-slate-900 mb-2">AI Verification</h3>
                             <p class="text-sm text-slate-600">Analyzing your documents and information</p>
                             <div class="mt-2">
-                                <div class="text-xs text-blue-600 animate-pulse">Processing ID documents...</div>
+                                <div class="text-xs text-red-600 animate-pulse">Processing ID documents...</div>
                             </div>
                         </div>
 
@@ -171,7 +171,7 @@
                     <!-- Refresh Button -->
                     <div id="accountBTN" class="hidden text-center mt-8">
                         <button onclick="myAccount()"
-                            class="inline-flex items-center px-6 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-400 text-white font-semibold rounded-lg transition-colors duration-200">
+                            class="inline-flex items-center px-6 py-3 bg-red-800 hover:bg-red-900 disabled:bg-slate-400 text-white font-semibold rounded-lg transition-colors duration-200">
                             Continue with my account
                         </button>
                         <p class="text-xs text-slate-500 mt-2">Last updated: <span id="last-updated">Just
@@ -184,17 +184,17 @@
                 <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-8 mb-8">
                     <h2 class="text-2xl font-bold text-slate-900 mb-6">Current Status</h2>
 
-                    <div class="bg-blue-50 border-l-4 border-blue-400 p-6 mb-6">
+                    <div class="bg-red-50 border-l-4 border-red-400 p-6 mb-6">
                         <div class="flex">
-                            <svg class="w-6 h-6 text-blue-400 mr-3 flex-shrink-0" fill="currentColor"
+                            <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0" fill="currentColor"
                                 viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                     clip-rule="evenodd"></path>
                             </svg>
                             <div>
-                                <h3 class="text-blue-900 font-semibold mb-1">AI Verification in Progress</h3>
-                                <p class="text-blue-800 text-sm leading-relaxed">
+                                <h3 class="text-red-900 font-semibold mb-1">AI Verification in Progress</h3>
+                                <p class="text-red-800 text-sm leading-relaxed">
                                     Our AI system is currently analyzing your School ID documents, profile photo, and
                                     personal information.
                                     This automated process verifies your alumni status and ensures all details match
@@ -205,16 +205,16 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
                             <div class="flex items-center mb-2">
-                                <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="font-semibold text-green-900">What's Being Verified</span>
+                                <span class="font-semibold text-red-900">What's Being Verified</span>
                             </div>
-                            <ul class="text-sm text-green-800 space-y-1 ml-7">
+                            <ul class="text-sm text-red-800 space-y-1 ml-7">
                                 <li>• School ID authenticity and validity</li>
                                 <li>• Personal information accuracy</li>
                                 <li>• Profile photo quality</li>
@@ -222,16 +222,16 @@
                             </ul>
                         </div>
 
-                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
                             <div class="flex items-center mb-2">
-                                <svg class="w-5 h-5 text-amber-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="font-semibold text-amber-900">Estimated Time</span>
+                                <span class="font-semibold text-red-900">Estimated Time</span>
                             </div>
-                            <p class="text-sm text-amber-800 ml-7">
+                            <p class="text-sm text-red-800 ml-7">
                                 AI verification typically takes <strong>1-3 minutes</strong>.
                                 ID document verification may require additional processing time.
                             </p>
@@ -246,7 +246,7 @@
                     <div class="space-y-4">
                         <div class="flex items-start">
                             <div
-                                class="inline-flex items-center justify-center w-8 h-8 bg-green-100 text-green-600 font-bold rounded-full mr-4 flex-shrink-0">
+                                class="inline-flex items-center justify-center w-8 h-8 bg-red-50 text-red-600 font-bold rounded-full mr-4 flex-shrink-0">
                                 1</div>
                             <div>
                                 <h3 class="font-semibold text-slate-900">AI Analysis Complete</h3>
@@ -283,7 +283,7 @@
                 <!-- Refresh Button -->
                 <div class="text-center mt-8">
                     <button onclick="refreshStatus()"
-                        class="inline-flex items-center px-6 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-400 text-white font-semibold rounded-lg transition-colors duration-200">
+                        class="inline-flex items-center px-6 py-3 bg-red-800 hover:bg-red-900 disabled:bg-slate-400 text-white font-semibold rounded-lg transition-colors duration-200">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
@@ -386,8 +386,8 @@
             const step2 = document.getElementById('step-2');
             step2.innerHTML = `
                 <div class="relative mb-4">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4 animate-pulse">
-                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-full mb-4 animate-pulse">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                             <rect x="8" y="9" width="8" height="6" rx="1"/>
                             <circle cx="10" cy="11" r="0.5"/>
@@ -395,7 +395,7 @@
                         </svg>
                     </div>
                     <div class="absolute top-0 right-0">
-                        <div class="inline-flex items-center justify-center w-6 h-6 bg-blue-500 text-white text-xs font-bold rounded-full animate-spin">
+                        <div class="inline-flex items-center justify-center w-6 h-6 bg-red-800 text-white text-xs font-bold rounded-full animate-spin">
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>
@@ -405,7 +405,7 @@
                 <h3 class="text-lg font-semibold text-slate-900 mb-2">AI Verification</h3>
                 <p class="text-sm text-slate-600">Analyzing your documents and information</p>
                 <div class="mt-2">
-                    <div class="text-xs text-blue-600 animate-pulse">Processing ID documents...</div>
+                    <div class="text-xs text-red-600 animate-pulse">Processing ID documents...</div>
                 </div>
             `;
         }
@@ -414,13 +414,13 @@
             const step2 = document.getElementById('step-2');
             step2.innerHTML = `
                 <div class="relative mb-4">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-full mb-4">
+                        <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
                     <div class="absolute top-0 right-0">
-                        <div class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white text-xs font-bold rounded-full">✓</div>
+                        <div class="inline-flex items-center justify-center w-6 h-6 bg-red-800 text-white text-xs font-bold rounded-full">✓</div>
                     </div>
                 </div>
                 <h3 class="text-lg font-semibold text-slate-900 mb-2">AI Verification Complete</h3>
@@ -447,13 +447,13 @@
             const step3 = document.getElementById('step-3');
             step3.innerHTML = `
                 <div class="relative mb-4">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-full mb-4">
+                        <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
                     <div class="absolute top-0 right-0">
-                        <div class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white text-xs font-bold rounded-full">✓</div>
+                        <div class="inline-flex items-center justify-center w-6 h-6 bg-red-800 text-white text-xs font-bold rounded-full">✓</div>
                     </div>
                 </div>
                 <h3 class="text-lg font-semibold text-slate-900 mb-2">Verified Successfully</h3>
@@ -480,13 +480,13 @@
             const step4 = document.getElementById('step-4');
             step4.innerHTML = `
                 <div class="relative mb-4">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4 animate-pulse">
-                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-full mb-4 animate-pulse">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
                         </svg>
                     </div>
                     <div class="absolute top-0 right-0">
-                        <div class="inline-flex items-center justify-center w-6 h-6 bg-blue-500 text-white text-xs font-bold rounded-full animate-spin">
+                        <div class="inline-flex items-center justify-center w-6 h-6 bg-red-800 text-white text-xs font-bold rounded-full animate-spin">
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>
@@ -502,13 +502,13 @@
             const step4 = document.getElementById('step-4');
             step4.innerHTML = `
                 <div class="relative mb-4">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-50 rounded-full mb-4">
+                        <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
                     <div class="absolute top-0 right-0">
-                        <div class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white text-xs font-bold rounded-full">✓</div>
+                        <div class="inline-flex items-center justify-center w-6 h-6 bg-red-800 text-white text-xs font-bold rounded-full">✓</div>
                     </div>
                 </div>
                 <h3 class="text-lg font-semibold text-slate-900 mb-2">Admin Review Complete</h3>
@@ -517,16 +517,16 @@
         }
 
         function updateStatusMessage(title, message) {
-            const statusSection = document.querySelector('.bg-blue-50');
+            const statusSection = document.querySelector('.bg-red-50');
             if (statusSection) {
                 statusSection.innerHTML = `
                     <div class="flex">
-                        <svg class="w-6 h-6 text-blue-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                         </svg>
                         <div>
-                            <h3 class="text-blue-900 font-semibold mb-1">${title}</h3>
-                            <p class="text-blue-800 text-sm leading-relaxed">${message}</p>
+                            <h3 class="text-red-900 font-semibold mb-1">${title}</h3>
+                            <p class="text-red-800 text-sm leading-relaxed">${message}</p>
                         </div>
                     </div>
                 `;
