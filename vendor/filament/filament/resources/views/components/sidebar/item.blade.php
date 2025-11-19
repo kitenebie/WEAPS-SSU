@@ -148,7 +148,7 @@
     @endif
     
         <style>
-            .fi-sidebar {
+            .fi-sidebar, .fi-sidebar-header {
                 background: #7F1D1D !important;
                 border-bottom-color: #FFB900 !important;
                 border-bottom-width: 2px !important;
