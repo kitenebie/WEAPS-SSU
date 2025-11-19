@@ -64,4 +64,10 @@ class EditCurriculumVitae extends EditRecord
             $user->fill($this->userPayload)->save();
         }
     }
+    // Hide Save + Cancel
+    protected function getFormActions(): array
+    {
+        return [];
+    }
+    
 }
