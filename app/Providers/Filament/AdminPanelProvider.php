@@ -45,10 +45,10 @@ class AdminPanelProvider extends PanelProvider
             // ->brandLogo(asset('https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp'))
             // ->brandLogoHeight('3rem')
             ->topNavigation(true)
-            ->colors([
-                'primary' => Color::Maroon,
-                'danger' => Color::Rose,
-            ])
+                ->colors([
+                    'primary' => Color::Red,
+                    'danger' => Color::Rose,
+                ])
             ->darkMode(false)
             ->plugins([
                 BreezyCore::make()
