@@ -154,7 +154,7 @@
                 border-bottom-width: 2px !important;
             }
             .fi-topbar{
-                background: #D8D8D8 !important;
+                background: #C6C6C6 !important;
             }
             .fi-sidebar-nav{
                 border-right-width: 1px #C5C5C5FF !important;
