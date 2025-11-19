@@ -38,8 +38,10 @@
             @endif
 
             <ul class="fi-sidebar-nav-groups">
-                <img style="width: 80px; height:80px" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
+                <center>
+                    <img style="width: 3rem; height:3rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
                     alt="" srcset="">
+                </center>
                 @foreach ($navigation as $group)
                     @php
                         $isGroupActive = $group->isActive();
