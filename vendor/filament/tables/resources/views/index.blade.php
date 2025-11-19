@@ -1900,6 +1900,7 @@
         }
         .fi-ta-record-content-ctn{
             background-color: #E9E9E9 !important;
+            border-radius: 1rem !important;
         }
     </style>
 </div>
