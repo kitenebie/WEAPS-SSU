@@ -170,6 +170,7 @@
                                     x-sortable-handle
                                     x-on:click.stop
                                     class="fi-ta-col-manager-reorder-handle fi-icon-btn"
+                                    style=""
                                     type="button"
                                 >
                                     {{ \Filament\Support\generate_icon_html(\Filament\Support\Icons\Heroicon::Bars2, alias: \Filament\Tables\View\TablesIconAlias::REORDER_HANDLE) }}
