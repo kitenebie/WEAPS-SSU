@@ -22,6 +22,8 @@ th {
 }
 .fi-topbar {
     background: #7F1D1D !important;
+    border-bottom-color: #FFB900 !important;
+    border-bottom-width: 2px !important;
 }
 .fi-topbar-item .fi-active a .fi-topbar-item-btn{
     background: #FFB900 !important;
