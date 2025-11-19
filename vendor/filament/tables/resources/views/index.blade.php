@@ -1875,5 +1875,8 @@ style="border-width: 2px; border-color: #FFB900; border-radius: 1rem;"
         th{
             background-color: #FFB900 !important;
         }
+        th span svg {
+            fill: #000000 !important;
+        }
     </style>
 </div>
