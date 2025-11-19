@@ -122,7 +122,7 @@
         }
 
         .fi-topbar {
-            background: #C6C6C6 !important;
+            background: #F6F6F6 !important;
         }
 
         .fi-sidebar-nav {
@@ -164,6 +164,9 @@
         @media (max-width: 768px) {
             .hide-h1-md-sm {
                 display: none;
+            }
+            .fi-topbar {
+                background: #7F1D1D !important;
             }
         }
     </style>
