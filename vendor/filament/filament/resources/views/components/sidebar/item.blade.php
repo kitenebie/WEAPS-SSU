@@ -168,6 +168,10 @@
                 display: none;
             }
 
+            .fi-sidebar-nav {
+                margin-top: 2rem;
+            }
+
             .fi-topbar {
                 background: #7F1D1D !important;
             }

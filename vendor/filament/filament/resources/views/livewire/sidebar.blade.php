@@ -20,13 +20,13 @@
                     <img class="logo-profile-header" style="position: absolute; top: 1.2rem;left: 30%;width: 6rem; height:6rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
                     alt="" srcset="">
                 </center>
-                @if ($homeUrl = filament()->getHomeUrl())
+                {{-- @if ($homeUrl = filament()->getHomeUrl())
                     <a {{ \Filament\Support\generate_href_html($homeUrl) }}>
                         <x-filament-panels::logo />
                     </a>
                 @else
                     <x-filament-panels::logo />
-                @endif
+                @endif --}}
 
                 {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_LOGO_AFTER) }}
             </header>
