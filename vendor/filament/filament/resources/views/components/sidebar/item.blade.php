@@ -158,6 +158,7 @@
             }
             .fi-sidebar-nav{
                 border-right-width: 1px #C5C5C5FF !important;
+                z-index: 100
             }
             .fi-sidebar-item-label {
                 color: #FFFFFF !important;
