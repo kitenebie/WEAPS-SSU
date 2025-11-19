@@ -16,7 +16,7 @@
     background-color: #FECF55 !important;
     color: white !important;
 } */
-.fi-main{
+.fi-main, .fi-main-ctn{
     background: #7F1D1D !important;
 }
 th {
@@ -32,7 +32,7 @@ th {
     background: #FFB900 !important;
     color: #7F1D1D !important;
 }
-.fi-topbar-item .fi-active{
+.fi-topbar-item .fi-active .fi-topbar-item-btn{
     background: #FFB900 !important;
     color: #7F1D1D !important;
 }
