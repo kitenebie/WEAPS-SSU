@@ -1871,4 +1871,9 @@ style="border-width: 2px; border-color: #FFB900; border-radius: 1rem;"
     </div>
 
     <x-filament-actions::modals />
+    <style>
+        th{
+            background-color: #FFB900 !important;
+        }
+    </style>
 </div>
