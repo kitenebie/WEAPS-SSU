@@ -1880,20 +1880,20 @@
             fill: #000000 !important;
         }
 
-        td {
+        td, .fi-pagination {
             background-color: #E9E9E9 !important;
         }
 
         /* odd th */
         td:nth-child(odd) {
             background-color: #E9E9E9 !important;
-            border-bottom: 2px solid #7F1D1D !important;
+            border-bottom: 1px solid #7F1D1D !important;
         }
 
         /* even th */
         td:nth-child(even) {
             background-color: #F9F9F9 !important;
-            border-bottom: 2px solid #7F1D1D !important;
+            border-bottom: 1px solid #7F1D1D !important;
         }
     </style>
 </div>
