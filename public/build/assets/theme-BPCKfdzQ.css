@@ -30,6 +30,9 @@ th {
     background-color: #FFB900 !important;
     color: #7F1D1D !important;
 }
-.fi-icon .fi-size-md .fi-topbar-item-icon{
+.fi-icon{
     fill: white !important;
+}
+fi-topbar-item-label{
+    color: white !important;
 }
