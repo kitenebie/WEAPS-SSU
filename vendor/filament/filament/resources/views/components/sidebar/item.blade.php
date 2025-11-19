@@ -153,6 +153,9 @@
                 border-bottom-color: #FFB900 !important;
                 border-bottom-width: 2px !important;
             }
+            .fi-topbar{
+                background: #FFB900 !important;
+            }
             .fi-sidebar-nav{
                 border-right-width: 1px #C5C5C5FF !important;
             }
