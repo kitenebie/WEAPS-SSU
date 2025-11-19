@@ -44,19 +44,17 @@
                 border-bottom-width: 2px !important;
             }
 
-            .fi-topbar-item .fi-active.fi-topbar-item-btn {
+            /* active item */
+            .fi-topbar-item.fi-active .fi-topbar-item-btn {
                 background: #FFB900 !important;
                 color: #7F1D1D !important;
             }
 
-            .fi-topbar-item .fi-active .fi-topbar-item-btn {
-                background: #FFB900 !important;
-                color: #7F1D1D !important;
-            }
-
+            /* hover */
             .fi-topbar-item-btn:hover {
                 background: #FECF55 !important;
                 color: #7F1D1D !important;
             }
         </style>
+
 </li>
