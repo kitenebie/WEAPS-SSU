@@ -171,7 +171,7 @@
                 color: #FFFFFF !important;
             }
 
-            .fi-sidebar-item-label {
+            .fi-sidebar-item-label, .fi-sidebar-group-label {
                 color: #FFFFFF !important;
             }
         </style>
