@@ -162,6 +162,7 @@
     selectsCurrentPageOnly: @js($selectsCurrentPageOnly),
     $wire,
 })"
+style="border-width: 2px; border-color: gray;"
     {{ $getExtraAttributeBag()->class(['fi-ta', 'fi-loading' => $records === null]) }}>
     <input type="hidden" value="{{ $allSelectableRecordsCount }}" x-ref="allSelectableRecordsCount" />
 
