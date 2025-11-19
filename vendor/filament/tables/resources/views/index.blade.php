@@ -1895,5 +1895,8 @@
             background-color: #F9F9F9 !important;
             border-bottom: 1px solid #7F1D1D !important;
         }
+        .fi-ta-content-grid{
+            background-color: #7F1D1D !important;
+        }
     </style>
 </div>
