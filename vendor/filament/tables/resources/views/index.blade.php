@@ -162,7 +162,7 @@
     selectsCurrentPageOnly: @js($selectsCurrentPageOnly),
     $wire,
 })"
-style="border-width: 2px; border-color: #FFB900; border-radius: 1rem;"
+    style="border-width: 2px; border-color: #FFB900; border-radius: 1rem;"
     {{ $getExtraAttributeBag()->class(['fi-ta', 'fi-loading' => $records === null]) }}>
     <input type="hidden" value="{{ $allSelectableRecordsCount }}" x-ref="allSelectableRecordsCount" />
 
@@ -1872,14 +1872,28 @@ style="border-width: 2px; border-color: #FFB900; border-radius: 1rem;"
 
     <x-filament-actions::modals />
     <style>
-        th{
+        th {
             background-color: #FFB900 !important;
         }
+
         th span svg {
             fill: #000000 !important;
         }
-        td{
+
+        td {
             background-color: #E9E9E9 !important;
+        }
+
+        /* odd th */
+        th:nth-child(odd) {
+            background-color: #E9E9E9 !important;
+            border-bottom: 2px solid #7F1D1D !important;
+        }
+
+        /* even th */
+        th:nth-child(even) {
+            background-color: #F9F9F9 !important;
+            border-bottom: 2px solid #7F1D1D !important;
         }
     </style>
 </div>
