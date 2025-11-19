@@ -162,7 +162,9 @@
         .logo-profile-header {
             display: none !important;
         }
-
+        .fi-logo{
+            display: none !important;
+        }
         @media (max-width: 768px) {
             .hide-h1-md-sm {
                 display: none;
