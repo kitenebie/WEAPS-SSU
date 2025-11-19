@@ -84,7 +84,7 @@ class DashboardStatsWidget extends BaseWidget
                         ->color('danger'),
                         
                     Stat::make('Unverified Alumni', User::whereHas('curriculumVitae')->whereNull('email_verified_at')->count())
-                        ->description('Alumni with unverified acoount')
+                        ->description('unverified acoount')
                         ->descriptionIcon('heroicon-m-exclamation-triangle')
                         ->extraAttributes([
                             'id' => 'unverified-alumni-stat',

@@ -15,6 +15,7 @@ class ApplicationFrequencyChart extends ApexChartWidget
     protected static ?string $chartId = 'applicationFrequencyByMonthYearChart';
     protected static ?int $contentHeight = 350;
     protected static bool $isCollapsible = true;
+    protected static bool $Collapse = false;
     protected int | string | array $columnSpan = 2;
 
     protected function getFilters(): ?array
