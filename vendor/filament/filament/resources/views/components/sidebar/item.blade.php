@@ -181,5 +181,10 @@
             .fi-sidebar-item-label, .fi-sidebar-group-label {
                 color: #FFFFFF !important;
             }
+            .fi-title{
+                color: #7F1D1D !important;
+                font-weight: bold !important;
+                font-size: 1.25rem !important;
+            }
         </style>
 </li>
