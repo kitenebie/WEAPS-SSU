@@ -27,7 +27,8 @@ class DashboardStatsWidget extends BaseWidget
                         ->description('All registered users')
                         ->descriptionIcon('heroicon-m-users')
                         ->extraAttributes([
-                            'style' => 'cursor: pointer;  border: 1px solid #CAD5E2; border: 1px solid #CAD5E2',
+                            'id' => 'total-users-stat',
+                            'style' => 'cursor: pointer;  border: 1px solid #CAD5E2; border: 1px solid #CAD5E2;',
                             'onclick' => "window.location.href='/admin/user-list?filter=users_list';",
                         ])
                         ->color('primary'),
@@ -36,6 +37,7 @@ class DashboardStatsWidget extends BaseWidget
                         ->description('Users with verified account')
                         ->descriptionIcon('heroicon-m-check-badge')
                         ->extraAttributes([
+                            'id' => 'verified-users-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
                             'onclick' => "window.location.href='/admin/user-list?filter=users_verified';",
                         ])
@@ -45,6 +47,7 @@ class DashboardStatsWidget extends BaseWidget
                         ->description('Users pending verification')
                         ->descriptionIcon('heroicon-m-exclamation-triangle')
                         ->extraAttributes([
+                            'id' => 'unverified-users-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
                             'onclick' => "window.location.href='/admin/user-list?filter=users_unverified';",
                         ])
@@ -54,46 +57,54 @@ class DashboardStatsWidget extends BaseWidget
                         ->description('Alumni with verified account')
                         ->descriptionIcon('heroicon-m-check-badge')
                         ->extraAttributes([
+                            'id' => 'verified-alumni-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
                             'onclick' => "window.location.href='/admin/user-list?filter=alumni_verified';",
                         ])
                         ->color('success'),
 
-                    Stat::make('Unverified Alumni', User::whereHas('curriculumVitae')->whereNull('email_verified_at')->count())
-                        ->description('Alumni with unverified acoount')
-                        ->descriptionIcon('heroicon-m-exclamation-triangle')
-                        ->extraAttributes([
-                            'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                            'onclick' => "window.location.href='/admin/user-list?filter=alumni_unverified';",
-                        ])
-                        ->color('warning'),
-
                     Stat::make('Total Companies', Company::count())
                         ->description('All registered companies')
                         ->descriptionIcon('heroicon-m-building-office')
                         ->extraAttributes([
+                            'id' => 'total-companies-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
                             'onclick' => "window.location.href='/admin/user-list?filter=company_list';",
                         ])
                         ->color('primary'),
 
-                    Stat::make('Active Companies', Company::where('isActive', true)->count())
-                        ->description('Currently active companies')
-                        ->descriptionIcon('heroicon-m-check-circle')
-                        ->extraAttributes([
-                            'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                            'onclick' => "window.location.href='/admin/user-list?filter=company_active';",
-                        ])
-                        ->color('success'),
-
                     Stat::make('Unverified Companies', Company::where('isActive', false)->count())
                         ->description('Unverified companies')
                         ->descriptionIcon('heroicon-m-x-circle')
                         ->extraAttributes([
+                            'id' => 'unverified-companies-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
                             'onclick' => "window.location.href='/admin/user-list?filter=company_unverified';",
                         ])
                         ->color('danger'),
+                        
+                    Stat::make('Unverified Alumni', User::whereHas('curriculumVitae')->whereNull('email_verified_at')->count())
+                        ->description('Alumni with unverified acoount')
+                        ->descriptionIcon('heroicon-m-exclamation-triangle')
+                        ->extraAttributes([
+                            'id' => 'unverified-alumni-stat',
+                            'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
+                            'onclick' => "window.location.href='/admin/user-list?filter=alumni_unverified';",
+                        ])
+                        ->color('warning'),
+
+
+
+                        
+                    Stat::make('Active Companies', Company::where('isActive', true)->count())
+                        ->description('Currently active companies')
+                        ->descriptionIcon('heroicon-m-check-circle')
+                        ->extraAttributes([
+                            'id' => 'active-companies-stat',
+                            'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
+                            'onclick' => "window.location.href='/admin/user-list?filter=company_active';",
+                        ])
+                        ->color('success'),
                 ])
         ];
     }

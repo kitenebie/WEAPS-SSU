@@ -89,7 +89,7 @@ class HiringAnalyticsChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#10B981'],
+            'colors' => ['#FFB900'],
             'stroke' => [
                 'curve' => 'smooth',
             ],
@@ -142,7 +142,7 @@ class HiringAnalyticsChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#3B82F6'],
+            'colors' => ['#7F1D1D'],
         ];
     }
 
@@ -157,7 +157,7 @@ class HiringAnalyticsChart extends ApexChartWidget
             ],
             'series' => [$totalHirings > 0 ? min($totalHirings, 100) : 0],
             'labels' => ['Total Hirings'],
-            'colors' => ['#8B5CF6'],
+            'colors' => ['#494949'],
             'plotOptions' => [
                 'radialBar' => [
                     'hollow' => [

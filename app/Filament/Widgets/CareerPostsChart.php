@@ -145,7 +145,7 @@ class CareerPostsChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#EF4444'],
+            'colors' => ['#7F1D1D'],
         ];
     }
 
@@ -160,7 +160,7 @@ class CareerPostsChart extends ApexChartWidget
             ],
             'series' => [$totalPosts > 0 ? min($totalPosts, 100) : 0],
             'labels' => ['Total Career Posts'],
-            'colors' => ['#EC4899'],
+            'colors' => ['#FFB900'],
             'plotOptions' => [
                 'radialBar' => [
                     'hollow' => [

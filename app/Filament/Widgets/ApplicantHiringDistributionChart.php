@@ -83,7 +83,7 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16', '#F97316', '#8B5CF6'],
+            'colors' => ['#4FA753', '#2992E3', '#494949', '#7F1D1D', '#4FA753', '#2992E3', '#494949', '#7F1D1D', '#4FA753', '#2992E3', '#494949', '#7F1D1D',],
             'plotOptions' => [
                 'bar' => [
                     'distributed' => true,
