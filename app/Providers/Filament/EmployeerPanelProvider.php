@@ -58,7 +58,7 @@ class EmployeerPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
-                FilamentAwinTheme::make(),
+                // FilamentAwinTheme::make(),
                 ShieldPlugin::make(), // Registers RoleResource (Spatie Shield)
             ])
             ->middleware([
