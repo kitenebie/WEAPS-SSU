@@ -150,7 +150,7 @@
             @endforeach
         </x-filament::dropdown>
     @endif
-
+    <img style="width: 80px; height:80px" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp" alt="" srcset="">
     <ul
         @if (filled($label))
             @if ($sidebarCollapsible)
