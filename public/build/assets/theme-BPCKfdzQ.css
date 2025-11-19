@@ -17,8 +17,7 @@
     color: white !important;
 } */
 .fi-body{
-    background-color: #7F1D1D !important;
-}
+    @apply bg-gray-800 dark:bg-gray-950;
 th {
   background: #FFD230;
   color: #7F1D1D;
