@@ -38,7 +38,7 @@
         @endif
         </{{ $tag }}>
         <style>
-            .fi-sidebar {
+            nav .fi-sidebar {
                 background: #7F1D1D !important;
                 border-bottom-color: #FFB900 !important;
                 border-bottom-width: 2px !important;
