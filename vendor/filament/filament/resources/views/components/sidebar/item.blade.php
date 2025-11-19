@@ -148,7 +148,7 @@
     @endif
     
         <style>
-            .fi-sidebar, .fi-sidebar-header {
+            .fi-sidebar, .fi-sidebar-header, nav {
                 background: #7F1D1D !important;
                 border-bottom-color: #FFB900 !important;
                 border-bottom-width: 2px !important;
