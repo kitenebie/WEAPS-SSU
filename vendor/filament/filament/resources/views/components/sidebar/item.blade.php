@@ -146,4 +146,33 @@
             @endforeach
         </ul>
     @endif
+    
+        <style>
+            .fi-sidebar {
+                background: #7F1D1D !important;
+                border-bottom-color: #FFB900 !important;
+                border-bottom-width: 2px !important;
+            }
+            .fi-sidebar-item-label {
+                color: #FFFFFF !important;
+            }
+            /* active item */
+            .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
+                background: #FFB900 !important;
+                color: #3D1515FF !important;
+            }
+
+            /* hover */
+            .fi-sidebar-item-btn:hover {
+                background: #DFA403FF !important;
+                color: #7F1D1D !important;
+            }
+            .fi-sidebar-item-btn .fi-icon {
+                color: #FFFFFF !important;
+            }
+
+            .fi-sidebar-item-label {
+                color: #FFFFFF !important;
+            }
+        </style>
 </li>
