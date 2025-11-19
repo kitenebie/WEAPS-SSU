@@ -50,4 +50,9 @@
 
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIMPLE_LAYOUT_END, scopes: $renderHookScopes) }}
     </div>
+    <style>
+        .fi-simple-layout{
+            background-color: #7F1D1D !important;
+        }
+    </style>
 </x-filament-panels::layout.base>
