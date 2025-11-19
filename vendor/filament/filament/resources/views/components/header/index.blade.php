@@ -47,7 +47,7 @@
     @endif
     <style>
         .fi-header-heading {
-            background-color: #FBBF24 !important;
+            color: #FBBF24 !important;
         }
         .fi-header-subheading{
             color: #FFFFFFFF !important;
