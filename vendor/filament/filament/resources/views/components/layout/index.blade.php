@@ -78,7 +78,7 @@
                     'fi-main',
                     ($maxContentWidth instanceof Width) ? "fi-width-{$maxContentWidth->value}" : $maxContentWidth,
                 ])
-                style="background-color: #DBD7D7FF !important;"
+                style="background-color: #E9E9E9 !important;"
             >
                 {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::CONTENT_START, scopes: $renderHookScopes) }}
 
