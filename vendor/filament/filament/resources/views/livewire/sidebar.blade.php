@@ -14,6 +14,10 @@
         x-bind:class="{ 'fi-sidebar-open': $store.sidebar.isOpen }" class="fi-sidebar fi-main-sidebar">
         <div class="fi-sidebar-header-ctn">
             <header class="fi-sidebar-header">
+                <center >
+                    <img class="logo-profile-header" style="width: 6rem; height:6rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
+                    alt="" srcset="">
+                </center>
                 {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_LOGO_BEFORE) }}
 
                 @if ($homeUrl = filament()->getHomeUrl())
@@ -38,8 +42,8 @@
             @endif
 
             <ul class="fi-sidebar-nav-groups">
-                <center>
-                    <img style="width: 6rem; height:6rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
+                <center >
+                    <img class="logo-profile" style="width: 6rem; height:6rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
                     alt="" srcset="">
                 </center>
                 @foreach ($navigation as $group)

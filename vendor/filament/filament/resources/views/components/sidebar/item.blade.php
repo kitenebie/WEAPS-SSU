@@ -161,12 +161,25 @@
             font-size: 1.25rem !important;
         }
 
+        .logo-profile-header {
+            display: none !important;
+        }
+
         @media (max-width: 768px) {
             .hide-h1-md-sm {
                 display: none;
             }
+
             .fi-topbar {
                 background: #7F1D1D !important;
+            }
+
+            .logo-profile {
+                display: none !important;
+            }
+
+            .logo-profile-header {
+                display: flex !important;
             }
         }
     </style>
