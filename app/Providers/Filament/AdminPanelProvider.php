@@ -44,7 +44,7 @@ class AdminPanelProvider extends PanelProvider
             ->subNavigationPosition(SubNavigationPosition::End)
             // ->brandLogo(asset('https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp'))
             // ->brandLogoHeight('3rem')
-            ->topNavigation(true)
+            // ->topNavigation(true)
                 ->colors([
                     'primary' => Color::Amber,
                 ])

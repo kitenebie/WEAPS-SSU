@@ -42,7 +42,7 @@ class EmployeerPanelProvider extends PanelProvider
             ->profile()
             ->brandLogo(asset('https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp'))
             ->brandLogoHeight('3rem')
-            ->topNavigation(true)
+            // ->topNavigation(true)
             ->colors([
                 'primary' => Color::Maroon,
             ])
