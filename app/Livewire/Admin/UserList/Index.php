@@ -211,6 +211,7 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
                         TextInput::make('middle_name'),
                         TextInput::make('last_name'),
                     ])
+                    ->color('warning')
                     ->action(function (array $data) {
                         $data['password'] = Hash::make($data['password']);
                         User::create($data);
