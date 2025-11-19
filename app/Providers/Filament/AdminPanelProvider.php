@@ -46,7 +46,7 @@ class AdminPanelProvider extends PanelProvider
             // ->brandLogoHeight('3rem')
             ->topNavigation(true)
                 ->colors([
-                    'primary' => Color::Gray,
+                    'primary' => Color::Amber,
                 ])
             ->darkMode(false)
             ->plugins([
