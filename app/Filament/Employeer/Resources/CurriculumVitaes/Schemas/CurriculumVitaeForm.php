@@ -78,7 +78,7 @@ class CurriculumVitaeForm
                     ->description('Educational qualifications alongside technical and language proficiencies')
                     ->schema([
                         Section::make('Education')
-                            ->collapsed()
+                            // ->collapsed()
                             ->description('Education history and relevant training')
                             ->icon('heroicon-o-academic-cap')
                             ->schema([
@@ -120,7 +120,7 @@ class CurriculumVitaeForm
                                     ->addActionLabel('Add Education')
                             ]),
                         Section::make('Skills & Languages')
-                            ->collapsed()
+                            // ->collapsed()
                             ->description('Technical skills and language proficiencies')
                             ->icon('heroicon-o-language')
                             ->schema([
@@ -175,7 +175,7 @@ class CurriculumVitaeForm
                     ->description('Professional certifications and awards received')
                     ->schema([
                         Section::make('certifications')
-                            ->collapsed()
+                            // ->collapsed()
                             // ->description('Technical skills and language proficiencies')
                             ->icon('heroicon-o-document-check')
                             ->schema([
@@ -199,7 +199,7 @@ class CurriculumVitaeForm
                                     ->addActionLabel('Add Certification'),
                             ]),
                         Section::make('awards')
-                            ->collapsed()
+                            // ->collapsed()
                             // ->description('Technical skills and language proficiencies')
                             ->icon('heroicon-o-trophy')
                             ->schema([
@@ -230,7 +230,7 @@ class CurriculumVitaeForm
                     ->description('Community involvement and professional references')
                     ->schema([
                         Section::make('Volunteer Work')
-                            ->collapsed()
+                            // ->collapsed()
                             ->icon('heroicon-o-heart')
                             ->schema([
                                 Repeater::make('volunteer_work')
@@ -257,7 +257,7 @@ class CurriculumVitaeForm
                             ]),
 
                         Section::make('References')
-                            ->collapsed()
+                            // ->collapsed()
                             ->icon('heroicon-o-user')
                             ->schema([
                                 Repeater::make('references')
@@ -310,7 +310,7 @@ class CurriculumVitaeForm
                     ->description('Supporting details')
                     ->schema([
                         Section::make('Work Experience')
-                            ->collapsed()
+                            // ->collapsed()
                             ->description('Previous job positions and employment history')
                             ->icon('heroicon-o-building-office-2')
                             ->schema([
@@ -342,7 +342,7 @@ class CurriculumVitaeForm
                             ]),
 
                         Section::make('Projects')
-                            ->collapsed()
+                            // ->collapsed()
                             ->description('Notable projects and achievements')
                             ->icon('heroicon-o-code-bracket')
                             ->schema([
@@ -371,7 +371,7 @@ class CurriculumVitaeForm
                             ]),
 
                         Section::make('Affiliations & Publications')
-                            ->collapsed()
+                            // ->collapsed()
                             ->description('Professional memberships and published works')
                             ->icon('heroicon-o-building-office')
                             ->schema([
@@ -420,7 +420,7 @@ class CurriculumVitaeForm
                             ]),
 
                         Section::make('Social Links')
-                            ->collapsed()
+                            // ->collapsed()
                             ->description('Professional online presence')
                             ->icon('heroicon-o-globe-alt')
                             ->schema([

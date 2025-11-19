@@ -43,7 +43,7 @@
 
             <ul class="fi-sidebar-nav-groups">
                 <center >
-                    <img class="logo-profile" style="width: 6rem; height:6rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
+                    <img class="logo-profile" style="width: 6rem; height:6rem" src={{ App\Models\CurriculumVitae::where('user_id', Auth::id())->first()->profile_picture ?? App\Models\Company::where('user_id', Auth::id())->first()->logo ?? "https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp" }}
                     alt="" srcset="">
                 </center>
                 @foreach ($navigation as $group)
