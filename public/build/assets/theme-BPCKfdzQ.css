@@ -16,8 +16,9 @@
     background-color: #FECF55 !important;
     color: white !important;
 } */
-.fi-body{
-    @apply bg-gray-800 dark:bg-gray-950;
+.fi-main .fi-width-full{
+    background-color: #7F1D1D !important;
+}
 th {
   background: #FFD230;
   color: #7F1D1D;
