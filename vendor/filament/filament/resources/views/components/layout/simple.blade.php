@@ -54,5 +54,9 @@
         .fi-simple-layout{
             background-color: #7F1D1D !important;
         }
+        .fi-ac-btn-action{
+            background-color: #7F1D1D !important;
+            color: #FFB900 !important;
+        }
     </style>
 </x-filament-panels::layout.base>
