@@ -23,3 +23,11 @@ th {
 .fi-topbar {
     background-color: #7F1D1D !important;
 }
+.fi-topbar-item {
+    background-color: #DEDEDF !important;
+    color: #484848 !important;
+}
+.fi-topbar-item .fi-active {
+    background-color: #FFB900 !important;
+    color: #7F1D1D !important;
+}
