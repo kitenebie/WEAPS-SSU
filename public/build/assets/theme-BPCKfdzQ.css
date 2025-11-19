@@ -17,14 +17,18 @@
     color: white !important;
 } */
 th {
-  background-color: #FFD230;
+  background: #FFD230;
   color: #7F1D1D;
 }
 .fi-topbar {
-    background-color: #FFB900 !important;
+    background: #7F1D1D !important;
+}
+.fi-topbar-item .fi-active a .fi-topbar-item-btn{
+    background: #FFB900 !important;
+    color: #7F1D1D !important;
 }
 .fi-topbar-item .fi-active a{
-    background-color: #FFB900 !important;
+    background: #FFB900 !important;
     color: #7F1D1D !important;
 }
 .fi-icon{
