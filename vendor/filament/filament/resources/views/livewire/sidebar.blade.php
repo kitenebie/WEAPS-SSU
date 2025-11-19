@@ -17,7 +17,7 @@
                 {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_LOGO_BEFORE) }}
 
                 <center >
-                    <img class="logo-profile-header" style="position: absolute; top: 2rem; left: 50%;width: 6rem; height:6rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
+                    <img class="logo-profile-header" style="position: absolute; top: 1.5rem; 1.5rem;width: 6rem; height:6rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
                     alt="" srcset="">
                 </center>
                 @if ($homeUrl = filament()->getHomeUrl())
