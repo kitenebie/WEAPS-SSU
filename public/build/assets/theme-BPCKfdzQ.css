@@ -21,10 +21,7 @@ th {
   color: #7F1D1D;
 }
 .fi-topbar {
-    background-color: #7F1D1D !important;
-}
-.fi-topbar-item {
-    color: #484848 !important;
+    background-color: #FFB900 !important;
 }
 .fi-topbar-item .fi-active a{
     background-color: #FFB900 !important;
