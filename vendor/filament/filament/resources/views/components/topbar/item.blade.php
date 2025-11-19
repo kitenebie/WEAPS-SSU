@@ -38,30 +38,30 @@
         @endif
         </{{ $tag }}>
         <style>
-            .fi-topbar {
+            .fi-sidebar {
                 background: #7F1D1D !important;
                 border-bottom-color: #FFB900 !important;
                 border-bottom-width: 2px !important;
             }
-            .fi-topbar-item-label {
+            .fi-sidebar-item-label {
                 color: #FFFFFF !important;
             }
             /* active item */
-            .fi-topbar-item.fi-active .fi-topbar-item-btn {
+            .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
                 background: #FFB900 !important;
                 color: #3D1515FF !important;
             }
 
             /* hover */
-            .fi-topbar-item-btn:hover {
+            .fi-sidebar-item-btn:hover {
                 background: #DFA403FF !important;
                 color: #7F1D1D !important;
             }
-            .fi-topbar-item-btn .fi-icon {
+            .fi-sidebar-item-btn .fi-icon {
                 color: #FFFFFF !important;
             }
 
-            .fi-topbar-item-label {
+            .fi-sidebar-item-label {
                 color: #FFFFFF !important;
             }
         </style>
