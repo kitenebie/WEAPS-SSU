@@ -1898,5 +1898,8 @@
         .fi-ta-content-grid{
             background-color: #7F1D1D !important;
         }
+        .fi-ta-record-content-ctn{
+            background-color: #E9E9E9 !important;
+        }
     </style>
 </div>
