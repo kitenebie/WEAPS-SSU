@@ -45,4 +45,12 @@
             {{ $afterActions }}
         </div>
     @endif
+    <style>
+        .header.fi-header {
+            background-color: #FBBF24 !important;
+        }
+        .fi-header-subheading{
+            color: #FFFFFFFF !important;
+        }
+    </style>
 </header>
