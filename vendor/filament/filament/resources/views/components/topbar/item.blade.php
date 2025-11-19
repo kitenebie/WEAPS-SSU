@@ -54,7 +54,7 @@
 
             /* hover */
             .fi-topbar-item-btn:hover {
-                background: #FECF55 !important;
+                background: #DFA403FF !important;
                 color: #7F1D1D !important;
             }
             .fi-topbar-item-btn .fi-icon {
