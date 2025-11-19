@@ -60,7 +60,7 @@ class AdminPanelProvider extends PanelProvider
                         slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
                     )
                     ->enableTwoFactorAuthentication(),
-                FilamentAwinTheme::make(),
+                // FilamentAwinTheme::make(),
                 FilamentApexChartsPlugin::make(),
                 FilamentShieldPlugin::make(), // Registers RoleResource (Spatie Shield)
             ])
