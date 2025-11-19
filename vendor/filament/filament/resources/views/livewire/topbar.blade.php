@@ -39,7 +39,7 @@
                 class="fi-topbar-close-sidebar-btn"
             />
         @endif
-        <h1 class="fi-title">Sorsogon State University - Bulan campus</h1>
+        <h1 class="fi-title hide-h1-md-sm">Sorsogon State University - Bulan campus</h1>
         <div class="fi-topbar-start">
             @if ($isSidebarCollapsibleOnDesktop)
                 <x-filament::icon-button

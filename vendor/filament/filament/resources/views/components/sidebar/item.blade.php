@@ -21,20 +21,15 @@
 @endphp
 
 <li
-    {{
-        $attributes->class([
-            'fi-sidebar-item',
-            'fi-active' => $active,
-            'fi-sidebar-item-has-active-child-items' => $activeChildItems,
-            'fi-sidebar-item-has-url' => filled($url),
-        ])
-    }}
->
-    <a
-        {{ \Filament\Support\generate_href_html($url, $shouldOpenUrlInNewTab) }}
+    {{ $attributes->class([
+        'fi-sidebar-item',
+        'fi-active' => $active,
+        'fi-sidebar-item-has-active-child-items' => $activeChildItems,
+        'fi-sidebar-item-has-url' => filled($url),
+    ]) }}>
+    <a {{ \Filament\Support\generate_href_html($url, $shouldOpenUrlInNewTab) }}
         x-on:click="window.matchMedia(`(max-width: 1024px)`).matches && $store.sidebar.close()"
-        @if ($sidebarCollapsible)
-            x-data="{ tooltip: false }"
+        @if ($sidebarCollapsible) x-data="{ tooltip: false }"
             x-effect="
                 tooltip = $store.sidebar.isOpen
                     ? false
@@ -44,35 +39,27 @@
                           theme: $store.theme,
                       }
             "
-            x-tooltip.html="tooltip"
-        @endif
-        class="fi-sidebar-item-btn"
-    >
-        @if (filled($icon) && ((! $subGrouped) || $sidebarCollapsible))
-            {{
-                \Filament\Support\generate_icon_html(($active && $activeIcon) ? $activeIcon : $icon, attributes: (new \Illuminate\View\ComponentAttributeBag([
-                    'x-show' => ($subGrouped && $sidebarCollapsible) ? '! $store.sidebar.isOpen' : false,
-                ]))->class(['fi-sidebar-item-icon']), size: \Filament\Support\Enums\IconSize::Large)
-            }}
+            x-tooltip.html="tooltip" @endif
+        class="fi-sidebar-item-btn">
+        @if (filled($icon) && (!$subGrouped || $sidebarCollapsible))
+            {{ \Filament\Support\generate_icon_html(
+                $active && $activeIcon ? $activeIcon : $icon,
+                attributes: new \Illuminate\View\ComponentAttributeBag([
+                    'x-show' => $subGrouped && $sidebarCollapsible ? '! $store.sidebar.isOpen' : false,
+                ])->class(['fi-sidebar-item-icon']),
+                size: \Filament\Support\Enums\IconSize::Large,
+            ) }}
         @endif
 
         @if ((blank($icon) && $grouped) || $subGrouped)
-            <div
-                @if (filled($icon) && $subGrouped && $sidebarCollapsible)
-                    x-show="$store.sidebar.isOpen"
-                @endif
-                class="fi-sidebar-item-grouped-border"
-            >
-                @if (! $first)
-                    <div
-                        class="fi-sidebar-item-grouped-border-part-not-first"
-                    ></div>
+            <div @if (filled($icon) && $subGrouped && $sidebarCollapsible) x-show="$store.sidebar.isOpen" @endif
+                class="fi-sidebar-item-grouped-border">
+                @if (!$first)
+                    <div class="fi-sidebar-item-grouped-border-part-not-first"></div>
                 @endif
 
-                @if (! $last)
-                    <div
-                        class="fi-sidebar-item-grouped-border-part-not-last"
-                    ></div>
+                @if (!$last)
+                    <div class="fi-sidebar-item-grouped-border-part-not-last"></div>
                 @endif
 
                 <div class="fi-sidebar-item-grouped-border-part"></div>
@@ -80,31 +67,22 @@
         @endif
 
         <span
-            @if ($sidebarCollapsible)
-                x-show="$store.sidebar.isOpen"
+            @if ($sidebarCollapsible) x-show="$store.sidebar.isOpen"
                 x-transition:enter="fi-transition-enter"
                 x-transition:enter-start="fi-transition-enter-start"
-                x-transition:enter-end="fi-transition-enter-end"
-            @endif
-            class="fi-sidebar-item-label"
-        >
+                x-transition:enter-end="fi-transition-enter-end" @endif
+            class="fi-sidebar-item-label">
             {{ $slot }}
         </span>
 
         @if (filled($badge))
             <span
-                @if ($sidebarCollapsible)
-                    x-show="$store.sidebar.isOpen"
+                @if ($sidebarCollapsible) x-show="$store.sidebar.isOpen"
                     x-transition:enter="fi-transition-enter"
                     x-transition:enter-start="fi-transition-enter-start"
-                    x-transition:enter-end="fi-transition-enter-end"
-                @endif
-                class="fi-sidebar-item-badge-ctn"
-            >
-                <x-filament::badge
-                    :color="$badgeColor"
-                    :tooltip="$badgeTooltip"
-                >
+                    x-transition:enter-end="fi-transition-enter-end" @endif
+                class="fi-sidebar-item-badge-ctn">
+                <x-filament::badge :color="$badgeColor" :tooltip="$badgeTooltip">
                     {{ $badge }}
                 </x-filament::badge>
             </span>
@@ -126,65 +104,67 @@
                     $childItemUrl = $childItem->getUrl();
                 @endphp
 
-                <x-filament-panels::sidebar.item
-                    :active="$isChildActive"
-                    :active-child-items="$isChildItemChildItemsActive"
-                    :active-icon="$childItemActiveIcon"
-                    :badge="$childItemBadge"
-                    :badge-color="$childItemBadgeColor"
-                    :badge-tooltip="$childItemBadgeTooltip"
-                    :first="$loop->first"
-                    grouped
-                    :icon="$childItemIcon"
-                    :last="$loop->last"
-                    :should-open-url-in-new-tab="$shouldChildItemOpenUrlInNewTab"
-                    sub-grouped
-                    :url="$childItemUrl"
-                >
+                <x-filament-panels::sidebar.item :active="$isChildActive" :active-child-items="$isChildItemChildItemsActive" :active-icon="$childItemActiveIcon" :badge="$childItemBadge"
+                    :badge-color="$childItemBadgeColor" :badge-tooltip="$childItemBadgeTooltip" :first="$loop->first" grouped :icon="$childItemIcon" :last="$loop->last"
+                    :should-open-url-in-new-tab="$shouldChildItemOpenUrlInNewTab" sub-grouped :url="$childItemUrl">
                     {{ $childItem->getLabel() }}
                 </x-filament-panels::sidebar.item>
             @endforeach
         </ul>
     @endif
-    
-        <style>
-            .fi-sidebar, .fi-sidebar-header {
-                background: #7F1D1D !important;
-                border-bottom-color: #FFB900 !important;
-                border-bottom-width: 2px !important;
-            }
-            .fi-topbar{
-                background: #C6C6C6 !important;
-            }
-            .fi-sidebar-nav{
-                border-right-width: 1px #C5C5C5FF !important;
-                z-index: 100
-            }
-            .fi-sidebar-item-label {
-                color: #FFFFFF !important;
-            }
-            /* active item */
-            .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
-                background: #FFB900 !important;
-                color: #3D1515FF !important;
-            }
 
-            /* hover */
-            .fi-sidebar-item-btn:hover {
-                background: #DFA403FF !important;
-                color: #7F1D1D !important;
-            }
-            .fi-sidebar-item-btn .fi-icon {
-                color: #FFFFFF !important;
-            }
+    <style>
+        .fi-sidebar,
+        .fi-sidebar-header {
+            background: #7F1D1D !important;
+            border-bottom-color: #FFB900 !important;
+            border-bottom-width: 2px !important;
+        }
 
-            .fi-sidebar-item-label, .fi-sidebar-group-label {
-                color: #FFFFFF !important;
+        .fi-topbar {
+            background: #C6C6C6 !important;
+        }
+
+        .fi-sidebar-nav {
+            border-right-width: 1px #C5C5C5FF !important;
+            z-index: 100
+        }
+
+        .fi-sidebar-item-label {
+            color: #FFFFFF !important;
+        }
+
+        /* active item */
+        .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
+            background: #FFB900 !important;
+            color: #3D1515FF !important;
+        }
+
+        /* hover */
+        .fi-sidebar-item-btn:hover {
+            background: #DFA403FF !important;
+            color: #7F1D1D !important;
+        }
+
+        .fi-sidebar-item-btn .fi-icon {
+            color: #FFFFFF !important;
+        }
+
+        .fi-sidebar-item-label,
+        .fi-sidebar-group-label {
+            color: #FFFFFF !important;
+        }
+
+        .fi-title {
+            color: #7F1D1D !important;
+            font-weight: bold !important;
+            font-size: 1.25rem !important;
+        }
+
+        @media (max-width: 768px) {
+            .hide-h1-md-sm {
+                display: none;
             }
-            .fi-title{
-                color: #7F1D1D !important;
-                font-weight: bold !important;
-                font-size: 1.25rem !important;
-            }
-        </style>
+        }
+    </style>
 </li>
