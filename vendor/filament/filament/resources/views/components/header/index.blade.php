@@ -46,7 +46,7 @@
         </div>
     @endif
     <style>
-        .header.fi-header {
+        .fi-header-heading {
             background-color: #FBBF24 !important;
         }
         .fi-header-subheading{
