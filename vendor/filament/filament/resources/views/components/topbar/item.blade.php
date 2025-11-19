@@ -43,17 +43,26 @@
                 border-bottom-color: #FFB900 !important;
                 border-bottom-width: 2px !important;
             }
-
+            .fi-topbar-item-label {
+                color: #FFFFFF !important;
+            }
             /* active item */
             .fi-topbar-item.fi-active .fi-topbar-item-btn {
                 background: #FFB900 !important;
-                color: #7F1D1D !important;
+                color: #3D1515FF !important;
             }
 
             /* hover */
             .fi-topbar-item-btn:hover {
                 background: #FECF55 !important;
                 color: #7F1D1D !important;
+            }
+            .fi-topbar-item-btn .fi-icon {
+                color: #FFFFFF !important;
+            }
+
+            .fi-topbar-item-label {
+                color: #FFFFFF !important;
             }
         </style>
 
