@@ -47,10 +47,10 @@
     @endif
     <style>
         .fi-header-heading {
-            color: #FBBF24 !important;
+            color: #7F1D1D !important;
         }
         .fi-header-subheading{
-            color: #FFFFFFFF !important;
+            color: #1A1A1AFF !important;
         }
     </style>
 </header>
