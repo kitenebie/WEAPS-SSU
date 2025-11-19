@@ -58,5 +58,8 @@
             background-color: #7F1D1D !important;
             color: #FFB900 !important;
         }
+        .fi-link{
+            color: #7F1D1D !important;
+        }
     </style>
 </x-filament-panels::layout.base>
