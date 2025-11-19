@@ -39,7 +39,7 @@
 
             <ul class="fi-sidebar-nav-groups">
                 <center>
-                    <img style="width: 3rem; height:3rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
+                    <img style="width: 6rem; height:6rem" src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp"
                     alt="" srcset="">
                 </center>
                 @foreach ($navigation as $group)
