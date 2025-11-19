@@ -36,9 +36,19 @@ th {
     background: #FFB900 !important;
     color: #7F1D1D !important;
 }
+.fi-topbar-item-btn:hover{
+    background: #FECF55 !important;
+    color: #7F1D1D !important;
+}
 .fi-icon{
     fill: white !important;
 }
 .fi-topbar-item-label{
+    color: white !important;
+}
+.fi-header-heading{
+    color: #FFD230 !important;
+}
+.fi-header-subheading{
     color: white !important;
 }
