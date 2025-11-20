@@ -257,7 +257,7 @@
                             @endif
 
                             @if ($career->min_salary || $career->max_salary)
-                                <div class="flex px-4 py-2 items-center text-lg border-2 text-red-900 font-semibold mb-2">
+                                <div class="flex px-4 py-2 items-center text-xl font-bolder mb-2">
                                     {{-- <svg class="w-4 h-4 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                                 </svg> --}}
@@ -281,7 +281,7 @@
 
                         <div class="space-y-2 mb-4">
                             @if ($career->role_type)
-                                <div class="flex items-center font-semibold text-sm text-gray-900">
+                                <div class="flex items-center font-semibold text-md text-gray-900">
                                     <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -293,8 +293,8 @@
                             @endif
 
                             @if ($career->location)
-                                <div class="flex items-center text-sm text-gray-900">
-                                    <svg class="w-4 h-4 mr-2  font-semibold  text-gray-900" fill="none" stroke="currentColor"
+                                <div class="flex items-center font-semibold  text-md text-gray-900">
+                                    <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
