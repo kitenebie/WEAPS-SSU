@@ -257,7 +257,7 @@
                             @endif
 
                             @if ($career->min_salary || $career->max_salary)
-                                <div class="flex px-4 py-2 items-center text-xl font-bold mb-2">
+                                <div class="flex px-2 py-2 items-center text-red-900 text-xl font-bold mb-2">
                                     {{-- <svg class="w-4 h-4 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                                 </svg> --}}
@@ -331,7 +331,7 @@
                                 <div class="flex flex-wrap gap-2">
                                     @foreach ($career->tags as $tag)
                                         <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-maroon-500 text-gray-50">
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-md font-medium bg-maroon-500 text-white">
                                             {{ $tag }}
                                         </span>
                                     @endforeach
@@ -365,7 +365,7 @@
                         </div>
 
                         <div class="pt-4 border-t border-slate-200">
-                            <div class="flex items-center justify-between text-sm text-slate-500">
+                            <div class="flex items-center justify-between text-sm text-gray-800">
                                 <span>{{ $career->created_at->diffForHumans() }}</span>
                                 @if ($career->applicants_count ?? false)
                                     <span class="font-medium">{{ $career->applicants_count }} applicants</span>
