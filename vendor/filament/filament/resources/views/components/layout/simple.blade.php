@@ -72,7 +72,7 @@
             display: flex;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(109, 1, 1, 0.83) 0%, rgba(128, 0, 0, 0.7) 30%, rgba(100, 1, 1, 0.8) 70%, rgba(92, 1, 1, 0.842) 100%), url(/bg.png);
+            background: linear-gradient(135deg, rgba(109, 1, 1, 0.83) 0%, rgba(128, 0, 0, 0.7) 30%, rgba(100, 1, 1, 0.8) 70%, rgba(92, 1, 1, 0.842) 100%), url(https://sorsu.edu.ph/wp-content/uploads/2024/06/SORSU-BC-JOINS-126TH-INDEPENDENCE-DAY-4.jpg);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
