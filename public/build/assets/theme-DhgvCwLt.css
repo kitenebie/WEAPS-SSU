@@ -21024,10 +21024,6 @@
 .fi-main-ctn {
     background: #7f1d1d !important;
 }
-th {
-    color: #7f1d1d;
-    background-color: #ffd230;
-}
 .fi-topbar {
     background: #7f1d1d !important;
     border-bottom-width: 2px !important;
@@ -21038,18 +21034,11 @@ th {
     color: #7f1d1d !important;
     background: #1E1E1E !important;
 }
-.fi-topbar-item-btn:hover {
-    color: #7f1d1d !important;
-    background: #fecf55 !important;
-}
 .fi-icon {
     fill: #fff !important;
 }
 .fi-topbar-item-label {
     color: #fff !important;
-}
-.fi-header-heading {
-    color: #ffd230 !important;
 }
 .fi-header-subheading {
     color: #fff !important;
