@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Carrer;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -107,8 +108,13 @@ class CareerList extends Component
     }
     public function openCampany($companyId)
     {
-        Session::put('company_id', $companyId);
-        return redirect('/Company%20Profile');
+        Cache::put('key', $companyId, now()->addMinutes(2));
+        $data = Cache::get('key');
+        if ($data != null) {
+            return redirect('/Company%20Profile');
+        } else {
+            dd("Error setting company_id in session: ". $companyId);
+        }
     }
     public function clearFilters()
     {

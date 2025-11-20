@@ -7,6 +7,7 @@ use Filament\Support\Icons\Heroicon;
 use BackedEnum;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class CompanyPage extends Page
@@ -26,9 +27,9 @@ class CompanyPage extends Page
             return false;
         }
         // dd(Session::get('Company_id'));
-
+        $data = Cache::get('key');
         // Make it visible if Company_id session exists and is not null
-        if (Session::get('Company_id') !== null) {
+        if ($data !== null) {
             return true;
         }
 
@@ -42,5 +43,4 @@ class CompanyPage extends Page
         $defaultRole = env('USER_DEFAULT_ROLE');
         return !$user->roles()->where('name', $defaultRole)->exists();
     }
-
 }
