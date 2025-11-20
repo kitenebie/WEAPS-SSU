@@ -18,6 +18,11 @@ class CompanyPage extends Page
     protected static ?string $navigationLabel = 'Company Profile';
     protected static ?string $slug = 'Company Profile';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Cache::get('key') === null;
+    }
+
 
     public static function canAccess(): bool
     {
