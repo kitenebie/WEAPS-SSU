@@ -129,7 +129,7 @@
                             @endif
                             @if ($role_type_filter)
                                 <span
-                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-100 text-gray-50">
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-100 text-gray-800">
                                     {{ $role_type_filter }}
                                 </span>
                             @endif
