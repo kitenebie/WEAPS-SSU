@@ -21794,3 +21794,21 @@ th {
 .fi-section-header {
     background: #1E1E1E !important;
 }
+.fi-simple-main-ctn {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(128, 0, 0, 0.4) 30%, rgba(128, 0, 0, 0.15) 70%, rgba(255, 255, 255, 0.1) 100%), url(/bg.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+}
