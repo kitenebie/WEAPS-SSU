@@ -132,15 +132,23 @@
         .fi-sc-wizard-header-step-label {
             font-size: 1.2rem !important;
             font-weight: 600 !important;
-            color: #ffb900 !important;
+            color: #ffffff !important;
         }
 
+        .fi-sc-wizard-header-step-icon-ctn{
+            border-color: #707070;
+            color: #7f1d1d;
+        }
         .fi-sc-wizard .fi-sc-wizard-header .fi-sc-wizard-header-step.fi-active .fi-sc-wizard-header-step-btn .fi-sc-wizard-header-step-icon-ctn {
-            border-color: #ffb900;
+            border-color: #ffffff;
+            color: #7f1d1d;
         }
         .fi-size-lg{
-            fill: #ffb900;
+            fill: #dfdfdf;
             color: #7f1d1d;
+        }
+        .fi-sidebar-item-icon{
+            fill: #dfdfdf;
         }
         .fi-sc-wizard-header-step-btn {
             color: #FFFFFFFF !important;

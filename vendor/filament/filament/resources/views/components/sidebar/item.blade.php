@@ -134,13 +134,13 @@
 
         /* active item */
         .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
-            background: #FFB900 !important;
+            background: #1E1E1E !important;
             color: #3D1515FF !important;
         }
 
         /* hover */
         .fi-sidebar-item-btn:hover {
-            background: #DFA403FF !important;
+            background: #1E1E1E !important;
             color: #7F1D1D !important;
         }
 

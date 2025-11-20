@@ -110,19 +110,20 @@ class CurriculumVitaesTable
                 //     ->sortable()
                 //     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->reorderableColumns()
             ->columnManagerColumns(4)
             ->filters([
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()
+                    ->button()
+                    ->color('info'),
+                EditAction::make()
+                    ->button()
+                    ->color('primary'),
             ], RecordActionsPosition::BeforeColumns)
             ->toolbarActions(actions: [
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                    DeleteBulkAction::make()->color('warning'),
             ]);
     }
 }

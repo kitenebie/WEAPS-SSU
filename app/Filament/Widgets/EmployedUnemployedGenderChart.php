@@ -76,7 +76,7 @@ class EmployedUnemployedGenderChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#FFB900', '#7F1D1D', '#494949'],
+            'colors' => ['#1E1E1E', '#7F1D1D', '#494949'],
             'plotOptions' => [
                 'bar' => [
                     'horizontal' => false,

@@ -100,7 +100,7 @@ class User extends Authenticatable
             self::logChange($user, 'delete');
         });
     }
-
+ 
     
     public function getFilamentName(): string
     {

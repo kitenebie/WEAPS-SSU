@@ -450,7 +450,7 @@ class CurriculumVitaeForm
     <x-filament::button
         type="submit"
         size="xl"
-        style="color: #ffb900;"
+        style="color: #1E1E1E;"
     >
         Save changes
     </x-filament::button>

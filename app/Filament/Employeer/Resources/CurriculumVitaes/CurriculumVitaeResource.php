@@ -24,6 +24,16 @@ class CurriculumVitaeResource extends Resource
 {
     protected static ?string $model = CurriculumVitae::class;
 
+    protected static ?int $sort = null;
+
+    public static function getNavigationSort(): ?int
+    {
+        $user = Auth::user();
+        if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
+            return -20;
+        }
+        return null;
+    }
     public static function getModelLabel(): string
     {
         $user = Auth::user();

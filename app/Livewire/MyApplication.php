@@ -53,7 +53,7 @@ class MyApplication extends Component
                 $query->where('title', 'like', '%' . $this->savedSearch . '%')
                       ->orWhere('description', 'like', '%' . $this->savedSearch . '%');
             })
-            ->paginate(10, ['*'], 'saved_page');
+            ->paginate(5, ['*'], 'saved_page');
     }
 
     public function setActiveTab($tab)
@@ -69,7 +69,7 @@ class MyApplication extends Component
                 $query->where('title', 'like', '%' . $this->appliedSearch . '%')
                       ->orWhere('description', 'like', '%' . $this->appliedSearch . '%');
             })
-            ->paginate(10, ['*'], 'applied_page');
+            ->paginate(5, ['*'], 'applied_page');
     }
 
     public function render()

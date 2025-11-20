@@ -39,12 +39,13 @@ class EmployeerPanelProvider extends PanelProvider
             ->passwordReset()
             ->emailVerification()
             ->emailChangeVerification()
-            ->profile()
             ->brandLogo(asset('https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp'))
             ->brandLogoHeight('3rem')
             // ->topNavigation(true)
             ->colors([
-                'primary' => Color::Maroon,
+                    'primary' => Color::Gray,
+                    'warning' => Color::Orange,
+                    'info' => Color::Blue,
             ])
             ->darkMode(false)
             ->discoverResources(in: app_path('Filament/Employeer/Resources'), for: 'App\Filament\Employeer\Resources')

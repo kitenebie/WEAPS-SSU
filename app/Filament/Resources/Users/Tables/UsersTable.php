@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Enums\RecordActionsPosition;
 
 class UsersTable
 {
@@ -90,17 +91,19 @@ class UsersTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->modifyQueryUsing(fn ($query) => $query->whereHas('companies'))
+            ->modifyQueryUsing(fn($query) => $query->whereHas('companies'))
             ->filters([
                 //
             ])
+            ->columnManagerColumns(2)
             ->recordActions([
-                ViewAction::make(),
-            ])
+                ViewAction::make()
+                    ->button()
+                    ->color('primary'),
+            ], RecordActionsPosition::BeforeColumns)
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                DeleteBulkAction::make()
+                    ->color('warning')
             ]);
     }
 }

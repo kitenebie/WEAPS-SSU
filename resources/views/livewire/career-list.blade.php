@@ -1,15 +1,15 @@
 <div style="width: 100%; display: flex; justify-content: center;">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/src/outStyle.css">
-    <div style="width: 100rem !important" class="mt-8">
+    <div style="width: 95rem !important" class="mt-8">
 
         <!-- Search and Filter Section -->
-        <div class="mb-8 min-w-full border border-gray-200 rounded-xl shadow-xs p-8">
+        <div class="mb-8 min-w-full border border-red-900 bg-red-900 shadow-xs p-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Search Bar -->
                 <div>
-                    <label for="search" class="block text-sm font-semibold text-slate-800 mb-3 pr-4">
-                        <svg class="w-4 h-4 inline mr-2 text-slate-600" fill="none" stroke="currentColor"
+                    <label for="search" class="block text-sm font-semibold text-gray-50 mb-3 pr-4">
+                        <svg class="w-4 h-4 inline mr-2 text-gray-50" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -32,8 +32,8 @@
 
                 <!-- Location Filter -->
                 <div>
-                    <label for="location_filter" class="block text-sm font-semibold text-slate-800 mb-3 pr-4">
-                        <svg class="w-4 h-4 inline mr-2 text-slate-600" fill="none" stroke="currentColor"
+                    <label for="location_filter" class="block text-sm font-semibold text-gray-50 mb-3 pr-4">
+                        <svg class="w-4 h-4 inline mr-2 text-gray-50" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
@@ -50,8 +50,8 @@
 
                 <!-- Role Type Filter -->
                 <div>
-                    <label for="role_type_filter" class="block text-sm font-semibold text-slate-800 mb-3 pr-4">
-                        <svg class="w-4 h-4 inline mr-2 text-slate-600" fill="none" stroke="currentColor"
+                    <label for="role_type_filter" class="block text-sm font-semibold text-gray-50 mb-3 pr-4">
+                        <svg class="w-4 h-4 inline mr-2 text-gray-50" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6">
@@ -72,8 +72,8 @@
 
                 <!-- Salary Range Filter -->
                 <div>
-                    <label for="salary_range_filter" class="block text-sm font-semibold text-slate-800 mb-3 pr-4">
-                        <svg class="w-4 h-4 inline mr-2 text-slate-600" fill="none" stroke="currentColor"
+                    <label for="salary_range_filter" class="block text-sm font-semibold text-gray-50 mb-3 pr-4">
+                        <svg class="w-4 h-4 inline mr-2 text-gray-50" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
@@ -129,7 +129,7 @@
                             @endif
                             @if ($role_type_filter)
                                 <span
-                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-maroon-100 text-slate-800">
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-maroon-100 text-gray-50">
                                     {{ $role_type_filter }}
                                 </span>
                             @endif
@@ -225,7 +225,7 @@
         @if ($careers->count() > 0)
             <!-- Results Counter -->
             <div class="mb-6">
-                <p class="text-sm text-gray-600">
+                <p class="text-lg text-gray-600">
                     Showing {{ $careers->count() }} career{{ $careers->count() !== 1 ? 's' : '' }}
                     @if ($search || $location_filter || $role_type_filter)
                         matching your search criteria
@@ -236,7 +236,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($careers as $career)
                     <div
-                        class="bg-gray-50 rounded-lg relative shadow-md border pt-4 border-gray-200 p-6 hover:shadow-lg hover:border-slate-300 transition-all duration-200">
+                        class="bg-red-50 rounded-lg relative shadow-md border pt-4 border-gray-200 p-6 hover:shadow-lg hover:border-slate-300 transition-all duration-200">
                         <div class="w-full h-4 bg-maroon-600 absolute rounded-t-lg top-0 left-0"></div>
                         @if(isset($career->is_saved) && $career->is_saved)
                             <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
@@ -249,15 +249,15 @@
                             </div>
                         @endif
                         <div class="mb-4" >
-                            <h3 class="text-xl font-semibold text-slate-900 mb-2">{{ $career->title }}</h3>
-                            @if ($career->company)
-                                <p class="text-sm text-slate-600 mb-2">
-                                    <span class="font-medium text-slate-700">Company:</span>
+                            <h3 class="text-3xl font-bold text-slate-900 mb-2">{{ $career->title }}</h3>
+                            @if ($career->company->name)
+                                <p class="text-lg font-semibold text-gray-600 mb-2">
+                                    <span class="text-gray-500">Company:</span>
                                     {{ $career->company->name ?? 'N/A' }}
                                 </p>
                             @endif
                             @if ($career->min_salary || $career->max_salary)
-                                <div class="flex items-center text-sm text-amber-600 font-semibold mb-2">
+                                <div class="flex px-4 py-2 items-center text-lg border-2 border-amber-800 bg-amber-300 text-red-900 font-semibold mb-2">
                                     {{-- <svg class="w-4 h-4 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                                 </svg> --}}
@@ -274,13 +274,13 @@
                         </div>
 
                         <div class="mb-4">
-                            <p class="text-gray-700 text-sm line-clamp-3">{{ Str::limit($career->description, 150) }}
+                            <p class="text-gray-900 text-md line-clamp-3">{{ Str::limit($career->description, 150) }}
                             </p>
                         </div>
 
                         <div class="space-y-2 mb-4">
                             @if ($career->role_type)
-                                <div class="flex items-center text-sm text-slate-600">
+                                <div class="flex items-center text-sm text-gray-50">
                                     <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -292,7 +292,7 @@
                             @endif
 
                             @if ($career->location)
-                                <div class="flex items-center text-sm text-slate-600">
+                                <div class="flex items-center text-sm text-gray-50">
                                     <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -306,7 +306,7 @@
                             @endif
 
                             {{-- @if ($career->min_salary || $career->max_salary)
-                                <div class="flex items-center text-sm text-slate-600">
+                                <div class="flex items-center text-sm text-gray-50">
                                     <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -330,7 +330,7 @@
                                 <div class="flex flex-wrap gap-2">
                                     @foreach ($career->tags as $tag)
                                         <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-maroon-100 text-slate-800">
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-maroon-100 text-gray-50">
                                             {{ $tag }}
                                         </span>
                                     @endforeach

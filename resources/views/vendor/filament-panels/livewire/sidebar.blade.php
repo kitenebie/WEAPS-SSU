@@ -4,7 +4,9 @@
         $isRtl = __('filament-panels::layout.direction') === 'rtl';
         $isSidebarCollapsibleOnDesktop = filament()->isSidebarCollapsibleOnDesktop();
         $isSidebarFullyCollapsibleOnDesktop = filament()->isSidebarFullyCollapsibleOnDesktop();
-        $image = App\Models\CurriculumVitae::where('user_id', Auth::id())->first()->profile_picture ?? App\Models\Company::where('user_id', Auth::id())->first()->logo;
+        $cv = App\Models\CurriculumVitae::where('user_id', Auth::id())->first();
+        $company = App\Models\Company::where('user_id', Auth::id())->first();
+        $image = $cv?->profile_picture ?? $company?->logo;
         $image = $image ? "https://weapssorsu-bc.site/storage/" . $image : null;
     @endphp
 
@@ -19,9 +21,16 @@
                 {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_LOGO_BEFORE) }}
 
                 <center >
-                    <img class="logo-profile-header" style="position: absolute; top: 1.2rem;left: 30%;width: 6rem; height:6rem; border-radius: 50%;border: 4px solid #ADADADFF" src={{ $image ?? "https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp" }}
+                    <img class="logo-profile-header" style="position: absolute; top: 1.2rem;left: 30%;width: 6rem; height:6rem; border-radius: 50%;border: 4px solid #1E1E1E" src={{ $image ?? "https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp" }}
                     alt="" srcset="">
                 </center>
+                {{-- @if ($homeUrl = filament()->getHomeUrl())
+                    <a {{ \Filament\Support\generate_href_html($homeUrl) }}>
+                        <x-filament-panels::logo />
+                    </a>
+                @else
+                    <x-filament-panels::logo />
+                @endif --}}
 
                 {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_LOGO_AFTER) }}
             </header>
@@ -38,7 +47,7 @@
 
             <ul class="fi-sidebar-nav-groups">
                 <center >
-                    <img class="logo-profile" style="width: 9rem; height:9rem; border-radius: 50%;border: 4px solid #ADADADFF" src={{ $image ?? "https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp" }}
+                    <img class="logo-profile" style="width: 9rem; height:9rem; border-radius: 50%;border: 4px solid #1E1E1E" src={{ $image ?? "https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp" }}
                     alt="" srcset="">
                 </center>
                 @foreach ($navigation as $group)

@@ -56,7 +56,7 @@
         }
         .fi-ac-btn-action{
             background-color: #7F1D1D !important;
-            color: #FFB900 !important;
+            color: #1E1E1E !important;
         }
         .fi-link{
             color: #7F1D1D !important;

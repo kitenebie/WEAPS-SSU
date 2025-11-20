@@ -67,3 +67,9 @@ Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->name('privacy.policy');
 Route::get('/alumni/list', [ListController::class, 'index'])->name('students.scrape');
+
+
+Route::get('/profile', function(){
+    $alumni_id = 5;
+    return view('Resume.index', compact('alumni_id'));
+});

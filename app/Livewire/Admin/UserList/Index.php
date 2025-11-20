@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\UserList;
 use Filament\Actions\BulkActionGroup;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Tables\Enums\RecordActionsPosition;
 use Livewire\Component;
 use Filament\Tables\Table;
 use Filament\Forms\Form;
@@ -181,6 +182,8 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->button()
+                    ->color('primary')
                     ->form([
                         TextInput::make('name')->required(),
                         TextInput::make('email')->email()->required(),
@@ -197,11 +200,13 @@ class Index extends Component implements HasSchemas, HasActions, HasTable
                         }
                         $record->update($data);
                     }),
-            ])
+            
+
+
+            ], RecordActionsPosition::BeforeColumns)
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                    DeleteBulkAction::make()
+                    ->color('warning'),
                 CreateAction::make()
                     ->form([
                         TextInput::make('name')->required(),

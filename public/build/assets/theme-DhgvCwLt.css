@@ -21031,12 +21031,12 @@ th {
 .fi-topbar {
     background: #7f1d1d !important;
     border-bottom-width: 2px !important;
-    border-bottom-color: #ffb900 !important;
+    border-bottom-color: #1E1E1E !important;
 }
 .fi-topbar-item .fi-active a .fi-topbar-item-btn,
 .fi-topbar-item .fi-active .fi-topbar-item-btn {
     color: #7f1d1d !important;
-    background: #ffb900 !important;
+    background: #1E1E1E !important;
 }
 .fi-topbar-item-btn:hover {
     color: #7f1d1d !important;
@@ -21744,7 +21744,7 @@ th {
 }
 
 /* .fi-btn .fi-size-sm  .fi-ac-btn-action{
-    background-color: #FFB900 !important;
+    background-color: #1E1E1E !important;
     color: white !important;
 }
 .fi-btn .fi-size-sm .fi-ac-btn-action:hover{
@@ -21752,7 +21752,7 @@ th {
     color: white !important;
 }
 .fi-sidebar-item.fi-active .fi-sidebar-item-btn{
-    background-color: #FFB900 !important;
+    background-color: #1E1E1E !important;
     color: white !important;
 }
 .fi-sidebar-item.fi-active .fi-sidebar-item-btn:hover{
@@ -21764,24 +21764,24 @@ th {
     background: #7f1d1d !important;
 }
 th {
-    background-color: #ffd230;
+    background-color: #1E1E1E;
     color: #7f1d1d;
 }
 .fi-topbar {
     background: #7f1d1d !important;
-    border-bottom-color: #ffb900 !important;
+    border-bottom-color: #1E1E1E !important;
     border-bottom-width: 2px !important;
 }
 .fi-topbar-item .fi-active a .fi-topbar-item-btn {
-    background: #ffb900 !important;
+    background: #1E1E1E !important;
     color: #7f1d1d !important;
 }
 .fi-topbar-item .fi-active .fi-topbar-item-btn {
-    background: #ffb900 !important;
+    background: #1E1E1E !important;
     color: #7f1d1d !important;
 }
 .fi-topbar-item-btn:hover {
-    background: #fecf55 !important;
+    background: #3C3C3C !important;
     color: #7f1d1d !important;
 }
 .fi-icon {
@@ -21791,7 +21791,7 @@ th {
     color: white !important;
 }
 .fi-header-heading {
-    color: #ffd230 !important;
+    color: #3C3C3C !important;
 }
 .fi-header-subheading {
     color: white !important;
@@ -21803,5 +21803,5 @@ th {
     background: #7f1d1d !important;
 }
 .fi-section-header {
-    background: #ffb900 !important;
+    background: #1E1E1E !important;
 }

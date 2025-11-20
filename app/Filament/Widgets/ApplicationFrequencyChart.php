@@ -95,7 +95,7 @@ class ApplicationFrequencyChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#FFB900', '#4FA753', '#7F1D1D'],
+            'colors' => ['#1E1E1E', '#4FA753', '#7F1D1D'],
             'legend' => [
                 'position' => 'top',
             ],

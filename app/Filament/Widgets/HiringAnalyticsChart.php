@@ -90,7 +90,7 @@ class HiringAnalyticsChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#FFB900'],
+            'colors' => ['#1E1E1E'],
             'stroke' => [
                 'curve' => 'smooth',
             ],

@@ -40,7 +40,7 @@
         <style>
             .fi-sidebar {
                 background: #7F1D1D !important;
-                border-bottom-color: #FFB900 !important;
+                border-bottom-color: #1E1E1E !important;
                 border-bottom-width: 2px !important;
             }
             .fi-sidebar-item-label {
@@ -48,7 +48,7 @@
             }
             /* active item */
             .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
-                background: #FFB900 !important;
+                background: #1E1E1E !important;
                 color: #3D1515FF !important;
             }
 
