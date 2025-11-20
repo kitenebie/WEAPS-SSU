@@ -225,7 +225,7 @@
         @if ($careers->count() > 0)
             <!-- Results Counter -->
             <div class="mb-6">
-                <p class="text-lg text-gray-600">
+                <p class="text-lg font-bold text-gray-800">
                     Showing {{ $careers->count() }} career{{ $careers->count() !== 1 ? 's' : '' }}
                     @if ($search || $location_filter || $role_type_filter)
                         matching your search criteria
@@ -252,7 +252,6 @@
                             <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ $career->title }}</h3>
                             @if ($career->company->name)
                                 <p class="text-lg font-semibold text-gray-700 mb-2">
-                                    <span class="text-gray-500">Company:</span>
                                     {{ $career->company->name ?? 'N/A' }}
                                 </p>
                             @endif
@@ -282,7 +281,7 @@
 
                         <div class="space-y-2 mb-4">
                             @if ($career->role_type)
-                                <div class="flex items-center text-sm text-gray-900">
+                                <div class="flex items-center font-semibold text-sm text-gray-900">
                                     <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -295,7 +294,7 @@
 
                             @if ($career->location)
                                 <div class="flex items-center text-sm text-gray-900">
-                                    <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
+                                    <svg class="w-4 h-4 mr-2  font-semibold  text-gray-900" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
