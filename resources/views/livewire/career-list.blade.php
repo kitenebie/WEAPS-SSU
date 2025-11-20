@@ -249,13 +249,14 @@
                             </div>
                         @endif
                         <div class="mb-4" >
-                            <h3 class="text-3xl font-bold text-slate-900 mb-2">{{ $career->title }}</h3>
+                            <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ $career->title }}</h3>
                             @if ($career->company->name)
                                 <p class="text-lg font-semibold text-gray-700 mb-2">
                                     <span class="text-gray-500">Company:</span>
                                     {{ $career->company->name ?? 'N/A' }}
                                 </p>
                             @endif
+
                             @if ($career->min_salary || $career->max_salary)
                                 <div class="flex px-4 py-2 items-center text-lg border-2 text-red-900 font-semibold mb-2">
                                     {{-- <svg class="w-4 h-4 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,6 +272,7 @@
                                     @endif
                                 </div>
                             @endif
+
                         </div>
 
                         <div class="mb-4">
@@ -280,8 +282,8 @@
 
                         <div class="space-y-2 mb-4">
                             @if ($career->role_type)
-                                <div class="flex items-center text-sm text-gray-50">
-                                    <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor"
+                                <div class="flex items-center text-sm text-gray-900">
+                                    <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6">
@@ -292,8 +294,8 @@
                             @endif
 
                             @if ($career->location)
-                                <div class="flex items-center text-sm text-gray-50">
-                                    <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor"
+                                <div class="flex items-center text-sm text-gray-900">
+                                    <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
@@ -330,7 +332,7 @@
                                 <div class="flex flex-wrap gap-2">
                                     @foreach ($career->tags as $tag)
                                         <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-maroon-100 text-gray-50">
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-maroon-500 text-gray-50">
                                             {{ $tag }}
                                         </span>
                                     @endforeach
@@ -351,7 +353,7 @@
                                 View Details
                             </button>
                             <button wire:click="openCampany({{ $career->company_id }})"
-                                class="w-1/2 bg-amber-400 hover:bg-amber-500 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                                class="w-1/2 bg-blue-400 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
