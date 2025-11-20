@@ -14,12 +14,12 @@ class CompanyPolicy
     
     public function viewAny(AuthUser $authUser): bool
     {
-        return $authUser->can('ViewAny:Company');
+        return true;
     }
 
     public function view(AuthUser $authUser, Company $company): bool
     {
-        return $authUser->can('View:Company');
+        return true;
     }
 
     public function create(AuthUser $authUser): bool

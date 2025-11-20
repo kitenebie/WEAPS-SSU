@@ -110,7 +110,7 @@ class Profile extends Component implements HasForms
                 });
             })
             ->get();
-
+            
         return view('livewire.company.profile', [
             'company' => $company,
             'careers' => $careers,
