@@ -477,9 +477,9 @@
                                             <div class="mt-2">
                                                 <span
                                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                                    @if ($applicant->status === 'pending') bg-amber-100 text-amber-800
-                                                    @elseif($applicant->status === 'approved') bg-green-100 text-green-800
-                                                    @elseif($applicant->status === 'rejected') bg-red-100 text-red-800
+                                                    @if ($applicant->status === 'pending') bg-[#FF6900] text-white
+                                                    @elseif($applicant->status === 'approved') bg-[#05DF72] text-green-800
+                                                    @elseif($applicant->status === 'rejected') bg-[#FF6900] text-white
                                                     @else bg-gray-100 text-gray-800 @endif">
                                                     {{ ucfirst($applicant->status ?? 'pending') }}
                                                 </span>
@@ -494,12 +494,12 @@
                                                 <button
                                                     onclick="updateApplicationStatus({{ $applicant->id }}, 'approved')"
                                                     class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
-                                                    Approve - {{ $applicant->id }}
+                                                    Approve
                                                 </button>
                                                 <button
                                                     onclick="updateApplicationStatus({{ $applicant->id }}, 'rejected')"
                                                     class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
-                                                    reject - {{ $applicant->id }}
+                                                    reject
                                                 </button>
                                             @endif
                                         </div>
