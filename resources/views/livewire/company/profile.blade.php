@@ -486,7 +486,7 @@
                                             </div>
                                         </div>
                                         <div class="flex space-x-2">
-                                            <button onclick="viewApplicant({{ $applicant->user->id }})"
+                                            <button onclick="viewApplicant({{ App\Models\CurriculumVitae::where('user_id', $applicant->user->id)->first()->id ?? 'null' }})"
                                                 class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-all">
                                                 View Profile
                                             </button>
