@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Support\Enums\Width;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Enums\RecordActionsPosition;
@@ -96,6 +97,7 @@ class UsersTable
                 //
             ])
             ->columnManagerColumns(2)
+            ->columnManagerWidth(Width::Medium)
             ->recordActions([
                 ViewAction::make()
                     ->button()
