@@ -494,7 +494,7 @@
                                                 <button
                                                     onclick="updateApplicationStatus({{ $applicant->user->id }}, 'approved')"
                                                     class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
-                                                    View
+                                                    Approve
                                                 </button>
                                             @endif
                                         </div>
