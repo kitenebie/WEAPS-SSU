@@ -494,12 +494,12 @@
                                                 <button
                                                     onclick="updateApplicationStatus({{ $applicant->id }}, 'approved')"
                                                     class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
-                                                    Approve
+                                                    Approve - {{ $applicant->id }}
                                                 </button>
                                                 <button
                                                     onclick="updateApplicationStatus({{ $applicant->id }}, 'rejected')"
                                                     class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
-                                                    reject
+                                                    reject - {{ $applicant->id }}
                                                 </button>
                                             @endif
                                         </div>

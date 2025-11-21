@@ -171,14 +171,14 @@ class CareerController extends Controller
         $applicant = Applicant::where($request->applicant_id);
 
         // Check if the applicant belongs to a career of this user's company
-        // $userCompanyId = Company::where('user_id', Auth::id())->first()->id ?? null;
+        $userCompanyId = Company::where('user_id', Auth::id())->first()->id ?? null;
         
-        // if (!$userCompanyId || $applicant->company_id !== $userCompanyId) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Unauthorized to update this application.'.$userCompanyId. "-".$applicant->company_id,
-        //     ], 403);
-        // }
+        if (!$userCompanyId || $applicant->company_id !== $userCompanyId) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized to update this application.'.$userCompanyId. "-".$applicant->company_id,
+            ], 403);
+        }
 
         $applicant->update([
             'status' => $request->status,
