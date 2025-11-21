@@ -155,7 +155,6 @@ class CareerController extends Controller
 
     public function updateApplicationStatus(Request $request)
     {
-        dd($request->all());
         $validator = Validator::make($request->all(), [
             'applicant_id' => 'required|exists:applicants,id',
             'status' => 'required|in:pending,approved,rejected',
@@ -176,7 +175,7 @@ class CareerController extends Controller
         if (!$userCompanyId || $applicant->company_id !== $userCompanyId) {
             return response()->json([
                 'success' => false,
-                'message' => 'Unauthorized to update this application.',
+                'message' => 'Unauthorized to update this application.'.$userCompanyId. "-".$applicant->company_id,
             ], 403);
         }
 
