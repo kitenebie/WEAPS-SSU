@@ -477,7 +477,7 @@
                                             <div class="mt-2">
                                                 <span
                                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                                    @if ($applicant->status === 'pending') bg-yellow-100 text-yellow-800
+                                                    @if ($applicant->status === 'pending') bg-amber-100 text-amber-800
                                                     @elseif($applicant->status === 'approved') bg-green-100 text-green-800
                                                     @elseif($applicant->status === 'rejected') bg-red-100 text-red-800
                                                     @else bg-gray-100 text-gray-800 @endif">
