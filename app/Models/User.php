@@ -138,4 +138,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Applicant::class);
     }
+
+    /**
+     * Get the emails sent to the user.
+     */
+    public function emails()
+    {
+        return $this->hasMany(Email::class);
+    }
 }

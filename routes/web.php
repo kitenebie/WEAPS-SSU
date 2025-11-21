@@ -73,3 +73,4 @@ Route::get('/profile', function(){
     $alumni_id = 5;
     return view('Resume.index', compact('alumni_id'));
 });
+Route::get('/send-email', [App\Http\Controllers\CareerController::class, 'sendJobPostingsEmail']);
