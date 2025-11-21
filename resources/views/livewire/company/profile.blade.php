@@ -476,11 +476,12 @@
                                             </p>
                                             <div class="mt-2">
                                                 <span
-                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                                    @if ($applicant->status === 'pending') bg-orange-100 text-orange-800
-                                                    @elseif($applicant->status === 'approved') bg-green-100 text-green-800
-                                                    @elseif($applicant->status === 'rejected') bg-red-100 text-red-800
-                                                    @else bg-gray-100 text-gray-800 @endif">
+                                                    
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                                                    @if ($applicant->status === 'pending')style="background-color: #f97316; color: #ea580c;"
+                                                    @elseif($applicant->status === 'approved') style="background-color: #05DF72; color: #026332FF;"
+                                                    @elseif($applicant->status === 'rejected') style="background-color: #FC3F49FF; color: #9C030BFF;"
+                                                    @else bg-gray-100 text-gray-800 @endif>
                                                     {{ ucfirst($applicant->status ?? 'pending') }}
                                                 </span>
                                             </div>
