@@ -493,7 +493,7 @@
                                             @if ($applicant->status === 'pending')
                                                 <button
                                                     onclick="updateApplicationStatus({{ $applicant->user->id }}, 'approved')"
-                                                    class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
+                                                    class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
                                                     View
                                                 </button>
                                             @endif

@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Illuminate\Contracts\View\View;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class Profile extends Component implements HasForms
@@ -38,8 +39,8 @@ class Profile extends Component implements HasForms
     {
         $company = null;
 
-        if (Session::get('company_id')) {
-            $company = Company::find(Session::get('company_id'));
+        if (Cache::get('key')) {
+            $company = Company::find(Cache::get('key'));
         } else {
             $company = Company::where('user_id', Auth::user()->id)->first();
         }
@@ -79,8 +80,9 @@ class Profile extends Component implements HasForms
     }
     public function render()
     {
-        if (Session::get('company_id')) {
-            $company = Company::find(Session::get('company_id'));
+        $data = Cache::get('key');
+        if ($data) {
+            $company = Company::find($data);
         } else {
             $company = Company::where('user_id', Auth::user()->id)->first();
             $this->isMe = true;
@@ -136,8 +138,8 @@ class Profile extends Component implements HasForms
 
             // Get the company
             $company = null;
-            if (Session::get('company_id')) {
-                $company = Company::find(Session::get('company_id'));
+            if (Cache::get('key')) {
+                $company = Company::find(Cache::get('key'));
             } else {
                 $company = Company::where('user_id', Auth::user()->id)->first();
             }
@@ -201,8 +203,8 @@ class Profile extends Component implements HasForms
 
             // Get the company
             $company = null;
-            if (Session::get('company_id')) {
-                $company = Company::find(Session::get('company_id'));
+            if (Cache::get('key')) {
+                $company = Company::find(Cache::get('key'));
             } else {
                 $company = Company::where('user_id', Auth::user()->id)->first();
             }
