@@ -233,148 +233,116 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ($careers as $career)
-                    <div
-                        class="bg-red-50 rounded-lg relative shadow-md border pt-4 border-gray-200 p-6 hover:shadow-lg hover:border-slate-300 transition-all duration-200">
-                        <div class="w-full h-4 bg-maroon-600 absolute rounded-t-lg top-0 left-0"></div>
-                        @if(isset($career->is_saved) && $career->is_saved)
-                            <div class="absolute top-0 right-2 bg-green-500 text-white text-md font-semibold px-4 py-2 rounded-b-sm">
-                                Saved
-                            </div>
-                        @endif
-                        @if(isset($career->is_applied) && $career->is_applied)
-                            <div class="absolute top-0 right-2 bg-blue-500 text-white text-md font-semibold px-4 py-2 rounded-b-sm">
-                                Applied
-                            </div>
-                        @endif
-                        <div class="mb-4" >
-                            <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ $career->title }}</h3>
-                            @if ($career->company->name)
-                                <p class="text-lg font-semibold text-gray-700 mb-2">
-                                    {{ $career->company->name ?? 'N/A' }}
-                                </p>
-                            @endif
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @foreach ($careers as $career)
+        <div class="bg-red-50 rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:border-slate-300 transition-all duration-200 flex flex-col">
+            <!-- Top colored bar -->
+            <div class="w-full h-4 bg-maroon-600 rounded-t-lg"></div>
 
-                            @if ($career->min_salary || $career->max_salary)
-                                <div class="flex px-2 py-2 items-center text-red-900 text-xl font-bold mb-2">
-                                    {{-- <svg class="w-4 h-4 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                                </svg> --}}
-                                    @if ($career->min_salary && $career->max_salary)
-                                        ₱{{ number_format($career->min_salary) }} -
-                                        ₱{{ number_format($career->max_salary) }}
-                                    @elseif($career->min_salary)
-                                        ₱{{ number_format($career->min_salary) }}+
-                                    @elseif($career->max_salary)
-                                        Up to ₱{{ number_format($career->max_salary) }}
-                                    @endif
-                                </div>
-                            @endif
+            <!-- Status badges -->
+            @if(isset($career->is_saved) && $career->is_saved)
+                <div class="absolute top-0 right-2 bg-green-500 text-white text-md font-semibold px-4 py-2 rounded-b-sm">Saved</div>
+            @endif
+            @if(isset($career->is_applied) && $career->is_applied)
+                <div class="absolute top-0 right-2 bg-blue-500 text-white text-md font-semibold px-4 py-2 rounded-b-sm">Applied</div>
+            @endif
 
+            <!-- Content -->
+            <div class="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ $career->title }}</h3>
+                    @if ($career->company->name)
+                        <p class="text-lg font-semibold text-gray-700 mb-2">{{ $career->company->name ?? 'N/A' }}</p>
+                    @endif
+
+                    @if ($career->min_salary || $career->max_salary)
+                        <div class="flex items-center text-red-900 text-xl font-bold mb-2">
+                            @if ($career->min_salary && $career->max_salary)
+                                ₱{{ number_format($career->min_salary) }} - ₱{{ number_format($career->max_salary) }}
+                            @elseif($career->min_salary)
+                                ₱{{ number_format($career->min_salary) }}+
+                            @elseif($career->max_salary)
+                                Up to ₱{{ number_format($career->max_salary) }}
+                            @endif
                         </div>
+                    @endif
 
-                        <div class="mb-4">
-                            <p class="text-gray-900 text-md line-clamp-3">{{ Str::limit($career->description, 150) }}
-                            </p>
-                        </div>
+                    <p class="text-gray-900 text-md line-clamp-3 mb-4">{{ Str::limit($career->description, 150) }}</p>
 
-                        <div class="space-y-2 mb-4">
-                            @if ($career->role_type)
-                                <div class="flex items-center font-semibold text-md text-gray-900">
-                                    <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6">
-                                        </path>
-                                    </svg>
-                                    {{ $career->role_type }}
-                                </div>
-                            @endif
-
-                            @if ($career->location)
-                                <div class="flex items-center font-semibold  text-md text-gray-900">
-                                    <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                        </path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                    {{ $career->location }}
-                                </div>
-                            @endif
-
-                            {{-- @if ($career->min_salary || $career->max_salary)
-                                <div class="flex items-center text-sm text-gray-50">
-                                    <svg class="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
-                                        </path>
-                                    </svg>
-                                    @if ($career->min_salary && $career->max_salary)
-                                        ₱{{ number_format($career->min_salary) }} -
-                                        ₱{{ number_format($career->max_salary) }}
-                                    @elseif($career->min_salary)
-                                        ₱{{ number_format($career->min_salary) }}+
-                                    @elseif($career->max_salary)
-                                        Up to ₱{{ number_format($career->max_salary) }}
-                                    @endif
-                                </div>
-                            @endif --}}
-                        </div>
-
-                        @if ($career->tags && count($career->tags) > 0)
-                            <div class="mb-4 mt-4">
-                                <div class="flex flex-wrap gap-2">
-                                    @foreach ($career->tags as $tag)
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-md font-medium bg-maroon-500 text-white">
-                                            {{ $tag }}
-                                        </span>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endif
-
-                        <div class="mb-4 flex gap-2">
-                            <button wire:click="openCareer({{ $career->id }})"
-                                class="w-1/2 bg-maroon-600 hover:bg-maroon-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="space-y-2 mb-4">
+                        @if ($career->role_type)
+                            <div class="flex items-center font-semibold text-md text-gray-900">
+                                <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                    </path>
+                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
                                 </svg>
-                                View Details
-                            </button>
-                            <button wire:click="openCampany({{ $career->company_id }})"
-                                class="w-1/2 bg-blue-400 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                    </path>
-                                </svg>
-                                View Compay
-                            </button>
-                        </div>
-
-                        <div class="pt-4 border-t border-slate-200">
-                            <div class="flex items-center justify-between text-sm text-gray-800">
-                                <span>{{ $career->created_at->diffForHumans() }}</span>
-                                @if ($career->applicants_count ?? false)
-                                    <span class="font-medium">{{ $career->applicants_count }} applicants</span>
-                                @endif
+                                {{ $career->role_type }}
                             </div>
-                        </div>
+                        @endif
+
+                        @if ($career->location)
+                            <div class="flex items-center font-semibold text-md text-gray-900">
+                                <svg class="w-4 h-4 mr-2 text-gray-900" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                {{ $career->location }}
+                            </div>
+                        @endif
                     </div>
-                @endforeach
+
+                    @if ($career->tags && count($career->tags) > 0)
+                        <div class="mb-4 mt-4 flex flex-wrap gap-2">
+                            @foreach ($career->tags as $tag)
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-md font-medium bg-maroon-500 text-white">
+                                    {{ $tag }}
+                                </span>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                <!-- Buttons aligned at bottom -->
+                <div class="flex gap-2 mt-auto mb-4">
+                    <button wire:click="openCareer({{ $career->id }})"
+                        class="w-1/2 bg-maroon-600 hover:bg-maroon-700 text-white font-medium py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-200">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                        View Details
+                    </button>
+                    <button wire:click="openCampany({{ $career->company_id }})"
+                        class="w-1/2 bg-blue-400 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-200">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                        View Company
+                    </button>
+                </div>
+
+                <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-sm text-gray-800">
+                    <span>{{ $career->created_at->diffForHumans() }}</span>
+                    @if ($career->applicants_count ?? false)
+                        <span class="font-medium">{{ $career->applicants_count }} applicants</span>
+                    @endif
+                </div>
             </div>
+        </div>
+    @endforeach
+</div>
+
         @else
             <div class="w-7xl text-center py-12">
                 <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" stroke="currentColor"
