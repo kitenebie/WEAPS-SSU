@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Applicant;
 use App\Models\Carrer;
+use App\Models\Company;
 use App\Models\SaveCareer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -170,9 +171,9 @@ class CareerController extends Controller
         $applicant = Applicant::find($request->applicant_id);
 
         // Check if the applicant belongs to a career of this user's company
-        $userCompanyId = Auth::user()->companies()->first()->id ?? null;
+        $userCompanyId = Company::where('user_id', Auth::id())->first()->id ?? null;
         
-        if (!$userCompanyId) {
+        if (!$userCompanyId || $applicant->company_id !== $userCompanyId) {
             return response()->json([
                 'success' => false,
                 'message' => 'Unauthorized to update this application.'.$userCompanyId. "-".$applicant->company_id,
