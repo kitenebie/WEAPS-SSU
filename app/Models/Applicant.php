@@ -10,7 +10,7 @@ class Applicant extends Model
 {
     use HasFactory, Loggable;
 
-    protected $fillable = [
+    protected $fillable = [ 
         'user_id',
         'company_id',
         'career_id',

@@ -492,12 +492,12 @@
                                             </button>
                                             @if ($applicant->status === 'pending')
                                                 <button
-                                                    onclick="updateApplicationStatus({{ $applicant->user->id }}, 'approved')"
+                                                    onclick="updateApplicationStatus({{ $applicant->id }}, 'approved')"
                                                     class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
                                                     Approve
                                                 </button>
                                                 <button
-                                                    onclick="updateApplicationStatus({{ $applicant->user->id }}, 'rejected')"
+                                                    onclick="updateApplicationStatus({{ $applicant->id }}, 'rejected')"
                                                     class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
                                                     reject
                                                 </button>

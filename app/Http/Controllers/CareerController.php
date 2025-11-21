@@ -168,7 +168,7 @@ class CareerController extends Controller
             ], 400);
         }
 
-        $applicant = Applicant::find($request->applicant_id);
+        $applicant = Applicant::where($request->applicant_id);
 
         // Check if the applicant belongs to a career of this user's company
         $userCompanyId = Company::where('user_id', Auth::id())->first()->id ?? null;
