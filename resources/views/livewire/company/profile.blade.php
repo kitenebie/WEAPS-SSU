@@ -496,6 +496,11 @@
                                                     class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
                                                     Approve
                                                 </button>
+                                                <button
+                                                    onclick="updateApplicationStatus({{ $applicant->user->id }}, 'rejected')"
+                                                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm transition-all">
+                                                    reject
+                                                </button>
                                             @endif
                                         </div>
                                     </div>
