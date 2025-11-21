@@ -171,7 +171,7 @@ class CareerController extends Controller
 
         // Check if the applicant belongs to a career of this user's company
         $userCompanyId = Auth::user()->companies()->first()->id ?? null;
-
+        dd($userCompanyId, $applicant->company_id, $userCompanyId);
         if (!$userCompanyId || $applicant->company_id !== $userCompanyId) {
             return response()->json([
                 'success' => false,
