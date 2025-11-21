@@ -155,6 +155,7 @@ class CareerController extends Controller
 
     public function updateApplicationStatus(Request $request)
     {
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             'applicant_id' => 'required|exists:applicants,id',
             'status' => 'required|in:pending,approved,rejected',
@@ -171,7 +172,7 @@ class CareerController extends Controller
 
         // Check if the applicant belongs to a career of this user's company
         $userCompanyId = Auth::user()->companies()->first()->id ?? null;
-        dd($userCompanyId, $applicant->company_id, $userCompanyId);
+        
         if (!$userCompanyId || $applicant->company_id !== $userCompanyId) {
             return response()->json([
                 'success' => false,
