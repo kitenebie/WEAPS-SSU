@@ -42,9 +42,15 @@
                 <br/>
                 <br/>
                 <br/>
+                <br/>
             <center>
                 <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
             </center>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             <main @class([
                 'fi-simple-main',
                 $maxContentWidth instanceof Width
