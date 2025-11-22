@@ -35,6 +35,7 @@
             </div>
         @endif
         <div class="fi-simple-main-ctn">
+            <div style="display:flex;flex-direction:column; align-items: center; justify-content:center">
             <center>
                 <h1 style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
             </center>
@@ -46,6 +47,8 @@
             ])>
                 {{ $slot }}
             </main>
+
+            </div>
         </div>
 
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::FOOTER, scopes: $renderHookScopes) }}
