@@ -21802,6 +21802,7 @@ th {
     width: 100%;
     display: flex;
     position: relative;
+    flex-direction: column;
     overflow: hidden;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(128, 0, 0, 0.4) 30%, rgba(128, 0, 0, 0.15) 70%, rgba(255, 255, 255, 0.1) 100%), url(/bg.png);
     background-size: cover;
