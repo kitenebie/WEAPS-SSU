@@ -39,6 +39,10 @@
             <center>
                 <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
                 <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
+                <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
+                <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
+                <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
+                <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
             </center>
             <main @class([
                 'fi-simple-main',
