@@ -21795,6 +21795,7 @@ th {
     background: #1E1E1E !important;
 }
 .fi-simple-main-ctn {
+    margin-top: 25rem !important;
     flex-grow: 1;
     justify-content: center;
     align-items: center;

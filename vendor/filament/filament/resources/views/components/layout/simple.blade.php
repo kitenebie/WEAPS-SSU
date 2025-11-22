@@ -34,7 +34,10 @@
                 @endif
             </div>
         @endif
+        <center>
 
+            <h1 style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
+        </center>
         <div class="fi-simple-main-ctn">
             <main @class([
                 'fi-simple-main',
