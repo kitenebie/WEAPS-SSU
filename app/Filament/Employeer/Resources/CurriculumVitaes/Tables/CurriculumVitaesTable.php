@@ -44,14 +44,9 @@ class CurriculumVitaesTable
                             ->weight(FontWeight::Bold)
                             ->size('lg'),
 
-                        TextColumn::make('job_title')
-                            ->label('Position')
-                            ->icon('heroicon-m-briefcase')
-                            ->color('gray')
-                            ->size('sm'),
-
                         TextColumn::make('highest_degree')
                             ->label('Degree')
+                            ->searchable()
                             ->icon('heroicon-m-academic-cap')
                             ->color('gray')
                             ->size('xs'),
@@ -70,8 +65,8 @@ class CurriculumVitaesTable
                             ->color('gray'),
                         TextColumn::make('job_title')
                             ->label('Position')
-                            ->icon('heroicon-m-briefcase')
                             ->searchable()
+                            ->icon('heroicon-m-briefcase')
                             ->color('gray'),
                     ])->space(1),
                 ]),
@@ -81,7 +76,7 @@ class CurriculumVitaesTable
                 'xl' => 4,
             ])
             ->paginated([12, 24, 48, 96, 'all'])
-            ->searchable(['first_name', 'last_name', 'email', 'job_title', 'highest_degree', 'university'])
+            // ->searchable(['first_name', 'last_name', 'email', 'job_title', 'highest_degree', 'university'])
             ->filters([
                 SelectFilter::make('highest_degree')
                     ->label('Education Level')
