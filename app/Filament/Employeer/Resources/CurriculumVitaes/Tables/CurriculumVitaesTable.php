@@ -26,7 +26,7 @@ class CurriculumVitaesTable
                 CurriculumVitae::query()
                     ->whereHas('user', function ($query) {
                         $query->whereDoesntHave('companies')
-                              ->whereNot('employment_status', 'employed');
+                            ->whereNot('employment_status', 'employed');
                     })
                     ->with('user')
             )
@@ -36,8 +36,8 @@ class CurriculumVitaesTable
                         ->label('')
                         ->circular()
                         ->size(80)
-                        ->alignCenter(),
-                        // ->getStateUsing(fn ($state) => $state ?: 'https://static.vecteezy.com/system/resources/previews/024/766/958/non_2x/default-male-avatar-profile-icon-social-media-user-free-vector.jpg'),
+                        ->alignCenter()
+                        ->getStateUsing(fn($record) => $record->profile_picture ?: 'https://static.vecteezy.com/system/resources/previews/024/766/958/non_2x/default-male-avatar-profile-icon-social-media-user-free-vector.jpg'),
                     Stack::make([
                         TextColumn::make('fullname')
                             ->label('Name')
