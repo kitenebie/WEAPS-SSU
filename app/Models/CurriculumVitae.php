@@ -66,6 +66,11 @@ class CurriculumVitae extends Model
     }
 
     public function getHighestDegreeAttribute(){
+        // If the column has a value, return it
+        if (!empty($this->attributes['highest_degree'])) {
+            return $this->attributes['highest_degree'];
+        }
+
         if (!$this->education || !is_array($this->education)) {
             return null;
         }
@@ -87,6 +92,11 @@ class CurriculumVitae extends Model
     }
 
     public function getUniversityAttribute(){
+        // If the column has a value, return it
+        if (!empty($this->attributes['university'])) {
+            return $this->attributes['university'];
+        }
+
         if (!$this->education || !is_array($this->education)) {
             return null;
         }
