@@ -156,7 +156,7 @@ class Applicants extends Page implements HasTable
                         'rejected' => 'Rejected',
                     ])
                     ->query(function ($query, $data) {
-                        $this->statusFilter = $data['value'];
+                        $this->statusFilter = $data['value'] ?? null;
                     }),
             ])
             ->defaultSort('created_at', 'desc');
