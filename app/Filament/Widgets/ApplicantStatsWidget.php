@@ -28,21 +28,29 @@ class ApplicantStatsWidget extends BaseWidget
 
         return [
             Stat::make('Pending Applications', $pending)
+                        ->description('Applications awaiting review')
+                        ->icon('heroicon-o-clock')
                         ->extraAttributes([
                             'id' => 'total-users-stat',
                             // 'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
                         ]),
             Stat::make('Approved Application', $approved)
+                        ->description('Applications that have been approved')
+                        ->icon('heroicon-o-check-circle')
                         ->extraAttributes([
                             'id' => 'verified-alumni-stat',
                             // 'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
                         ]),
             Stat::make('Hired Applicants', $hired)
+                        ->description('Applicants who have been hired')
+                        ->icon('heroicon-o-user-group')
                         ->extraAttributes([
                             'id' => 'unverified-users-stat',
                             // 'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
                         ]),
             Stat::make('Rejected Application', $rejected)
+                        ->description('Applications that have been rejected')
+                        ->icon('heroicon-o-x-circle')
                         ->extraAttributes([
                             'id' => 'verified-users-stat',
                             // 'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
