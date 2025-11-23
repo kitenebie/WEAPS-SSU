@@ -31,8 +31,9 @@ class Applicants extends Page implements HasTable
 
     protected string $view = 'filament.employeer.pages.applicants';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Folder;
+    protected static ?string $recordTitleAttribute = 'Applications';
     protected static ?string $navigationLabel = 'Applications';
-    protected static ?string $slug = 'applications';
+    protected static ?string $slug = 'Applications';
     protected static UnitEnum|string|null $navigationGroup = 'Manage Applicants';
 
     protected function getHeaderWidgets(): array
