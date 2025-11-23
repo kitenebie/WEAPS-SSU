@@ -46,7 +46,7 @@ class CurriculumVitaesTable
 
                         TextColumn::make('highest_degree')
                             ->label('Degree')
-                            ->searchable()
+                            // ->searchable()
                             ->icon('heroicon-m-academic-cap')
                             ->color('gray')
                             ->size('xs'),
