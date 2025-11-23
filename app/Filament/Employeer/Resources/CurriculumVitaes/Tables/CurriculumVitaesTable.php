@@ -68,6 +68,11 @@ class CurriculumVitaesTable
                             ->label('Location')
                             ->icon('heroicon-m-map-pin')
                             ->color('gray'),
+                        TextColumn::make('job_title')
+                            ->label('Position')
+                            ->icon('heroicon-m-briefcase')
+                            ->searchable()
+                            ->color('gray'),
                     ])->space(1),
                 ]),
             ])
