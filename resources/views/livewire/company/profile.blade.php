@@ -327,10 +327,10 @@
                 <div id="posts-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-xl font-bold text-gray-900">Recent Updates</h3>
-                        <button onclick="showAddPostModal(); showTab('posts'); saveTabToLocalStorage('posts')"
+                        {{-- <button onclick="showAddPostModal(); showTab('posts'); saveTabToLocalStorage('posts')"
                             class="bg-maroon-500 hover:bg-maroon-600 text-white px-4 py-2 rounded-lg font-semibold transition-all">
                             + Add Post
-                        </button>
+                        </button> --}}
                     </div>
                     <div class="space-y-6">
                         @php
