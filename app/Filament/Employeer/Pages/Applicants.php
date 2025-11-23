@@ -146,19 +146,19 @@ class Applicants extends Page implements HasTable
                     ])
                     ->modalCancelAction(false),
             ])
-            ->filters([
-                SelectFilter::make('status')
-                    ->multiple()
-                    ->options([
-                        'pending' => 'Pending',
-                        'approved' => 'Approved',
-                        'hired' => 'Hired',
-                        'rejected' => 'Rejected',
-                    ])
-                    ->query(function ($query, $data) {
-                        $this->statusFilter = $data['value'] ?? null;
-                    }),
-            ])
+            // ->filters([
+            //     SelectFilter::make('status')
+            //         ->multiple()
+            //         ->options([
+            //             'pending' => 'Pending',
+            //             'approved' => 'Approved',
+            //             'hired' => 'Hired',
+            //             'rejected' => 'Rejected',
+            //         ])
+            //         ->query(function ($query, $data) {
+            //             $this->statusFilter = $data['value'] ?? null;
+            //         }),
+            // ])
             ->defaultSort('created_at', 'desc');
     }
 
