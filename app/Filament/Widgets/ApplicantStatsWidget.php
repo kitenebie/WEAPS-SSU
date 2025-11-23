@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Applicant;
 use App\Models\Company;
+use Filament\Actions\Action;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Schemas\Components\Grid;
@@ -31,22 +32,26 @@ class ApplicantStatsWidget extends BaseWidget
                         ->extraAttributes([
                             'id' => 'total-users-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                        ]),
+                        ])
+                        ->action(Action::make('filter_pending')->action(fn() => $this->getPage()->dispatch('filterApplicants', status: 'pending'))),
             Stat::make('Approved Application', $approved)
                         ->extraAttributes([
                             'id' => 'verified-alumni-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                        ]),
+                        ])
+                        ->action(Action::make('filter_approved')->action(fn() => $this->getPage()->dispatch('filterApplicants', status: 'approved'))),
             Stat::make('Hired Applicants', $hired)
                         ->extraAttributes([
                             'id' => 'unverified-users-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                        ]),
+                        ])
+                        ->action(Action::make('filter_hired')->action(fn() => $this->getPage()->dispatch('filterApplicants', status: 'hired'))),
             Stat::make('Rejected Application', $rejected)
                         ->extraAttributes([
                             'id' => 'verified-users-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                        ]),
+                        ])
+                        ->action(Action::make('filter_rejected')->action(fn() => $this->getPage()->dispatch('filterApplicants', status: 'rejected'))),
         ];
     }
 }

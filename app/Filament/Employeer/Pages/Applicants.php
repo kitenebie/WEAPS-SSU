@@ -24,6 +24,10 @@ use Illuminate\Support\HtmlString;
 class Applicants extends Page implements HasTable
 {
     use InteractsWithTable;
+
+    public ?string $statusFilter = null;
+
+    protected $listeners = ['filterApplicants' => 'setFilter'];
     protected string $view = 'filament.employeer.pages.applicants';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Folder;
     protected static ?string $recordTitleAttribute = 'Applications';
@@ -40,6 +44,12 @@ class Applicants extends Page implements HasTable
         return [
             ApplicantStatsWidget::class,
         ];
+    }
+
+    public function setFilter($status)
+    {
+        $this->statusFilter = $status;
+        $this->resetTable();
     }
 
 
@@ -59,6 +69,7 @@ class Applicants extends Page implements HasTable
             ->query(
                 Applicant::query()
                     ->where('company_id', $company ? $company->id : null)
+                    ->when($this->statusFilter, fn($query) => $query->where('status', $this->statusFilter))
                     ->with(['user', 'career'])
             )
             ->columns([
