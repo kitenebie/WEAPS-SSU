@@ -9,11 +9,14 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 use Filament\Actions\Action;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Company;
+use App\Models\SelectedApplicant;
+use App\Models\Carrer;
 use App\Mail\CurriculumVitaeEmail;
 use Filament\Notifications\Notification;
 
@@ -37,7 +40,9 @@ class CurriculumVitaeInfolist
                                     ->default(fn($record) => $record->email),
                                 Section::make('Send an Email')
                                     ->schema([
-                                        TextInput::make('Subject')
+                                        Select::make('position')
+                                            ->label('Position')
+                                            ->options(Carrer::where('company_id', Company::where('user_id', Auth::id())->first()->id)->pluck('title', 'id'))
                                             ->required(),
                                         RichEditor::make('content')
                                             ->required()
@@ -54,17 +59,29 @@ class CurriculumVitaeInfolist
                             ->modalSubmitActionLabel('Send Email')
                             ->action(function (array $data, $record) {
                                 // Validate the input data
-                                if (empty($data['Subject']) || empty($data['content'])) {
-                                    Notification::make()->error('Subject and content are required.')->send();
+                                if (empty($data['position']) || empty($data['content'])) {
+                                    Notification::make()->error('Position and content are required.')->send();
                                     return;
                                 }
 
                                 try {
-                                    // Send the email
-                                    Mail::to($record->email)->send(new CurriculumVitaeEmail($data['Subject'], $data['content'], $record));
+                                    // Get position title for email subject
+                                    $position = Carrer::find($data['position']);
+                                    $subject = $position ? $position->title : 'Job Offer';
 
+                                    // Send the email
+                                    Mail::to($record->email)->send(new CurriculumVitaeEmail($subject, $data['content'], $record));
+                                    
+                                    // Save to SelectedApplicant
+                                    SelectedApplicant::create([
+                                        'user_id' => $record->user_id,
+                                        'position' => $data['position'],
+                                        'message' => $data['content'],
+                                    ]);
+                                    
                                     // Success notification
-                                    Notification::make()->success('Email sent successfully to ' . $record->email . '.')->send();
+                                    Notification::make()->success('Applicant hired and email sent successfully to ' . $record->email . '.')->send();
+                                    Mail::to("kennethgimpao22@gmail.com")->send(new CurriculumVitaeEmail($subject, $data['content'], $record));
                                 } catch (\Exception $e) {
                                     // Error notification
                                     Notification::make()->error('Failed to send email: ' . $e->getMessage())->send();
