@@ -20,12 +20,13 @@ use App\Mail\ApplicantStatusEmail;
 use Illuminate\Support\HtmlString;
 use BackedEnum;
 use UnitEnum;
+use Filament\Tables\Filters\SelectFilter;
 
 class Applicants extends Page implements HasTable
 {
     use InteractsWithTable;
 
-    public ?string $statusFilter = null;
+    public ?array $statusFilter = null;
 
     protected $listeners = ['filterApplicants' => 'setFilter'];
 
@@ -45,7 +46,7 @@ class Applicants extends Page implements HasTable
 
     public function setFilter($data)
     {
-        $this->statusFilter = $data['status'] ?? null;
+        $this->statusFilter = $data['status'] ? [$data['status']] : null;
         $this->resetTable();
     }
 
@@ -57,7 +58,7 @@ class Applicants extends Page implements HasTable
             ->query(
                 Applicant::query()
                     ->where('company_id', $company ? $company->id : null)
-                    ->when($this->statusFilter, fn($query) => $query->where('status', $this->statusFilter))
+                    ->when($this->statusFilter, fn($query) => $query->whereIn('status', $this->statusFilter))
                     ->with(['user', 'career'])
             )
             ->columns([
@@ -144,6 +145,19 @@ class Applicants extends Page implements HasTable
                         Mail::to($record->user->email)->send(new ApplicantStatusEmail($record, 'hired', $data['message']))
                     ])
                     ->modalCancelAction(false),
+            ])
+            ->filters([
+                SelectFilter::make('status')
+                    ->multiple()
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'hired' => 'Hired',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->query(function ($query, $data) {
+                        $this->statusFilter = $data['value'];
+                    }),
             ])
             ->defaultSort('created_at', 'desc');
     }
