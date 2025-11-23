@@ -37,7 +37,7 @@ class CurriculumVitaesTable
                         ->circular()
                         ->size(80)
                         ->alignCenter()
-                        ->defaultImageUrl('https://static.vecteezy.com/system/resources/previews/024/766/958/non_2x/default-male-avatar-profile-icon-social-media-user-free-vector.jpg'),
+                        ->getStateUsing(fn ($state) => $state ?: 'https://static.vecteezy.com/system/resources/previews/024/766/958/non_2x/default-male-avatar-profile-icon-social-media-user-free-vector.jpg'),
                     Stack::make([
                         TextColumn::make('fullname')
                             ->label('Name')

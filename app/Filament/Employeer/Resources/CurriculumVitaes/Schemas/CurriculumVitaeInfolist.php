@@ -118,7 +118,7 @@ class CurriculumVitaeInfolist
                                                                     ->disk('local')
                                                                     ->visibility('public')
                                                                     ->imageSize(200)
-                                                                    ->defaultImageUrl('https://static.vecteezy.com/system/resources/previews/024/766/958/non_2x/default-male-avatar-profile-icon-social-media-user-free-vector.jpg'),
+                                                                    ->getStateUsing(fn ($state) => $state ?: 'https://static.vecteezy.com/system/resources/previews/024/766/958/non_2x/default-male-avatar-profile-icon-social-media-user-free-vector.jpg'),
                                                             ]),
                                                         Grid::make()
                                                             ->columns(1)
