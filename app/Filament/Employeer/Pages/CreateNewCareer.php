@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Filament\Employeer\Pages;
+
+use Filament\Pages\Page;
+use Illuminate\Support\Facades\Auth;
+use Filament\Support\Icons\Heroicon;
+use BackedEnum;
+use UnitEnum;
+
+class CreateNewCareer extends Page
+{
+    protected string $view = 'filament.employeer.pages.create-new-career';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::TableCells;
+    protected static ?string $recordTitleAttribute = 'Create New Career';
+    protected static ?string $navigationLabel = 'Create New Career';
+    protected static ?string $slug = 'Careers';
+
+    // ⭐ Group in sidebar
+    protected static UnitEnum|string|null $navigationGroup = 'Manage Company';
+
+    public static function canAccess(): bool
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return false;
+        }
+
+        // Hide navigation if user role is applicant
+        $applicantRole = env('USER_APPLICANT_ROLE');
+        if ($user->roles()->where('name', $applicantRole)->exists()) {
+            return false;
+        }
+
+        // Fallback logic
+        $defaultRole = env('USER_DEFAULT_ROLE');
+        return !$user->roles()->where('name', $defaultRole)->exists();
+    }
+}

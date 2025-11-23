@@ -48,7 +48,7 @@ class CompanyForm
             ->components([
                 Section::make('Company Information')
                     ->columnSpanFull()
-                    ->collapsed()
+                    // ->collapsed()
                     ->collapsible()
                     ->description('Complete company profile and details')
                     ->components([
@@ -153,92 +153,92 @@ class CompanyForm
                             ]),
                     ]),
 
-                Section::make('Career Management')
-                    ->visible(fn() => Company::where('user_id', Auth::id())->first()->isAdminVerified)
-                    ->collapsed()
-                    ->collapsible()
-                    ->columnSpanFull()
-                    ->description('Job positions and career opportunities')
-                    ->components([
-                        Repeater::make('careers')
-                            ->label('Career Positions')
-                            ->schema([
-                                Hidden::make('company_id')
-                                    ->default(fn() => static::getCompanyId()),
-                                TextInput::make('title')
-                                    ->label('Job Title')
-                                    ->required()
-                                    ->columnSpanFull(),
-                                Textarea::make('description')
-                                    ->label('Job Description')
-                                    ->required()
-                                    ->columnSpanFull()
-                                    ->rows(3),
-                                Select::make('role_type')
-                                    ->label('Role Type')
-                                    ->options([
-                                        'Full-time' => 'Full-time',
-                                        'Part-time' => 'Part-time',
-                                        'Contract' => 'Contract',
-                                        'Internship' => 'Internship',
-                                        'Freelance' => 'Freelance',
-                                    ])
-                                    ->required(),
-                                TextInput::make('location')
-                                    ->label('Job Location')
-                                    ->required(),
-                                TextInput::make('min_salary')
-                                    ->label('Minimum Salary (₱)')
-                                    ->prefix('₱')
-                                    ->numeric()
-                                    ->placeholder('e.g. 25000'),
-                                TextInput::make('max_salary')
-                                    ->label('Maximum Salary (₱)')
-                                    ->prefix('₱')
-                                    ->numeric()
-                                    ->placeholder('e.g. 50000'),
-                                TagsInput::make('tags')
-                                    ->label('Skills/Tags')
-                                    ->columnSpanFull(),
-                            ])
-                            ->columns(2)
-                            ->columnSpanFull()
-                            ->default([])
-                            ->addActionLabel('Add New Career Position')
-                            ->itemLabel(fn(array $state): ?string => $state['title'] ?? null),
-                    ]),
+                // Section::make('Career Management')
+                //     ->visible(fn() => Company::where('user_id', Auth::id())->first()->isAdminVerified)
+                //     ->collapsed()
+                //     ->collapsible()
+                //     ->columnSpanFull()
+                //     ->description('Job positions and career opportunities')
+                //     ->components([
+                //         Repeater::make('careers')
+                //             ->label('Career Positions')
+                //             ->schema([
+                //                 Hidden::make('company_id')
+                //                     ->default(fn() => static::getCompanyId()),
+                //                 TextInput::make('title')
+                //                     ->label('Job Title')
+                //                     ->required()
+                //                     ->columnSpanFull(),
+                //                 Textarea::make('description')
+                //                     ->label('Job Description')
+                //                     ->required()
+                //                     ->columnSpanFull()
+                //                     ->rows(3),
+                //                 Select::make('role_type')
+                //                     ->label('Role Type')
+                //                     ->options([
+                //                         'Full-time' => 'Full-time',
+                //                         'Part-time' => 'Part-time',
+                //                         'Contract' => 'Contract',
+                //                         'Internship' => 'Internship',
+                //                         'Freelance' => 'Freelance',
+                //                     ])
+                //                     ->required(),
+                //                 TextInput::make('location')
+                //                     ->label('Job Location')
+                //                     ->required(),
+                //                 TextInput::make('min_salary')
+                //                     ->label('Minimum Salary (₱)')
+                //                     ->prefix('₱')
+                //                     ->numeric()
+                //                     ->placeholder('e.g. 25000'),
+                //                 TextInput::make('max_salary')
+                //                     ->label('Maximum Salary (₱)')
+                //                     ->prefix('₱')
+                //                     ->numeric()
+                //                     ->placeholder('e.g. 50000'),
+                //                 TagsInput::make('tags')
+                //                     ->label('Skills/Tags')
+                //                     ->columnSpanFull(),
+                //             ])
+                //             ->columns(2)
+                //             ->columnSpanFull()
+                //             ->default([])
+                //             ->addActionLabel('Add New Career Position')
+                //             ->itemLabel(fn(array $state): ?string => $state['title'] ?? null),
+                //     ]),
 
-                Section::make('Company Posts')
-                    ->columnSpanFull()
-                    ->visible(fn() => Company::where('user_id', Auth::id())->first()->isAdminVerified)
-                    ->collapsed()
-                    ->collapsible()
-                    ->description('Company announcements and updates')
-                    ->components([
-                        Repeater::make('posts')
-                            ->label('Company Posts')
-                            ->schema([
-                                Hidden::make('id')->default(null), // For existing records
-                                Hidden::make('company_id')
-                                    ->default(fn() => static::getCompanyId()),
-                                Textarea::make('content')
-                                    ->label('Post Content')
-                                    ->required()
-                                    ->columnSpanFull()
-                                    ->rows(4)
-                                    ->placeholder('Write your company announcement or update...'),
-                            ])
-                            ->columns(1)
-                            ->columnSpanFull()
-                            ->default([])
-                            ->addActionLabel('Add New Post')
-                            ->itemLabel(
-                                fn(array $state): ?string =>
-                                strlen($state['content'] ?? '') > 30
-                                    ? substr($state['content'], 0, 30) . '...'
-                                    : ($state['content'] ?? 'New Post')
-                            ),
-                    ]),
+                // Section::make('Company Posts')
+                //     ->columnSpanFull()
+                //     ->visible(fn() => Company::where('user_id', Auth::id())->first()->isAdminVerified)
+                //     ->collapsed()
+                //     ->collapsible()
+                //     ->description('Company announcements and updates')
+                //     ->components([
+                //         Repeater::make('posts')
+                //             ->label('Company Posts')
+                //             ->schema([
+                //                 Hidden::make('id')->default(null), // For existing records
+                //                 Hidden::make('company_id')
+                //                     ->default(fn() => static::getCompanyId()),
+                //                 Textarea::make('content')
+                //                     ->label('Post Content')
+                //                     ->required()
+                //                     ->columnSpanFull()
+                //                     ->rows(4)
+                //                     ->placeholder('Write your company announcement or update...'),
+                //             ])
+                //             ->columns(1)
+                //             ->columnSpanFull()
+                //             ->default([])
+                //             ->addActionLabel('Add New Post')
+                //             ->itemLabel(
+                //                 fn(array $state): ?string =>
+                //                 strlen($state['content'] ?? '') > 30
+                //                     ? substr($state['content'], 0, 30) . '...'
+                //                     : ($state['content'] ?? 'New Post')
+                //             ),
+                //     ]),
 
             ]);
     }

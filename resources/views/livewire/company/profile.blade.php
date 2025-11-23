@@ -131,6 +131,10 @@
                 <div class="border-t border-gray-200">
                     <div class="px-6">
                         <nav class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 overflow-x-auto">
+                            <button onclick="showTab('about'); saveTabToLocalStorage('about')"
+                                class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
+                                About
+                            </button>
                             <button onclick="showTab('careers'); saveTabToLocalStorage('careers')"
                                 class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                 Careers
@@ -143,18 +147,14 @@
                                 class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                 Reviews
                             </button>
-                            @if (
+                            {{-- @if (
                                 !\Illuminate\Support\Facades\Session::get('company_id') ||
                                     \Illuminate\Support\Facades\Auth::user()->hasRole('super_admin'))
                                 <button onclick="showTab('Applicants'); saveTabToLocalStorage('Applicants')"
                                     class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
                                     Applicants
                                 </button>
-                            @endif
-                            <button onclick="showTab('about'); saveTabToLocalStorage('about')"
-                                class="tab-btn py-4 px-2 md:px-0 border-b-2 border-transparent text-gray-600 hover:text-gray-900 whitespace-nowrap">
-                                About
-                            </button>
+                            @endif --}}
                         </nav>
                     </div>
                 </div>
@@ -212,10 +212,10 @@
                 <div id="careers-section" class="tab-content bg-white rounded-lg shadow-md p-6 ">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-xl font-bold text-gray-900">Current Openings</h3>
-                        <button onclick="showAddPositionModal()"
+                        {{-- <button onclick="showAddPositionModal()"
                             class="bg-maroon-500 hover:bg-maroon-600 text-white px-4 py-2 rounded-lg font-semibold transition-all">
                             + Add Position
-                        </button>
+                        </button> --}}
                     </div>
 
                     <!-- Search Input -->
@@ -447,7 +447,7 @@
                 </div>
 
                 <!-- Applicant Section -->
-                <div id="Applicants-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
+                {{-- <div id="Applicants-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-xl font-bold text-gray-900">Applicants</h3>
                     </div>
@@ -520,7 +520,7 @@
                             </div>
                         @endif
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Sidebar -->

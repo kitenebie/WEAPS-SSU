@@ -43,9 +43,9 @@ class EmployeerPanelProvider extends PanelProvider
             ->brandLogoHeight('3rem')
             // ->topNavigation(true)
             ->colors([
-                    'primary' => Color::Gray,
-                    'warning' => Color::Orange,
-                    'info' => Color::Blue,
+                'primary' => Color::Gray,
+                'warning' => Color::Orange,
+                'info' => Color::Blue,
             ])
             ->darkMode(false)
             ->discoverResources(in: app_path('Filament/Employeer/Resources'), for: 'App\Filament\Employeer\Resources')
@@ -79,5 +79,11 @@ class EmployeerPanelProvider extends PanelProvider
             ])
             ->globalSearch(false)
             ->maxContentWidth(Width::Full);
+    }
+    public function widgets(): array
+    {
+        return [
+            \App\Filament\Widgets\ApplicantStatsWidget::class,
+        ];
     }
 }
