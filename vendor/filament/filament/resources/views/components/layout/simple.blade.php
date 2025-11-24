@@ -36,14 +36,6 @@
         @endif
         <div class="fi-simple-main-ctn">
             <div class="fi-simple-main-div" style="display:flex;flex-direction:column; align-items: center; justify-content:center">
-            <center>
-                <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: rgba(255, 255, 255, 0)">Welcome, Where Alumni Futures Begin</h1>
-            </center>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
             <main @class([
                 'fi-simple-main',
                 $maxContentWidth instanceof Width
