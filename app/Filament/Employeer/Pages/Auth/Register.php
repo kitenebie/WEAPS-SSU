@@ -66,7 +66,7 @@ class Register extends BaseRegister
                     ->hiddenLabel()
                     ->visible(fn() => $this->registerMode === 'normal')
                     ->content(new \Illuminate\Support\HtmlString('
-                    <div style="display: flex; flex-direction:  column; margin-bottom: 1rem; gap: 8px;">
+                    <div style="display: flex; flex-direction:  column; margin-bottom: 2px; gap: 8px;">
                     <button style="Display: flex !important" x-data="filamentFormButton" x-bind:class="{ \'fi-processing\': isProcessing }" class="btn-signup mb-4 fi-color fi-color-primary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="submit" wire:loading.attr="disabled" wire:target="register" x-bind:disabled="isProcessing">
                                             <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fi-icon fi-loading-indicator fi-size-md" wire:loading.delay.default="" wire:target="register">
     <path clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill-rule="evenodd" fill="currentColor" opacity="0.2"></path>
@@ -83,13 +83,14 @@ class Register extends BaseRegister
 
                     </button>
                     </div>
-                        <p style="width: 100%; margin-bottom: 1rem; text-align:center; padding: 4px; color: #A4A4A4">--------------  Or continue with  --------------</p>
+                        <p style="width: 100%; text-align:center; padding: 4px; color: #A4A4A4">--------------  Or continue with  --------------</p>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <button style="Display: flex !important" wire:click="$set(\'registerMode\', \'student\')" class="btn-signup mb-4 fi-color fi-color-primary fi-bg-color-600 hover:fi-bg-color-500 dark:fi-bg-color-600 dark:hover:fi-bg-color-500 fi-text-color-0 hover:fi-text-color-0 dark:fi-text-color-0 dark:hover:fi-text-color-0 fi-btn fi-size-md  fi-ac-btn-action" type="button">
                         Register Using SorSU ID
                     </button>
 
-                            <a href="' . route('socialite.google') . '" style="display: inline-flex ; align-items: center; justify-content: center; padding: 8px 16px; background-color: #0866FF; border: 1px solid #0247AFFF; border-radius: 6px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); font-size: 14px; font-weight: 500; color: #EBEBEBFF; text-decoration: none;">
+                        <div style="display: flex; flex-direction: row; gap: 2px">
+                                                    <a href="' . route('socialite.google') . '" style="display: inline-flex ; align-items: center; justify-content: center; padding: 8px 16px; background-color: #0866FF; border: 1px solid #0247AFFF; border-radius: 6px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); font-size: 14px; font-weight: 500; color: #EBEBEBFF; text-decoration: none;">
                                 <svg style="width: 20px; height: 20px; margin-right: 8px;" viewBox="0 0 24 24">
                                     <path fill="#EBEBEBFF" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                                     <path fill="#EBEBEBFF" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -104,12 +105,7 @@ class Register extends BaseRegister
                                 </svg>
                                 Continue with GitHub
                             </a>
-                            <a href="' . route('socialite.linkedin') . '" style="display: inline-flex; align-items: center; justify-content: center; padding: 8px 16px; background-color: #0077B5; border: 1px solid transparent; border-radius: 6px; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); font-size: 14px; font-weight: 500; color: white; text-decoration: none;">
-                                <svg style="width: 20px; height: 20px; margin-right: 8px;" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                                </svg>
-                                Continue with LinkedIn
-                            </a>
+                        </div>
                         </div>
                         <style>
                         button:nth-child(1)
