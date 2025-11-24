@@ -43,10 +43,11 @@ class SavedJobs extends Page implements HasTable
                 TextColumn::make('career.end_date')
                     ->label('Status')
                     ->formatStateUsing(function ($state) {
-                        if ($state && $state->isPast()) {
-                            return 'Expired';
+                        if ($state) {
+                            $date = \Carbon\Carbon::parse($state);
+                            return $date->isPast() ? 'Expired' : $date->format('M d, Y');
                         } else {
-                            return $state ? $state->format('M d, Y') : 'N/A';
+                            return 'N/A';
                         }
                     })
                     ->sortable(),

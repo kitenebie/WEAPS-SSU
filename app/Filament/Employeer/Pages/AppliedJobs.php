@@ -42,12 +42,23 @@ class AppliedJobs extends Page implements HasTable
                     ->searchable()
                     ->sortable(),
                 BadgeColumn::make('status')
-                    ->label('Status')
+                    ->label('Application Status')
                     ->colors([
                         'warning' => 'pending',
                         'success' => 'approved',
                         'danger' => 'rejected',
                     ]),
+                TextColumn::make('career.end_date')
+                    ->label('Status')
+                    ->formatStateUsing(function ($state) {
+                        if ($state) {
+                            $date = \Carbon\Carbon::parse($state);
+                            return $date->isPast() ? 'Expired' : $date->format('M d, Y');
+                        } else {
+                            return 'N/A';
+                        }
+                    })
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Applied Date')
                     ->date('M d, Y')
