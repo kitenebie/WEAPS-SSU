@@ -29,6 +29,7 @@
 /public/hiring-amico.svg
 /public/list.html
 !/public/build/*
+!/public/css/resume/style.css
 .htaccess
 /storage/pail
 /vendor

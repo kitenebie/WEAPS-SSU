@@ -60,11 +60,13 @@ class AppliedJobs extends Page implements HasTable
                             return 'N/A';
                         }
                     })
-                    ->colors([
-                        'info' => 'Expired',
-                        'danger' => fn ($state) => $state !== 'Expired' && $state !== 'N/A',
-                        'gray' => 'N/A',
-                    ])
+                    ->color(function ($state) {
+                        return match($state) {
+                            'Expired' => 'info',
+                            'N/A' => 'gray',
+                            default => 'danger',
+                        };
+                    })
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Applied Date')
