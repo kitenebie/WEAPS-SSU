@@ -124,8 +124,8 @@ class AppliedJobs extends Page implements HasTable
         $user = Auth::user();
         if (!$user) return false;
 
-        $applicantRole = env('USER_APPLICANT_ROLE');
-        if ($user->roles()->where('name', $applicantRole)->exists()) return true;
+        $applicantRole = env('USER_EMPLOYEER_ROLE');
+        if ($user->roles()->where('name', $applicantRole)->exists()) return false;
 
         $defaultRole = env('USER_DEFAULT_ROLE');
         return !$user->roles()->where('name', $defaultRole)->exists();
