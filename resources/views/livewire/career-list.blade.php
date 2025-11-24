@@ -320,7 +320,7 @@
                         View Details
                     </button>
                     <button wire:click="openCampany({{ $career->company_id }})"
-                        class="w-1/2 bg-blue-400 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-xs flex items-center justify-center transition-colors duration-200">
+                        class="w-1/2 bg-[#4D4842] hover:bg-[#57534FFF] text-white font-medium py-2 px-4 rounded-xs flex items-center justify-center transition-colors duration-200">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
