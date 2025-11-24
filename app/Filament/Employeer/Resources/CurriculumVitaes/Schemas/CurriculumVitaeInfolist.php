@@ -74,7 +74,8 @@ class CurriculumVitaeInfolist
                                     
                                     // Save to SelectedApplicant
                                     SelectedApplicant::create([
-                                        'user_id' => $record->user_id,
+                                        'user_id' => Auth::id(),
+                                        'applicant_id' => $record->user_id,
                                         'position' => $data['position'],
                                         'message' => $data['content'],
                                     ]);

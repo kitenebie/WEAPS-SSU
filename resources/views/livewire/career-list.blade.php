@@ -19,7 +19,7 @@
                     <div class="relative flex">
                         <input type="text" id="search" wire:model.live.debounce.300ms="search"
                             placeholder="Search by job title, company..."
-                            class="w-full  p-2 pl-4 pr-4 py-4 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
+                            class="w-full  p-2 pl-4 pr-4 py-2 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                         <div class="absolute inset-y-0 right-2  pl-4 flex items-center pointer-events-none">
                             <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">

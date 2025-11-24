@@ -4,7 +4,7 @@ return [
 
     'title' => 'Login',
 
-    'heading' => 'Sign in',
+    'heading' => 'Welcome, Where Alumni Futures Begin',
 
     'actions' => [
 

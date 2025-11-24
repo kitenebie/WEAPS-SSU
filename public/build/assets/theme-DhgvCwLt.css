@@ -21804,7 +21804,7 @@ th {
     position: relative;
     flex-direction: column;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(128, 0, 0, 0.4) 30%, rgba(128, 0, 0, 0.15) 70%, rgba(255, 255, 255, 0.1) 100%), url(/bg.png);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(128, 0, 0, 0.4) 30%, rgba(128, 0, 0, 0.15) 70%, rgba(255, 255, 255, 0.1) 100%), url('https://sorsu.edu.ph/wp-content/uploads/2024/02/BULAN-CAMPUS-BLESSING-AND-RIBBON-CUTTING-OF-GATE-50.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

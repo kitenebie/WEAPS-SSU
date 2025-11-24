@@ -9,6 +9,7 @@ class SelectedApplicant extends Model
 {
     protected $fillable = [
         'user_id',
+        'applicant_id',
         'position',
         'message',
     ];
@@ -21,5 +22,10 @@ class SelectedApplicant extends Model
     public function career(): BelongsTo
     {
         return $this->belongsTo(Carrer::class, 'position');
+    }
+
+    public function applicant(): BelongsTo
+    {
+        return $this->belongsTo(Applicant::class);
     }
 }
