@@ -52,7 +52,8 @@ class SavedJobs extends Page implements HasTable
                         }
                     })
                     ->colors([
-                        'danger' => 'Expired',
+                        'info' => 'Expired',
+                        'danger' => fn ($state) => $state !== 'Expired' && $state !== 'N/A',
                     ])
                     ->sortable(),
             ])
