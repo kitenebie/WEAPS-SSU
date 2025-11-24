@@ -1,3 +1,3 @@
 <div style="display:flex; justify-content: end;">
-    {{ $this->HireAction }}
+    <x-filament-actions::modals />
 </div>
