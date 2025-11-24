@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Filament\Forms;
 use App\Models\CurriculumVitae;
 use Filament\Infolists\Components\TextEntry;
+use App\Filament\Employeer\Resources\CurriculumVitaes\CurriculumVitaeResource;
 
 
 
@@ -125,11 +126,11 @@ class CurriculumVitaesTable
                     ->toggle(),
             ])
             ->recordActions([
-                // EditAction::make()->button()->outlined()->color('primary'),
-                ViewAction::make('edit')->button()->outlined()->color('primary')
-                    ->schema([
-                        TextEntry::make('title'),
-                    ])
+                ViewAction::make('view')
+                    ->button()
+                    ->outlined()
+                    ->color('primary')
+                    ->url(fn ($record) => CurriculumVitaeResource::getUrl('view', ['record' => $record])),
             ]);
         // ->recordUrl(fn ($record) => route('filament.employeer.pages.recruiting', $record->id));
         // ->recordUrl(fn ($record) => route('cv.view', $record->id));

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 @php
-    use Illuminate\Support\Facades\Auth;
-    $applicant = Auth::user();
+    $getUser = \App\Models\CurriculumVitae::find($alumni_id);
+    $applicant = \App\Models\User::find($getUser->user_id);
 @endphp
 
 <head>
@@ -41,48 +41,55 @@
         <div class="resume-wrapper-inner mx-auto text-left bg-white shadow-lg">
             <header class="resume-header pt-4 pt-md-0">
                 <div class="media flex-column flex-md-row">
-                    <a href="https://weapssorsu-bc.site/storage/{{ $applicant->curriculumVitae->profile_picture }}">
-                        <img src="https://weapssorsu-bc.site/storage/{{ $applicant->curriculumVitae->profile_picture }}"
-                            alt="image" border="0"width="220" height="220"></a>
+                    {{-- https://static.vecteezy.com/system/resources/previews/024/766/958/non_2x/default-male-avatar-profile-icon-social-media-user-free-vector.jpg --}}
+                    @if ($applicant->curriculumVitae?->profile_picture)
+                        <a href="https://weapssorsu-bc.site/storage/{{ $applicant->curriculumVitae->profile_picture }}">
+                            <img src="https://weapssorsu-bc.site/storage/{{ $applicant->curriculumVitae->profile_picture }}"
+                                alt="image" border="0"width="220" height="220"></a>
+                    @else
+                        <a
+                            href="https://static.vecteezy.com/system/resources/previews/024/766/958/non_2x/default-male-avatar-profile-icon-social-media-user-free-vector.jpg">
+                            <img src="https://static.vecteezy.com/system/resources/previews/024/766/958/non_2x/default-male-avatar-profile-icon-social-media-user-free-vector.jpg"
+                                alt="image" border="0"width="220" height="220"></a>
+                    @endif
                     <img class="mr-3 img-fluid picture mx-auto" src="assets/images/фотощька.jpg" alt="">
                     <div class="media-body p-4 d-flex flex-column flex-md-row mx-auto mx-lg-0">
                         <div class="primary-info">
                             <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase">{{ $applicant->name }}
                             </h1>
-                            <div class="title mb-3">{{ $applicant->curriculumVitae->job_title }}</div>
+                            <div class="title mb-3">{{ $applicant->curriculumVitae?->job_title }}</div>
                             <ul class="list-unstyled">
                                 <li class="mb-2"><a href="mailto:{{ $applicant->email }}"><i
                                             class="far fa-envelope fa-fw mr-2"
                                             data-fa-transform="grow-3"></i>{{ $applicant->email }}</a></li>
                                 <li><a><i class="fas fa-mobile-alt fa-fw mr-2"
-                                            data-fa-transform="grow-6"></i>{{ $applicant->curriculumVitae->phone }}</a>
+                                            data-fa-transform="grow-6"></i>{{ $applicant->curriculumVitae?->phone }}</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="secondary-info ml-md-auto mt-2">
                             <ul class="resume-social list-unstyled">
 
-                                @if ($applicant->curriculumVitae->facebook_url)
-                                    <li class="mb-3"><a href="{{ $applicant->curriculumVitae->facebook_url }}"><span
+                                @if ($applicant->curriculumVitae?->facebook_url)
+                                    <li class="mb-3"><a href="{{ $applicant->curriculumVitae?->facebook_url }}"><span
                                                 class="fa-container text-center mr-2"><i
-                                                    class="fab fa-facebook fa-fw"></i></span>{{ $applicant->name }}</a>
+                                                    class="fab fa-facebook fa-fw"></i></span>Facebook</a>
                                     </li>
                                 @endif
-                                @if ($applicant->curriculumVitae->github_url)
-                                    <li class="mb-3"><a href="{{ $applicant->curriculumVitae->github_url }}"><span
+                                @if ($applicant->curriculumVitae?->github_url)
+                                    <li class="mb-3"><a href="{{ $applicant->curriculumVitae?->github_url }}"><span
                                                 class="fa-container text-center mr-2"><i
-                                                    class="fab fa-github fa-fw"></i></span>{{ $applicant->name }}</a>
+                                                    class="fab fa-github fa-fw"></i></span>Github</a>
                                     </li>
                                 @endif
-                                @if ($applicant->curriculumVitae->linkedin_url)
-                                    <li class="mb-3"><a
-                                            href="{{ $applicant->curriculumVitae->linkedin_url }}"><span
+                                @if ($applicant->curriculumVitae?->linkedin_url)
+                                    <li class="mb-3"><a href="{{ $applicant->curriculumVitae?->linkedin_url }}"><span
                                                 class="fa-container text-center mr-2"><i
-                                                    class="fab fa-linkedin fa-fw"></i></span>{{ $applicant->name }}</a>
+                                                    class="fab fa-linkedin fa-fw"></i></span>LinkedIn</a>
                                     </li>
                                 @endif
-                                @if ($applicant->curriculumVitae->portfolio_url)
-                                    <li><a href="{{ $applicant->curriculumVitae->portfolio_url }}"><span
+                                @if ($applicant->curriculumVitae?->portfolio_url)
+                                    <li><a href="{{ $applicant->curriculumVitae?->portfolio_url }}"><span
                                                 class="fa-container text-center mr-2"><i
                                                     class="fab fa-globe-asia"></i></span>{{ $applicant->name }}
                                         </a></li>
@@ -96,12 +103,12 @@
                 <section class="resume-section summary-section mb-5">
                     <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">ABOUT</h2>
                     <div class="resume-section-content">
-                        <p class="mb-0">{{ $applicant->curriculumVitae->summary }}</p>
+                        <p class="mb-0">{{ $applicant->curriculumVitae?->summary }}</p>
                     </div>
                 </section>
                 <div class="row">
                     <div class="col-lg-9">
-                        @if ($applicant->curriculumVitae->education != null)
+                        @if ($applicant->curriculumVitae?->education)
                             <section class="resume-section experience-section mb-5">
                                 <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">EDUCATION
                                 </h2>
@@ -143,7 +150,7 @@
                                 </div>
                             </section>
                         @endif
-                        @if ($applicant->curriculumVitae->work_experience != null)
+                        @if ($applicant->curriculumVitae?->work_experience)
                             <section class="resume-section experience-section mb-5">
                                 <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">WORK
                                     EXPERIENCE
@@ -175,7 +182,7 @@
                             </section>
 
                         @endif
-                        @if ($applicant->curriculumVitae->volunteer_work != null)
+                        @if ($applicant->curriculumVitae?->volunteer_work)
                             <section class="resume-section experience-section mb-5">
                                 <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">VOLUNTEER
                                     WORK
@@ -205,7 +212,7 @@
                                 </div>
                             </section>
                         @endif
-                        @if ($applicant->curriculumVitae->affiliations != null)
+                        @if ($applicant->curriculumVitae?->affiliations)
                             <section class="resume-section experience-section mb-5">
                                 <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">AFFILIATIONS
                                 </h2>
@@ -234,7 +241,7 @@
                                 </div>
                             </section>
                         @endif
-                        @if ($applicant->curriculumVitae->certifications != null)
+                        @if ($applicant->curriculumVitae?->certifications)
                             <section class="resume-section experience-section mb-5">
                                 <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">
                                     CERTIFICATIONS
@@ -263,7 +270,7 @@
                                 </div>
                             </section>
                         @endif
-                        @if ($applicant->curriculumVitae->awards != null)
+                        @if ($applicant->curriculumVitae?->awards)
                             <section class="resume-section experience-section mb-5">
                                 <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">AWARDS
                                 </h2>
@@ -291,7 +298,7 @@
                                 </div>
                             </section>
                         @endif
-                        @if ($applicant->curriculumVitae->projects != null)
+                        @if ($applicant->curriculumVitae?->projects)
                             <section class="resume-section experience-section mb-5">
                                 <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">PROJECTS
                                 </h2>
@@ -335,19 +342,21 @@
                                 <div class="resume-skill-item">
                                     {{-- <h4 class="resume-skills-cat font-weight-bold">В Адоуб</h4> --}}
                                     <ul class="list-unstyled mb-4"></ul>
-                                    @forelse ($applicant->curriculumVitae->skills as $skils)
-                                        <li class="mb-2">
-                                            <div class="resume-skill-name">{{ $skils['name'] }}</div>
-                                            <div class="progress resume-progress">
-                                                <div class="progress-bar theme-progress-bar-dark" role="progressbar"
-                                                    style="width: {{ $skils['level'] }}%" aria-valuenow="25"
-                                                    aria-valuemin="0" aria-valuemax="100">
+                                    @if ($applicant->curriculumVitae?->skills)
+                                        @forelse ($applicant->curriculumVitae->skills as $skils)
+                                            <li class="mb-2">
+                                                <div class="resume-skill-name">{{ $skils['name'] }}</div>
+                                                <div class="progress resume-progress">
+                                                    <div class="progress-bar theme-progress-bar-dark"
+                                                        role="progressbar" style="width: {{ $skils['level'] }}%"
+                                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
 
-                                    @empty
-                                    @endforelse
+                                        @empty
+                                        @endforelse
+                                    @endif
                                 </div>
                         </section>
                         <section class="resume-section skills-section mb-5">
@@ -356,35 +365,39 @@
                                 <div class="resume-skill-item">
                                     {{-- <h4 class="resume-skills-cat font-weight-bold">В Адоуб</h4> --}}
                                     <ul class="list-unstyled mb-4"></ul>
-                                    @forelse ($applicant->curriculumVitae->languages as $languages)
-                                        <li class="mb-2">
-                                            <div class="resume-degree  font-weight-bold">{{ $languages['name'] }}
-                                            </div>
-                                            <div class="font-weight-normal resume-skill-name">
-                                                {{ $languages['proficiency'] }}
-                                        </li>
-
-                                    @empty
-                                    @endforelse
+                                    @if ($applicant->curriculumVitae?->languages)
+                                        @forelse ($applicant->curriculumVitae->languages as $languages)
+                                            <li class="mb-2">
+                                                <div class="resume-degree  font-weight-bold">{{ $languages['name'] }}
+                                                </div>
+                                                <div class="font-weight-normal resume-skill-name">
+                                                    {{ $languages['proficiency'] }}
+                                            </li>
+                                        @empty
+                                        @endforelse
+                                    @endif
                                 </div>
                         </section>
                         <section class="resume-section education-section mb-5">
                             <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">REFERENCES</h2>
                             <div class="resume-section-content">
                                 <ul class="list-unstyled">
-                                    @forelse ($applicant->curriculumVitae->references as $references)
-                                        <li class="mb-2">
-                                            <div class="resume-degree font-weight-bold">{{ $references['name'] }}
-                                            </div>
-                                            <div class="resume-degree-org">Position: {{ $references['title'] }}</div>
-                                            <div class="resume-degree-org">Company: {{ $references['company'] }}</div>
-                                            <div class="resume-degree-org">{{ $references['email'] }}</div>
-                                            <div class="resume-degree-org">{{ $references['phone'] }}</div>
-                                            <div class="resume-degree-org">{{ $references['relationship'] }}</div>
-                                        </li>
-
-                                    @empty
-                                    @endforelse
+                                    @if ($applicant->curriculumVitae?->references)
+                                        @forelse ($applicant->curriculumVitae->references as $references)
+                                            <li class="mb-2">
+                                                <div class="resume-degree font-weight-bold">{{ $references['name'] }}
+                                                </div>
+                                                <div class="resume-degree-org">Position: {{ $references['title'] }}
+                                                </div>
+                                                <div class="resume-degree-org">Company: {{ $references['company'] }}
+                                                </div>
+                                                <div class="resume-degree-org">{{ $references['email'] }}</div>
+                                                <div class="resume-degree-org">{{ $references['phone'] }}</div>
+                                                <div class="resume-degree-org">{{ $references['relationship'] }}</div>
+                                            </li>
+                                        @empty
+                                        @endforelse
+                                    @endif
                                 </ul>
                             </div>
                         </section>

@@ -70,7 +70,10 @@ Route::get('/alumni/list', [ListController::class, 'index'])->name('students.scr
 
 
 Route::get('/profile', function(){
-    $alumni_id = 5;
-    return view('Resume.index', compact('alumni_id'));
+    return view('Resume.index');
+});
+Route::get('/support/{id}/', function($id){
+    $alumni_id = $id;
+    return view('Resume.support', compact('alumni_id'));
 });
 Route::get('/send-email', [App\Http\Controllers\CareerController::class, 'sendJobPostingsEmail']);

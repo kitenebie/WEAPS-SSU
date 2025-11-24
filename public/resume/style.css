@@ -8526,7 +8526,7 @@ a.theme-btn-on-bg:hover, a.theme-btn-on-bg:focus, a.theme-btn-on-bg:active, .the
   border-color: transparent;
   border: none;
 }
-
+ 
 .progress {
   border-radius: 2px;
 }
@@ -8541,7 +8541,7 @@ a.theme-btn-on-bg:hover, a.theme-btn-on-bg:focus, a.theme-btn-on-bg:active, .the
 }
 
 .resume-wrapper-inner {
-  max-width: 1000px;
+  max-width: 90%;
 }
 
 .resume-header {
