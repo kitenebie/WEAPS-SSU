@@ -48,7 +48,7 @@ class AppliedJobs extends Page implements HasTable
                         'success' => 'approved',
                         'danger' => 'rejected',
                     ]),
-                TextColumn::make('career.end_date')
+                BadgeColumn::make('career.end_date')
                     ->label('Status')
                     ->formatStateUsing(function ($state) {
                         if ($state) {
@@ -58,6 +58,11 @@ class AppliedJobs extends Page implements HasTable
                             return 'N/A';
                         }
                     })
+                    ->colors([
+                        'danger' => 'Expired',
+                        'success' => fn ($state) => $state !== 'Expired' && $state !== 'N/A',
+                        'gray' => 'N/A',
+                    ])
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Applied Date')

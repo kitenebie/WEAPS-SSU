@@ -7,6 +7,7 @@ use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Actions\Action;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -40,7 +41,7 @@ class SavedJobs extends Page implements HasTable
                     ->label('Company')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('career.end_date')
+                BadgeColumn::make('career.end_date')
                     ->label('Status')
                     ->formatStateUsing(function ($state) {
                         if ($state) {
@@ -50,6 +51,11 @@ class SavedJobs extends Page implements HasTable
                             return 'N/A';
                         }
                     })
+                    ->colors([
+                        'danger' => 'Expired',
+                        'success' => fn ($state) => $state !== 'Expired' && $state !== 'N/A',
+                        'gray' => 'N/A',
+                    ])
                     ->sortable(),
             ])
             ->actions([
