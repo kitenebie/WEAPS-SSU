@@ -237,7 +237,7 @@
     @foreach ($careers as $career)
         <div class="bg-red-50 rounded-xs shadow-md border border-gray-200 hover:shadow-lg hover:border-slate-300 transition-all duration-200 flex flex-col">
             <!-- Top colored bar -->
-            <div class="w-full h-4 bg-maroon-600 rounded-t-lg"></div>
+            <div class="w-full h-4 bg-maroon-600 rounded-t-xs"></div>
 
             <!-- Status badges -->
             @if(isset($career->is_saved) && $career->is_saved)
