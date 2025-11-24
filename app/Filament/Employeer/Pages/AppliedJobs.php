@@ -72,6 +72,7 @@ class AppliedJobs extends Page implements HasTable
             ->actions([
                 Action::make('view_details')
                     ->label('View Details')
+                    ->button()
                     ->icon('heroicon-o-eye')
                     ->action(function (Applicant $record) {
                         // Placeholder for view details
