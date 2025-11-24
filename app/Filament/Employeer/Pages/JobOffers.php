@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Filament\Employeer\Pages;
+
 use App\Models\Applicant;
 use App\Models\SelectedApplicant;
 use Filament\Pages\Page;
@@ -34,29 +35,38 @@ class JobOffers extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(SelectedApplicant::whereHas('applicant', function ($query) {
-                $query->where('user_id', Auth::id());
-            })->with(['user', 'applicant.career']))
+            ->query(
+                SelectedApplicant::query()
+                    ->whereHas('applicant', function ($query) {
+                        $query->where('user_id', Auth::id());
+                    })
+                    ->with(['user', 'applicant.career'])
+            )
             ->columns([
                 TextColumn::make('applicant.company.name')
                     ->label('Company')
                     ->searchable(),
+
                 TextColumn::make('user.email')
                     ->label('Email')
                     ->searchable(),
+
                 TextColumn::make('applicant.career.title')
                     ->label('Position')
                     ->searchable(),
+
                 TextColumn::make('message')
                     ->label('Message')
                     ->html()
                     ->searchable(),
+
                 TextColumn::make('created_at')
-                    ->label('Hired At')
+                    ->label('Date')
                     ->dateTime(),
             ])
             ->defaultSort('created_at', 'desc');
     }
+
 
     public static function canAccess(): bool
     {
@@ -70,4 +80,3 @@ class JobOffers extends Page implements HasTable
         return !$user->roles()->where('name', $defaultRole)->exists();
     }
 }
-

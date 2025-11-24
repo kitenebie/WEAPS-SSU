@@ -29,6 +29,29 @@ class Carrer extends Model
         'tags' => 'array',
     ];
 
+    public function getTagsAttribute($value)
+    {
+        $decoded = json_decode($value, true);
+        if (is_array($decoded)) {
+            return array_filter($decoded, function($item) {
+                return is_string($item) && !empty($item);
+            });
+        }
+        return [];
+    }
+
+    public function setTagsAttribute($value)
+    {
+        if (is_array($value)) {
+            $value = array_filter($value, function($item) {
+                return is_string($item) && !empty($item);
+            });
+        } else {
+            $value = [];
+        }
+        $this->attributes['tags'] = json_encode($value);
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);

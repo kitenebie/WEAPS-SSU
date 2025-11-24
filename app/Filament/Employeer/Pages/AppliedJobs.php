@@ -88,22 +88,9 @@ class AppliedJobs extends Page implements HasTable
 
     public function getHeaderWidgets(): array
     {
-        return [
-            StatsOverviewWidget::make([
-                Stat::make('Pending Applications', $this->getPendingCount())
-                    ->description('Applications waiting for review')
-                    ->descriptionIcon('heroicon-m-clock')
-                    ->color('warning'),
-                Stat::make('Approved Applications', $this->getApprovedCount())
-                    ->description('Successfully approved')
-                    ->descriptionIcon('heroicon-m-check-circle')
-                    ->color('success'),
-                Stat::make('Rejected Applications', $this->getRejectedCount())
-                    ->description('Applications not approved')
-                    ->descriptionIcon('heroicon-m-x-circle')
-                    ->color('danger'),
-            ]),
-        ];
+        // Temporarily disabled to isolate Livewire serialization issue.
+        // If needed later, move these stats into a dedicated StatsOverview widget class.
+        return [];
     }
 
     private function getPendingCount(): int

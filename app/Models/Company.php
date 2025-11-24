@@ -34,13 +34,59 @@ class Company extends Model
      ];
 
     protected $casts = [
-         'specialties' => 'array',
-         'Document_Permit' => 'array',
-         'isActive' => 'boolean',
-         'isAdminVerified' => 'boolean',
-         'founded_year' => 'integer',
-         'employee_count' => 'integer',
-     ];
+          'specialties' => 'array',
+          'Document_Permit' => 'array',
+          'isActive' => 'boolean',
+          'isAdminVerified' => 'boolean',
+          'founded_year' => 'integer',
+          'employee_count' => 'integer',
+      ];
+
+    public function getSpecialtiesAttribute($value)
+    {
+        $decoded = json_decode($value, true);
+        if (is_array($decoded)) {
+            return array_filter($decoded, function($item) {
+                return is_string($item) && !empty($item);
+            });
+        }
+        return [];
+    }
+
+    public function setSpecialtiesAttribute($value)
+    {
+        if (is_array($value)) {
+            $value = array_filter($value, function($item) {
+                return is_string($item) && !empty($item);
+            });
+        } else {
+            $value = [];
+        }
+        $this->attributes['specialties'] = json_encode($value);
+    }
+
+    public function getDocumentPermitAttribute($value)
+    {
+        $decoded = json_decode($value, true);
+        if (is_array($decoded)) {
+            return array_filter($decoded, function($item) {
+                return is_string($item) || is_array($item);
+            });
+        }
+        return [];
+    }
+
+    public function setDocumentPermitAttribute($value)
+    {
+        if (is_array($value)) {
+            $value = array_filter($value, function($item) {
+                return is_string($item) || is_array($item);
+            });
+        } else {
+            $value = [];
+        }
+        $this->attributes['Document_Permit'] = json_encode($value);
+    }
 
     // Relationships
     public function user()
