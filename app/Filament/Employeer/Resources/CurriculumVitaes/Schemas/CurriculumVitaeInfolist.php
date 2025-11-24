@@ -30,7 +30,7 @@ class CurriculumVitaeInfolist
                     ->description('Personal details provided by the applicant')
                     ->afterHeader([
                         Action::make('Hire this applicant')
-                            ->visible(fn($record) => !Auth::user()->hasRole(env('USER_APPLICANT_ROLE', 'Applicant_Alumni')) && Company::where('user_id', Auth::id())->first()->isAdminVerified)
+                            ->visible(fn($record) => !Auth::user()->hasRole(env('USER_APPLICANT_ROLE', 'Applicant_Alumni')) && ($company = Company::where('user_id', Auth::id())->first()) && $company->isAdminVerified)
                             ->form([
                                 TextInput::make('Name')
                                     ->required()
@@ -42,7 +42,7 @@ class CurriculumVitaeInfolist
                                     ->schema([
                                         Select::make('position')
                                             ->label('Position')
-                                            ->options(Carrer::where('company_id', Company::where('user_id', Auth::id())->first()->id)->pluck('title', 'id') ?? [])
+                                            ->options(Carrer::where('company_id', Company::where('user_id', Auth::id())->first()?->id)->pluck('title', 'id') ?? [])
                                             ->required(),
                                         RichEditor::make('content')
                                             ->required()
