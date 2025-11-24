@@ -10,6 +10,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Widgets\StatsOverviewWidget;
+use Filament\Widgets\StatsOverviewWidget\Stat;
 use BackedEnum;
 use Filament\Actions\Action;
 use Illuminate\Http\Response;
@@ -80,6 +82,41 @@ class AppliedJobs extends Page implements HasTable
                     }),
             ])
             ->defaultSort('created_at', 'desc');
+    }
+
+    public function getHeaderWidgets(): array
+    {
+        return [
+            StatsOverviewWidget::make([
+                Stat::make('Pending Applications', $this->getPendingCount())
+                    ->description('Applications waiting for review')
+                    ->descriptionIcon('heroicon-m-clock')
+                    ->color('warning'),
+                Stat::make('Approved Applications', $this->getApprovedCount())
+                    ->description('Successfully approved')
+                    ->descriptionIcon('heroicon-m-check-circle')
+                    ->color('success'),
+                Stat::make('Rejected Applications', $this->getRejectedCount())
+                    ->description('Applications not approved')
+                    ->descriptionIcon('heroicon-m-x-circle')
+                    ->color('danger'),
+            ]),
+        ];
+    }
+
+    private function getPendingCount(): int
+    {
+        return Applicant::where('user_id', Auth::id())->where('status', 'pending')->count();
+    }
+
+    private function getApprovedCount(): int
+    {
+        return Applicant::where('user_id', Auth::id())->where('status', 'approved')->count();
+    }
+
+    private function getRejectedCount(): int
+    {
+        return Applicant::where('user_id', Auth::id())->where('status', 'rejected')->count();
     }
 
     public static function canAccess(): bool

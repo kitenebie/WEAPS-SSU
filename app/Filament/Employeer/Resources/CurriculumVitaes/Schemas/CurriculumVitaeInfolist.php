@@ -42,7 +42,7 @@ class CurriculumVitaeInfolist
                                     ->schema([
                                         Select::make('position')
                                             ->label('Position')
-                                            ->options(Carrer::where('company_id', Company::where('user_id', Auth::id())->first()->id)->pluck('title', 'id'))
+                                            ->options(Carrer::where('company_id', Company::where('user_id', Auth::id())->first()->id)->pluck('title', 'id') ?? [])
                                             ->required(),
                                         RichEditor::make('content')
                                             ->required()
