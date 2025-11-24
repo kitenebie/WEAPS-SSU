@@ -4,7 +4,7 @@
     <div class="w-full max-w-[95rem] px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 lg:mt-8">
 
         <!-- Search and Filter Section -->
-        <div class="mb-6 sm:mb-8 w-full border border-red-900 bg-red-900 shadow-xs p-4 sm:p-6 lg:p-8 rounded-lg">
+        <div class="mb-6 sm:mb-8 w-full border border-red-900 bg-red-900 shadow-xs p-4 sm:p-6 lg:p-8 rounded-xs">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <!-- Search Bar -->
                 <div class="sm:col-span-2 lg:col-span-1">
@@ -19,7 +19,7 @@
                     <div class="relative flex">
                         <input type="text" id="search" wire:model.live.debounce.300ms="search"
                             placeholder="Search by job title, company..."
-                            class="w-full  p-2 pl-4 pr-4 py-2 text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
+                            class="w-full  p-2 pl-4 pr-4 py-2 text-base border-2 border-slate-200 rounded-sm focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                         <div class="absolute inset-y-0 right-2  pl-4 flex items-center pointer-events-none">
                             <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -45,7 +45,7 @@
                     </label>
                     <input type="text" id="location_filter" wire:model.live.debounce.300ms="location_filter"
                         placeholder="Enter location..."
-                        class="w-full px-4 py-3 sm:py-4 text-sm sm:text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
+                        class="w-full px-4 py-3 sm:py-4 text-sm sm:text-base border-2 border-slate-200 rounded-sm focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                 </div>
 
                 <!-- Role Type Filter -->
@@ -60,7 +60,7 @@
                         Job Type
                     </label>
                     <select id="role_type_filter" wire:model.live="role_type_filter"
-                        class="w-full px-4 py-3 sm:py-4 text-sm sm:text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
+                        class="w-full px-4 py-3 sm:py-4 text-sm sm:text-base border-2 border-slate-200 rounded-sm focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                         <option value="">All Job Types</option>
                         <option value="Full-time">Full-time</option>
                         <option value="Part-time">Part-time</option>
@@ -82,7 +82,7 @@
                         Salary Range (₱)
                     </label>
                     <select id="salary_range_filter" wire:model.live="salary_range_filter"
-                        class="w-full px-4 py-3 sm:py-4 text-sm sm:text-base border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
+                        class="w-full px-4 py-3 sm:py-4 text-sm sm:text-base border-2 border-slate-200 rounded-sm focus:ring-4 focus:ring-maroon-500/20 focus:border-slate-500 bg-white shadow-sm transition-all duration-200">
                         <option value="">All Salary Ranges</option>
                         <option value="5k-10k">₱5,000 - ₱10,000</option>
                         <option value="11k-15k">₱11,000 - ₱15,000</option>
@@ -210,7 +210,7 @@
                         </div>
 
                         <button wire:click="clearFilters"
-                            class="inline-flex mt-2 items-center px-4 py-2 bg-white border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-maroon-50 hover:border-slate-400 transition-all duration-200 shadow-sm">
+                            class="inline-flex mt-2 items-center px-4 py-2 bg-white border-2 border-slate-300 text-slate-700 font-semibold rounded-xs hover:bg-maroon-50 hover:border-slate-400 transition-all duration-200 shadow-sm">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12"></path>
@@ -235,7 +235,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     @foreach ($careers as $career)
-        <div class="bg-red-50 rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:border-slate-300 transition-all duration-200 flex flex-col">
+        <div class="bg-red-50 rounded-xs shadow-md border border-gray-200 hover:shadow-lg hover:border-slate-300 transition-all duration-200 flex flex-col">
             <!-- Top colored bar -->
             <div class="w-full h-4 bg-maroon-600 rounded-t-lg"></div>
 
@@ -309,7 +309,7 @@
                 <!-- Buttons aligned at bottom -->
                 <div class="flex gap-2 mt-auto mb-4">
                     <button wire:click="openCareer({{ $career->id }})"
-                        class="w-1/2 bg-maroon-600 hover:bg-maroon-700 text-white font-medium py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-200">
+                        class="w-1/2 bg-maroon-600 hover:bg-maroon-700 text-white font-medium py-2 px-4 rounded-xs flex items-center justify-center transition-colors duration-200">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -320,7 +320,7 @@
                         View Details
                     </button>
                     <button wire:click="openCampany({{ $career->company_id }})"
-                        class="w-1/2 bg-blue-400 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-200">
+                        class="w-1/2 bg-blue-400 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-xs flex items-center justify-center transition-colors duration-200">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
