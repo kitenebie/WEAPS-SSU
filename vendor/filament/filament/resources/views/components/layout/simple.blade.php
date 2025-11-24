@@ -36,15 +36,8 @@
         @endif
         <div class="fi-simple-main-ctn">
             <div class="fi-simple-main-div" style="display:flex;flex-direction:column; align-items: center; justify-content:center">
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
             <center>
-                <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: white">Welcome, Where Alumni Futures Begin</h1>
+                <h1 class="titleH1" style="font-size: 3rem; font-weight:bolder; color: rgba(255, 255, 255, 0)">Welcome, Where Alumni Futures Begin</h1>
             </center>
                 <br/>
                 <br/>
@@ -89,7 +82,7 @@
             display: flex;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(109, 1, 1, 0.83) 0%, rgba(128, 0, 0, 0.7) 30%, rgba(100, 1, 1, 0.8) 70%, rgba(92, 1, 1, 0.842) 100%), url(https://sorsu.edu.ph/wp-content/uploads/2024/06/SORSU-BC-JOINS-126TH-INDEPENDENCE-DAY-4.jpg);
+            background: linear-gradient(135deg, rgba(109, 1, 1, 0.83) 0%, rgba(128, 0, 0, 0.7) 30%, rgba(100, 1, 1, 0.8) 70%, rgba(92, 1, 1, 0.842) 100%), url(/BULAN-CAMPUS-BLESSING-AND-RIBBON-CUTTING-OF-GATE-50.jpg);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
