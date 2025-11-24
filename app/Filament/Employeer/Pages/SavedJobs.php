@@ -40,6 +40,16 @@ class SavedJobs extends Page implements HasTable
                     ->label('Company')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('career.end_date')
+                    ->label('Status')
+                    ->formatStateUsing(function ($state) {
+                        if ($state && $state->isPast()) {
+                            return 'Expired';
+                        } else {
+                            return $state ? $state->format('M d, Y') : 'N/A';
+                        }
+                    })
+                    ->sortable(),
             ])
             ->actions([
                 Action::make('view_details')
