@@ -162,7 +162,7 @@
                                     ✓ Applied
                                 </button>
                             @else
-                                <button id="apply-now-footer-btn" class="bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 px-6 rounded-sm transition-colors duration-200" onclick="applyNow({{ $career->id }})">
+                                <button id="apply-now-footer-btn" class="bg-[#7F1D1D] hover:bg-[#8D2727FF] text-white font-medium py-2 px-6 rounded-sm transition-colors duration-200" onclick="applyNow({{ $career->id }})">
                                     Apply Now
                                 </button>
                             @endif
