@@ -1,201 +1,448 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/resume/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-</head>
 @php
-    $data = App\Models\User::find($alumni_id);
+    use Illuminate\Support\Facades\Auth;
 @endphp
 
+<head>
+    <title>{{ Auth::user()->name }}</title>
+    <link rel="shortcut icon" href="иконка.ico">
+    <style>
+        a {
+            color: #2287C9;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: #2287C9;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: #2287C9;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #339900;
+            text-decoration: underline;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+        integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous">
+    </script>
+    <link id="theme-style" rel="stylesheet" href="/css/resume/style.css">
+    <base target="_blank">
+</head>
+
 <body>
-    <div class="resume">
-        <div class="base">
-            <div class="profile">
-                <div class="photo">
-                    <img
-                        src="{{ $data->curriculumVitae->profile_picture != null ? 'https://weapssorsu-bc.site/storage/' . $data->curriculumVitae->profile_picture : 'https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp' }}" />
-                </div>
-                <div class="info">
-                    <h1 class="name">{{ $data->name ?? '' }}</h1>
-                    <h3 class="job">{{ $data->curriculumVitae->job_title ?? 'Open for all position' }}</h3>
-                </div>
-            </div>
-            <div class="about">
-                <h3>About Me</h3>
-                {{ $data->curriculumVitae->summary ?? '' }}
-            </div>
-            <div class="contact">
-                <h3>Contact Me</h3>
-                <div class="call">
-                    <a href="tel:{{ $data->curriculumVitae->phone ?? '' }}"><i
-                            class="fas fa-phone"></i><span>{{ $data->curriculumVitae->phone ?? '' }}</span></a>
-                </div>
-                <div class="address">
-                    <a href="#"><i
-                            class="fas fa-map-marker"></i><span>{{ $data->curriculumVitae->address ?? '' }}</span></a>
-                </div>
-                <div class="email">
-                    <a href="mailto:{{ $data->curriculumVitae->email ?? '' }}"><i
-                            class="fas fa-envelope"></i><span>{{ $data->curriculumVitae->email ?? '' }}</span></a>
-                </div>
-                @if ($data->curriculumVitae->portfolio_url)
-                    <div class="website">
-                        <a href="{{ $data->curriculumVitae->portfolio_url }}" target="_blank">
-                            <i
-                                class="fas fa-home"></i><span>{{ $data->curriculumVitae->portfolio_url ?? '' }}</span></a>
+    <article class="resume-wrapper text-center position-relative">
+        <div class="resume-wrapper-inner mx-auto text-left bg-white shadow-lg">
+            <header class="resume-header pt-4 pt-md-0">
+                <div class="media flex-column flex-md-row">
+                    <a href="https://weapssorsu-bc.site/storage/{{ Auth::user()->curriculumVitae->profile_picture }}">
+                        <img src="https://weapssorsu-bc.site/storage/{{ Auth::user()->curriculumVitae->profile_picture }}"
+                            alt="image" border="0"width="220" height="220"></a>
+                    <img class="mr-3 img-fluid picture mx-auto" src="assets/images/фотощька.jpg" alt="">
+                    <div class="media-body p-4 d-flex flex-column flex-md-row mx-auto mx-lg-0">
+                        <div class="primary-info">
+                            <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase">{{ Auth::user()->name }}
+                            </h1>
+                            <div class="title mb-3">{{ Auth::user()->curriculumVitae->job_title }}</div>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="mailto:{{ Auth::user()->email }}"><i
+                                            class="far fa-envelope fa-fw mr-2"
+                                            data-fa-transform="grow-3"></i>{{ Auth::user()->email }}</a></li>
+                                <li><a><i class="fas fa-mobile-alt fa-fw mr-2"
+                                            data-fa-transform="grow-6"></i>{{ Auth::user()->curriculumVitae->phone }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="secondary-info ml-md-auto mt-2">
+                            <ul class="resume-social list-unstyled">
+
+                                @if (Auth::user()->curriculumVitae->facebook_url)
+                                    <li class="mb-3"><a href="{{ Auth::user()->curriculumVitae->facebook_url }}"><span
+                                                class="fa-container text-center mr-2"><i
+                                                    class="fab fa-facebook fa-fw"></i></span>{{ Auth::user()->name }}</a>
+                                    </li>
+                                @endif
+                                @if (Auth::user()->curriculumVitae->github_url)
+                                    <li class="mb-3"><a href="{{ Auth::user()->curriculumVitae->github_url }}"><span
+                                                class="fa-container text-center mr-2"><i
+                                                    class="fab fa-github fa-fw"></i></span>{{ Auth::user()->name }}</a>
+                                    </li>
+                                @endif
+                                @if (Auth::user()->curriculumVitae->linkedin_url)
+                                    <li class="mb-3"><a
+                                            href="{{ Auth::user()->curriculumVitae->linkedin_url }}"><span
+                                                class="fa-container text-center mr-2"><i
+                                                    class="fab fa-linkedin fa-fw"></i></span>{{ Auth::user()->name }}</a>
+                                    </li>
+                                @endif
+                                @if (Auth::user()->curriculumVitae->portfolio_url)
+                                    <li><a href="{{ Auth::user()->curriculumVitae->portfolio_url }}"><span
+                                                class="fa-container text-center mr-2"><i
+                                                    class="fab fa-globe-asia"></i></span>{{ Auth::user()->name }}
+                                        </a></li>
+                                @endif
+                            </ul>
+                        </div>
                     </div>
-                @endif
-            </div>
-            <div class="follow">
-                <h3>Follow Me</h3>
-                <div class="box">
-                    <a href="{{ $data->curriculumVitae->facebook_url ?? "#" }}" target="_blank"><i
-                            class="fab fa-facebook"></i></a>
-                    <a href="{{ $data->curriculumVitae->github_url ?? "#" }}" target="_blank"><i
-                            class="fab fa-github"></i></a>
-                    <a href="{{ $data->curriculumVitae->linkedin_url ?? "#" }}" target="_blank"><i
-                            class="fab fa-linkedin"></i></a>
+                </div>
+            </header>
+            <div class="resume-body p-5">
+                <section class="resume-section summary-section mb-5">
+                    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">ABOUT</h2>
+                    <div class="resume-section-content">
+                        <p class="mb-0">{{ Auth::user()->curriculumVitae->summary }}</p>
+                    </div>
+                </section>
+                <div class="row">
+                    <div class="col-lg-9">
+                        @if (Auth::user()->curriculumVitae->education != null)
+                            <section class="resume-section experience-section mb-5">
+                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">EDUCATION
+                                </h2>
+                                <div class="resume-section-content">
+                                    <div class="resume-timeline position-relative">
+                                        @forelse (Auth::user()->curriculumVitae->education as $education)
+                                            <article class="resume-timeline-item position-relative pb-5">
+
+                                                <div class="resume-timeline-item-header mb-2">
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <h3 class="resume-position-title font-weight-bold mb-1">
+                                                            {{ $education['degree'] }}</h3>
+                                                        {{-- <div class="resume-company-name ml-auto">
+                                                    ГК «Основа»</div> --}}
+                                                    </div>
+                                                    <div class="resume-position-time">
+                                                        {{ $education['year_graduated'] }}
+                                                    </div>
+                                                </div><!--//resume-timeline-item-header-->
+                                                <div class="resume-timeline-item-desc">
+                                                    <p>{{ $education['school_name'] }}</p>
+                                                    {{-- <ul>
+                                                <li><a href="https://vk.com/@russianimp-top-5-faktov-ob-internete-v-metro-vo-vremena-rossiiskoi-impe?ref=group_block"
+                                                        target="_blank">«Метро в Российской империи»</a></li>
+                                                <li><a href="https://vk.com/russianimp?w=wall-44693766_143639"
+                                                        target="_blank">Смешные
+                                                        дореволюционные журналы</a></li>
+                                                <li><a href="https://www.instagram.com/p/ByzmsdVopko/"
+                                                        target="_blank">Политические
+                                                        мемы</a></li>
+                                            </ul> --}}
+                                                </div>
+
+                                            </article>
+
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </section>
+                        @endif
+                        @if (Auth::user()->curriculumVitae->work_experience != null)
+                            <section class="resume-section experience-section mb-5">
+                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">WORK
+                                    EXPERIENCE
+                                </h2>
+                                <div class="resume-section-content">
+                                    <div class="resume-timeline position-relative">
+                                        @forelse (Auth::user()->curriculumVitae->work_experience as $work_experience)
+                                            <article class="resume-timeline-item position-relative pb-5">
+                                                <div class="resume-timeline-item-header mb-2">
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <h3 class="resume-position-title font-weight-bold mb-1">
+                                                            {{ $work_experience['jobPosition'] }}</h3>
+                                                        <div class="resume-company-name ml-auto">
+                                                            {{ $work_experience['company_name'] }}</div>
+                                                    </div>
+                                                    <div class="resume-position-time">
+                                                        {{ $work_experience['start_date'] }}
+                                                        — {{ $work_experience['end_date'] }}</div>
+                                                </div><!--//resume-timeline-item-header-->
+                                                <div class="resume-timeline-item-desc">
+                                                    <p>{{ $work_experience['summary'] }}</p>
+                                                </div>
+                                            </article>
+
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </section>
+
+                        @endif
+                        @if (Auth::user()->curriculumVitae->volunteer_work != null)
+                            <section class="resume-section experience-section mb-5">
+                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">VOLUNTEER
+                                    WORK
+                                </h2>
+                                <div class="resume-section-content">
+                                    <div class="resume-timeline position-relative">
+                                        @forelse (Auth::user()->curriculumVitae->volunteer_work as $volunteer_work)
+                                            <article class="resume-timeline-item position-relative pb-5">
+                                                <div class="resume-timeline-item-header mb-2">
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <h3 class="resume-position-title font-weight-bold mb-1">
+                                                            {{ $volunteer_work['organization'] }}</h3>
+                                                        <div class="resume-company-name ml-auto">
+                                                            {{ $volunteer_work['role'] }}</div>
+                                                    </div>
+                                                    <div class="resume-position-time">
+                                                        {{ $volunteer_work['start_date'] }} —
+                                                        {{ $volunteer_work['end_date'] }}</div>
+                                                </div><!--//resume-timeline-item-header-->
+                                                <div class="resume-timeline-item-desc">
+                                                    <p>{{ $volunteer_work['description'] }}</p>
+                                                </div>
+                                            </article>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </section>
+                        @endif
+                        @if (Auth::user()->curriculumVitae->affiliations != null)
+                            <section class="resume-section experience-section mb-5">
+                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">AFFILIATIONS
+                                </h2>
+                                <div class="resume-section-content">
+                                    <div class="resume-timeline position-relative">
+                                        @forelse (Auth::user()->curriculumVitae->affiliations as $affiliations)
+                                            <article class="resume-timeline-item position-relative pb-5">
+                                                <div class="resume-timeline-item-header mb-2">
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <h3 class="resume-position-title font-weight-bold mb-1">
+                                                            {{ $affiliations['organization'] }}</h3>
+                                                        <div class="resume-company-name ml-auto">
+                                                            {{ $affiliations['role'] }}</div>
+                                                    </div>
+                                                    <div class="resume-position-time">
+                                                        {{ $affiliations['start_date'] }} —
+                                                        {{ $affiliations['end_date'] }}</div>
+                                                </div><!--//resume-timeline-item-header-->
+                                                <div class="resume-timeline-item-desc">
+                                                    <p>{{ $affiliations['description'] }}</p>
+                                                </div>
+                                            </article>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </section>
+                        @endif
+                        @if (Auth::user()->curriculumVitae->certifications != null)
+                            <section class="resume-section experience-section mb-5">
+                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">
+                                    CERTIFICATIONS
+                                </h2>
+                                <div class="resume-section-content">
+                                    <div class="resume-timeline position-relative">
+                                        @forelse (Auth::user()->curriculumVitae->certifications as $certifications)
+                                            <article class="resume-timeline-item position-relative pb-5">
+                                                <div class="resume-timeline-item-header mb-2">
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <h3 class="resume-position-title font-weight-bold mb-1">
+                                                            {{ $certifications['name'] }}</h3>
+                                                        <div class="resume-company-name ml-auto">
+                                                            {{ $certifications['issuer'] }}</div>
+                                                    </div>
+                                                    <div class="resume-position-time">
+                                                        {{ $certifications['date_obtained'] }}</div>
+                                                </div><!--//resume-timeline-item-header-->
+                                                <div class="resume-timeline-item-desc">
+                                                    <p>{{ $certifications['credential_id'] }}</p>
+                                                </div>
+                                            </article>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </section>
+                        @endif
+                        @if (Auth::user()->curriculumVitae->awards != null)
+                            <section class="resume-section experience-section mb-5">
+                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">AWARDS
+                                </h2>
+                                <div class="resume-section-content">
+                                    <div class="resume-timeline position-relative">
+                                        @forelse (Auth::user()->curriculumVitae->awards as $awards)
+                                            <article class="resume-timeline-item position-relative pb-5">
+                                                <div class="resume-timeline-item-header mb-2">
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <h3 class="resume-position-title font-weight-bold mb-1">
+                                                            {{ $awards['name'] }}</h3>
+                                                        <div class="resume-company-name ml-auto">
+                                                            {{ $awards['organization'] }}</div>
+                                                    </div>
+                                                    <div class="resume-position-time">
+                                                        {{ $awards['date_received'] }}</div>
+                                                </div><!--//resume-timeline-item-header-->
+                                                <div class="resume-timeline-item-desc">
+                                                    <p>{{ $awards['description'] }}</p>
+                                                </div>
+                                            </article>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </section>
+                        @endif
+                        @if (Auth::user()->curriculumVitae->projects != null)
+                            <section class="resume-section experience-section mb-5">
+                                <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">PROJECTS
+                                </h2>
+                                <div class="resume-section-content">
+                                    <div class="resume-timeline position-relative">
+                                        @forelse (Auth::user()->curriculumVitae->projects as $projects)
+                                            <article class="resume-timeline-item position-relative pb-5">
+                                                <div class="resume-timeline-item-header mb-2">
+                                                    <div class="d-flex flex-column flex-md-row">
+                                                        <h3 class="resume-position-title font-weight-bold mb-1">
+                                                            {{ $projects['name'] }}</h3>
+                                                    </div>
+                                                    <div class="resume-position-time">
+                                                        {{ $projects['start_date'] }} - {{ $projects['end_date'] }}
+                                                    </div>
+                                                </div><!--//resume-timeline-item-header-->
+                                                <div class="resume-timeline-item-desc">
+                                                    <p>{{ $projects['description'] }}</p>
+                                                    <p>{{ $projects['outcomes'] }}</p>
+                                                    <ul>
+                                                        @forelse ($projects['technologies'] as $technologies)
+                                                            <li>{{ $technologies }}</li>
+                                                        @empty
+                                                        @endforelse
+
+                                                    </ul>
+                                                </div>
+                                            </article>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </section>
+                        @endif
+                    </div>
+
+                    <div class="col-lg-3">
+                        <section class="resume-section skills-section mb-5">
+                            <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">SKILLS</h2>
+                            <div class="resume-section-content">
+                                <div class="resume-skill-item">
+                                    {{-- <h4 class="resume-skills-cat font-weight-bold">В Адоуб</h4> --}}
+                                    <ul class="list-unstyled mb-4"></ul>
+                                    @forelse (Auth::user()->curriculumVitae->skills as $skils)
+                                        <li class="mb-2">
+                                            <div class="resume-skill-name">{{ $skils['name'] }}</div>
+                                            <div class="progress resume-progress">
+                                                <div class="progress-bar theme-progress-bar-dark" role="progressbar"
+                                                    style="width: {{ $skils['level'] }}%" aria-valuenow="25"
+                                                    aria-valuemin="0" aria-valuemax="100">
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    @empty
+                                    @endforelse
+                                </div>
+                        </section>
+                        <section class="resume-section skills-section mb-5">
+                            <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">LANGUAGES</h2>
+                            <div class="resume-section-content">
+                                <div class="resume-skill-item">
+                                    {{-- <h4 class="resume-skills-cat font-weight-bold">В Адоуб</h4> --}}
+                                    <ul class="list-unstyled mb-4"></ul>
+                                    @forelse (Auth::user()->curriculumVitae->languages as $languages)
+                                        <li class="mb-2">
+                                            <div class="resume-degree  font-weight-bold">{{ $languages['name'] }}
+                                            </div>
+                                            <div class="font-weight-normal resume-skill-name">
+                                                {{ $languages['proficiency'] }}
+                                        </li>
+
+                                    @empty
+                                    @endforelse
+                                </div>
+                        </section>
+                        <section class="resume-section education-section mb-5">
+                            <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">REFERENCES</h2>
+                            <div class="resume-section-content">
+                                <ul class="list-unstyled">
+                                    @forelse (Auth::user()->curriculumVitae->references as $references)
+                                        <li class="mb-2">
+                                            <div class="resume-degree font-weight-bold">{{ $references['name'] }}
+                                            </div>
+                                            <div class="resume-degree-org">Position: {{ $references['title'] }}</div>
+                                            <div class="resume-degree-org">Company: {{ $references['company'] }}</div>
+                                            <div class="resume-degree-org">{{ $references['email'] }}</div>
+                                            <div class="resume-degree-org">{{ $references['phone'] }}</div>
+                                            <div class="resume-degree-org">{{ $references['relationship'] }}</div>
+                                        </li>
+
+                                    @empty
+                                    @endforelse
+                                </ul>
+                            </div>
+                        </section>
+                        {{-- <section class="resume-section reference-section mb-5">
+                            <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Хвалюсь</h2>
+                            <div class="resume-section-content">
+                                <ul class="list-unstyled resume-awards-list">
+                                    <li class="mb-2 pl-4 position-relative">
+                                        <i class="resume-award-icon fas fa-trophy position-absolute"
+                                            data-fa-transform="shrink-2"></i>
+                                        <div class="resume-award-name">Знаниями нейроэкономики</div>
+                                        <div class="resume-award-desc"><a
+                                                href="https://www.coursera.org/account/accomplishments/verify/DPCCM39K7M8F"
+                                                target="_blank">Подтверждёнными сертификатом</a></div>
+                                    </li>
+                                    <li class="mb-0 pl-4 position-relative">
+                                        <i class="resume-award-icon fas fa-trophy position-absolute"
+                                            data-fa-transform="shrink-2"></i>
+                                        <div class="resume-award-name">Школой редакторов Бюро Горбунова</div>
+                                        <div class="resume-award-desc"><a
+                                                href="https://bureau.ru/burosfera/stas-zveryanov" target="_blank">И
+                                                кабинетом в Бюросфере</a></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="resume-section language-section mb-5">
+                            <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Разговариваю на
+                            </h2>
+                            <div class="resume-section-content">
+                                <ul class="list-unstyled resume-lang-list">
+                                    <li class="mb-2"><span class="resume-lang-name font-weight-bold">Русском</span>
+                                        <small class="text-muted font-weight-normal">(Он ведь родной)</small>
+                                    </li>
+                                    <li class="mb-2 align-middle"><span
+                                            class="resume-lang-name font-weight-bold">Английском</span>
+                                        <small class="text-muted font-weight-normal">(С1)</small>
+                                    </li>
+                                    <li><span class="resume-lang-name font-weight-bold">Немецком</span> <small
+                                            class="text-muted font-weight-normal">(В1)</small></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="resume-section interests-section mb-5">
+                            <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Интересуюсь</h2>
+                            <div class="resume-section-content">
+                                <ul class="list-unstyled">
+                                    <li class="mb-1">Видеоиграми</li>
+                                    <li class="mb-1">Редактурой</li>
+                                    <li class="mb-1">Дизайном</li>
+                                </ul>
+                            </div>
+                        </section> --}}
+
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="func">
-            <div class="work">
-                <h3><i class="fa fa-briefcase"></i>Experience</h3>
-                {{ $data->curriculumVitae->work_experience }}
-                <ul>
-                    <li>
-                        <span>Technical Consultant -<br />Web Design</span><small>Fiserv</small><small>Apr 2018 -
-                            Now</small>
-                    </li>
-                    <li>
-                        <span>Web Designer</span><small>Lynden</small><small>Jan 2018 - Apr 2018</small>
-                    </li>
-                    <li>
-                        <span>Intern - Web Design</span><small>Lynden</small><small>Aug 2017 - Dec 2017</small>
-                    </li>
-                </ul>
-            </div>
-            <div class="edu">
-                <h3><i class="fa fa-graduation-cap"></i>Education</h3>
-                <ul>
-                    <li>
-                        <span>Bachelor of Science<br />Web Design and
-                            Development</span><small>BYU-Idaho</small><small>Jan. 2016 - Apr. 2018</small>
-                    </li>
-                    <li>
-                        <span>Computer Science</span><small>Edmonds Community College</small><small>Sept. 2014 - Dec.
-                            2015</small>
-                    </li>
-                    <li>
-                        <span>High School</span><small>Henry M. Jackson High School</small><small>Jan. 2013 - Jun.
-                            2015</small>
-                    </li>
-                </ul>
-            </div>
-            <div class="skills-prog">
-                <h3><i class="fas fa-code"></i>Programming Skills</h3>
-                <ul>
-                    <li data-percent="95">
-                        <span>HTML5</span>
-                        <div class="skills-bar">
-                            <div class="bar"></div>
-                        </div>
-                    </li>
-                    <li data-percent="90">
-                        <span>CSS3 & SCSS</span>
-                        <div class="skills-bar">
-                            <div class="bar"></div>
-                        </div>
-                    </li>
-                    <li data-percent="60">
-                        <span>JavaScript</span>
-                        <div class="skills-bar">
-                            <div class="bar"></div>
-                        </div>
-                    </li>
-                    <li data-percent="50">
-                        <span>jQuery</span>
-                        <div class="skills-bar">
-                            <div class="bar"></div>
-                        </div>
-                    </li>
-                    <li data-percent="40">
-                        <span>JSON</span>
-                        <div class="skills-bar">
-                            <div class="bar"></div>
-                        </div>
-                    </li>
-                    <li data-percent="55">
-                        <span>PHP</span>
-                        <div class="skills-bar">
-                            <div class="bar"></div>
-                        </div>
-                    </li>
-                    <li data-percent="40">
-                        <span>MySQL</span>
-                        <div class="skills-bar">
-                            <div class="bar"></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="skills-soft">
-                <h3><i class="fas fa-bezier-curve"></i>Software Skills</h3>
-                <ul>
-                    <li data-percent="90">
-                        <svg viewbox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45"></circle>
-                            <circle class="cbar" cx="50" cy="50" r="45"></circle>
-                        </svg><span>Illustrator</span><small></small>
-                    </li>
-                    <li data-percent="75">
-                        <svg viewbox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45"></circle>
-                            <circle class="cbar" cx="50" cy="50" r="45"></circle>
-                        </svg><span>Photoshop</span><small></small>
-                    </li>
-                    <li data-percent="85">
-                        <svg viewbox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45"></circle>
-                            <circle class="cbar" cx="50" cy="50" r="45"></circle>
-                        </svg><span>InDesign</span><small></small>
-                    </li>
-                    <li data-percent="65">
-                        <svg viewbox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45"></circle>
-                            <circle class="cbar" cx="50" cy="50" r="45"></circle>
-                        </svg><span>Dreamweaver</span><small></small>
-                    </li>
-                </ul>
-            </div>
-            <div class="interests">
-                <h3><i class="fas fa-star"></i>Interests</h3>
-                <div class="interests-items">
-                    <div class="art">
-                        <i class="fas fa-palette"></i><span>Art</span>
-                    </div>
-                    <div class="art">
-                        <i class="fas fa-book"></i><span>Books</span>
-                    </div>
-                    <div class="movies">
-                        <i class="fas fa-film"></i><span>Movies</span>
-                    </div>
-                    <div class="music">
-                        <i class="fas fa-headphones"></i><span>Music</span>
-                    </div>
-                    <div class="games">
-                        <i class="fas fa-gamepad"></i><span>Games</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="/js/resume/script.js"></script>
+    </article>
 </body>
 
 </html>

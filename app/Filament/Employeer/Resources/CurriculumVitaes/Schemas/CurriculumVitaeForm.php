@@ -334,6 +334,11 @@ class CurriculumVitaeForm
                                             ->label('Company Email'),
                                         TextInput::make('company_contactnumber')
                                             ->label('Company Contact Number'),
+                                        Textarea::make('summary')
+                                            ->required()
+                                            ->default(null)
+                                            ->rows(12)
+                                            ->columnSpanFull(),
                                     ])
                                     ->columns(2)
                                     ->collapsible()

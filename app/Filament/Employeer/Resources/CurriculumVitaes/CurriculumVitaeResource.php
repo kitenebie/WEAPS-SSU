@@ -19,10 +19,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Filament\Panel;
+use Illuminate\Contracts\Support\Htmlable;
 
 class CurriculumVitaeResource extends Resource
 {
     protected static ?string $model = CurriculumVitae::class;
+
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?int $sort = null;
 
@@ -38,12 +41,23 @@ class CurriculumVitaeResource extends Resource
     {
         $user = Auth::user();
         if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
-            return 'My Resume';
+            return 'Edit Resume';
         }
         return 'Applicants';
     }
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+
+    public static function getNavigationIcon(): string|BackedEnum|Htmlable|null
+    {
+        $user = Auth::user();
+        if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
+            $user->syncRoles([env('USER_APPLICANT_ROLE')]);
+            $user->assignRole(env('USER_APPLICANT_ROLE'));
+            return  Heroicon::PencilSquare;
+        }
+        return  Heroicon::OutlinedUserGroup;
+    }
+
 
     protected static ?string $recordTitleAttribute = 'first_name';
 
@@ -53,7 +67,7 @@ class CurriculumVitaeResource extends Resource
         if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
             $user->syncRoles([env('USER_APPLICANT_ROLE')]);
             $user->assignRole(env('USER_APPLICANT_ROLE'));
-            return 'Resume';
+            return 'Edit Resume';
         }
         return 'Recruiting Applicants';
     }
