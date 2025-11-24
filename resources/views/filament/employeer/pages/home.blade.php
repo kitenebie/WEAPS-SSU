@@ -7,12 +7,6 @@
             --eh-muted: #FEE2E2;
             --eh-surface: #FFFFFF;
         }
-
-        .fi-header,
-        .fi-dropdown-panel {
-            display: none !important;
-        }
-
         .stat-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
