@@ -166,7 +166,7 @@
             <!-- Main Content -->
             <div class="lg:col-span-2 space-y-6">
                 <!-- About Section -->
-                <div id="about-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
+                <div id="about-section" class="tab-content bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-4">
                         About TechCorp Solutions
                     </h3>
@@ -209,7 +209,7 @@
                 </div>
 
                 <!-- Careers Section -->
-                <div id="careers-section" class="tab-content bg-white rounded-lg shadow-md p-6 ">
+                <div id="careers-section" class="tab-content bg-white rounded-lg shadow-md p-6 hidden">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-xl font-bold text-gray-900">Current Openings</h3>
                         {{-- <button onclick="showAddPositionModal()"
