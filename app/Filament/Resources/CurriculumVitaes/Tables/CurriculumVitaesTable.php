@@ -31,10 +31,16 @@ class CurriculumVitaesTable
                     ->toggleable()
                     ->searchable(),
                 ImageColumn::make('profile_picture')
+                    ->imageHeight(40)->imageWidth(40)
+                    ->square()
                     ->toggleable(),
                 ImageColumn::make('front_id')
+                    ->imageHeight(40)->imageWidth(40)
+                    ->square()
                     ->toggleable(),
                 ImageColumn::make('back_id')
+                    ->imageHeight(40)->imageWidth(40)
+                    ->square()
                     ->toggleable(),
                 IconColumn::make('isActive')
                     ->label('Admin Verified')
@@ -123,7 +129,7 @@ class CurriculumVitaesTable
                     ->color('primary'),
             ], RecordActionsPosition::BeforeColumns)
             ->toolbarActions(actions: [
-                    DeleteBulkAction::make()->color('warning'),
+                DeleteBulkAction::make()->color('warning'),
             ]);
     }
 }
