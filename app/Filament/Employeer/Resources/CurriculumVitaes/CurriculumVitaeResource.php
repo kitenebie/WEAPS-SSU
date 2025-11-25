@@ -117,7 +117,7 @@ class CurriculumVitaeResource extends Resource
         return [
             'index' => ListCurriculumVitaes::route('/'),
             'create' => CreateCurriculumVitae::route('/create'),
-            // 'view' => ViewCurriculumVitae::route('/{record}'),
+            'view' => ViewCurriculumVitae::route('/{record}'),
             'edit' => EditCurriculumVitae::route('/{record}/edit'),
         ];
     }
