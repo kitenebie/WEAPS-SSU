@@ -31,15 +31,15 @@ class CurriculumVitaesTable
                     ->toggleable()
                     ->searchable(),
                 ImageColumn::make('profile_picture')
-                    ->imageHeight(40)->imageWidth(40)
+                    ->imageHeight(80)->imageWidth(80)
                     ->square()
                     ->toggleable(),
                 ImageColumn::make('front_id')
-                    ->imageHeight(40)->imageWidth(40)
+                    ->imageHeight(80)->imageWidth(80)
                     ->square()
                     ->toggleable(),
                 ImageColumn::make('back_id')
-                    ->imageHeight(40)->imageWidth(40)
+                    ->imageHeight(80)->imageWidth(80)
                     ->square()
                     ->toggleable(),
                 IconColumn::make('isActive')
