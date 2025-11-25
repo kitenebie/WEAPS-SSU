@@ -305,7 +305,7 @@
                 </div>
             </div>
         </section>
-        <main class="eh-stats-grid"><!-- Finding Careers Card -->
+        {{-- <main class="eh-stats-grid"><!-- Finding Careers Card -->
             <a href="/careers" class="stat-card eh-stat-card">
                 <!-- Badge Banner -->
                 <div class="eh-badge"
@@ -618,7 +618,7 @@
                     <p class="eh-stat-description" style="color: #991B1B;">Congratulations!</p>
                 </div>
             </a>
-        </main><!-- Resume Builder Section -->
+        </main><!-- Resume Builder Section --> --}}
         <br>
         <section class="eh-section">
             <div class="eh-card eh-card--gradient"
