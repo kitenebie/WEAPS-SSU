@@ -15,18 +15,26 @@ class SystemLogsTable
     {
         return $table
             ->columns([
+                TextColumn::make('action')
+                    ->label('Log Action')
+                    ->searchable()
+                    ->badge(),
                 TextColumn::make('model_type')
+                    ->label('Model')
+                    ->formatStateUsing(fn ($state) => class_basename($state))
                     ->searchable(),
                 TextColumn::make('model_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('action')
+                    ->label('Model Name')
+                    ->getStateUsing(fn ($record) => $record->model ? ($record->model->name ?? $record->model->title ?? $record->model->email ?? $record->model_id) : $record->model_id)
                     ->searchable(),
                 TextColumn::make('user.name')
+                    ->label('User')
                     ->searchable(),
                 TextColumn::make('ip_address')
+                    ->label('IP Address')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('Logged At')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
