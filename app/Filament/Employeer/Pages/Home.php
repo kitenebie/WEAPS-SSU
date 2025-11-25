@@ -11,9 +11,9 @@ class Home extends Page
 {
     protected string $view = 'filament.employeer.pages.home';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Squares2x2;
-    protected static ?string $recordTitleAttribute = 'Dashboard';
-    protected static ?string $navigationLabel = 'Dashboard';
-    protected static ?string $slug = 'Dashboard';
+    protected static ?string $recordTitleAttribute = 'Home';
+    protected static ?string $navigationLabel = 'Home';
+    protected static ?string $slug = 'Home';
     public static function getNavigationSort(): ?int
     {
         $user = Auth::user();

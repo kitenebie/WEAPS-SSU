@@ -230,7 +230,7 @@
     </style>
     <div class="eh-scroll-container">
         <header class="eh-page-header">
-            <h1 id="page-title" style="color: #7F1D1D;"> Dashboard</h1>
+            <h1 id="page-title" style="color: #7F1D1D;"> Home</h1>
             <p id="welcome-message" style="color: #991B1B;"></p>
         </header><!-- Greeting Section -->
         <section class="eh-section">
