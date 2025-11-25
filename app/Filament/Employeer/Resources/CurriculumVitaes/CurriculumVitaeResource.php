@@ -25,6 +25,8 @@ class CurriculumVitaeResource extends Resource
 {
     protected static ?string $model = CurriculumVitae::class;
 
+    // protected static string $view = 'filament.employeer.pages.selected-applicants';
+
     // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?int $sort = null;
@@ -41,7 +43,7 @@ class CurriculumVitaeResource extends Resource
     {
         $user = Auth::user();
         if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
-            return 'Edit Resume';
+            return 'Edit Profile';
         }
         return 'Applicants';
     }
@@ -115,7 +117,7 @@ class CurriculumVitaeResource extends Resource
         return [
             'index' => ListCurriculumVitaes::route('/'),
             'create' => CreateCurriculumVitae::route('/create'),
-            'view' => ViewCurriculumVitae::route('/{record}'),
+            // 'view' => ViewCurriculumVitae::route('/{record}'),
             'edit' => EditCurriculumVitae::route('/{record}/edit'),
         ];
     }

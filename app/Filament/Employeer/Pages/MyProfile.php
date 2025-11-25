@@ -11,9 +11,9 @@ class MyProfile extends Page
 {
     protected string $view = 'filament.employeer.pages.my-profile';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::User;
-    protected static ?string $recordTitleAttribute = 'My Resume';
-    protected static ?string $navigationLabel = 'My Resume';
-    protected static ?string $slug = 'My Resume';
+    protected static ?string $recordTitleAttribute = 'My Profile';
+    protected static ?string $navigationLabel = 'My Profile';
+    protected static ?string $slug = 'My Profile';
     public static function getNavigationSort(): ?int
     {
         $user = Auth::user();
