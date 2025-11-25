@@ -69,7 +69,7 @@ class CurriculumVitaeResource extends Resource
         if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
             $user->syncRoles([env('USER_APPLICANT_ROLE')]);
             $user->assignRole(env('USER_APPLICANT_ROLE'));
-            return 'Edit Resume';
+            return 'Edit Profile';
         }
         return 'Recruiting Applicants';
     }
@@ -85,7 +85,7 @@ class CurriculumVitaeResource extends Resource
     {
         $user = Auth::user();
         if ($user && $user->roles()->where('name', env('USER_APPLICANT_ROLE'))->exists()) {
-            return 'My Resume';
+            return 'My Profile';
         }
         return 'Applicants';
     }
