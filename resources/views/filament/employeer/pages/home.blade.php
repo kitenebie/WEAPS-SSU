@@ -230,8 +230,8 @@
     </style>
     <div class="eh-scroll-container">
         <header class="eh-page-header">
-            <h1 id="page-title" style="color: #7F1D1D;">Career Dashboard</h1>
-            <p id="welcome-message" style="color: #991B1B;">Track your job search journey</p>
+            <h1 id="page-title" style="color: #7F1D1D;"> Dashboard</h1>
+            <p id="welcome-message" style="color: #991B1B;"></p>
         </header><!-- Greeting Section -->
         <section class="eh-section">
             <div class="eh-card" style="background: #FFFFFF;">
@@ -620,7 +620,7 @@
             </a>
         </main><!-- Resume Builder Section --> --}}
         <br>
-        <section class="eh-section">
+        {{-- <section class="eh-section">
             <div class="eh-card eh-card--gradient"
                 style="background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 100%);">
                 <div class="eh-dual-grid">
@@ -877,6 +877,6 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
     </div>
 </x-filament-panels::page>
