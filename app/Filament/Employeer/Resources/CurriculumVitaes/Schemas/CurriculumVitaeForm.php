@@ -459,6 +459,13 @@ class CurriculumVitaeForm
     >
         Save changes
     </x-filament::button>
+    <style>
+        .fi-icon-btn .fi-size-md .fi-topbar-open-sidebar-btn
+        {
+            color: white;
+            fill:white;
+        }
+    </style>
 BLADE)))
         ];
     }
