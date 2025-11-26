@@ -8,12 +8,14 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use App\Models\SystemLog;
 
 class SystemLogsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->query(SystemLog::query()->GroupBy('id', 'desc'))
             ->columns([
                 TextColumn::make('action')
                     ->label('Log Action')
