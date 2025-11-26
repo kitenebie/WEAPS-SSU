@@ -104,10 +104,13 @@ class AdminPanelProvider extends PanelProvider
             ->userMenuItems([
                 'logout' => fn(Action $action) => $action->label('Log out')
                     ->hidden()
-                    ->action(fn() =>dd('logout')),
-                Action::make('newlogout')->label('Log out')
+                    ->action(fn() => dd('logout')),
+                Action::make('delete')
+                    ->schema([])
                     ->requiresConfirmation()
-                    ->action(fn() =>dd('logout'))
+                    ->modalHeading('Delete post')
+                    ->modalDescription('Are you sure you\'d like to delete this post? This cannot be undone.')
+                    ->modalSubmitActionLabel('Yes, delete it')
             ]);
     }
 }
