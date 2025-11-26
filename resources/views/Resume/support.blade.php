@@ -27,6 +27,25 @@
             color: #339900;
             text-decoration: underline;
         }
+
+        @media (max-width: 576px) {
+            .resume-header .media {
+                align-items: center;
+                text-align: center;
+            }
+
+            .resume-header .media > a,
+            .resume-header .media > img,
+            .resume-header .media .picture {
+                display: block;
+                margin: 0 auto 1rem;
+            }
+
+            .resume-header .media > a {
+                display: inline-flex;
+                justify-content: center;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
