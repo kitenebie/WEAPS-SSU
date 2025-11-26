@@ -39,34 +39,42 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
                 ->label('Select Company')
                 ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
                 ->placeholder('All Companies')
-                ->dehydrateStateUsing(fn($state) => $this->company_id = $state),
+                ->reactive(), // <-- make it reactive
 
             DatePicker::make('startDate')
                 ->label('From Date')
                 ->default(now()->subMonths(12))
-                ->dehydrateStateUsing(fn($state) => $this->startDate = $state),
+                ->reactive(),
 
             DatePicker::make('endDate')
                 ->label('To Date')
                 ->default(now())
-                ->dehydrateStateUsing(fn($state) => $this->endDate = $state),
+                ->reactive(),
 
-            Action::make('mountAction')
+            Action::make('applyFilter')
                 ->label('Apply Filter')
                 ->color('primary')
-                ->action('mountAction'),
+                ->action(function () {
+                    $this->mount(); // refresh chart data
+                }),
         ]);
     }
 
-    public function mountAction()
+
+    public function mount(): void
     {
-        $this->dispatch('$refresh');
+        // Ensure reactive properties exist
+        $this->company_id ??= null;
+        $this->startDate ??= now()->subMonths(12)->format('Y-m-d');
+        $this->endDate ??= now()->format('Y-m-d');
     }
+
 
     protected function getOptions(): array
     {
         return $this->getData($this->company_id, $this->startDate, $this->endDate);
     }
+
 
     private function getData($companyId = null, $startDate = null, $endDate = null): array
     {
