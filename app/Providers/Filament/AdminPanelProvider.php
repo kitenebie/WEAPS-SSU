@@ -103,6 +103,7 @@ class AdminPanelProvider extends PanelProvider
             ->userMenuItems([
                 'logout' => fn (Action $action) => $action
                     ->requiresConfirmation()
+                    ->label('Log out')
                     ->modalHeading('Are you sure you want to log out?')
                     ->modalDescription('You will be logged out of your account.')
                     ->modalSubmitActionLabel('Log out'),

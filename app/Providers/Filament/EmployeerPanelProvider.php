@@ -80,7 +80,8 @@ class EmployeerPanelProvider extends PanelProvider
             ->globalSearch(false)
             ->maxContentWidth(Width::Full)
             ->userMenuItems([
-                'logout' => fn (Action $action) => $action
+                'logout' => fn(Action $action) => $action
+                    ->label('Log out')
                     ->requiresConfirmation()
                     ->modalHeading('Are you sure you want to log out?')
                     ->modalDescription('You will be logged out of your account.')
