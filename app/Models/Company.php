@@ -129,18 +129,18 @@ class Company extends Model
     protected static function booted(): void
     {
         static::created(function (self $company): void {
-            self::logChange($company, 'create');
+            $company->logChange('create');
         });
 
         static::updated(function (self $company): void {
             $changes = $company->getChanges();
             if (!empty($changes)) {
-                self::logChange($company, 'update', $changes);
+                $company->logChange('update', $changes);
             }
         });
 
         static::deleted(function (self $company): void {
-            self::logChange($company, 'delete');
+            $company->logChange('delete');
         });
     }
 }

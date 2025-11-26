@@ -128,18 +128,18 @@ class CurriculumVitae extends Model
     protected static function booted(): void
     {
         static::created(function (self $cv): void {
-            self::logChange($cv, 'create');
+            $cv->logChange('create');
         });
 
         static::updated(function (self $cv): void {
             $changes = $cv->getChanges();
             if (!empty($changes)) {
-                self::logChange($cv, 'update', $changes);
+                $cv->logChange('update', $changes);
             }
         });
 
         static::deleted(function (self $cv): void {
-            self::logChange($cv, 'delete');
+            $cv->logChange('delete');
         });
     }
 }

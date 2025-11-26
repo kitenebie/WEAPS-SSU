@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Request;
 
 trait Loggable
 {
-    protected static function logChange($model, $action, $changes = null)
+    public function logChange($action, $changes = null)
     {
         SystemLog::create([
-            'model_type' => get_class($model),
-            'model_id' => $model->getKey(),
+            'model_type' => get_class($this),
+            'model_id' => $this->getKey(),
             'action' => $action,
             'changes' => $changes,
             'user_id' => Auth::id(),

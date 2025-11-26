@@ -86,18 +86,18 @@ class User extends Authenticatable
                 $user->assignRole($roleName);
             }
 
-            self::logChange($user, 'create');
+            $user->logChange('create');
         });
 
         static::updated(function (self $user): void {
             $changes = $user->getChanges();
             if (!empty($changes)) {
-                self::logChange($user, 'update', $changes);
+                $user->logChange('update', $changes);
             }
         });
 
         static::deleted(function (self $user): void {
-            self::logChange($user, 'delete');
+            $user->logChange('delete');
         });
     }
  
