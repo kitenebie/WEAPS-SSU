@@ -17,6 +17,13 @@ class ApplicantStatsWidget extends BaseWidget
 
     protected function getStats(): array
     {
+        
+        $user = Auth::user();
+        if (!$user) return [];
+
+        $applicantRole = env('ADMIN_ROLE');
+        if ($user->roles()->where('name', $applicantRole)->exists()) return [];
+
         $company = Company::where('user_id', Auth::id())->first();
 
         $applicantsQuery = Applicant::where('company_id', $company ? $company->id : null);
