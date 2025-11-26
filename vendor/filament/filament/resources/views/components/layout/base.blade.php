@@ -157,7 +157,7 @@
                     // Send POST request to Filament’s logout route
                     const form = document.createElement('form');
                     form.method = 'POST';
-                    form.action = "{{ route('filament.auth.logout') }}";
+                    form.action = "{{ route('filament.admin.auth.logout') }}"; // ✔ correct route
 
                     const csrf = document.createElement('input');
                     csrf.type = 'hidden';
