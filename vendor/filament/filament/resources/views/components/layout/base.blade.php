@@ -175,7 +175,7 @@
     <style>
         .logoutFi {}
     </style>
-    @if (Filament\Facades\Filament::getCurrentPage()?->getSlug() === 'edit')
+    @if ($livewire instanceof \App\Filament\Resources\CurriculumVitaeResource\Pages\EditCurriculumVitae)
         <style>
             .fi-size-lg {
                 color: white !important;
@@ -183,6 +183,7 @@
             }
         </style>
     @endif
+
 </body>
 
 </html>
