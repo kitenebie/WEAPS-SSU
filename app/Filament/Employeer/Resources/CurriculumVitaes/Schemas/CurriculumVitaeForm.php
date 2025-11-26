@@ -463,7 +463,7 @@ class CurriculumVitaeForm
         .fi-icon-btn .fi-size-md .fi-topbar-open-sidebar-btn .fi-icon .fi-size-lg
         {
             color: white !important;
-            fill:white !important;
+            stroke:white !important;
         }
     </style>
 BLADE)))
