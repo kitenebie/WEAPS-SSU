@@ -8,43 +8,98 @@ use Illuminate\Support\Facades\Request;
 
 trait Loggable
 {
-    protected static function logChange($model, $action, $changes = null)
-    {
-        SystemLog::create([
-            'model_type' => get_class($model),
-            'model_id' => $model->getKey(),
-            'action' => $action,
-            'changes' => $changes,
-            'user_id' => Auth::id(),
-            'ip_address' => Request::ip(),
-            'user_agent' => Request::userAgent(),
-        ]);
-    }
-
-    protected static function bootLoggable()
+ public static function bootLogsActivity()
     {
         static::created(function ($model) {
-            static::logChange($model, 'create', null);
+            $model->storeLog('create');
         });
 
         static::updated(function ($model) {
-            $dirty = $model->getDirty();
-
-            $changes = [];
-            foreach ($dirty as $field => $newValue) {
-                $changes[$field] = [
-                    'old' => $model->getOriginal($field),
-                    'new' => $newValue,
-                ];
-            }
-
-            if (!empty($changes)) {
-                static::logChange($model, 'update', $changes);
-            }
+            $model->storeLog('update');
         });
 
         static::deleted(function ($model) {
-            static::logChange($model, 'delete', null);
+            $model->storeLog('delete');
         });
+    }
+
+    protected function storeLog(string $action): void
+    {
+        // Build a { field: { column_name: ..., old: ..., new: ... } } map
+        [$diff, $columns] = match ($action) {
+            'create' => $this->buildCreateDiff(),
+            'update' => $this->buildUpdateDiff(),
+            'delete' => $this->buildDeleteDiff(),
+            default  => [[], []],
+        };
+
+        // Skip empty/no-op logs (esp. for update)
+        if ($action === 'update' && empty($columns)) {
+            return;
+        }
+
+        SystemLog::create([
+            'user_id'          => Auth::id(),
+            'model'            => get_class($this),
+            'model_id'         => $this->getKey(),
+            'action'           => $action,
+            'modified'         => $diff,
+            'modified_columns' => $columns,
+            'ip_address'       => request()?->ip(),
+        ]);
+    }
+
+    /**
+     * On CREATE: old = null, new = current value
+     */
+    protected function buildCreateDiff(): array
+    {
+        $attrs = $this->getAttributes();
+        $diff = [];
+        foreach ($attrs as $key => $newVal) {
+            $diff[$key] = [
+                'column_name' => $key,
+                'old'         => null,
+                'new'         => $newVal,
+            ];
+        }
+        return [$diff, array_keys($attrs)];
+    }
+
+    /**
+     * On UPDATE: only changed attributes
+     */
+    protected function buildUpdateDiff(): array
+    {
+        $changed = $this->getChanges();
+        unset($changed['updated_at']); // ignore timestamp noise if you want
+
+        $diff = [];
+        foreach ($changed as $key => $newVal) {
+            $diff[$key] = [
+                'column_name' => $key,
+                'old'         => $this->getOriginal($key),
+                'new'         => $newVal,
+            ];
+        }
+
+        return [$diff, array_keys($diff)];
+    }
+
+    /**
+     * On DELETE: old = current/original value, new = null
+     */
+    protected function buildDeleteDiff(): array
+    {
+        $original = $this->getOriginal();
+        $diff = [];
+        foreach ($original as $key => $oldVal) {
+            $diff[$key] = [
+                'column_name' => $key,
+                'old'         => $oldVal,
+                'new'         => null,
+            ];
+        }
+        return [$diff, array_keys($original)];
     }
 }

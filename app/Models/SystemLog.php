@@ -3,32 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SystemLog extends Model
 {
     protected $fillable = [
-        'model_type',
+        'user_id',
+        'model',
         'model_id',
         'action',
         'changes',
-        'user_id',
         'ip_address',
-        'user_agent',
+        'modified_columns',
+        'modified'
     ];
 
     protected $casts = [
-        'changes' => 'array',
+        'modified' => 'array',          // now the main diff payload
+        'modified_columns' => 'array',  // list of changed columns
     ];
 
-    // relationship to user
-    public function user()
+
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    // relationship to the affected model
-    public function model()
-    {
-        return $this->morphTo();
     }
 }
