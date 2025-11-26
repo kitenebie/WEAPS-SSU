@@ -174,12 +174,16 @@
     </script>
     <style>
         .logoutFi {}
-
-        .fi-icon-btn .fi-size-md .fi-topbar-open-sidebar-btn .fi-icon .fi-size-lg {
-            color: white !important;
-            stroke: white !important;
-        }
     </style>
+    @if (Filament::getCurrentPage()?->getSlug() === 'edit')
+        {
+            <style>
+                .fi-size-lg {
+                    color: white !important;
+                    stroke: white !important;
+                }
+            </style>
+        }
 </body>
 
 </html>
