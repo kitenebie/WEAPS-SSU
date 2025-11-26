@@ -22,6 +22,7 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     protected static bool $isCollapsible = true;
     protected int | string | array $columnSpan = 2;
 
+    // Filters
     #[Reactive]
     public ?int $company_id = null;
 
@@ -39,38 +40,41 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
                 ->searchable()
                 ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
                 ->placeholder('All Companies')
-                ->reactive(),
+                ->dehydrateStateUsing(fn($state) => $this->company_id = $state),
 
             DatePicker::make('startDate')
                 ->label('From Date')
                 ->default(now()->subMonths(12))
-                ->reactive(),
+                ->dehydrateStateUsing(fn($state) => $this->startDate = $state),
 
             DatePicker::make('endDate')
                 ->label('To Date')
                 ->default(now())
-                ->reactive(),
+                ->dehydrateStateUsing(fn($state) => $this->endDate = $state),
+
+            Action::make('mountAction')
+                ->label('Apply Filter')
+                ->color('primary')
+                ->action('mountAction'),
         ]);
+    }
+
+    public function mountAction()
+    {
+        $this->dispatch('$refresh');
     }
 
     protected function getOptions(): array
     {
-        return $this->getData(
-            $this->company_id,
-            $this->startDate,
-            $this->endDate
-        );
+        return $this->getData($this->company_id, $this->startDate, $this->endDate);
     }
-
 
     private function getData($companyId = null, $startDate = null, $endDate = null): array
     {
         $startDate = $startDate ?? now()->subMonths(12)->format('Y-m-d');
-        $endDate   = $endDate   ?? now()->format('Y-m-d');
+        $endDate = $endDate ?? now()->format('Y-m-d');
 
         $period = CarbonPeriod::create($startDate, '1 month', $endDate);
-
-        // Get months for X-axis
         $months = [];
         foreach ($period as $date) {
             $months[] = $date->format('F Y');
@@ -84,28 +88,29 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
         $series = [];
         foreach ($companies as $company) {
-
-            // rebuild period because it gets consumed by the loop
-            $period = CarbonPeriod::create($startDate, '1 month', $endDate);
-
             $monthlyData = [];
             foreach ($period as $date) {
-                $monthlyData[] = $company->careers()
+                $monthlyCount = $company->careers()
                     ->whereYear('created_at', $date->year)
                     ->whereMonth('created_at', $date->month)
                     ->count();
+                $monthlyData[] = $monthlyCount;
             }
-
             $series[] = [
-                'name'  => $company->name,
-                'data'  => $monthlyData,
+                'name' => $company->name,
+                'data' => $monthlyData,
             ];
         }
 
         return [
             'chart' => ['type' => 'bar', 'height' => 350],
             'series' => $series,
-            'xaxis' => ['categories' => $months],
+            'xaxis' => ['categories' => $months, 'labels' => ['style' => ['fontFamily' => 'inherit']]],
+            'yaxis' => ['title' => ['text' => 'Quantity'], 'labels' => ['style' => ['fontFamily' => 'inherit']]],
+            'colors' => ['#4FA753', '#2992E3', '#494949', '#7F1D1D'],
+            'plotOptions' => ['bar' => ['distributed' => true]],
+            'legend' => ['position' => 'top'],
+            'dataLabels' => ['enabled' => false],
         ];
     }
 }
