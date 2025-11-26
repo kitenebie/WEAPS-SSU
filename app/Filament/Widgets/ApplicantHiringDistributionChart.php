@@ -71,7 +71,10 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
         // Generate months for x-axis
         $period = CarbonPeriod::create($start, '1 month', $end);
-        $months = collect($period)->map(fn(CarbonImmutable $date) => $date->format('F Y'))->toArray();
+        $months = [];
+        foreach ($period as $date) {
+            $months[] = $date->format('F Y');
+        }
 
         // Query companies
         $companiesQuery = Company::query();
@@ -82,11 +85,13 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
         // Build series for chart
         $series = $companies->map(function ($company) use ($period) {
-            $monthlyData = collect($period)->map(fn(CarbonImmutable $date) => $company->careers()
-                ->whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
-                ->count()
-            )->toArray();
+            $monthlyData = [];
+            foreach ($period as $date) {
+                $monthlyData[] = $company->careers()
+                    ->whereYear('created_at', $date->year)
+                    ->whereMonth('created_at', $date->month)
+                    ->count();
+            }
 
             return [
                 'name' => $company->name,
