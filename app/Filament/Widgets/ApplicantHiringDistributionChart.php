@@ -3,10 +3,12 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Company;
+use Filament\Actions\Action;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Button;
 use Filament\Schemas\Schema;
 use Filament\Widgets\ChartWidget\Concerns\HasFiltersSchema;
 
@@ -26,27 +28,35 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     public ?string $startDate = null;
     public ?string $endDate = null;
 
+    // Only update chart when "Apply Filter" is clicked
+    public function applyFilters(): void
+    {
+        $this->emit('refreshChart'); // triggers chart re-render
+    }
+
     public function filtersSchema(Schema $schema): Schema
     {
         return $schema->components([
             Select::make('company_id')
                 ->label('Select Company')
-                ->options(Company::orderBy('name')->pluck('name', 'id')->toArray())
+                ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
                 ->placeholder('All Companies')
-                ->reactive()
                 ->dehydrateStateUsing(fn($state) => $this->company_id = $state),
 
             DatePicker::make('startDate')
                 ->label('From Date')
                 ->default(now()->subMonths(12))
-                ->reactive()
                 ->dehydrateStateUsing(fn($state) => $this->startDate = $state),
 
             DatePicker::make('endDate')
                 ->label('To Date')
                 ->default(now())
-                ->reactive()
                 ->dehydrateStateUsing(fn($state) => $this->endDate = $state),
+
+            Action::make('Apply Filter')
+                ->label('Apply Filter')
+                ->color('primary')
+                ->action('applyFilters'),
         ]);
     }
 
@@ -57,7 +67,6 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
     private function getData($companyId = null, $startDate = null, $endDate = null): array
     {
-        // Default dates if not set
         $startDate = $startDate ?? now()->subMonths(12)->format('Y-m-d');
         $endDate = $endDate ?? now()->format('Y-m-d');
 
@@ -76,7 +85,6 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
         $companies = $companiesQuery->get();
 
         $series = [];
-
         foreach ($companies as $company) {
             $monthlyData = [];
             foreach ($period as $date) {
