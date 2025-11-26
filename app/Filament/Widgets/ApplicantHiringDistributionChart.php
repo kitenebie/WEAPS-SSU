@@ -37,6 +37,7 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
         return $schema->components([
             Select::make('company_id')
                 ->label('Select Company')
+                ->searchable()
                 ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
                 ->placeholder('All Companies')
                 ->dehydrateStateUsing(fn($state) => $this->company_id = $state),
@@ -60,8 +61,7 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
     public function mountAction()
     {
-        return $this->getData($this->company_id, $this->startDate, $this->endDate);
-        // $this->dispatch('$refresh');
+        $this->dispatch('$refresh');
     }
 
     protected function getOptions(): array
