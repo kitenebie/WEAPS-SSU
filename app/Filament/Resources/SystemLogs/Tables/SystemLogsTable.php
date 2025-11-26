@@ -27,6 +27,14 @@ class SystemLogsTable
                     ->label('Model Name')
                     ->getStateUsing(fn ($record) => $record->model ? ($record->model->name ?? $record->model->title ?? $record->model->email ?? $record->model_id) : $record->model_id)
                     ->searchable(),
+                TextColumn::make('changes')
+                    ->label('Before')
+                    ->formatStateUsing(fn ($state) => $state ? collect($state)->map(fn ($change, $field) => "$field: " . (isset($change['old']) ? $change['old'] : 'N/A'))->join(', ') : 'No changes')
+                    ->wrap(),
+                TextColumn::make('changes')
+                    ->label('After')
+                    ->formatStateUsing(fn ($state) => $state ? collect($state)->map(fn ($change, $field) => "$field: " . (isset($change['new']) ? $change['new'] : 'N/A'))->join(', ') : 'No changes')
+                    ->wrap(),
                 TextColumn::make('user.name')
                     ->label('User')
                     ->searchable(),
