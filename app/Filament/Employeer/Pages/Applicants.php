@@ -92,7 +92,7 @@ class Applicants extends Page implements HasTable
                     ->button()
                     ->url(fn($record) =>
                         url('/Applicants/' . (\App\Models\CurriculumVitae::where('user_id', $record->user->id)->first()->id ?? '') . "_blank")
-                    )
+                    )->hidden()
                     ->color('primary'),
 
                 Action::make('approve')

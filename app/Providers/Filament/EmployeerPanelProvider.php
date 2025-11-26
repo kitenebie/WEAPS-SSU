@@ -23,11 +23,9 @@ use Filament\Support\Enums\Width;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin as ShieldPlugin;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Resma\FilamentAwinTheme\FilamentAwinTheme;
-use Filament\Forms\Components\Actions\Action;
 use Filament\Support\Enums\ActionSize;
 use App\Http\Middleware\EmployerRoleMiddleware;
-use Filament\Navigation\MenuItem;
-use Illuminate\Support\Facades\Auth;
+use Filament\Actions\Action;
 
 class EmployeerPanelProvider extends PanelProvider
 {
@@ -82,12 +80,7 @@ class EmployeerPanelProvider extends PanelProvider
             ->globalSearch(false)
             ->maxContentWidth(Width::Full)
             ->userMenuItems([
-                MenuItem::make('logout')
-                    ->label('Log out')
-                    ->action(function () {
-                        Auth::logout();
-                        return redirect('/login');
-                    })
+                'logout' => fn (Action $action) => $action
                     ->requiresConfirmation()
                     ->modalHeading('Are you sure you want to log out?')
                     ->modalDescription('You will be logged out of your account.')
