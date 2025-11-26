@@ -24,18 +24,20 @@ class EmployedUnemployedChart extends ApexChartWidget
                               $query->where('employment_status', 'unemployed')
                                     ->orWhereNull('employment_status');
                           })->count();
-        $undefined = User::whereHas('curriculumVitae')
-                         ->where('employment_status', 'undefined')
-                         ->count();
+        // $undefined = User::whereHas('curriculumVitae')
+        //                  ->where('employment_status', 'undefined')
+        //                  ->count();
 
         return [
             'chart' => [
                 'type' => 'pie',
                 'height' => 350,
             ],
-            'series' => [$employed, $unemployed, $undefined],
+            'series' => [$employed, $unemployed],
+            // 'series' => [$employed, $unemployed, $undefined],
             'labels' => ['Employed', 'Unemployed', 'Undefined'],
-            'colors' => ['#1E1E1E', '#7F1D1D', '#494949'],
+            'colors' => ['#1E1E1E', '#7F1D1D'],
+            // 'colors' => ['#1E1E1E', '#7F1D1D', '#494949'],
             'legend' => [
                 'position' => 'bottom',
             ],
