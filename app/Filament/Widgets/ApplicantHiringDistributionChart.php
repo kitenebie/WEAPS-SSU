@@ -9,6 +9,7 @@ use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 use Filament\Widgets\ChartWidget\Concerns\HasFiltersSchema;
 use Carbon\CarbonPeriod;
+use Filament\Actions\Action;
 use Livewire\Attributes\Reactive;
 
 class ApplicantHiringDistributionChart extends ApexChartWidget
@@ -37,15 +38,25 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
             Select::make('company_id')
                 ->label('Select Company')
                 ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
-                ->placeholder('All Companies'),
+                ->placeholder('All Companies')
+                ->dehydrateStateUsing(fn($state) => $this->company_id = $state),
 
             DatePicker::make('startDate')
                 ->label('From Date')
-                ->default(now()->subMonths(12)),
+                ->default(now()->subMonths(12))
+                ->dehydrateStateUsing(fn($state) => $this->startDate = $state),
 
             DatePicker::make('endDate')
                 ->label('To Date')
-                ->default(now()),
+                ->default(now())
+                ->dehydrateStateUsing(fn($state) => $this->endDate = $state),
+
+            Action::make('Apply Filter')
+                ->label('Apply Filter')
+                ->color('primary')
+                ->action(function () {
+                    $this->updateChart(); // re-renders the chart
+                }),
         ]);
     }
 
