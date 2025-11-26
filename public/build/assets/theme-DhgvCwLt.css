@@ -20714,7 +20714,7 @@
         --prose-strong-color: var(--color-gray-950);
         --prose-link-color: var(--color-gray-950);
         --prose-code-color: var(--color-gray-950);
-        --prose-marker-color: oklab(37.2% -0.00968297 -0.0429213/.25);
+        --prose-marker-color: oklab(37.2% -0.00968297 -0.0429213/0.25);
     }
     @supports (color: color-mix(in lab, red, red)) {
         .fi-prose {
@@ -20729,7 +20729,7 @@
         --prose-link-underline-color: var(--color-primary-400);
         --prose-th-borders: var(--color-gray-300);
         --prose-td-borders: var(--color-gray-200);
-        --prose-hr-color: oklab(12.9% -0.0038832 -0.0418201/.05);
+        --prose-hr-color: oklab(12.9% -0.0038832 -0.0418201/0.05);
     }
     @supports (color: color-mix(in lab, red, red)) {
         .fi-prose {
@@ -20749,7 +20749,7 @@
         --prose-strong-color: var(--color-white);
         --prose-link-color: var(--color-white);
         --prose-code-color: var(--color-white);
-        --prose-marker-color: oklab(86.9% -0.00647109 -0.0210268/.35);
+        --prose-marker-color: oklab(86.9% -0.00647109 -0.0210268/0.35);
     }
     @supports (color: color-mix(in lab, red, red)) {
         .fi-prose:where(.dark, .dark *) {
@@ -21027,12 +21027,12 @@
 .fi-topbar {
     background: #7f1d1d !important;
     border-bottom-width: 2px !important;
-    border-bottom-color: #1E1E1E !important;
+    border-bottom-color: #1e1e1e !important;
 }
 .fi-topbar-item .fi-active a .fi-topbar-item-btn,
 .fi-topbar-item .fi-active .fi-topbar-item-btn {
     color: #7f1d1d !important;
-    background: #1E1E1E !important;
+    background: #1e1e1e !important;
 }
 .fi-icon {
     fill: #fff !important;
@@ -21753,24 +21753,24 @@
     background: #7f1d1d !important;
 }
 th {
-    background-color: #1E1E1E;
+    background-color: #1e1e1e;
     color: #7f1d1d;
 }
 .fi-topbar {
     background: #7f1d1d !important;
-    border-bottom-color: #1E1E1E !important;
+    border-bottom-color: #1e1e1e !important;
     border-bottom-width: 2px !important;
 }
 .fi-topbar-item .fi-active a .fi-topbar-item-btn {
-    background: #1E1E1E !important;
+    background: #1e1e1e !important;
     color: #7f1d1d !important;
 }
 .fi-topbar-item .fi-active .fi-topbar-item-btn {
-    background: #1E1E1E !important;
+    background: #1e1e1e !important;
     color: #7f1d1d !important;
 }
 .fi-topbar-item-btn:hover {
-    background: #3C3C3C !important;
+    background: #3c3c3c !important;
     color: #7f1d1d !important;
 }
 .fi-icon {
@@ -21780,7 +21780,7 @@ th {
     color: white !important;
 }
 .fi-header-heading {
-    color: #3C3C3C !important;
+    color: #3c3c3c !important;
 }
 .fi-header-subheading {
     color: white !important;
@@ -21792,7 +21792,7 @@ th {
     background: #7f1d1d !important;
 }
 .fi-section-header {
-    background: #1E1E1E !important;
+    background: #1e1e1e !important;
 }
 .fi-simple-main-ctn {
     margin-top: 25rem !important;
@@ -21804,7 +21804,14 @@ th {
     position: relative;
     flex-direction: column;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(128, 0, 0, 0.4) 30%, rgba(128, 0, 0, 0.15) 70%, rgba(255, 255, 255, 0.1) 100%), url('https://sorsu.edu.ph/wp-content/uploads/2024/02/BULAN-CAMPUS-BLESSING-AND-RIBBON-CUTTING-OF-GATE-50.jpg');
+    background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.25) 0%,
+            rgba(128, 0, 0, 0.4) 30%,
+            rgba(128, 0, 0, 0.15) 70%,
+            rgba(255, 255, 255, 0.1) 100%
+        ),
+        url("https://sorsu.edu.ph/wp-content/uploads/2024/02/BULAN-CAMPUS-BLESSING-AND-RIBBON-CUTTING-OF-GATE-50.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -21812,14 +21819,15 @@ th {
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.2);
 }
-.fi-simple-main-div{
+.fi-simple-main-div {
     gap: 20rem;
 }
 
-        .fi-icon-btn .fi-size-md .fi-topbar-open-sidebar-btn .fi-icon .fi-size-lg
-        {
-            color: white !important;
-            stroke:white !important;
-        }
+.fi-icon-btn .fi-size-md .fi-topbar-open-sidebar-btn .fi-icon .fi-size-lg {
+    color: white !important;
+    stroke: white !important;
+}
