@@ -103,6 +103,9 @@ class AdminPanelProvider extends PanelProvider
             ->maxContentWidth(Width::Full)
             ->userMenuItems([
                 'logout' => fn(Action $action) => $action->label('Log out')
+                    ->hidden()
+                    ->action(fn() =>dd('logout')),
+                'Newlogout' => fn(Action $action) => $action->label('Log out')
                     ->requiresConfirmation()
                     ->action(fn() =>dd('logout'))
             ]);
