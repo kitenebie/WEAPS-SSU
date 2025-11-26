@@ -6,10 +6,10 @@ use App\Models\Company;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Actions\Action;
 use Filament\Schemas\Schema;
 use Filament\Widgets\ChartWidget\Concerns\HasFiltersSchema;
 use Carbon\CarbonPeriod;
-use Filament\Actions\Action;
 use Livewire\Attributes\Reactive;
 
 class ApplicantHiringDistributionChart extends ApexChartWidget
@@ -51,13 +51,16 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
                 ->default(now())
                 ->dehydrateStateUsing(fn($state) => $this->endDate = $state),
 
-            Action::make('Apply Filter')
+            Action::make('mountAction')
                 ->label('Apply Filter')
                 ->color('primary')
-                ->action(function () {
-                    $this->updateChart(); // re-renders the chart
-                }),
+                ->action('mountAction'),
         ]);
+    }
+
+    public function mountAction()
+    {
+        $this->updateChart();
     }
 
     protected function getOptions(): array
