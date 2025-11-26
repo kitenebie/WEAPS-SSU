@@ -62,13 +62,13 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
             DatePicker::make('startDate')
                 ->label('From Date')
-                ->maxDate(fn ($get) => $get('endDate'))
+                ->maxDate(fn () => data_get($this->filters, 'endDate'))
                 ->default($this->getDefaultFiltersState()['startDate'])
                 ->native(false),
 
             DatePicker::make('endDate')
                 ->label('To Date')
-                ->minDate(fn ($get) => $get('startDate'))
+                ->minDate(fn () => data_get($this->filters, 'startDate'))
                 ->default($this->getDefaultFiltersState()['endDate'])
                 ->native(false),
 
