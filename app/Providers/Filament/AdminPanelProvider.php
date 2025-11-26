@@ -47,12 +47,12 @@ class AdminPanelProvider extends PanelProvider
             // ->brandLogo(asset('https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp'))
             // ->brandLogoHeight('3rem')
             // ->topNavigation(true)
-                ->colors([
-                    'primary' => Color::Gray,
-                    'warning' => Color::Orange,
-                    'info' => Color::Blue,
-                    
-                ])
+            ->colors([
+                'primary' => Color::Gray,
+                'warning' => Color::Orange,
+                'info' => Color::Blue,
+
+            ])
             ->darkMode(false)
             ->plugins([
                 // BreezyCore::make()
@@ -75,7 +75,7 @@ class AdminPanelProvider extends PanelProvider
                 Dashboard::class,
                 \App\Filament\Pages\UserList::class,
             ])
-        
+
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 \App\Filament\Widgets\DashboardStatsWidget::class,
@@ -100,6 +100,11 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->maxContentWidth(Width::Full);
+            ->maxContentWidth(Width::Full)
+            ->userMenuItems([
+                'logout' => fn(Action $action) => $action->label('Log out')
+                    ->requiresConfirmation()
+                    ->action(fn() =>dd('logout'))
+            ]);
     }
 }
