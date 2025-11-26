@@ -171,6 +171,33 @@
                 }
             });
         }
+        function EmpconfirmLogout() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You’re about to log out.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Log out",
+                confirmButtonColor: "#7F1D1D",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Send POST request to Filament’s logout route
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = "{{ route('filament.employeer.auth.logout') }}"; // ✔ correct route
+
+                    const csrf = document.createElement('input');
+                    csrf.type = 'hidden';
+                    csrf.name = '_token';
+                    csrf.value = "{{ csrf_token() }}";
+
+                    form.appendChild(csrf);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        }
     </script>
     <style>
         .logoutFi {}

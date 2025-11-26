@@ -88,7 +88,7 @@ class EmployeerPanelProvider extends PanelProvider
                     ->label('Log out')
                     ->icon('heroicon-o-arrow-left-on-rectangle')
                     ->extraAttributes([
-                        'x-on:click.prevent' => 'confirmLogout()',
+                        'x-on:click.prevent' => 'EmpconfirmLogout()',
                         'id' => 'logoutFi'
                     ]),
             ]);
