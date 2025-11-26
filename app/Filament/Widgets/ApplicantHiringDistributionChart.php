@@ -12,7 +12,6 @@ use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Actions;
 use Filament\Widgets\ChartWidget\Concerns\HasFiltersSchema;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
-use Livewire\Attributes\Reactive;
 
 class ApplicantHiringDistributionChart extends ApexChartWidget
 {
@@ -26,13 +25,10 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     protected static bool $isCollapsible = true;
     protected int|string|array $columnSpan = 2;
 
-    #[Reactive]
     public ?int $company_id = null;
 
-    #[Reactive]
     public ?CarbonInterface $startDate = null;
 
-    #[Reactive]
     public ?CarbonInterface $endDate = null;
 
     public function mount(): void
