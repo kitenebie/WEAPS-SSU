@@ -34,43 +34,43 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     public function filtersSchema(Schema $schema): Schema
     {
         return $schema->components([
-
             Select::make('company_id')
                 ->label('Select Company')
-                ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
                 ->searchable()
+                ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
                 ->placeholder('All Companies')
-                ->afterStateUpdated(fn ($state) => $this->company_id = $state),
+                ->reactive(),
 
             DatePicker::make('startDate')
                 ->label('From Date')
-                ->default(now()->subMonths(12)->toDateString())
-                ->afterStateUpdated(fn ($state) => $this->startDate = $state),
+                ->default(now()->subMonths(12))
+                ->reactive(),
 
             DatePicker::make('endDate')
                 ->label('To Date')
-                ->default(now()->toDateString())
-                ->afterStateUpdated(fn ($state) => $this->endDate = $state),
-
-            Action::make('applyFilter')
-                ->label('Apply Filter')
-                ->color('primary')
-                ->action(fn () => $this->dispatch('$refresh')),
+                ->default(now())
+                ->reactive(),
         ]);
     }
 
     protected function getOptions(): array
     {
-        return $this->getData($this->company_id, $this->startDate, $this->endDate);
+        return $this->getData(
+            $this->company_id,
+            $this->startDate,
+            $this->endDate
+        );
     }
 
-    private function getData($companyId, $startDate, $endDate): array
+
+    private function getData($companyId = null, $startDate = null, $endDate = null): array
     {
         $startDate = $startDate ?? now()->subMonths(12)->format('Y-m-d');
-        $endDate = $endDate ?? now()->format('Y-m-d');
+        $endDate   = $endDate   ?? now()->format('Y-m-d');
 
-        // Build fresh period for categories
         $period = CarbonPeriod::create($startDate, '1 month', $endDate);
+
+        // Get months for X-axis
         $months = [];
         foreach ($period as $date) {
             $months[] = $date->format('F Y');
@@ -83,14 +83,13 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
         $companies = $companiesQuery->get();
 
         $series = [];
-
         foreach ($companies as $company) {
 
-            // ⚠️ Must recreate period to avoid exhausted generator
-            $periodLoop = CarbonPeriod::create($startDate, '1 month', $endDate);
+            // rebuild period because it gets consumed by the loop
+            $period = CarbonPeriod::create($startDate, '1 month', $endDate);
 
             $monthlyData = [];
-            foreach ($periodLoop as $date) {
+            foreach ($period as $date) {
                 $monthlyData[] = $company->careers()
                     ->whereYear('created_at', $date->year)
                     ->whereMonth('created_at', $date->month)
@@ -98,26 +97,15 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
             }
 
             $series[] = [
-                'name' => $company->name,
-                'data' => $monthlyData,
+                'name'  => $company->name,
+                'data'  => $monthlyData,
             ];
         }
 
         return [
             'chart' => ['type' => 'bar', 'height' => 350],
             'series' => $series,
-            'xaxis' => [
-                'categories' => $months,
-                'labels' => ['style' => ['fontFamily' => 'inherit']]
-            ],
-            'yaxis' => [
-                'title' => ['text' => 'Quantity'],
-                'labels' => ['style' => ['fontFamily' => 'inherit']]
-            ],
-            'colors' => ['#4FA753', '#2992E3', '#494949', '#7F1D1D'],
-            'plotOptions' => ['bar' => ['distributed' => true]],
-            'legend' => ['position' => 'top'],
-            'dataLabels' => ['enabled' => false],
+            'xaxis' => ['categories' => $months],
         ];
     }
 }
