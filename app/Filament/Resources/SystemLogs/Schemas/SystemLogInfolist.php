@@ -11,7 +11,7 @@ class SystemLogInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('model_type'),
+                TextEntry::make('model'),
                 TextEntry::make('model_id')
                     ->numeric(),
                 TextEntry::make('action'),

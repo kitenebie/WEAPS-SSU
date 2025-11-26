@@ -6,9 +6,13 @@ use App\Models\Company;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
+use Filament\Widgets\ChartWidget\Concerns\HasFiltersSchema;
 
 class ApplicantHiringDistributionChart extends ApexChartWidget
 {
+    use HasFiltersSchema;
+
     protected static ?string $heading = 'Company Career Posts Distribution';
     protected static ?string $chartId = 'companyCareerPostsChart';
     protected static ?int $contentHeight = 350;
@@ -16,38 +20,22 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     protected static bool $Collapse = false;
     protected int | string | array $columnSpan = 2;
 
-    // Add property for search input
-    public ?string $search = null;
-
-    protected function getFormSchema(): array
+    // Use filters schema for TextInput search
+    public function filtersSchema(Schema $schema): Schema
     {
-        return [
+        return $schema->components([
             TextInput::make('search')
                 ->label('Search Company')
                 ->placeholder('Type company name...')
-                ->reactive() // triggers chart refresh on typing
-        ];
-    }
-
-    protected function getFilters(): ?array
-    {
-        $years = DB::table('carrers')
-            ->select(DB::raw('DISTINCT YEAR(created_at) as year'))
-            ->orderBy('year')
-            ->pluck('year')
-            ->toArray();
-
-        $filters = ['All' => 'All'];
-        foreach ($years as $year) {
-            $filters[$year] = $year;
-        }
-        return $filters;
+                ->reactive(), // updates chart as user types
+        ]);
     }
 
     protected function getOptions(): array
     {
-        $year = request()->query('filter', 'All');
-        return $this->getDataForYear($year, $this->search);
+        $year = request()->query('filter', 'All'); // or default year
+        $search = $this->getAppliedFilterState('search');
+        return $this->getDataForYear($year, $search);
     }
 
     private function getDataForYear($year, $search = null): array

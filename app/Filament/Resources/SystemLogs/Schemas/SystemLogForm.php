@@ -13,14 +13,14 @@ class SystemLogForm
     {
         return $schema
             ->components([
-                TextInput::make('model_type')
+                TextInput::make('model')
                     ->required(),
                 TextInput::make('model_id')
                     ->required()
                     ->numeric(),
                 TextInput::make('action')
                     ->required(),
-                Textarea::make('changes')
+                Textarea::make('modified')
                     ->default(null)
                     ->columnSpanFull(),
                 Select::make('user_id')
@@ -28,9 +28,6 @@ class SystemLogForm
                     ->default(null),
                 TextInput::make('ip_address')
                     ->default(null),
-                Textarea::make('user_agent')
-                    ->default(null)
-                    ->columnSpanFull(),
             ]);
     }
 }
