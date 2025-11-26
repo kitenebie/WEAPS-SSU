@@ -198,7 +198,13 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
                 'labels' => ['style' => ['fontFamily' => 'inherit']]
             ],
             'colors' => ['#4FA753', '#2992E3', '#494949', '#7F1D1D'],
-            'plotOptions' => ['bar' => ['distributed' => true]],
+            'plotOptions' => [
+                'bar' => [
+                    'distributed' => true,
+                    'horizontal' => true,
+                    'barHeight' => '70%',
+                ],
+            ],
             'legend' => ['position' => 'top'],
             'dataLabels' => ['enabled' => false],
             'plugins' => [
