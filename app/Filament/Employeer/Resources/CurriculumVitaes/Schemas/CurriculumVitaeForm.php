@@ -460,7 +460,7 @@ class CurriculumVitaeForm
         Save changes
     </x-filament::button>
     <style>
-        .fi-icon-btn .fi-size-md .fi-topbar-open-sidebar-btn .fi-icon .fi-size-lg
+        .fi-icon-btn .fi-size-md .fi-topbar-open-sidebar-btn .fi-icon .fi-size-lg, fi-size-lg
         {
             color: white !important;
             stroke:white !important;

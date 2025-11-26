@@ -26,6 +26,7 @@ use Resma\FilamentAwinTheme\FilamentAwinTheme;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Support\Enums\ActionSize;
 use App\Http\Middleware\EmployerRoleMiddleware;
+use Filament\Navigation\MenuItem;
 
 class EmployeerPanelProvider extends PanelProvider
 {
@@ -78,7 +79,16 @@ class EmployeerPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->globalSearch(false)
-            ->maxContentWidth(Width::Full);
+            ->maxContentWidth(Width::Full)
+            ->userMenuItems([
+                MenuItem::make('logout')
+                    ->label('Log out')
+                    ->url(route('filament.employeer.auth.logout'))
+                    ->requiresConfirmation()
+                    ->modalHeading('Are you sure you want to log out?')
+                    ->modalDescription('You will be logged out of your account.')
+                    ->modalSubmitActionLabel('Log out'),
+            ]);
     }
     public function widgets(): array
     {

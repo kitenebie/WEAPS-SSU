@@ -26,6 +26,7 @@ use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
 use Filament\Pages\Enums\SubNavigationPosition;
 use Filament\Support\Enums\Width;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Filament\Navigation\MenuItem;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -98,6 +99,15 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->maxContentWidth(Width::Full);
+            ->maxContentWidth(Width::Full)
+            ->userMenuItems([
+                MenuItem::make('logout')
+                    ->label('Log out')
+                    ->url(route('filament.admin.auth.logout'))
+                    ->requiresConfirmation()
+                    ->modalHeading('Are you sure you want to log out?')
+                    ->modalDescription('You will be logged out of your account.')
+                    ->modalSubmitActionLabel('Log out'),
+            ]);
     }
 }
