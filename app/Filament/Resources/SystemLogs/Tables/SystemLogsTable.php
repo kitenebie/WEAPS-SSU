@@ -18,7 +18,13 @@ class SystemLogsTable
                 TextColumn::make('action')
                     ->label('Log Action')
                     ->searchable()
-                    ->badge(),
+                    ->badge()
+                    ->color(fn($state) => match (strtolower($state)) {
+                        'create' => 'success',   // green
+                        'update' => 'warning',   // yellow
+                        'delete' => 'danger',    // red
+                        default   => 'gray',     // fallback
+                    }),
                 TextColumn::make('model_type')
                     ->label('Table')
                     ->formatStateUsing(fn($state) => class_basename($state))
