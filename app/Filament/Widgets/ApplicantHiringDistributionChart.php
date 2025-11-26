@@ -78,8 +78,7 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
                     ->label('Reset')
                     ->color('danger')
                     ->action('resetFilters')
-                    ->icon('heroicon-o-arrow-path')
-                    ->color('gray'),
+                    ->icon('heroicon-o-arrow-path'),
             ])->fullWidth(),
         ]);
     }
@@ -161,30 +160,59 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
             $timeline = collect([CarbonImmutable::now()->startOfMonth()]);
         }
 
-        $months = $timeline
-            ->map(fn (CarbonInterface $date) => $date->translatedFormat('F Y'))
-            ->toArray();
+        $monthBuckets = [];
+        $monthLabels = [];
+        foreach ($timeline as $date) {
+            $key = $date->format('Y-m');
+            $monthBuckets[$key] = $date;
+            $monthLabels[$key] = $date->translatedFormat('F Y');
+        }
+
+        $monthTotals = array_fill_keys(array_keys($monthBuckets), 0);
 
         // Query companies
         $companies = Company::query()
             ->when($this->company_id, fn ($query) => $query->where('id', $this->company_id))
             ->get();
 
-        // Build series for chart
-        $series = $companies->map(function ($company) use ($timeline, $rangeStart, $rangeEnd) {
-            $monthlyData = $timeline->map(function (CarbonInterface $date) use ($company, $rangeStart, $rangeEnd) {
-                return $company->careers()
+        $rawSeries = [];
+
+        // Build series data per company while accumulating monthly totals
+        foreach ($companies as $company) {
+            $dataByMonth = [];
+
+            foreach ($monthBuckets as $key => $date) {
+                $count = $company->careers()
                     ->whereBetween('created_at', [$rangeStart, $rangeEnd])
                     ->whereYear('created_at', $date->year)
                     ->whereMonth('created_at', $date->month)
                     ->count();
-            })->toArray();
+
+                $dataByMonth[$key] = $count;
+                $monthTotals[$key] += $count;
+            }
+
+            $rawSeries[] = [
+                'name' => $company->name,
+                'data' => $dataByMonth,
+            ];
+        }
+
+        arsort($monthTotals);
+        $sortedMonthKeys = array_keys($monthTotals);
+        $months = array_map(fn (string $key) => $monthLabels[$key], $sortedMonthKeys);
+
+        $series = array_map(function (array $entry) use ($sortedMonthKeys) {
+            $orderedData = [];
+            foreach ($sortedMonthKeys as $monthKey) {
+                $orderedData[] = $entry['data'][$monthKey] ?? 0;
+            }
 
             return [
-                'name' => $company->name,
-                'data' => $monthlyData,
+                'name' => $entry['name'],
+                'data' => $orderedData,
             ];
-        })->toArray();
+        }, $rawSeries);
 
         // Chart options
         return [
