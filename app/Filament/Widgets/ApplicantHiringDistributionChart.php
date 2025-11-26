@@ -70,12 +70,13 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
             Actions::make([
                 Action::make('applyFilters')
-                    ->label('Apply Filters')
+                    ->label('Apply')
                     ->action('applyFilters')
                     ->icon('heroicon-o-funnel')
                     ->color('primary'),
                 Action::make('resetFilters')
                     ->label('Reset')
+                    ->color('danger')
                     ->action('resetFilters')
                     ->icon('heroicon-o-arrow-path')
                     ->color('gray'),
