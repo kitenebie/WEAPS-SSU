@@ -3,14 +3,16 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Company;
-use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
+use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
+use Carbon\CarbonPeriod;
+use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Schemas\Components\Actions;
 use Filament\Widgets\ChartWidget\Concerns\HasFiltersSchema;
+use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Livewire\Attributes\Reactive;
-use Carbon\Carbon;
-use Carbon\CarbonImmutable;
-use Carbon\CarbonPeriod;
 
 class ApplicantHiringDistributionChart extends ApexChartWidget
 {
@@ -28,10 +30,21 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     public ?int $company_id = null;
 
     #[Reactive]
-    public ?Carbon $startDate = null;
+    public ?CarbonInterface $startDate = null;
 
     #[Reactive]
-    public ?Carbon $endDate = null;
+    public ?CarbonInterface $endDate = null;
+
+    public function mount(): void
+    {
+        parent::mount();
+
+        if (blank($this->filters)) {
+            $this->filters = $this->getDefaultFiltersState();
+        }
+
+        $this->applyFilters(shouldRefresh: false);
+    }
 
     /**
      * Define the chart filters schema
@@ -42,16 +55,35 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
             Select::make('company_id')
                 ->label('Select Company')
                 ->searchable()
-                ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
+                ->preload()
+                ->nullable()
+                ->options(Company::orderBy('name')->pluck('name', 'id')->toArray())
                 ->placeholder('All Companies'),
 
             DatePicker::make('startDate')
                 ->label('From Date')
-                ->default(now()->subMonths(12)),
+                ->maxDate(fn ($get) => $get('endDate'))
+                ->default($this->getDefaultFiltersState()['startDate'])
+                ->native(false),
 
             DatePicker::make('endDate')
                 ->label('To Date')
-                ->default(now()),
+                ->minDate(fn ($get) => $get('startDate'))
+                ->default($this->getDefaultFiltersState()['endDate'])
+                ->native(false),
+
+            Actions::make([
+                Action::make('applyFilters')
+                    ->label('Apply Filters')
+                    ->action('applyFilters')
+                    ->icon('heroicon-o-funnel')
+                    ->color('primary'),
+                Action::make('resetFilters')
+                    ->label('Reset')
+                    ->action('resetFilters')
+                    ->icon('heroicon-o-arrow-path')
+                    ->color('gray'),
+            ])->fullWidth(),
         ]);
     }
 
@@ -63,37 +95,93 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
         $this->dispatch('$refresh');
     }
 
+    public function applyFilters(bool $shouldRefresh = true): void
+    {
+        $filters = $this->filters ?? [];
+
+        $start = $this->resolveDate(data_get($filters, 'startDate'), true)
+            ?? CarbonImmutable::now()->subMonths(12)->startOfDay();
+        $end = $this->resolveDate(data_get($filters, 'endDate'), false)
+            ?? CarbonImmutable::now()->endOfDay();
+
+        if ($start->greaterThan($end)) {
+            [$start, $end] = [$end->startOfDay(), $start->endOfDay()];
+        }
+
+        $this->company_id = filled($filters['company_id'] ?? null)
+            ? (int) $filters['company_id']
+            : null;
+
+        $this->startDate = $start;
+        $this->endDate = $end;
+
+        if ($shouldRefresh) {
+            $this->dispatch('$refresh');
+        }
+    }
+
+    public function resetFilters(): void
+    {
+        $this->filters = $this->getDefaultFiltersState();
+        $this->applyFilters();
+    }
+
+    protected function getDefaultFiltersState(): array
+    {
+        return [
+            'company_id' => null,
+            'startDate' => CarbonImmutable::now()->subMonths(12)->toDateString(),
+            'endDate' => CarbonImmutable::now()->toDateString(),
+        ];
+    }
+
+    protected function resolveDate(null|string|CarbonInterface $value, bool $isStart): ?CarbonImmutable
+    {
+        if (blank($value)) {
+            return null;
+        }
+
+        $date = CarbonImmutable::parse($value);
+
+        return $isStart ? $date->startOfDay() : $date->endOfDay();
+    }
+
     /**
      * Generate chart options
      */
     protected function getOptions(): array
     {
-        $start = ($this->startDate ?? now()->subMonths(12))->toImmutable();
-        $end = ($this->endDate ?? now())->toImmutable();
+        $rangeStart = ($this->startDate ?? CarbonImmutable::now()->subMonths(12)->startOfDay());
+        $rangeEnd = ($this->endDate ?? CarbonImmutable::now()->endOfDay());
 
-        // Generate months for x-axis
-        $period = CarbonPeriod::create($start, '1 month', $end);
-        $months = [];
-        foreach ($period as $date) {
-            $months[] = $date->format('F Y');
+        $timeline = collect(CarbonPeriod::create(
+            $rangeStart->startOfMonth(),
+            '1 month',
+            $rangeEnd->startOfMonth()
+        ))->values();
+
+        if ($timeline->isEmpty()) {
+            $timeline = collect([CarbonImmutable::now()->startOfMonth()]);
         }
+
+        $months = $timeline
+            ->map(fn (CarbonInterface $date) => $date->translatedFormat('F Y'))
+            ->toArray();
 
         // Query companies
-        $companiesQuery = Company::query();
-        if ($this->company_id) {
-            $companiesQuery->where('id', $this->company_id);
-        }
-        $companies = $companiesQuery->get();
+        $companies = Company::query()
+            ->when($this->company_id, fn ($query) => $query->where('id', $this->company_id))
+            ->get();
 
         // Build series for chart
-        $series = $companies->map(function ($company) use ($period) {
-            $monthlyData = [];
-            foreach ($period as $date) {
-                $monthlyData[] = $company->careers()
+        $series = $companies->map(function ($company) use ($timeline, $rangeStart, $rangeEnd) {
+            $monthlyData = $timeline->map(function (CarbonInterface $date) use ($company, $rangeStart, $rangeEnd) {
+                return $company->careers()
+                    ->whereBetween('created_at', [$rangeStart, $rangeEnd])
                     ->whereYear('created_at', $date->year)
                     ->whereMonth('created_at', $date->month)
                     ->count();
-            }
+            })->toArray();
 
             return [
                 'name' => $company->name,
