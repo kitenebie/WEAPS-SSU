@@ -102,6 +102,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-arrow-left-on-rectangle')
                     ->extraAttributes([
                         'x-on:click.prevent' => 'confirmLogout()',
+                        'id' => 'logoutFi'
                     ]),
             ]);
     }

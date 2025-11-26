@@ -79,7 +79,19 @@ class EmployeerPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->globalSearch(false)
-            ->maxContentWidth(Width::Full);
+            ->maxContentWidth(Width::Full)
+            ->userMenuItems([
+                'logout' => fn(Action $action) => $action->label('Log out')
+                    ->hidden()
+                    ->action(fn() => dd('logout')),
+                Action::make('logout')
+                    ->label('Log out')
+                    ->icon('heroicon-o-arrow-left-on-rectangle')
+                    ->extraAttributes([
+                        'x-on:click.prevent' => 'confirmLogout()',
+                        'id' => 'logoutFi'
+                    ]),
+            ]);
     }
     public function widgets(): array
     {
