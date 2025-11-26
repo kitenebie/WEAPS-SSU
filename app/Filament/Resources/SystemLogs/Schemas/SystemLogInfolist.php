@@ -33,7 +33,7 @@ class SystemLogInfolist
                     ->formatStateUsing(
                         fn($state) =>
                         $state != null
-                            ? collect($state)->map(fn($value, $field) => "$field: $value")->join(', ')
+                            ? collect($state)->map(fn($value, $field) => "$value"."\n")->join(', ')
                             : 'No changes'
                     )
                     ->wrap(),
