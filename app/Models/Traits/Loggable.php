@@ -20,4 +20,31 @@ trait Loggable
             'user_agent' => Request::userAgent(),
         ]);
     }
+
+    protected static function bootLoggable()
+    {
+        static::created(function ($model) {
+            static::logChange($model, 'create', null);
+        });
+
+        static::updated(function ($model) {
+            $dirty = $model->getDirty();
+
+            $changes = [];
+            foreach ($dirty as $field => $newValue) {
+                $changes[$field] = [
+                    'old' => $model->getOriginal($field),
+                    'new' => $newValue,
+                ];
+            }
+
+            if (!empty($changes)) {
+                static::logChange($model, 'update', $changes);
+            }
+        });
+
+        static::deleted(function ($model) {
+            static::logChange($model, 'delete', null);
+        });
+    }
 }

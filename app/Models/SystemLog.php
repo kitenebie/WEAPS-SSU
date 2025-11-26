@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SystemLog extends Model
 {
@@ -21,13 +20,15 @@ class SystemLog extends Model
         'changes' => 'array',
     ];
 
-    public function user(): BelongsTo
+    // relationship to user
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function getModelAttribute()
+    // relationship to the affected model
+    public function model()
     {
-        return $this->model_type::find($this->model_id);
+        return $this->morphTo();
     }
 }
