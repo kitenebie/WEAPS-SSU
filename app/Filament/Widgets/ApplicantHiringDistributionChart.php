@@ -199,7 +199,14 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
         }
 
         arsort($monthTotals);
-        $sortedMonthKeys = array_keys($monthTotals);
+
+        $sortedMonthKeys = [];
+        foreach ($monthTotals as $key => $total) {
+            if ($total >= 1) {
+                $sortedMonthKeys[] = $key;
+            }
+        }
+
         $months = array_map(fn (string $key) => $monthLabels[$key], $sortedMonthKeys);
 
         $series = array_map(function (array $entry) use ($sortedMonthKeys) {
