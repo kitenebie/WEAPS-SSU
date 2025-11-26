@@ -27,6 +27,7 @@ use Filament\Forms\Components\Actions\Action;
 use Filament\Support\Enums\ActionSize;
 use App\Http\Middleware\EmployerRoleMiddleware;
 use Filament\Navigation\MenuItem;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeerPanelProvider extends PanelProvider
 {
@@ -83,7 +84,10 @@ class EmployeerPanelProvider extends PanelProvider
             ->userMenuItems([
                 MenuItem::make('logout')
                     ->label('Log out')
-                    ->url(route('filament.employeer.auth.logout'))
+                    ->action(function () {
+                        Auth::logout();
+                        return redirect('/login');
+                    })
                     ->requiresConfirmation()
                     ->modalHeading('Are you sure you want to log out?')
                     ->modalDescription('You will be logged out of your account.')
