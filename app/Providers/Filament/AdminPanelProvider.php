@@ -27,6 +27,7 @@ use Filament\Pages\Enums\SubNavigationPosition;
 use Filament\Support\Enums\Width;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Actions\Action;
+use Filament\Facades\Filament;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -101,12 +102,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->maxContentWidth(Width::Full)
             ->userMenuItems([
-                'logout' => fn (Action $action) => $action
-                    ->requiresConfirmation()
+                Action::make('logout')
                     ->label('Log out')
-                    ->modalHeading('Are you sure you want to log out?')
-                    ->modalDescription('You will be logged out of your account.')
-                    ->modalSubmitActionLabel('Log out'),
+                    ->icon('heroicon-o-arrow-left-on-rectangle')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->modalHeading('Are you sure you wanna log out?')
+                    ->modalDescription('You’re about to be kicked out of your session.')
+                    ->modalSubmitActionLabel('Yes, log me out')
+                    ->action(fn() => Filament::auth()->logout()),
             ]);
     }
 }

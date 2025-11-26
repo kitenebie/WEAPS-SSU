@@ -26,6 +26,7 @@ use Resma\FilamentAwinTheme\FilamentAwinTheme;
 use Filament\Support\Enums\ActionSize;
 use App\Http\Middleware\EmployerRoleMiddleware;
 use Filament\Actions\Action;
+use Filament\Facades\Filament;
 
 class EmployeerPanelProvider extends PanelProvider
 {
@@ -80,12 +81,15 @@ class EmployeerPanelProvider extends PanelProvider
             ->globalSearch(false)
             ->maxContentWidth(Width::Full)
             ->userMenuItems([
-                'logout' => fn(Action $action) => $action
+                Action::make('logout')
                     ->label('Log out')
+                    ->icon('heroicon-o-arrow-left-on-rectangle')
+                    ->color('danger')
                     ->requiresConfirmation()
-                    ->modalHeading('Are you sure you want to log out?')
-                    ->modalDescription('You will be logged out of your account.')
-                    ->modalSubmitActionLabel('Log out'),
+                    ->modalHeading('Are you sure you wanna log out?')
+                    ->modalDescription('You’re about to be kicked out of your session.')
+                    ->modalSubmitActionLabel('Yes, log me out')
+                    ->action(fn() => Filament::auth()->logout()),
             ]);
     }
     public function widgets(): array
