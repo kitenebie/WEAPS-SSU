@@ -27,32 +27,20 @@ class SystemLogsTable
                         'delete' => 'danger',    // red
                         default   => 'gray',     // fallback
                     }),
-                TextColumn::make('model_type')
+                TextColumn::make('model')
                     ->label('Table')
                     ->formatStateUsing(fn($state) => class_basename($state))
                     ->searchable(),
                 TextColumn::make('model_id')
-                    ->label('Record')
-                    ->getStateUsing(fn($record) => $record->model ? ($record->model->name ?: ($record->model->title ?: ($record->model->email ?: $record->model_id))) : $record->model_id)
+                    ->label('Record ID')
                     ->searchable(),
-                TextColumn::make('before_changes')
-                    ->label('Before')
-                    ->getStateUsing(fn($record) => $record->changes)
+                TextColumn::make('modified')
+                    ->label('Changes')
+                    ->getStateUsing(fn($record) => $record->modified)
                     ->formatStateUsing(
                         fn($state) =>
                         $state != null
-                            ? collect($state)->map(fn($change, $field) => "$field: " . ($change['old'] ?? 'N/A'))->join(', ')
-                            : 'No changes'
-                    )
-                    ->wrap(),
-
-                TextColumn::make('after_changes')
-                    ->label('After')
-                    ->getStateUsing(fn($record) => $record->changes)
-                    ->formatStateUsing(
-                        fn($state) =>
-                        $state
-                            ? collect($state)->map(fn($change, $field) => "$field: " . ($change['new'] ?? 'N/A'))->join(', ')
+                            ? collect($state)->map(fn($value, $field) => "$field: $value")->join(', ')
                             : 'No changes'
                     )
                     ->wrap(),
