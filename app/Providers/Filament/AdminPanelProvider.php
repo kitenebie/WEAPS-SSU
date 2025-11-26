@@ -97,7 +97,7 @@ class AdminPanelProvider extends PanelProvider
                 'logout' => fn(Action $action) => $action->label('Log out')
                     ->hidden()
                     ->action(fn() => dd('logout')),
-                CreateAction::make()
+                Action::make('new')
                     ->action(function(){
                         Notification::make()->title('Success')->send();
                     })
