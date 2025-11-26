@@ -176,14 +176,13 @@
         .logoutFi {}
     </style>
     @if (Filament::getCurrentPage()?->getSlug() === 'edit')
-        {
-            <style>
-                .fi-size-lg {
-                    color: white !important;
-                    stroke: white !important;
-                }
-            </style>
-        }
+        <style>
+            .fi-size-lg {
+                color: white !important;
+                stroke: white !important;
+            }
+        </style>
+    @endif
 </body>
 
 </html>
