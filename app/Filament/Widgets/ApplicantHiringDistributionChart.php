@@ -22,7 +22,6 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     protected static bool $isCollapsible = true;
     protected int | string | array $columnSpan = 2;
 
-    // Filters
     #[Reactive]
     public ?int $company_id = null;
 
@@ -35,33 +34,29 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     public function filtersSchema(Schema $schema): Schema
     {
         return $schema->components([
+
             Select::make('company_id')
                 ->label('Select Company')
-                ->searchable()
                 ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
+                ->searchable()
                 ->placeholder('All Companies')
-                ->dehydrateStateUsing(fn($state) => $this->company_id = $state),
+                ->afterStateUpdated(fn ($state) => $this->company_id = $state),
 
             DatePicker::make('startDate')
                 ->label('From Date')
-                ->default(now()->subMonths(12))
-                ->dehydrateStateUsing(fn($state) => $this->startDate = $state),
+                ->default(now()->subMonths(12)->toDateString())
+                ->afterStateUpdated(fn ($state) => $this->startDate = $state),
 
             DatePicker::make('endDate')
                 ->label('To Date')
-                ->default(now())
-                ->dehydrateStateUsing(fn($state) => $this->endDate = $state),
+                ->default(now()->toDateString())
+                ->afterStateUpdated(fn ($state) => $this->endDate = $state),
 
-            Action::make('mountAction')
+            Action::make('applyFilter')
                 ->label('Apply Filter')
                 ->color('primary')
-                ->action('mountAction'),
+                ->action(fn () => $this->dispatch('$refresh')),
         ]);
-    }
-
-    public function mountAction()
-    {
-        $this->dispatch('$refresh');
     }
 
     protected function getOptions(): array
@@ -69,11 +64,12 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
         return $this->getData($this->company_id, $this->startDate, $this->endDate);
     }
 
-    private function getData($companyId = null, $startDate = null, $endDate = null): array
+    private function getData($companyId, $startDate, $endDate): array
     {
         $startDate = $startDate ?? now()->subMonths(12)->format('Y-m-d');
         $endDate = $endDate ?? now()->format('Y-m-d');
 
+        // Build fresh period for categories
         $period = CarbonPeriod::create($startDate, '1 month', $endDate);
         $months = [];
         foreach ($period as $date) {
@@ -87,15 +83,20 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
         $companies = $companiesQuery->get();
 
         $series = [];
+
         foreach ($companies as $company) {
+
+            // ⚠️ Must recreate period to avoid exhausted generator
+            $periodLoop = CarbonPeriod::create($startDate, '1 month', $endDate);
+
             $monthlyData = [];
-            foreach ($period as $date) {
-                $monthlyCount = $company->careers()
+            foreach ($periodLoop as $date) {
+                $monthlyData[] = $company->careers()
                     ->whereYear('created_at', $date->year)
                     ->whereMonth('created_at', $date->month)
                     ->count();
-                $monthlyData[] = $monthlyCount;
             }
+
             $series[] = [
                 'name' => $company->name,
                 'data' => $monthlyData,
@@ -105,8 +106,14 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
         return [
             'chart' => ['type' => 'bar', 'height' => 350],
             'series' => $series,
-            'xaxis' => ['categories' => $months, 'labels' => ['style' => ['fontFamily' => 'inherit']]],
-            'yaxis' => ['title' => ['text' => 'Quantity'], 'labels' => ['style' => ['fontFamily' => 'inherit']]],
+            'xaxis' => [
+                'categories' => $months,
+                'labels' => ['style' => ['fontFamily' => 'inherit']]
+            ],
+            'yaxis' => [
+                'title' => ['text' => 'Quantity'],
+                'labels' => ['style' => ['fontFamily' => 'inherit']]
+            ],
             'colors' => ['#4FA753', '#2992E3', '#494949', '#7F1D1D'],
             'plotOptions' => ['bar' => ['distributed' => true]],
             'legend' => ['position' => 'top'],
