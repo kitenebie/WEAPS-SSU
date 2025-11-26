@@ -97,16 +97,12 @@ class AdminPanelProvider extends PanelProvider
                 'logout' => fn(Action $action) => $action->label('Log out')
                     ->hidden()
                     ->action(fn() => dd('logout')),
-                Action::make('new')
-                    ->action(function(){
-                        Notification::make()->title('Success')->send();
-                    })
-                // Action::make('delete')
-                //     ->schema([])
-                //     ->requiresConfirmation()
-                //     ->modalHeading('Delete post')
-                //     ->modalDescription('Are you sure you\'d like to delete this post? This cannot be undone.')
-                //     ->modalSubmitActionLabel('Yes, delete it')
+                Action::make('logout')
+                    ->label('Log out')
+                    ->icon('heroicon-o-arrow-left-on-rectangle')
+                    ->extraAttributes([
+                        'x-on:click.prevent' => 'confirmLogout()',
+                    ]),
             ]);
     }
 }
