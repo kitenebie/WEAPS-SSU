@@ -22,7 +22,7 @@ class ApplicantStatsWidget extends BaseWidget
         if (!$user) return [];
 
         $applicantRole = env('USER_EMPLOYEER_ROLE');
-        if ($user->roles()->where('name', $applicantRole)->exists()) return [];
+        if (!$user->roles()->where('name', $applicantRole)->exists()) return [];
 
         $company = Company::where('user_id', Auth::id())->first();
 
