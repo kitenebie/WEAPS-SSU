@@ -111,6 +111,15 @@ class AdminPanelProvider extends PanelProvider
                     ->modalDescription('You’re about to be kicked out of your session.')
                     ->modalSubmitActionLabel('Yes, log me out')
                     ->action(fn() => Filament::auth()->logout()),
+                Action::make('logouts')
+                    ->label('Log out')
+                    ->icon('heroicon-o-arrow-left-on-rectangle')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->modalHeading('Are you sure you wanna log out?')
+                    ->modalDescription('You’re about to be kicked out of your session.')
+                    ->modalSubmitActionLabel('Yes, log me out')
+                    ->action(fn() => Filament::auth()->logout()),
             ]);
     }
 }
