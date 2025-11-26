@@ -28,7 +28,8 @@ use Filament\Support\Enums\Width;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
-
+use Filament\Actions\CreateAction;
+use Filament\Forms\Components\TextInput;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -55,17 +56,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->darkMode(false)
             ->plugins([
-                // BreezyCore::make()
-                //     ->myProfile(
-                //         shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
-                //         userMenuLabel: 'My Profile', // Customizes the 'account' link label in the panel User Menu (default = null)
-                //         shouldRegisterNavigation: false, // Adds a main navigation item for the My Profile page (default = false)
-                //         navigationGroup: 'Settings', // Sets the navigation group for the My Profile page (default = null)
-                //         hasAvatars: false, // Enables the avatar upload form component (default = false)
-                //         slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
-                //     )
-                //     ->enableTwoFactorAuthentication(),
-                // FilamentAwinTheme::make(),
                 FilamentApexChartsPlugin::make(),
                 FilamentShieldPlugin::make(), // Registers RoleResource (Spatie Shield)
             ])
@@ -105,12 +95,19 @@ class AdminPanelProvider extends PanelProvider
                 'logout' => fn(Action $action) => $action->label('Log out')
                     ->hidden()
                     ->action(fn() => dd('logout')),
-                Action::make('delete')
-                    ->schema([])
-                    ->requiresConfirmation()
-                    ->modalHeading('Delete post')
-                    ->modalDescription('Are you sure you\'d like to delete this post? This cannot be undone.')
-                    ->modalSubmitActionLabel('Yes, delete it')
+                CreateAction::make()
+                    ->schema([
+                        TextInput::make('title')
+                            ->required()
+                            ->maxLength(255),
+                        // ...
+                    ])
+                // Action::make('delete')
+                //     ->schema([])
+                //     ->requiresConfirmation()
+                //     ->modalHeading('Delete post')
+                //     ->modalDescription('Are you sure you\'d like to delete this post? This cannot be undone.')
+                //     ->modalSubmitActionLabel('Yes, delete it')
             ]);
     }
 }
