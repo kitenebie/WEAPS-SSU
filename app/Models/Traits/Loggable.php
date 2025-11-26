@@ -11,13 +11,12 @@ trait Loggable
     public function logChange($action, $changes = null)
     {
         SystemLog::create([
-            'model_type' => get_class($this),
+            'model' => get_class($this),
             'model_id' => $this->getKey(),
             'action' => $action,
-            'changes' => $changes,
+            'modified' => $changes,
             'user_id' => Auth::id(),
             'ip_address' => Request::ip(),
-            'user_agent' => Request::userAgent(),
         ]);
     }
 

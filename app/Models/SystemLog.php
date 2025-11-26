@@ -12,10 +12,9 @@ class SystemLog extends Model
         'model',
         'model_id',
         'action',
-        'changes',
+        'modified',
         'ip_address',
-        'modified_columns',
-        'modified'
+        'modified_columns'
     ];
 
     protected $casts = [
