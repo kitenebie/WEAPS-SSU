@@ -15,7 +15,7 @@ class SystemLogsTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->query(SystemLog::OrderBy('id', 'desc')->query())
+            ->query(SystemLog::query()->OrderBy('id', 'desc'))
             ->columns([
                 TextColumn::make('action')
                     ->label('Log Action')
