@@ -85,11 +85,11 @@ class UserInfolist
                             ->state(function ($record) {
                                 return $record->companies->pluck('email')->join(', ');
                             }),
-                        TextEntry::make('user_handles')
-                            ->label('User Handles')
-                            ->state(function ($record) {
-                                return $record->companies->pluck('user_handle')->join(', ');
-                            }),
+                        // TextEntry::make('user_handles')
+                        //     ->label('User Handles')
+                        //     ->state(function ($record) {
+                        //         return $record->companies->pluck('user_handle')->join(', ');
+                        //     }),
                         TextEntry::make('active_status')
                             ->label('Active Status')
                             ->state(function ($record) {
