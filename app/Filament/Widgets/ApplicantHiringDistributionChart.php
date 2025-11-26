@@ -229,10 +229,10 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
                 'categories' => $months,
                 'labels' => ['style' => ['fontFamily' => 'inherit']]
             ],
-            'yaxis' => [
-                'title' => ['text' => 'Quantity'],
-                'labels' => ['style' => ['fontFamily' => 'inherit']]
-            ],
+            // 'yaxis' => [
+            //     'title' => ['text' => 'Quantity'],
+            //     'labels' => ['style' => ['fontFamily' => 'inherit']]
+            // ],
             'colors' => ['#4FA753', '#2992E3', '#494949', '#7F1D1D'],
             'plotOptions' => [
                 'bar' => [
