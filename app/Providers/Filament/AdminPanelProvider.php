@@ -30,6 +30,8 @@ use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Actions\CreateAction;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -96,12 +98,9 @@ class AdminPanelProvider extends PanelProvider
                     ->hidden()
                     ->action(fn() => dd('logout')),
                 CreateAction::make()
-                    ->schema([
-                        TextInput::make('title')
-                            ->required()
-                            ->maxLength(255),
-                        // ...
-                    ])
+                    ->action(function(){
+                        Notification::make()->title('Success')->send();
+                    })
                 // Action::make('delete')
                 //     ->schema([])
                 //     ->requiresConfirmation()
