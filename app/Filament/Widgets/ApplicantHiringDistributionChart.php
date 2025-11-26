@@ -20,27 +20,33 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     protected static bool $Collapse = false;
     protected int | string | array $columnSpan = 2;
 
-    // Use filters schema for TextInput search
+    // Public property for search input
+    public ?string $search = null;
+
     public function filtersSchema(Schema $schema): Schema
     {
         return $schema->components([
             TextInput::make('search')
                 ->label('Search Company')
                 ->placeholder('Type company name...')
-                ->reactive(), // updates chart as user types
+                ->reactive()
+                ->dehydrateStateUsing(fn($state) => $this->search = $state),
         ]);
     }
 
     protected function getOptions(): array
     {
-        $year = request()->query('filter', 'All'); // or default year
-        $search = $this->getAppliedFilterState('search');
+        $year = request()->query('filter', 'All'); // Or make a year filter
+        $search = $this->search;
+
         return $this->getDataForYear($year, $search);
     }
 
     private function getDataForYear($year, $search = null): array
     {
-        $months = collect(range(1, 12))->map(fn($m) => date('F', mktime(0, 0, 0, $m, 1)))->toArray();
+        $months = collect(range(1, 12))
+            ->map(fn($m) => date('F', mktime(0, 0, 0, $m, 1)))
+            ->toArray();
 
         $query = Company::query();
         if ($search) {
@@ -73,32 +79,16 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
             'series' => $series,
             'xaxis' => [
                 'categories' => $months,
-                'labels' => [
-                    'style' => [
-                        'fontFamily' => 'inherit',
-                    ],
-                ],
+                'labels' => ['style' => ['fontFamily' => 'inherit']],
             ],
             'yaxis' => [
                 'title' => ['text' => 'Quantity'],
-                'labels' => [
-                    'style' => [
-                        'fontFamily' => 'inherit',
-                    ],
-                ],
+                'labels' => ['style' => ['fontFamily' => 'inherit']],
             ],
             'colors' => ['#4FA753', '#2992E3', '#494949', '#7F1D1D'],
-            'plotOptions' => [
-                'bar' => [
-                    'distributed' => true,
-                ],
-            ],
-            'legend' => [
-                'position' => 'top',
-            ],
-            'dataLabels' => [
-                'enabled' => false,
-            ],
+            'plotOptions' => ['bar' => ['distributed' => true]],
+            'legend' => ['position' => 'top'],
+            'dataLabels' => ['enabled' => false],
         ];
     }
 }
