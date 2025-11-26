@@ -6,11 +6,11 @@ use App\Models\Company;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
-use Filament\Actions\Action;
-use Filament\Schemas\Schema;
 use Filament\Widgets\ChartWidget\Concerns\HasFiltersSchema;
-use Carbon\CarbonPeriod;
 use Livewire\Attributes\Reactive;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Carbon\CarbonPeriod;
 
 class ApplicantHiringDistributionChart extends ApexChartWidget
 {
@@ -20,93 +20,92 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     protected static ?string $chartId = 'companyCareerPostsChart';
     protected static ?int $contentHeight = 350;
     protected static bool $isCollapsible = true;
-    protected int | string | array $columnSpan = 2;
+    protected int|string|array $columnSpan = 2;
 
-    // Filters
     #[Reactive]
     public ?int $company_id = null;
 
     #[Reactive]
-    public ?string $startDate = null;
+    public ?Carbon $startDate = null;
 
     #[Reactive]
-    public ?string $endDate = null;
+    public ?Carbon $endDate = null;
 
-    public function filtersSchema(Schema $schema): Schema
+    /**
+     * Define the chart filters schema
+     */
+    public function filtersSchema($schema)
     {
         return $schema->components([
             Select::make('company_id')
                 ->label('Select Company')
                 ->searchable()
                 ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
-                ->placeholder('All Companies')
-                ->dehydrateStateUsing(fn($state) => $this->company_id = $state),
+                ->placeholder('All Companies'),
 
             DatePicker::make('startDate')
                 ->label('From Date')
-                ->default(now()->subMonths(12))
-                ->dehydrateStateUsing(fn($state) => $this->startDate = $state),
+                ->default(now()->subMonths(12)),
 
             DatePicker::make('endDate')
                 ->label('To Date')
-                ->default(now())
-                ->dehydrateStateUsing(fn($state) => $this->endDate = $state),
-
-            Action::make('mountAction')
-                ->label('Apply Filter')
-                ->color('primary')
-                ->action('mountAction'),
+                ->default(now()),
         ]);
     }
 
+    /**
+     * Optional action to manually refresh chart
+     */
     public function mountAction()
     {
         $this->dispatch('$refresh');
     }
 
+    /**
+     * Generate chart options
+     */
     protected function getOptions(): array
     {
-        return $this->getData($this->company_id, $this->startDate, $this->endDate);
-    }
+        $start = ($this->startDate ?? now()->subMonths(12))->toImmutable();
+        $end = ($this->endDate ?? now())->toImmutable();
 
-    private function getData($companyId = null, $startDate = null, $endDate = null): array
-    {
-        $startDate = $startDate ?? now()->subMonths(12)->format('Y-m-d');
-        $endDate = $endDate ?? now()->format('Y-m-d');
+        // Generate months for x-axis
+        $period = CarbonPeriod::create($start, '1 month', $end);
+        $months = collect($period)->map(fn(CarbonImmutable $date) => $date->format('F Y'))->toArray();
 
-        $period = CarbonPeriod::create($startDate, '1 month', $endDate);
-        $months = [];
-        foreach ($period as $date) {
-            $months[] = $date->format('F Y');
-        }
-
+        // Query companies
         $companiesQuery = Company::query();
-        if ($companyId) {
-            $companiesQuery->where('id', $companyId);
+        if ($this->company_id) {
+            $companiesQuery->where('id', $this->company_id);
         }
         $companies = $companiesQuery->get();
 
-        $series = [];
-        foreach ($companies as $company) {
-            $monthlyData = [];
-            foreach ($period as $date) {
-                $monthlyCount = $company->careers()
-                    ->whereYear('created_at', $date->year)
-                    ->whereMonth('created_at', $date->month)
-                    ->count();
-                $monthlyData[] = $monthlyCount;
-            }
-            $series[] = [
+        // Build series for chart
+        $series = $companies->map(function ($company) use ($period) {
+            $monthlyData = collect($period)->map(fn(CarbonImmutable $date) => $company->careers()
+                ->whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->count()
+            )->toArray();
+
+            return [
                 'name' => $company->name,
                 'data' => $monthlyData,
             ];
-        }
+        })->toArray();
 
+        // Chart options
         return [
             'chart' => ['type' => 'bar', 'height' => 350],
             'series' => $series,
-            'xaxis' => ['categories' => $months, 'labels' => ['style' => ['fontFamily' => 'inherit']]],
-            'yaxis' => ['title' => ['text' => 'Quantity'], 'labels' => ['style' => ['fontFamily' => 'inherit']]],
+            'xaxis' => [
+                'categories' => $months,
+                'labels' => ['style' => ['fontFamily' => 'inherit']]
+            ],
+            'yaxis' => [
+                'title' => ['text' => 'Quantity'],
+                'labels' => ['style' => ['fontFamily' => 'inherit']]
+            ],
             'colors' => ['#4FA753', '#2992E3', '#494949', '#7F1D1D'],
             'plotOptions' => ['bar' => ['distributed' => true]],
             'legend' => ['position' => 'top'],
