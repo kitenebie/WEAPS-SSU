@@ -51,7 +51,7 @@ class SystemLogResource extends Resource
         return [
             'index' => ListSystemLogs::route('/'),
             // 'create' => CreateSystemLog::route('/create'),
-            'view' => ViewSystemLog::route('/{record}'),
+            // 'view' => ViewSystemLog::route('/{record}'),
             // 'edit' => EditSystemLog::route('/{record}/edit'),
         ];
     }

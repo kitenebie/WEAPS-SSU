@@ -20,11 +20,11 @@ class SystemLogsTable
                     ->searchable()
                     ->badge(),
                 TextColumn::make('model_type')
-                    ->label('Model')
+                    ->label('Table')
                     ->formatStateUsing(fn ($state) => class_basename($state))
                     ->searchable(),
                 TextColumn::make('model_id')
-                    ->label('Model Name')
+                    ->label('Record')
                     ->getStateUsing(fn ($record) => $record->model ? ($record->model->name ?? $record->model->title ?? $record->model->email ?? $record->model_id) : $record->model_id)
                     ->searchable(),
                 TextColumn::make('changes')
