@@ -60,8 +60,8 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
     public function mountAction()
     {
-        dd(true);
-        $this->dispatch('$refresh');
+        return $this->getData($this->company_id, $this->startDate, $this->endDate);
+        // $this->dispatch('$refresh');
     }
 
     protected function getOptions(): array
