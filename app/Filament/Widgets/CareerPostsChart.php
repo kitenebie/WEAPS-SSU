@@ -5,10 +5,7 @@ namespace App\Filament\Widgets;
 use App\Models\Carrer;
 use Illuminate\Support\Facades\DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
-use Filament\Forms\Components\Select;
-/**
- * Charts visualizing the number of career posts over recent months/years and overall total.
- */
+use Filament\Forms\Components\TextInput;
 
 class CareerPostsChart extends ApexChartWidget
 {
@@ -19,48 +16,74 @@ class CareerPostsChart extends ApexChartWidget
     protected static bool $Collapse = false;
     protected int | string | array $columnSpan = 2;
 
-    protected function getFilters(): ?array
+    // Add search input
+    public ?string $companySearch = null;
+
+    protected function getFormSchema(): array
     {
         return [
-            'monthly' => 'Monthly (Last 12 months)',
-            'yearly' => 'Yearly (Last 5 years)',
-            'all' => 'All Time',
+            TextInput::make('companySearch')
+                ->label('Search Company')
+                ->placeholder('Enter company name')
+                ->reactive(),
         ];
+    }
+
+    protected function getFilters(): ?array
+    {
+        $years = Carrer::select(DB::raw('YEAR(created_at) as year'))
+            ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->pluck('year')
+            ->toArray();
+
+        $filter = ['all' => 'All Time'];
+
+        foreach ($years as $year) {
+            $filter[$year] = $year;
+        }
+
+        return $filter;
     }
 
     protected function getOptions(): array
     {
-        $period = request()->query('filter', 'monthly');
+        $period = request()->query('filter', 'all');
 
         switch ($period) {
-            case 'monthly':
-                return $this->getMonthlyData();
-            case 'yearly':
-                return $this->getYearlyData();
             case 'all':
                 return $this->getAllTimeData();
             default:
-                return $this->getMonthlyData();
+                return $this->getYearlyOrMonthlyData($period);
         }
     }
 
-    private function getMonthlyData(): array
+    private function getYearlyOrMonthlyData($year): array
     {
-        $data = Carrer::select(
-                DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
-                DB::raw('COUNT(*) as count')
-            )
-            ->where('created_at', '>=', now()->subMonths(12))
-            ->groupBy('month')
-            ->orderBy('month')
-            ->pluck('count', 'month');
+        $query = Carrer::query();
+
+        if ($year !== 'all') {
+            $query->whereYear('created_at', $year);
+        }
+
+        if ($this->companySearch) {
+            $query->where('company_name', 'like', "%{$this->companySearch}%");
+        }
+
+        // Group by month
+        $data = $query->select(
+            DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
+            DB::raw('COUNT(*) as count')
+        )
+        ->groupBy('month')
+        ->orderBy('month')
+        ->pluck('count', 'month');
 
         $months = [];
         $counts = [];
-
-        for ($i = 11; $i >= 0; $i--) {
-            $month = now()->subMonths($i)->format('Y-m');
-            $months[] = now()->subMonths($i)->format('M Y');
+        for ($i = 0; $i < 12; $i++) {
+            $month = now()->subMonths(11 - $i)->format('Y-m');
+            $months[] = now()->subMonths(11 - $i)->format('M Y');
             $counts[] = $data->get($month, 0);
         }
 
@@ -71,7 +94,7 @@ class CareerPostsChart extends ApexChartWidget
             ],
             'series' => [
                 [
-                    'name' => 'Career Posts',
+                    'name' => 'Quantity',
                     'data' => $counts,
                 ],
             ],
@@ -84,6 +107,7 @@ class CareerPostsChart extends ApexChartWidget
                 ],
             ],
             'yaxis' => [
+                'title' => ['text' => 'Quantity'],
                 'labels' => [
                     'style' => [
                         'fontFamily' => 'inherit',
@@ -91,68 +115,16 @@ class CareerPostsChart extends ApexChartWidget
                 ],
             ],
             'colors' => ['#3C3C3C'],
-            'stroke' => [
-                'curve' => 'smooth',
-            ],
-            'fill' => [
-                'opacity' => 0.3,
-            ],
-        ];
-    }
-
-    private function getYearlyData(): array
-    {
-        $data = Carrer::select(
-                DB::raw('YEAR(created_at) as year'),
-                DB::raw('COUNT(*) as count')
-            )
-            ->where('created_at', '>=', now()->subYears(5))
-            ->groupBy('year')
-            ->orderBy('year')
-            ->pluck('count', 'year');
-
-        $years = [];
-        $counts = [];
-
-        for ($i = 4; $i >= 0; $i--) {
-            $year = now()->subYears($i)->format('Y');
-            $years[] = $year;
-            $counts[] = $data->get((int)$year, 0);
-        }
-
-        return [
-            'chart' => [
-                'type' => 'column',
-                'height' => 300,
-            ],
-            'series' => [
-                [
-                    'name' => 'Career Posts',
-                    'data' => $counts,
-                ],
-            ],
-            'xaxis' => [
-                'categories' => $years,
-                'labels' => [
-                    'style' => [
-                        'fontFamily' => 'inherit',
-                    ],
-                ],
-            ],
-            'yaxis' => [
-                'labels' => [
-                    'style' => [
-                        'fontFamily' => 'inherit',
-                    ],
-                ],
-            ],
-            'colors' => ['#7F1D1D'],
+            'stroke' => ['curve' => 'smooth'],
+            'fill' => ['opacity' => 0.3],
         ];
     }
 
     private function getAllTimeData(): array
     {
-        $totalPosts = Carrer::count();
+        $totalPosts = Carrer::when($this->companySearch, function ($q) {
+            $q->where('company_name', 'like', "%{$this->companySearch}%");
+        })->count();
 
         return [
             'chart' => [
@@ -164,12 +136,10 @@ class CareerPostsChart extends ApexChartWidget
             'colors' => ['#1E1E1E'],
             'plotOptions' => [
                 'radialBar' => [
-                    'hollow' => [
-                        'size' => '70%',
-                    ],
+                    'hollow' => ['size' => '70%'],
                     'dataLabels' => [
                         'value' => [
-                            'formatter' => 'function (val) { return val + " posts" }',
+                            'formatter' => 'function (val) { return val + " posts"; }',
                         ],
                     ],
                 ],
