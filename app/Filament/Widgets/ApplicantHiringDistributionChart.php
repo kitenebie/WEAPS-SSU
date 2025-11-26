@@ -19,7 +19,7 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
 
     protected static ?string $heading = 'Company Career Posts Distribution';
     protected static ?string $chartId = 'companyCareerPostsChart';
-    protected static ?int $contentHeight = 800;
+    protected static ?int $contentHeight = 350;
 
     protected ?string $pollingInterval = '1s';
     protected static bool $isCollapsible = true;
