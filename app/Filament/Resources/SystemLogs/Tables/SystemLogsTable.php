@@ -38,7 +38,7 @@ class SystemLogsTable
                     ->getStateUsing(fn($record) => $record->changes)
                     ->formatStateUsing(
                         fn($state) =>
-                        $state
+                        $state != null
                             ? collect($state)->map(fn($change, $field) => "$field: " . ($change['old'] ?? 'N/A'))->join(', ')
                             : 'No changes'
                     )
