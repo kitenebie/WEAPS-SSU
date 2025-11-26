@@ -175,7 +175,7 @@
     <style>
         .logoutFi {}
     </style>
-    @if (Filament::getCurrentPage()?->getSlug() === 'edit')
+    @if (Filament\Facades\Filament::getCurrentPage()?->getSlug() === 'edit')
         <style>
             .fi-size-lg {
                 color: white !important;
