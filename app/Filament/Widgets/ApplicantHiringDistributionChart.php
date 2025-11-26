@@ -11,6 +11,8 @@ use Livewire\Attributes\Reactive;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonPeriod;
+use Filament\Pages\Dashboard\Actions\FilterAction;
+use Filament\Pages\Dashboard\Concerns\HasFiltersAction;
 
 class ApplicantHiringDistributionChart extends ApexChartWidget
 {
@@ -36,23 +38,19 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
     /**
      * Define the chart filters schema
      */
-    public function filtersSchema($schema)
+
+    use HasFiltersAction;
+    
+    protected function getHeaderActions(): array
     {
-        return $schema->components([
-            Select::make('company_id')
-                ->label('Select Company')
-                ->searchable()
-                ->options([null => 'All Companies'] + Company::orderBy('name')->pluck('name', 'id')->toArray())
-                ->placeholder('All Companies'),
-
-            DatePicker::make('startDate')
-                ->label('From Date')
-                ->default(now()->subMonths(12)),
-
-            DatePicker::make('endDate')
-                ->label('To Date')
-                ->default(now()),
-        ]);
+        return [
+            FilterAction::make()
+                ->schema([
+                    DatePicker::make('startDate'),
+                    DatePicker::make('endDate'),
+                    // ...
+                ]),
+        ];
     }
 
     /**
@@ -117,6 +115,11 @@ class ApplicantHiringDistributionChart extends ApexChartWidget
             'plotOptions' => ['bar' => ['distributed' => true]],
             'legend' => ['position' => 'top'],
             'dataLabels' => ['enabled' => false],
+            'plugins' => [
+                'legend' => [
+                    'display' => false,
+                ],
+            ],
         ];
     }
 }
