@@ -14,7 +14,7 @@ class CareerPostsChart extends ApexChartWidget
 {
     protected static ?string $heading = 'Career Posts Analytics';
     protected static ?string $chartId = 'careerPostsChart';
-    protected static ?int $contentHeight = 300;
+    protected static ?int $contentHeight = 350;
     protected static bool $isCollapsible = true;
     protected static bool $Collapse = false;
     protected int | string | array $columnSpan = 2;
