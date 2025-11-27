@@ -141,14 +141,14 @@ class CurriculumVitaesTable
                             $query->where('isAiValidate', $data['value']);
                         }
                     }),
-                SelectFilter::make('employment_status')
-                    ->label('Employment Status')
-                    ->options(fn() => \App\Models\User::whereNotNull('employment_status')->distinct('employment_status')->pluck('employment_status', 'employment_status')->toArray())
-                    ->query(function ($query, $data) {
-                        if ($data['value']) {
-                            $query->whereHas('user', fn($q) => $q->where('employment_status', $data['value']));
-                        }
-                    }),
+                // SelectFilter::make('employment_status')
+                //     ->label('Employment Status')
+                //     ->options(fn() => \App\Models\User::whereNotNull('employment_status')->distinct('employment_status')->pluck('employment_status', 'employment_status')->toArray())
+                //     ->query(function ($query, $data) {
+                //         if ($data['value']) {
+                //             $query->whereHas('user', fn($q) => $q->where('employment_status', $data['value']));
+                //         }
+                //     }),
                 // SelectFilter::make('highest_degree')
                 //     ->label('Highest Degree')
                 //     ->options(fn() => \App\Models\CurriculumVitae::whereNotNull('highest_degree')->distinct('highest_degree')->pluck('highest_degree', 'highest_degree')->toArray())
