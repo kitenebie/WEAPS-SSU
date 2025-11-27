@@ -59,7 +59,7 @@ class DashboardStatsWidget extends BaseWidget
                         ->extraAttributes([
                             'id' => 'verified-alumni-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                            'onclick' => "window.location.href='/admin/user-list?filter=alumni_verified';",
+                            'onclick' => "window.location.href='/admin/Alumni%20List?filters[isActive][value]=1';",
                         ])
                         ->color('success'),
 
@@ -89,7 +89,7 @@ class DashboardStatsWidget extends BaseWidget
                         ->extraAttributes([
                             'id' => 'unverified-alumni-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                            'onclick' => "window.location.href='/admin/user-list?filter=alumni_unverified';",
+                            'onclick' => "window.location.href='/admin/Alumni%20List?filters[isActive][value]=0';",
                         ])
                         ->color('warning'),
 
