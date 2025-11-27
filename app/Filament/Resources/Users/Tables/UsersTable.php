@@ -102,16 +102,16 @@ class UsersTable
             ->filters([
                 SelectFilter::make('companies.type')
                     ->label('Company Type')
-                    ->options(fn() => \App\Models\Company::distinct('type')->pluck('type', 'type')->toArray()),
+                    ->options(fn() => \App\Models\Company::whereNotNull('type')->distinct('type')->pluck('type', 'type')->toArray()),
                 SelectFilter::make('companies.location')
                     ->label('Location')
-                    ->options(fn() => \App\Models\Company::distinct('location')->pluck('location', 'location')->toArray()),
+                    ->options(fn() => \App\Models\Company::whereNotNull('location')->distinct('location')->pluck('location', 'location')->toArray()),
                 SelectFilter::make('companies.industry')
                     ->label('Industry')
-                    ->options(fn() => \App\Models\Company::distinct('industry')->pluck('industry', 'industry')->toArray()),
+                    ->options(fn() => \App\Models\Company::whereNotNull('industry')->distinct('industry')->pluck('industry', 'industry')->toArray()),
                 SelectFilter::make('companies.company_size')
                     ->label('Company Size')
-                    ->options(fn() => \App\Models\Company::distinct('company_size')->pluck('company_size', 'company_size')->toArray()),
+                    ->options(fn() => \App\Models\Company::whereNotNull('company_size')->distinct('company_size')->pluck('company_size', 'company_size')->toArray()),
                 SelectFilter::make('companies.isActive')
                     ->label('Is Active')
                     ->options([
