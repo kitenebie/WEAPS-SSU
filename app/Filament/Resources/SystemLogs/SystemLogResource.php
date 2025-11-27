@@ -45,7 +45,10 @@ class SystemLogResource extends Resource
             //
         ];
     }
-
+    public static function getNavigationSort(): ?int
+    {
+       return 100;
+    }
     public static function getPages(): array
     {
         return [
