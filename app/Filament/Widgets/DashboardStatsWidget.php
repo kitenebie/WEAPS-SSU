@@ -79,7 +79,7 @@ class DashboardStatsWidget extends BaseWidget
                         ->extraAttributes([
                             'id' => 'unverified-companies-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                            'onclick' => "window.location.href='/admin/user-list?filter=company_unverified';",
+                            'onclick' => "window.location.href='/admin/Company%20List?filter=company_unverified';",
                         ])
                         ->color('danger'),
                         
@@ -102,7 +102,7 @@ class DashboardStatsWidget extends BaseWidget
                         ->extraAttributes([
                             'id' => 'active-companies-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                            'onclick' => "window.location.href='/admin/user-list?filter=company_active';",
+                            'onclick' => "window.location.href='/admin/Company%20List?filter=company_active';",
                         ])
                         ->color('success'),
                 ])
