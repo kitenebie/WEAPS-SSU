@@ -8,8 +8,10 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Support\Enums\Width;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Enums\RecordActionsPosition;
+use Filament\Tables\Filters\SelectFilter;
 
 class UsersTable
 {
@@ -74,9 +76,13 @@ class UsersTable
                 // TextColumn::make('companies.Document_Permit')
                 //     ->label('Document Permit')
                 //     ->searchable(),
-                TextColumn::make('companies.isActive')
+                BadgeColumn::make('companies.isActive')
                     ->label('Is Active')
-                    ->searchable(),
+                    ->colors([
+                        'success' => true,
+                        'danger' => false,
+                    ])
+                    ->formatStateUsing(fn($state) => $state ? 'Active' : 'Inactive'),
                 // TextColumn::make('companies.user_handle')
                 //     ->label('User Handle')
                 //     ->searchable(),
@@ -94,7 +100,24 @@ class UsersTable
             ])
             ->modifyQueryUsing(fn($query) => $query->whereHas('companies'))
             ->filters([
-                //
+                SelectFilter::make('companies.type')
+                    ->label('Company Type')
+                    ->options(fn() => \App\Models\Company::distinct('type')->pluck('type', 'type')->toArray()),
+                SelectFilter::make('companies.location')
+                    ->label('Location')
+                    ->options(fn() => \App\Models\Company::distinct('location')->pluck('location', 'location')->toArray()),
+                SelectFilter::make('companies.industry')
+                    ->label('Industry')
+                    ->options(fn() => \App\Models\Company::distinct('industry')->pluck('industry', 'industry')->toArray()),
+                SelectFilter::make('companies.company_size')
+                    ->label('Company Size')
+                    ->options(fn() => \App\Models\Company::distinct('company_size')->pluck('company_size', 'company_size')->toArray()),
+                SelectFilter::make('companies.isActive')
+                    ->label('Is Active')
+                    ->options([
+                        '1' => 'Active',
+                        '0' => 'Inactive',
+                    ]),
             ])
             ->columnManagerColumns(2)
             ->columnManagerWidth(Width::Medium)
