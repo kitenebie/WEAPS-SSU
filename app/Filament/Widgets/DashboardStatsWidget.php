@@ -69,7 +69,7 @@ class DashboardStatsWidget extends BaseWidget
                         ->extraAttributes([
                             'id' => 'total-companies-stat',
                             'style' => 'cursor: pointer;  border: 1px solid #CAD5E2',
-                            'onclick' => "window.location.href='/admin/user-list?filter=company_list';",
+                            'onclick' => "window.location.href='/admin/Company%20List;",
                         ])
                         ->color('primary'),
 
