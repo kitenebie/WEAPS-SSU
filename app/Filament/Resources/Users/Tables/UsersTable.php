@@ -100,24 +100,49 @@ class UsersTable
             ])
             ->modifyQueryUsing(fn($query) => $query->whereHas('companies'))
             ->filters([
-                SelectFilter::make('companies.type')
+                SelectFilter::make('type')
                     ->label('Company Type')
-                    ->options(fn() => \App\Models\Company::whereNotNull('type')->distinct('type')->pluck('type', 'type')->toArray()),
-                SelectFilter::make('companies.location')
+                    ->options(fn() => \App\Models\Company::whereNotNull('type')->distinct('type')->pluck('type', 'type')->toArray())
+                    ->query(function ($query, $data) {
+                        if ($data['value']) {
+                            $query->whereHas('companies', fn($q) => $q->where('type', $data['value']));
+                        }
+                    }),
+                SelectFilter::make('location')
                     ->label('Location')
-                    ->options(fn() => \App\Models\Company::whereNotNull('location')->distinct('location')->pluck('location', 'location')->toArray()),
-                SelectFilter::make('companies.industry')
+                    ->options(fn() => \App\Models\Company::whereNotNull('location')->distinct('location')->pluck('location', 'location')->toArray())
+                    ->query(function ($query, $data) {
+                        if ($data['value']) {
+                            $query->whereHas('companies', fn($q) => $q->where('location', $data['value']));
+                        }
+                    }),
+                SelectFilter::make('industry')
                     ->label('Industry')
-                    ->options(fn() => \App\Models\Company::whereNotNull('industry')->distinct('industry')->pluck('industry', 'industry')->toArray()),
-                SelectFilter::make('companies.company_size')
+                    ->options(fn() => \App\Models\Company::whereNotNull('industry')->distinct('industry')->pluck('industry', 'industry')->toArray())
+                    ->query(function ($query, $data) {
+                        if ($data['value']) {
+                            $query->whereHas('companies', fn($q) => $q->where('industry', $data['value']));
+                        }
+                    }),
+                SelectFilter::make('company_size')
                     ->label('Company Size')
-                    ->options(fn() => \App\Models\Company::whereNotNull('company_size')->distinct('company_size')->pluck('company_size', 'company_size')->toArray()),
-                SelectFilter::make('companies.isActive')
+                    ->options(fn() => \App\Models\Company::whereNotNull('company_size')->distinct('company_size')->pluck('company_size', 'company_size')->toArray())
+                    ->query(function ($query, $data) {
+                        if ($data['value']) {
+                            $query->whereHas('companies', fn($q) => $q->where('company_size', $data['value']));
+                        }
+                    }),
+                SelectFilter::make('isActive')
                     ->label('Is Active')
                     ->options([
                         '1' => 'Active',
                         '0' => 'Inactive',
-                    ]),
+                    ])
+                    ->query(function ($query, $data) {
+                        if (isset($data['value'])) {
+                            $query->whereHas('companies', fn($q) => $q->where('isActive', $data['value']));
+                        }
+                    }),
             ])
             ->columnManagerColumns(2)
             ->columnManagerWidth(Width::Medium)
