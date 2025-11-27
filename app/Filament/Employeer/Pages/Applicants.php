@@ -65,7 +65,8 @@ class Applicants extends Page implements HasTable
                 TextColumn::make('user.first_name')
                     ->label('Applicant')
                     ->formatStateUsing(fn($record) => ($record->user->first_name ?? 'Unknown') . ' ' . ($record->user->last_name ?? 'User'))
-                    ->searchable(),
+                    ->searchable()
+                    ->url(fn($record) => url('/Applicants/' . (\App\Models\CurriculumVitae::where('user_id', $record->user->id)->first()->id ?? '') . "_blank")),
 
                 TextColumn::make('career.title')
                     ->label('Position')
