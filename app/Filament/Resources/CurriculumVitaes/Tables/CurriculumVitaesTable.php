@@ -13,6 +13,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Support\Enums\Width;
+use Filament\Tables\Filters\SelectFilter;
 
 class CurriculumVitaesTable
 {
@@ -118,7 +119,36 @@ class CurriculumVitaesTable
             ])
             ->columnManagerColumns(4)
             ->filters([
-                //
+                SelectFilter::make('isActive')
+                    ->label('Admin Verified')
+                    ->options([
+                        '1' => 'Verified',
+                        '0' => 'Not Verified',
+                    ])
+                    ->query(function ($query, $data) {
+                        if (isset($data['value'])) {
+                            $query->where('isActive', $data['value']);
+                        }
+                    }),
+                SelectFilter::make('isAiValidate')
+                    ->label('AI Verified')
+                    ->options([
+                        '1' => 'Verified',
+                        '0' => 'Not Verified',
+                    ])
+                    ->query(function ($query, $data) {
+                        if (isset($data['value'])) {
+                            $query->where('isAiValidate', $data['value']);
+                        }
+                    }),
+                SelectFilter::make('employment_status')
+                    ->label('Employment Status')
+                    ->options(fn() => \App\Models\User::whereNotNull('employment_status')->distinct('employment_status')->pluck('employment_status', 'employment_status')->toArray())
+                    ->query(function ($query, $data) {
+                        if ($data['value']) {
+                            $query->whereHas('user', fn($q) => $q->where('employment_status', $data['value']));
+                        }
+                    }),
             ])
             ->recordActions([
                 ViewAction::make()
