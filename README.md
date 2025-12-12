@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp" alt="SSU Logo" width="200">
   <br>
-  <strong>Surigao State University Alumni Job Portal</strong>
+  <strong>SorSu State University Alumni Job Portal</strong>
 </p>
 
 <p align="center">
@@ -15,7 +15,7 @@
 
 ## 📋 Overview
 
-WEAPS-SSU is a comprehensive job portal system designed specifically for Surigao State University (SSU) alumni. The platform connects qualified alumni with employers, featuring advanced verification systems, AI-powered content validation, and comprehensive analytics.
+WEAPS-SSU is a comprehensive job portal system designed specifically for SorSu State University (SSU) alumni. The platform connects qualified alumni with employers, featuring advanced verification systems, AI-powered content validation, and comprehensive analytics.
 
 ### 🎯 Key Features
 
