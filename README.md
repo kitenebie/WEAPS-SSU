@@ -1,89 +1,263 @@
+# WEAPS-SSU: Workforce Employment Alumni Portal System
 
+<p align="center">
+  <img src="https://cdn.bulan.sorsu.edu.ph/images/ssu-logo.webp" alt="SSU Logo" width="200">
+  <br>
+  <strong>Surigao State University Alumni Job Portal</strong>
+</p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-12-red.svg" alt="Laravel 12">
+  <img src="https://img.shields.io/badge/Filament-4-blue.svg" alt="Filament 4">
+  <img src="https://img.shields.io/badge/PHP-8.2+-purple.svg" alt="PHP 8.2+">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License">
+</p>
+
+## 📋 Overview
+
+WEAPS-SSU is a comprehensive job portal system designed specifically for Surigao State University (SSU) alumni. The platform connects qualified alumni with employers, featuring advanced verification systems, AI-powered content validation, and comprehensive analytics.
+
+### 🎯 Key Features
+
+- **Multi-Role Architecture**: Separate interfaces for Alumni, Employers, and Administrators
+- **AI Content Validation**: Advanced detection of AI-generated resumes and content
+- **School Verification**: Secure alumni verification through SSU records
+- **Advanced Job Matching**: Intelligent job-alumni matching system
+- **Analytics Dashboard**: Comprehensive reporting and insights
+- **Company Reviews**: Alumni feedback and rating system
+- **Real-time Notifications**: Email and in-app notifications
+- **Mobile Responsive**: Optimized for all devices
+
+## 🚀 Quick Start
+
+### Prerequisites
+- PHP 8.2 or higher
+- Composer
+- Node.js & npm
+- MySQL/PostgreSQL
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd weaps-ssu
+
+# Install PHP dependencies
+composer install
+
+# Install Node dependencies
+npm install
+
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+
+# Configure database in .env file
+# Run migrations and seeders
+php artisan migrate --seed
+
+# Build assets
+npm run build
+
+# Start the development server
+php artisan serve
+```
+
+### Seeding Commands
+```bash
 php seed.php
 php active_user.php
 php update_seed.php
-
-php artisan db:seed --class=CarrerSeeder 
+php artisan db:seed --class=CarrerSeeder
 php artisan db:seed --class=ApplicantSeeder
-<br>
-<br>
-<br>
-<br>
-<br>
+```
 
+## 👥 User Roles & Access
 
+### 🔐 Administrator Panel (`/admin`)
+- User and company verification management
+- System analytics and reporting
+- Content moderation and oversight
+- Platform configuration and maintenance
 
+📖 **[Complete Admin Guide](ADMIN_README.md)**
 
+### 👨‍🎓 Alumni Portal (Public Interface)
+- Job search and application system
+- Curriculum vitae management
+- Company research and reviews
+- Professional networking tools
 
+📖 **[Complete Alumni Guide](ALUMNI_README.md)**
 
+### 🏢 Employer Panel (`/`)
+- Job posting and management
+- Applicant screening and evaluation
+- Company profile management
+- Recruitment analytics and reporting
 
+📖 **[Complete Employer Guide](EMPLOYER_README.md)**
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## 🏗️ Architecture
+
+### Tech Stack
+- **Backend**: Laravel 12 (PHP 8.2+)
+- **Frontend**: Livewire 3, Alpine.js
+- **Admin Panel**: Filament 4
+- **Database**: MySQL/PostgreSQL with Eloquent ORM
+- **Styling**: Tailwind CSS
+- **Authentication**: Laravel Sanctum + Social Auth
+- **File Storage**: Laravel Storage with signed URLs
+
+### Key Dependencies
+- `filament/filament`: Admin panel framework
+- `jeffgreco13/filament-breezy`: User profile management
+- `bezhansalleh/filament-shield`: Role-based permissions
+- `leandrocfe/filament-apex-charts`: Analytics charts
+- `laravel/socialite`: Social authentication
+- `maatwebsite/excel`: Data export functionality
+
+## 📊 Database Schema
+
+### Core Models
+- **Users**: Base user model with role management
+- **CurriculumVitae**: Alumni resume and profile data
+- **Company**: Employer organization profiles
+- **Carrer**: Job posting information
+- **Applicant**: Job application records
+- **SystemLog**: Audit trail for all activities
+
+### Key Relationships
+- User ↔ CurriculumVitae (One-to-One)
+- User ↔ Company (One-to-Many)
+- Company ↔ Carrer (One-to-Many)
+- Carrer ↔ Applicant (One-to-Many)
+- User ↔ Applicant (One-to-Many)
+
+## 🔒 Security Features
+
+- **Role-Based Access Control**: Spatie Laravel Permission integration
+- **AI Content Detection**: Automated validation of user-generated content
+- **File Security**: Signed URLs for private file access
+- **CSRF Protection**: Laravel's built-in CSRF protection
+- **Input Validation**: Comprehensive validation on all forms
+- **Audit Logging**: Complete activity tracking
+
+## 📈 Analytics & Reporting
+
+### Available Metrics
+- Application frequency and trends
+- Hiring success rates
+- User engagement statistics
+- Job posting performance
+- Company review analytics
+- Alumni employment tracking
+
+### Dashboard Widgets
+- Real-time statistics cards
+- Interactive charts and graphs
+- Applicant distribution analytics
+- Career posting trends
+- Gender and employment status breakdowns
+
+## 🌐 API Endpoints
+
+### Public Endpoints
+- `GET /cv/{id}` - View curriculum vitae
+- `GET /career/{id}` - Job details
+- `POST /career/apply` - Submit job application
+- `POST /company/review/store` - Submit company review
+
+### Admin Endpoints
+- `GET /inActiveResume` - Inactive resume management
+- `POST /api/a/i/varification` - AI content verification
+- `POST /verification/update-role/{type}` - User verification
+
+## 🚀 Deployment
+
+### Production Setup
+```bash
+# Set environment to production
+APP_ENV=production
+APP_DEBUG=false
+
+# Optimize Laravel
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Set proper permissions
+chmod -R 755 storage
+chmod -R 755 bootstrap/cache
+
+# Run queue worker (if using queues)
+php artisan queue:work
+```
+
+### Environment Variables
+```env
+# Application
+APP_NAME="WEAPS-SSU"
+APP_ENV=production
+APP_KEY=base64:your-app-key
+APP_DEBUG=false
+
+# Database
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=weaps_ssu
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_db_password
+
+# Mail Configuration
+MAIL_MAILER=smtp
+MAIL_HOST=your-smtp-host
+MAIL_PORT=587
+MAIL_USERNAME=your-email@domain.com
+MAIL_PASSWORD=your-email-password
+
+# File Storage
+FILESYSTEM_DISK=public
+AWS_ACCESS_KEY_ID=your-aws-key
+AWS_SECRET_ACCESS_KEY=your-aws-secret
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=your-bucket-name
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- **Documentation**: Check the role-specific README files
+- **Issues**: Report bugs via GitHub Issues
+- **Discussions**: Join community discussions
+- **Email**: Contact the development team
+
+## 🙏 Acknowledgments
+
+- **Laravel Framework**: For the robust backend foundation
+- **Filament**: For the beautiful admin interface
+- **Surigao State University**: For the institutional partnership
+- **Open Source Community**: For the amazing tools and libraries
+
+---
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <strong>Built with ❤️ for SSU Alumni</strong>
+  <br>
+  Connecting talent with opportunity since 2024
 </p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-
-
-
-
-===
-in app\Http\Controllers\RegistrationController.php review the code for public function updateRole($type) revise the code if the Session::get('Alumni_data') has data value then get the value of School_id and look to CurriculumVitae Model if the CurriculumVitae.School_id is equal to School_id of Session::get('Alumni_data'). if TRUE then add the update for User model [
