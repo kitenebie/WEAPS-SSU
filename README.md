@@ -250,8 +250,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - **Laravel Framework**: For the robust backend foundation
-- **Filament**: For the beautiful admin interface
-- **Surigao State University**: For the institutional partnership
 - **Open Source Community**: For the amazing tools and libraries
 
 ---
